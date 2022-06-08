@@ -3,6 +3,14 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+sample_code/sneik/__pycache__/
+*.py[cod]
+*$py.class
+
+sample_code/Subnezia/__pycache__/
+*.py[cod]
+*$py.class
+
 # C extensions
 *.so
 
