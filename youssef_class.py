@@ -4,10 +4,18 @@ from data import *
 
 pygame.init()
 
+# Contiene il nome di tutte le abilita'
 skills=[["ab1","ab3","ab5"],["ab2","ab4","ab6"]]
 
+# Contiene il nome di tutti gli amici
 friends=[["fr1","fr3","null"],["fr2","fr4","null"]]
-
+''' sel:
+    is_choosing: Vero se il pg corrente sta scegliendo la mossa da fare altrimenti Falso
+    is_selecting: Dice cosa sta selezionando il pg
+    has_done_first_selection: Dice se ha selezionato una delle prime voci
+    has_cursor_on: Dice la sua ultima scelta
+    is_choosing_target: Falso se il target e' il nemico, altrimenti contiene un compagno
+'''
 sel={"is_choosing":True,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
 
 position_in_fight="left-down"

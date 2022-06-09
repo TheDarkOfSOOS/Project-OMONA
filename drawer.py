@@ -37,41 +37,38 @@ def characters():
     #Disegno Fabiano
     pygame.draw.rect(WIN, (0,0,255), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, 0+SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     
+# Scrive le scelte disponibili
 def choices(current_player, is_selecting):
-    '''for x in CHOICE_LOCATIONS:
-        for slot in x:
-            my_font=pygame.font.SysFont("Freemono, Monospace",16)
-            text=my_font.render(turn.menu[0][0],False,(255,255,255))
-            WIN.blit(text,(slot[X], slot[Y]))
-            #pygame.draw.rect(WIN, (255,255,255), pygame.Rect( slot[X], slot[Y], 20, 20 ))'''
+    my_font=pygame.font.SysFont("Freemono, Monospace",16)
+
+    ''' In base al tipo di selezione del personaggio,
+        ci sara' del testo diverso '''
     if not current_player.sel["has_done_first_selection"]:
         for i in range(3):
             for j in range(2):
-                my_font=pygame.font.SysFont("Freemono, Monospace",16)
                 text=my_font.render(turn.menu[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     elif current_player.sel["has_done_first_selection"] and is_selecting=="skills":
         for i in range(3):
             for j in range(2):
-                my_font=pygame.font.SysFont("Freemono, Monospace",16)
                 text=my_font.render(current_player.skills[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     elif current_player.sel["has_done_first_selection"] and is_selecting=="friends":
         for i in range(3):
             for j in range(2):
-                my_font=pygame.font.SysFont("Freemono, Monospace",16)
                 text=my_font.render(current_player.friends[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
-
     
-def selection(input, currX, currY, current_player, is_selecting):
-    if input:
-        bg()
-        gui(False)
-        characters()
-        choices(current_player, is_selecting)
-        pygame.draw.rect(WIN, (255,0,0), pygame.Rect( CHOICE_LOCATIONS[currY][currX][X], CHOICE_LOCATIONS[currY][currX][Y], 10, 10 ))
+def selection(currX, currY, current_player, is_selecting):
+    # Ridisegniamo tutti gli elementi
+    bg()
+    # False perche' ci serve il box sotto visto che si sta ancora scegliendo
+    gui(False)
+    characters()
+    choices(current_player, is_selecting)
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( CHOICE_LOCATIONS[currY][currX][X], CHOICE_LOCATIONS[currY][currX][Y], 10, 10 ))
 
+# In base alla posizione del player, ci sara' un focus del bordo diverso
 def border_of(current_player):
     if current_player.position_in_fight=="left-down":
         pygame.draw.rect(WIN, (255,255,255), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)

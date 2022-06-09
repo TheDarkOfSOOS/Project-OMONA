@@ -70,13 +70,20 @@ while run:
 
     # Turno pg1
     if youssef.sel["is_choosing"]==True:
+        # Fa partire il turno di youssef
         youssef.sel=turn.of_character(youssef,input)
         print("youssef: ", youssef.sel)
+        # Se non e' piu' il suo turno di scegliere
         if youssef.sel["is_choosing"]==False:
+            # E ha finito la prima selezione (quindi ha gia' scelto)
             if youssef.sel["has_done_first_selection"]==True:
+                # Tocca a scegliere a Pier
                 pier.sel["is_choosing"]=True
+                # Disattiviamo l'input per evitare che riprenda return
                 input="null"
             else:
+                # Si tratta qui di un errore,
+                # Riportiamo lo stato di scelta a Youssef
                 youssef.sel["is_choosing"]=True
                 input="null"
     # Turno pg2
@@ -88,6 +95,8 @@ while run:
                 raul.sel["is_choosing"]=True
                 input="null"
             else:
+                # Se pier non ha finito la prima selezione
+                # ritorniamo al pg precedente: Youssef
                 youssef.sel["is_choosing"]=True
                 input="null"
     # Turno pg3
