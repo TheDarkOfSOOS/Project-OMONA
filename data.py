@@ -2,11 +2,11 @@ import pygame
 from pygame.locals import *
 
 
-WIDTH, HEIGHT = 1280, 720
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+#WIDTH, HEIGHT = 1280, 720
+#WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
-# WIDTH, HEIGHT = 1920, 1080
-# WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
+WIDTH, HEIGHT = 1920, 1080
+WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 
 FPS = 5
 
@@ -25,6 +25,7 @@ CHARA_WIDTH = 250
 CHARA_HEIGHT = 350
 
 SPACING = 25
+SPACING_PLAYER_BAR = 5
 
 BOX_WIDTH = WIDTH-(CHARA_WIDTH*2)-(SPACING*8)
 BOX_HEIGHT = (CHARA_HEIGHT/5)*3
@@ -45,3 +46,14 @@ BOX_RIGHT_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*3, (BOX_HEIGHT/3)*1+(HEIGH
 BOX_RIGHT_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*3, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT) )
 
 CHOICE_LOCATIONS = [[BOX_LEFT_UP,BOX_CENTER_UP,BOX_RIGHT_UP],[BOX_LEFT_DOWN,BOX_CENTER_DOWN,BOX_RIGHT_DOWN]]
+
+CHARA_NEUTRAL = pygame.image.load("img/chara_neutral.png")
+CHARA_HAPPY = pygame.image.load("img/chara_happy.png")
+CHARA_EUFORIC = pygame.image.load("img/chara_euforic.png")
+CHARA_SAD = pygame.image.load("img/chara_sad.png")
+CHARA_DEPRESSED = pygame.image.load("img/chara_depressed.png")
+CHARA_RAGE = pygame.image.load("img/chara_rage.png")
+CHARA_FURY = pygame.image.load("img/chara_fury.png")
+
+NEUTRAL_IMG = pygame.image.load("img/neutral_img.png")
+HAPPY_IMG = pygame.image.load("img/happy_img.png")

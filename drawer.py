@@ -28,8 +28,12 @@ def gui(isFighting):
 # DA MIGLIORARE
 def characters():
     #Disegno Youssef
-    # pygame.draw.rect(WIN, (0,255,0), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
-    WIN.blit(y.img,(SPACING,HEIGHT-CHARA_HEIGHT-SPACING))
+    pygame.draw.rect(WIN, (0,255,0), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    WIN.blit(y.img["Profilo"],(SPACING,HEIGHT-CHARA_HEIGHT-SPACING))
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (SPACING_PLAYER_BAR), CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    WIN.blit(y.img["Emozione"],(SPACING,HEIGHT-CHARA_HEIGHT-SPACING+SPACING_PLAYER_BAR))
+    
     #Disegno Piergiorgio
     pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     #Disegno Raul

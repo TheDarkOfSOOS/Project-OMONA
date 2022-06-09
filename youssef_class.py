@@ -23,7 +23,7 @@ position_in_fight="left-down"
 class Youssef():
     def __init__(self,):
 
-        self.img = pygame.transform.scale(pygame.image.load("img/chara_neutral.png"),(CHARA_WIDTH,CHARA_HEIGHT))
+        self.img = {"Profilo":pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         # STATISTICHE
         self.hp = 432 # Variabile per i punti vita
@@ -39,10 +39,29 @@ class Youssef():
         self.current_emotion = "neutrale" # Emozione attuale
         self.emotional_levels = {"Felicità":"2","Rabbia":"2","Tristezza":"2"} # Dizionario per il livello massimo delle emozioni
 
-    def sforbiciata(self, objective):
-        self.skill_atk = 10
-        temp = 131
-        self.vel = 999
+    def change_img(self):
+        if self.current_emotion == "neutrale":
+            self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT))
+            self.img["Emozione"] = NEUTRAL_IMG
+
+        elif self.current_emotion == "gioioso":
+            self.img["Profilo"] = pygame.transform.scale(CHARA_HAPPY,(CHARA_WIDTH,CHARA_HEIGHT))
+            self.img["Emozione"] = HAPPY_IMG
+
+        elif self.current_emotion == "euforico":
+            self.img["Profilo"] = CHARA_EUFORIC
+
+        elif self.current_emotion == "triste":
+            self.img["Profilo"] = CHARA_SAD
+
+        elif self.current_emotion == "depresso":
+            self.img["Profilo"] = CHARA_DEPRESSED
+
+        elif self.current_emotion == "arrabbiato":
+            self.img["Profilo"] = CHARA_RAGE
+            
+        elif self.current_emotion == "iracondo":
+            self.img["Profilo"] = CHARA_FURY
 
 
 y = Youssef()
