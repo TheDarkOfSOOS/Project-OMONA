@@ -3,6 +3,10 @@ from pygame.locals import *
 
 import turn
 import drawer as dw
+import classes.youssef_class as youssef
+import classes.pier_class as pier
+import classes.raul_class as raul
+import classes.fabiano_class as fabiano
 
 from data import *
 
@@ -18,7 +22,8 @@ clock = pygame.time.Clock()
 # TEMPORANEAMENTE AGISCE DA MAIN
 
 run = True
-isFighting = False
+is_fighting = False
+
 
 pygame.display.set_caption("OMONA testing ROUND")
 
@@ -29,39 +34,62 @@ while run:
     # Disegno boss
 
     # Disegno GUI
-    dw.gui(isFighting)
+    dw.gui(is_fighting)
     # Disegno personaggi
     dw.characters()
-
     for event in pygame.event.get():
-            # Se avviene un input
-            if event.type == pygame.KEYDOWN:
-                # Controlla se input valido
-                #print(event.key)
-                if event.key == pygame.K_RIGHT:
-                    print(pygame.K_RIGHT)
-                elif event.key == pygame.K_LEFT:
-                    print(pygame.K_LEFT)
-                elif event.key == pygame.K_UP:
-                    print(pygame.K_UP)
-                elif event.key == pygame.K_DOWN:
-                    print(pygame.K_DOWN)
-        
-            # Se questo equivale alla chiusura della finestra
-            if event.type == pygame.QUIT:
-                # Imposta lo stato di run a falso
-                run = False
+        # Se avviene un input
+        if event.type == pygame.KEYDOWN:
+            # Controlla se input valido
+            #print(event.key)
+            if event.key == pygame.K_RIGHT:
+                input="right"
+                print(pygame.K_RIGHT)
+            elif event.key == pygame.K_LEFT:
+                input="left"
+                print(pygame.K_LEFT)
+            elif event.key == pygame.K_UP:
+                input="up"
+                print(pygame.K_UP)
+            elif event.key == pygame.K_DOWN:
+                input="down"
+                print(pygame.K_DOWN)
+            elif event.key == pygame.K_RETURN:
+                input="return"
+                print(pygame.K_RETURN)
+    
+        # Se questo equivale alla chiusura della finestra
+        if event.type == pygame.QUIT:
+            # Imposta lo stato di run a falso
+            run = False
 
     # - Inizio round -
 
     # Turno pg1
-    turn.of_character("1")
+    if youssef.sel["is_choosing"]==True:
+        youssef.sel=turn.of_character(youssef,input)
+        print("youssef: ", youssef.sel)
+        if youssef.sel["is_choosing"]==False:
+            pier.sel["is_choosing"]=True
+            input="null"
     # Turno pg2
-
+    if pier.sel["is_choosing"]==True:
+        pier.sel=turn.of_character(pier,input)
+        print("pier: ", pier.sel)
+        if pier.sel["is_choosing"]==False:
+            raul.sel["is_choosing"]=True
+            input="null"
     # Turno pg3
-
+    if raul.sel["is_choosing"]==True:
+        raul.sel=turn.of_character(raul,input)
+        print("raul: ",raul.sel)
+        if raul.sel["is_choosing"]==False:
+            fabiano.sel["is_choosing"]=True
+            input="null"
     # Turno pg4
-
+    if fabiano.sel["is_choosing"]==True:
+        fabiano.sel=turn.of_character(fabiano,input)
+        print("fab: ",fabiano.sel)
     # Calcolo velocità
     #list_speed_ordered=[1,2,3]
 
@@ -69,5 +97,5 @@ while run:
         # Azione di attacking_character
 
 
-
     pygame.display.update()
+    input="null"

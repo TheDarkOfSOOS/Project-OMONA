@@ -2,6 +2,14 @@ import pygame
 
 pygame.init()
 
+skills=[["sk1","sk3","sk5"],["sk2","sk4","sk6"]]
+
+friends=[["fr1","fr3","null"],["fr2","fr4","null"]]
+
+sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
+
+position_in_fight="left-up"
+
 class Pier():
     def __init__(self,):
 
