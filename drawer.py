@@ -64,8 +64,8 @@ def choices(current_player, is_selecting):
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
 
     
-def selection(direction, currX, currY, current_player, is_selecting):
-    if direction:
+def selection(input, currX, currY, current_player, is_selecting):
+    if input:
         bg()
         gui(False)
         characters()

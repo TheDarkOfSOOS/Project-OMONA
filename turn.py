@@ -18,36 +18,45 @@ current_selection_Y = 0
 '''
 menu=[["skills","items","log"],
     ["recover","friends","quit"]]
-
-def of_character(current_player,direction):
+def of_character(current_player,input):
     sel=current_player.sel
 
     global current_selection_X
     global current_selection_Y
-    print(direction)
+    print(input)
     dw.choices(current_player, sel["is_selecting"])
 
     dw.selection("null", current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
-    if (direction=="right" and current_selection_X<2):
+    if (input=="right" and current_selection_X<2):
         current_selection_X+=1
-        dw.selection(direction, current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
+        dw.selection(input, current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
 
-    elif (direction=="left" and current_selection_X>0):
+    elif (input=="left" and current_selection_X>0):
         current_selection_X-=1
-        dw.selection(direction, current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
+        dw.selection(input, current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
 
-    elif (direction=="up" and current_selection_Y>0):
+    elif (input=="up" and current_selection_Y>0):
         current_selection_Y-=1
-        dw.selection(direction, current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
+        dw.selection(input, current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
         
-    elif (direction=="down" and current_selection_Y<1):
+    elif (input=="down" and current_selection_Y<1):
         current_selection_Y+=1
-        dw.selection(direction, current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
+        dw.selection(input, current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
 
-    if (direction=="return" and sel["has_done_first_selection"]==False):
+    if (input=="return" and sel["has_done_first_selection"]==False):
         sel["has_done_first_selection"]=True
-    elif (direction=="return") and sel["has_done_first_selection"]==True:
+        reset_movement()
+    elif (input=="return") and sel["has_done_first_selection"]==True:
         sel["is_choosing"]=False
+        reset_movement()
+
+    if (input=="backspace" and sel["has_done_first_selection"]==True):
+        sel["has_done_first_selection"]=False
+        reset_movement
+    elif (input=="backspace" and sel["has_done_first_selection"]==False):
+        sel["is_choosing"]=False
+        reset_movement()
+
 
     if not current_player.sel["has_done_first_selection"]:
         sel["is_selecting"]=menu[current_selection_Y][current_selection_X]
@@ -64,3 +73,8 @@ def of_character(current_player,direction):
         dw.border_of(current_player)
     return sel
 
+def reset_movement():
+    global current_selection_X
+    global current_selection_Y
+    current_selection_X = 0
+    current_selection_Y = 0

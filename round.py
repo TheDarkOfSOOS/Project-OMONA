@@ -23,7 +23,7 @@ clock = pygame.time.Clock()
 
 run = True
 is_fighting = False
-
+everyone_has_chosen = False
 
 pygame.display.set_caption("OMONA testing ROUND")
 
@@ -57,6 +57,9 @@ while run:
             elif event.key == pygame.K_RETURN:
                 input="return"
                 print(pygame.K_RETURN)
+            elif event.key == pygame.K_BACKSPACE:
+                input="backspace"
+                print(pygame.K_BACKSPACE)
     
         # Se questo equivale alla chiusura della finestra
         if event.type == pygame.QUIT:
@@ -70,31 +73,52 @@ while run:
         youssef.sel=turn.of_character(youssef,input)
         print("youssef: ", youssef.sel)
         if youssef.sel["is_choosing"]==False:
-            pier.sel["is_choosing"]=True
-            input="null"
+            if youssef.sel["has_done_first_selection"]==True:
+                pier.sel["is_choosing"]=True
+                input="null"
+            else:
+                youssef.sel["is_choosing"]=True
+                input="null"
     # Turno pg2
     if pier.sel["is_choosing"]==True:
         pier.sel=turn.of_character(pier,input)
         print("pier: ", pier.sel)
         if pier.sel["is_choosing"]==False:
-            raul.sel["is_choosing"]=True
-            input="null"
+            if pier.sel["has_done_first_selection"]==True:
+                raul.sel["is_choosing"]=True
+                input="null"
+            else:
+                youssef.sel["is_choosing"]=True
+                input="null"
     # Turno pg3
     if raul.sel["is_choosing"]==True:
         raul.sel=turn.of_character(raul,input)
         print("raul: ",raul.sel)
         if raul.sel["is_choosing"]==False:
-            fabiano.sel["is_choosing"]=True
-            input="null"
+            if raul.sel["has_done_first_selection"]==True:
+                fabiano.sel["is_choosing"]=True
+                input="null"
+            else:
+                pier.sel["is_choosing"]=True
+                input="null"
     # Turno pg4
     if fabiano.sel["is_choosing"]==True:
         fabiano.sel=turn.of_character(fabiano,input)
         print("fab: ",fabiano.sel)
-    # Calcolo velocità
-    #list_speed_ordered=[1,2,3]
+        if fabiano.sel["is_choosing"]==False:
+            if fabiano.sel["has_done_first_selection"]==False:
+                raul.sel["is_choosing"]=True
+                input="null"
+            else:
+                everyone_has_chosen=True
+    
+    if everyone_has_chosen:
+        print("YEEEE")
+        # Calcolo velocità
+        #list_speed_ordered=[1,2,3]
 
-    #for attacking_character in 1,2,3:
-        # Azione di attacking_character
+        #for attacking_character in 1,2,3:
+            # Azione di attacking_character
 
 
     pygame.display.update()
