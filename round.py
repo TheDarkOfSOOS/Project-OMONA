@@ -7,6 +7,7 @@ import youssef_class as youssef
 import pier_class as pier
 import raul_class as raul
 import fabiano_class as fabiano
+import boss
 
 from data import *
 
@@ -32,7 +33,7 @@ while run:
     # Disegno sfondo
     dw.bg()
     # Disegno boss
-
+    dw.boss()
     # Disegno GUI
     dw.gui(is_fighting)
     # Disegno personaggi
@@ -72,7 +73,7 @@ while run:
     if youssef.sel["is_choosing"]==True:
         # Fa partire il turno di youssef
         youssef.sel=turn.of_character(youssef,input)
-        print("youssef: ", youssef.sel)
+        #print("youssef: ", youssef.sel)
         # Se non e' piu' il suo turno di scegliere
         if youssef.sel["is_choosing"]==False:
             # E ha finito la prima selezione (quindi ha gia' scelto)
@@ -102,7 +103,7 @@ while run:
     # Turno pg3
     if raul.sel["is_choosing"]==True:
         raul.sel=turn.of_character(raul,input)
-        print("raul: ",raul.sel)
+        #print("raul: ",raul.sel)
         if raul.sel["is_choosing"]==False:
             if raul.sel["has_done_first_selection"]==True:
                 fabiano.sel["is_choosing"]=True
@@ -113,7 +114,7 @@ while run:
     # Turno pg4
     if fabiano.sel["is_choosing"]==True:
         fabiano.sel=turn.of_character(fabiano,input)
-        print("fab: ",fabiano.sel)
+        #print("fab: ",fabiano.sel)
         if fabiano.sel["is_choosing"]==False:
             if fabiano.sel["has_done_first_selection"]==False:
                 raul.sel["is_choosing"]=True
@@ -122,13 +123,19 @@ while run:
                 everyone_has_chosen=True
     
     if everyone_has_chosen:
-        print("YEEEE")
+        #print("YEEEE")
         # Calcolo velocità
-        #list_speed_ordered=[1,2,3]
+        list_speed_ordered=[youssef.y,pier.p,raul.r,fabiano.f,boss.b]
 
-        #for attacking_character in 1,2,3:
-            # Azione di attacking_character
+        for attacking_character in list_speed_ordered:
+            # In do_something... dovranno fare qualcosa
+            attacking_character.do_something()
 
+        # Tutti hanno finito l'azione, finisce il round
+        everyone_has_chosen = False
+        youssef.sel["is_choosing"] = True
+        for character in [youssef, pier, raul, fabiano]:
+            character.sel["has_done_first_selection"] = False
 
     pygame.display.update()
     input="null"

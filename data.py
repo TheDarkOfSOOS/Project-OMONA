@@ -2,13 +2,13 @@ import pygame
 from pygame.locals import *
 
 
-#WIDTH, HEIGHT = 1280, 720
-#WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+WIDTH, HEIGHT = 1280, 720
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
-WIDTH, HEIGHT = 1920, 1080
-WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
+#WIDTH, HEIGHT = 1920, 1080
+#WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 
-FPS = 5
+FPS = 30
 
 X, Y = 0, 1
 
@@ -47,6 +47,8 @@ BOX_RIGHT_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*3, (BOX_HEIGHT/3)*2+(HEI
 
 CHOICE_LOCATIONS = [[BOX_LEFT_UP,BOX_CENTER_UP,BOX_RIGHT_UP],[BOX_LEFT_DOWN,BOX_CENTER_DOWN,BOX_RIGHT_DOWN]]
 
+# Images
+
 CHARA_NEUTRAL = pygame.image.load("img/chara_neutral.png")
 CHARA_HAPPY = pygame.image.load("img/chara_happy.png")
 CHARA_EUFORIC = pygame.image.load("img/chara_euforic.png")
@@ -57,3 +59,5 @@ CHARA_FURY = pygame.image.load("img/chara_fury.png")
 
 NEUTRAL_IMG = pygame.image.load("img/neutral_img.png")
 HAPPY_IMG = pygame.image.load("img/happy_img.png")
+
+BOSS = pygame.image.load("img/boss.png")

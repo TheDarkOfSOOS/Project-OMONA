@@ -1,8 +1,11 @@
 import pygame
 
+import action
+import boss
+
 pygame.init()
 
-skills=[["sk1","sk3","sk5"],["ab2","ab4","ab6"]]
+skills=[["sk1","sk3","sk5"],["Pestata","ab4","ab6"]]
 
 friends=[["fr1","fr3","null"],["fr2","fr4","null"]]
 
@@ -27,3 +30,12 @@ class Fabiano():
         self.current_emotion = "neutrale" # Emozione attuale
         self.emotional_levels = {"Felicità":"3","Rabbia":"1","Tristezza":"2"} # Dizionario per il livello massimo delle emozioni
 
+    def do_something(self):
+        if sel["has_cursor_on"]=="Pestata":
+            DMG_DEAL = 7
+            DAMAGE_DEALED = action.damage_deal(f.vel,DMG_DEAL,boss.b.defn)
+            boss.b.hp-= DAMAGE_DEALED
+            print("Fabiano ha fatto", DAMAGE_DEALED, " danni al nemico!")
+
+
+f = Fabiano()

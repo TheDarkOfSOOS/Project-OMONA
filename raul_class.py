@@ -1,8 +1,11 @@
 import pygame
 
+import action
+import boss
+
 pygame.init()
 
-skills=[["ab1","ab3","ab5"],["ab2","ab4","ab6"]]
+skills=[["Saetta trascendente","ab3","ab5"],["ab2","ab4","ab6"]]
 
 friends=[["fr1","fr3","null"],["fr2","fr4","null"]]
 
@@ -26,4 +29,13 @@ class Raul():
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
         self.emotional_levels = {"Felicità":"2","Rabbia":"3","Tristezza":"2"} # Dizionario per il livello massimo delle emozioni
+    
+    def do_something(self):
+        if sel["has_cursor_on"]=="Saetta trascendente":
+            DMG_DEAL = 8
+            DAMAGED_DEALED = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
+            boss.b.hp-= DAMAGED_DEALED
+            print("Raul ha fatto", DAMAGED_DEALED, " danni al nemico!")
 
+
+r = Raul()

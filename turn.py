@@ -29,7 +29,7 @@ def of_character(current_player,input):
     # Prendiamo le variabili globali della selezione corrente
     global current_selection_X
     global current_selection_Y
-    print(input)
+    #print(input)
 
     ''' Disegniamo le scelte del giocatore.
         In base a quello che sta scegliendo
@@ -60,6 +60,26 @@ def of_character(current_player,input):
         current_selection_Y+=1
         dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
 
+    # Se il player corrente non ha fatto la prima selezione
+    if not current_player.sel["has_done_first_selection"]:
+        # Cambiamo cosa sta selezionando in base a quello che c'e' nel menu
+        sel["is_selecting"]=menu[current_selection_Y][current_selection_X]
+    elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="skills":
+        # Se si ha gia' scelto skills si dovra' scegliere l'abilita'
+        # Le abilita' vengono prese dalla classe del pg
+        sel["has_cursor_on"]=current_player.skills[current_selection_Y][current_selection_X]
+    #elif has_done_first_selection and sel["is_selecting"]=="items":
+        #sel["has_cursor_on"]=current_player.skills[current_selection_Y][current_selection_X]
+    elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="friends":
+        sel["has_cursor_on"]=current_player.friends[current_selection_Y][current_selection_X]
+    #print("sel:",sel)
+    #print("menu[def]",menu[current_selection_Y][current_selection_X])
+
+    # Disegniamo il bordo di chi sta scegliendo se non sta scegliendo nessun target
+    if not current_player.sel["is_choosing_target"]:
+        dw.border_of(current_player)
+    # Finalmente ritorniamo le modifiche
+
     # Casi in cui si deve reimpostare la selezione perche' cambio di pagina
     #1. E' stata aperta una sub-pagina
     if (input=="return" and sel["has_done_first_selection"]==False):
@@ -78,25 +98,6 @@ def of_character(current_player,input):
         sel["is_choosing"]=False
         reset_movement()
 
-    # Se il player corrente non ha fatto la prima selezione
-    if not current_player.sel["has_done_first_selection"]:
-        # Cambiamo cosa sta selezionando in base a quello che c'e' nel menu
-        sel["is_selecting"]=menu[current_selection_Y][current_selection_X]
-    elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="skills":
-        # Se si ha gia' scelto skills si dovra' scegliere l'abilita'
-        # Le abilita' vengono prese dalla classe del pg
-        sel["has_cursor_on"]=current_player.skills[current_selection_Y][current_selection_X]
-    #elif has_done_first_selection and sel["is_selecting"]=="items":
-        #sel["has_cursor_on"]=current_player.skills[current_selection_Y][current_selection_X]
-    elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="friends":
-        sel["has_cursor_on"]=current_player.friends[current_selection_Y][current_selection_X]
-    #print("sel:",sel)
-    print("menu[def]",menu[current_selection_Y][current_selection_X])
-
-    # Disegniamo il bordo di chi sta scegliendo se non sta scegliendo nessun target
-    if not current_player.sel["is_choosing_target"]:
-        dw.border_of(current_player)
-    # Finalmente ritorniamo le modifiche
     return sel
 
 # Funzione veloce per resettare movimento

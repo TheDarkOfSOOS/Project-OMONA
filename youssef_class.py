@@ -2,10 +2,13 @@ import pygame
 
 from data import *
 
+import action
+import boss
+
 pygame.init()
 
 # Contiene il nome di tutte le abilita'
-skills=[["ab1","ab3","ab5"],["ab2","ab4","ab6"]]
+skills=[["Sforbiciata","ab3","ab5"],["ab2","ab4","ab6"]]
 
 # Contiene il nome di tutti gli amici
 friends=[["fr1","fr3","null"],["fr2","fr4","null"]]
@@ -63,6 +66,13 @@ class Youssef():
         elif self.current_emotion == "iracondo":
             self.img["Profilo"] = CHARA_FURY
 
+    def do_something(self):
+        if sel["has_cursor_on"]=="Sforbiciata":
+            DMG_DEAL = 10
+            DAMAGE_DEALED = action.damage_deal(y.atk,DMG_DEAL,boss.b.defn)
+            boss.b.hp-=DAMAGE_DEALED
+            print("Youssef ha fatto",DAMAGE_DEALED," danni al nemico!")
+            
 
 y = Youssef()
 
