@@ -2,10 +2,10 @@ import pygame
 from pygame.locals import *
 
 import drawer as dw
-import classes.youssef_class as youssef
-import classes.pier_class as pier
-import classes.raul_class as raul
-import classes.fabiano_class as fabiano
+import youssef_class as youssef
+import pier_class as pier
+import raul_class as raul
+import fabiano_class as fabiano
 
 # Turn contiene invece le azioni che un personaggio puo' fare in un turno 
 

@@ -1,5 +1,7 @@
 import pygame
 
+from data import *
+
 pygame.init()
 
 skills=[["ab1","ab3","ab5"],["ab2","ab4","ab6"]]
@@ -12,6 +14,8 @@ position_in_fight="left-down"
 
 class Youssef():
     def __init__(self,):
+
+        self.img = pygame.transform.scale(pygame.image.load("img/chara_neutral.png"),(CHARA_WIDTH,CHARA_HEIGHT))
 
         # STATISTICHE
         self.hp = 432 # Variabile per i punti vita
@@ -32,10 +36,8 @@ class Youssef():
         temp = 131
         self.vel = 999
 
-        
 
-
-        
+y = Youssef()
 
 
 
