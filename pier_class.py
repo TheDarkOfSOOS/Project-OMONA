@@ -29,6 +29,9 @@ friends=[["Ilaria","Prade","-"],["Stefan","Gonzato (spirito)","-"]]
 
 sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
 
+allies_selections=["Sacrificio umano", "Ilaria"]
+allies_enemy_selections=["Richiesta d'aiuto"]
+
 position_in_fight="left-up"
 
 class Pier():
@@ -76,8 +79,20 @@ class Pier():
 
 
     def do_something(self):
-        #print(sel["has_cursor_on"], "Sbracciata", sel["has_cursor_on"]=="Sbracciata")
         if sel["has_cursor_on"]=="Sbracciata":
+            DMG_DEAL = 6
+            DAMAGE_DEALED = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn)
+            if self.is_doing_animation:
+                dw.sbracciata_animation()
+
+            if not self.is_doing_animation:
+                boss.b.hp-=DAMAGE_DEALED
+                print("Pier ha fatto", DAMAGE_DEALED, "danni al nemico!")
+                self.text_action="Pier ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Richiesta d'aiuto":
             DMG_DEAL = 6
             DAMAGE_DEALED = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:

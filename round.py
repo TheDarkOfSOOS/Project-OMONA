@@ -62,7 +62,10 @@ while run:
             elif event.key == pygame.K_BACKSPACE:
                 input="backspace"
                 print(pygame.K_BACKSPACE)
-    
+            elif event.key == pygame.K_LSHIFT:
+                input="shift"
+                print(pygame.K_LSHIFT)
+
         # Se questo equivale alla chiusura della finestra
         if event.type == pygame.QUIT:
             # Imposta lo stato di run a falso
@@ -128,7 +131,7 @@ while run:
                 animation_is_starting = True
     
     if everyone_has_chosen:
-        # Calcolo velocità
+        # Calcolo velocità TODO
         list_speed_ordered=[youssef.y,pier.p,raul.r,fabiano.f,boss.b]
 
         if animation_is_starting:

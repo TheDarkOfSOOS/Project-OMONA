@@ -29,6 +29,9 @@ friends=[["Cappe","Trentin","-"],["Diego","Pastorello (spirito)","-"]]
 
 sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
 
+allies_selections=["Biscotto","Soffio della morte","Cappe"]
+allies_enemy_selections=["Servizietto"]
+
 position_in_fight="right-up"
 
 class Fabiano():
@@ -78,7 +81,6 @@ class Fabiano():
             DMG_DEAL = 7
             DAMAGE_DEALED = action.damage_deal(f.vel,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:
-                #print("su classe, inizia animazione")
                 dw.pestata_animation()
 
             if not self.is_doing_animation:

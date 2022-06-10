@@ -16,8 +16,8 @@ description={
     "Tempesta":"Scatena una tempesta, che rende tristi tutti gli alleati e causa lievi danni al nemico.",
     "Bastonata":"Colpisce con la sua staffa elettrica. Ottiene un quarto del mana suo totale.",
     "Pettoinfuori":"Si pompa, aumentando l’attacco per 3 turni.",
-    "Bel tempo":"Scarica dal suo corpo una forte elettricità. Diventa arrabbiato e causa danni a tutti: alleati, sé stesso e gravi danni al nemico.",
-    "Tensione esplosiva":"Il nemico lo prende di mira. Se Youssef è triste diminuisce l’attacco del nemico per 3 turni. Attacca per primo.",
+    "Bel tempo":"Crea un arcobaleno con la pioggia delle tempeste e la luce delle scintille. Fa diventare gioioso un alleato o nemico.",
+    "Tensione esplosiva":"Scarica dal suo corpo una forte elettricità. Diventa arrabbiato e causa danni a tutti: alleati, sé stesso e gravi danni al nemico.",
     # Friends
     "Damonte":"[Rhythm Mayhem]: Aumenta la velocità di tutti gli alleati.",
     "Cristian":"[Flash]: Aumenta l’attacco di tutti gli alleati e li rende arrabbiati.",
@@ -28,6 +28,9 @@ description={
 friends=[["Damonte","Cristian","-"],["Noce","Mohammed (spirito)","-"]]
 
 sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
+
+allies_selections=[]
+allies_enemy_selections=["Bel tempo"]
 
 position_in_fight="right-down"
 

@@ -39,6 +39,10 @@ friends=[["Pol","Borin","-"],["Anastasia","Ciudin (spirito)","-"]]
 '''
 sel={"is_choosing":True,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
 
+allies_selections=[""]
+allies_enemy_selections=[""]
+
+
 position_in_fight="left-down"
 
 class Youssef():
@@ -114,7 +118,6 @@ class Youssef():
             DMG_DEAL = 10
             DAMAGE_DEALED = action.damage_deal(y.atk,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:
-                #print("su classe, inizia animazione")
                 dw.sforbiciata_animation()
 
             if not self.is_doing_animation:

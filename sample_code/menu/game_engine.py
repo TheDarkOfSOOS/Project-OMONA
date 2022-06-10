@@ -8,7 +8,6 @@ FPS = 7
 # COSTANTE DELLO SCHERMO
 SCHERMO = pygame.display.set_mode((WIDTH,HEIGHT))
 # IMPORT DEI TILE
-svastica = pygame.image.load("img/SvasticaIntera.jpg")
 blockFill = pygame.image.load("img/blockFill.png")
 
 class Block:

@@ -84,6 +84,7 @@ def selection(currX, currY, current_player, is_selecting):
     gui(False)
     characters()
     choices(current_player, is_selecting)
+    # Disegna selettore abilita'
     pygame.draw.rect(WIN, (255,0,0), pygame.Rect( CHOICE_LOCATIONS[currY][currX][X], CHOICE_LOCATIONS[currY][currX][Y], 10, 10 ))
 
 # In base alla posizione del player, ci sara' un focus del bordo diverso
@@ -100,48 +101,68 @@ def border_of(current_player):
     if current_player.position_in_fight=="right-up":
         pygame.draw.rect(WIN, (255,255,255), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
 
+def find_target(sel, input):
+    if input=="right" and sel["is_choosing_target"]=="left-down":
+        sel["is_choosing_target"]="right-down"
+    elif input=="right" and sel["is_choosing_target"]=="left-up":
+        sel["is_choosing_target"]="right-up"
+    elif input=="left" and sel["is_choosing_target"]=="right-down":
+        sel["is_choosing_target"]="left-down"
+    elif input=="left" and sel["is_choosing_target"]=="right-up":
+        sel["is_choosing_target"]="left-up"
+
+    elif input=="up" and sel["is_choosing_target"]=="left-down":
+        sel["is_choosing_target"]="left-up"
+    elif input=="up" and sel["is_choosing_target"]=="right-down":
+        sel["is_choosing_target"]="right-up"
+    elif input=="down" and sel["is_choosing_target"]=="left-up":
+        sel["is_choosing_target"]="left-down"
+    elif input=="down" and sel["is_choosing_target"]=="right-up":
+        sel["is_choosing_target"]="right-down"
+
+    print(sel["is_choosing_target"])
+
+    if sel["is_choosing_target"]=="left-down":
+        pygame.draw.rect(WIN, (255,255,255), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+
+    if sel["is_choosing_target"]=="left-up":
+        pygame.draw.rect(WIN, (255,255,255), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+
+    if sel["is_choosing_target"]=="right-down":
+        pygame.draw.rect(WIN, (255,255,255), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+
+    if sel["is_choosing_target"]=="right-up":
+        pygame.draw.rect(WIN, (255,255,255), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+
 def text_action(text):
-    #print("stampando...")
     my_font=pygame.font.SysFont("Freemono, Monospace",16)
     text=my_font.render(text,False,(255,255,255))
     WIN.blit(text,(BOX_HORIZONTAL_SPACING+SPACING, SPACING))
 
 def sforbiciata_animation():
-    #print("entra in funzione")
     if y.is_doing_animation:
-        #print("esegue blit")
         WIN.blit(y.sforbiciata_animation[int(y.current_animation)],(0,0))
         y.current_animation+=0.25
     if y.current_animation >= len(y.sforbiciata_animation):
-        #print("rendiamo falsa l'animazione")
         y.is_doing_animation = False
 
 def sbracciata_animation():
-    #print("entra in funzione")
     if p.is_doing_animation:
-        #print("esegue blit")
         WIN.blit(p.sbracciata_animation[int(p.current_animation)],(0,0))
         p.current_animation+=0.25
     if p.current_animation >= len(p.sbracciata_animation):
-        #print("rendiamo falsa l'animazione")
         p.is_doing_animation = False
 
 def saetta_animation():
-    #print("entra in funzione")
     if r.is_doing_animation:
-        #print("esegue blit")
         WIN.blit(r.saetta_animation[int(r.current_animation)],(0,0))
         r.current_animation+=0.25
     if r.current_animation >= len(r.saetta_animation):
-        #print("rendiamo falsa l'animazione")
         r.is_doing_animation = False
 
 def pestata_animation():
-    #print("entra in funzione")
     if f.is_doing_animation:
-        #print("esegue blit")
         WIN.blit(f.pestata_animation[int(f.current_animation)],(0,0))
         f.current_animation+=0.25
     if f.current_animation >= len(f.pestata_animation):
-        #print("rendiamo falsa l'animazione")
         f.is_doing_animation = False
