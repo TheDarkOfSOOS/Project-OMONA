@@ -5,6 +5,9 @@ from data import *
 import turn
 
 from youssef_class import y
+from pier_class import p
+from raul_class import r
+from fabiano_class import f
 from boss import b
 
 # Drawer serve per disegnare ogni contenuto visibile
@@ -55,16 +58,19 @@ def choices(current_player, is_selecting):
     ''' In base al tipo di selezione del personaggio,
         ci sara' del testo diverso '''
     if not current_player.sel["has_done_first_selection"]:
+        text_action("Cosa fara' "+ current_player.name + "?")
         for i in range(3):
             for j in range(2):
                 text=my_font.render(turn.menu[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     elif current_player.sel["has_done_first_selection"] and is_selecting=="skills":
+        text_action(current_player.description.get(current_player.sel["has_cursor_on"]))
         for i in range(3):
             for j in range(2):
                 text=my_font.render(current_player.skills[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     elif current_player.sel["has_done_first_selection"] and is_selecting=="friends":
+        text_action(current_player.description.get(current_player.sel["has_cursor_on"]))
         for i in range(3):
             for j in range(2):
                 text=my_font.render(current_player.friends[j][i],False,(255,255,255))
@@ -93,3 +99,49 @@ def border_of(current_player):
 
     if current_player.position_in_fight=="right-up":
         pygame.draw.rect(WIN, (255,255,255), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+
+def text_action(text):
+    #print("stampando...")
+    my_font=pygame.font.SysFont("Freemono, Monospace",16)
+    text=my_font.render(text,False,(255,255,255))
+    WIN.blit(text,(BOX_HORIZONTAL_SPACING+SPACING, SPACING))
+
+def sforbiciata_animation():
+    #print("entra in funzione")
+    if y.is_doing_animation:
+        #print("esegue blit")
+        WIN.blit(y.sforbiciata_animation[int(y.current_animation)],(0,0))
+        y.current_animation+=0.25
+    if y.current_animation >= len(y.sforbiciata_animation):
+        #print("rendiamo falsa l'animazione")
+        y.is_doing_animation = False
+
+def sbracciata_animation():
+    #print("entra in funzione")
+    if p.is_doing_animation:
+        #print("esegue blit")
+        WIN.blit(p.sbracciata_animation[int(p.current_animation)],(0,0))
+        p.current_animation+=0.25
+    if p.current_animation >= len(p.sbracciata_animation):
+        #print("rendiamo falsa l'animazione")
+        p.is_doing_animation = False
+
+def saetta_animation():
+    #print("entra in funzione")
+    if r.is_doing_animation:
+        #print("esegue blit")
+        WIN.blit(r.saetta_animation[int(r.current_animation)],(0,0))
+        r.current_animation+=0.25
+    if r.current_animation >= len(r.saetta_animation):
+        #print("rendiamo falsa l'animazione")
+        r.is_doing_animation = False
+
+def pestata_animation():
+    #print("entra in funzione")
+    if f.is_doing_animation:
+        #print("esegue blit")
+        WIN.blit(f.pestata_animation[int(f.current_animation)],(0,0))
+        f.current_animation+=0.25
+    if f.current_animation >= len(f.pestata_animation):
+        #print("rendiamo falsa l'animazione")
+        f.is_doing_animation = False
