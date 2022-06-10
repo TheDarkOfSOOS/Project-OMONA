@@ -81,10 +81,18 @@ def of_character(current_player,input):
     # Finalmente ritorniamo le modifiche
 
     # Casi in cui si deve reimpostare la selezione perche' cambio di pagina
-    #1. E' stata aperta una sub-pagina
+    #1. E' stata aperta una sub-pagina (o CASI PARTICOLARI)
     if (input=="return" and sel["has_done_first_selection"]==False):
         sel["has_done_first_selection"]=True
         reset_movement()
+        # Caso receover:
+        if (sel["is_selecting"]=="recover"):
+            sel["is_choosing"] = False
+        # Caso quit:
+        if (sel["is_selecting"]=="quit"):
+            pygame.quit()
+        # Caso log:
+        # DA APPROFONDIRE
     #2. Si sta cambiando personaggio
     elif (input=="return") and sel["has_done_first_selection"]==True:
         sel["is_choosing"]=False

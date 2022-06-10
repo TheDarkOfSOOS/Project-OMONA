@@ -100,6 +100,7 @@ while run:
                 # Se pier non ha finito la prima selezione
                 # ritorniamo al pg precedente: Youssef
                 youssef.sel["is_choosing"]=True
+                youssef.sel["has_done_first_selection"]=False
                 input="null"
     # Turno pg3
     if raul.sel["is_choosing"]==True:
@@ -111,6 +112,7 @@ while run:
                 input="null"
             else:
                 pier.sel["is_choosing"]=True
+                pier.sel["has_done_first_selection"]=False
                 input="null"
     # Turno pg4
     if fabiano.sel["is_choosing"]==True:
@@ -119,6 +121,7 @@ while run:
         if fabiano.sel["is_choosing"]==False:
             if fabiano.sel["has_done_first_selection"]==False:
                 raul.sel["is_choosing"]=True
+                raul.sel["has_done_first_selection"]=False
                 input="null"
             else:
                 everyone_has_chosen = True
