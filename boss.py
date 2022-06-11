@@ -15,8 +15,7 @@ class Boss():
         self.img = pygame.transform.scale(BOSS,(WIDTH,HEIGHT))
 
         # STATISTICHE
-        self.hp = 432 # Variabile per i punti vita
-        self.mna = 197 # Variabile per i punti mana
+        self.hp = 8000 # Variabile per i punti vita
         self.atk = 145 # Variabile per i punti attacco
         self.defn = 156 # Variabile per i punti difesa
         self.vel = 131 # Variabile per i punti velocità
