@@ -129,16 +129,16 @@ def of_character(current_player,input):
         sel["is_choosing"]=False
 
         if sel["is_choosing_target"]==youssef.position_in_fight:
-            sel["is_choosing_target"]="Youssef"
+            sel["is_choosing_target"]=youssef.y
 
         elif sel["is_choosing_target"]==pier.position_in_fight:
-            sel["is_choosing_target"]="Pier"
+            sel["is_choosing_target"]=pier.p
 
         elif sel["is_choosing_target"]==raul.position_in_fight:
-            sel["is_choosing_target"]="Raul"
+            sel["is_choosing_target"]=raul.r
 
         elif sel["is_choosing_target"]==fabiano.position_in_fight:
-            sel["is_choosing_target"]="Fabiano"
+            sel["is_choosing_target"]=fabiano.f
 
     if find_target:
         sel["is_choosing_target"]="left-down"

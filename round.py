@@ -73,6 +73,16 @@ while run:
 
     # - Inizio round -
 
+    #print(youssef.y.current_emotion)
+    #print(pier.p.current_emotion)
+    #print(raul.r.current_emotion)
+    #print(fabiano.f.current_emotion)
+
+    print(youssef.y.current_hp)
+    #print(pier.p.current_hp)
+    #print(raul.r.current_hp)
+    #print(fabiano.f.current_hp)
+
     # Turno pg1
     if youssef.sel["is_choosing"]==True:
         # Fa partire il turno di youssef
@@ -198,6 +208,7 @@ while run:
 
         if input=="return":
             continue_animation = True
+            list_speed_ordered[3].is_showing_text_outputs = False
 
         #if list_speed_ordered[4].is_doing_animation:
          #   print("Si fa qualcosa", list_speed_ordered[4])

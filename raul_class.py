@@ -2,7 +2,12 @@ import pygame
 
 import action
 import boss
+import change_emotion as emotion
 import drawer as dw
+import youssef_class as y
+import pier_class as p
+import fabiano_class as f
+import random as rng
 
 pygame.init()
 
@@ -35,7 +40,9 @@ allies_enemy_selections=["Bel tempo"]
 position_in_fight="right-down"
 
 class Raul():
-    def __init__(self,):
+    def __init__(self):
+
+        self.name = "Raul"
 
         # STATISTICHE
         self.hp = 498 # Variabile per i punti vita
@@ -45,11 +52,18 @@ class Raul():
         self.vel = 93 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
+        self.current_hp = self.hp 
+        self.current_mna = self.mna
+        self.current_atk = self.atk
+        self.current_defn = self.defn
+        self.current_vel = self.vel
+        self.current_eva = self.eva
+
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
-        self.emotional_levels = {"Felicità":"2","Rabbia":"3","Tristezza":"2"} # Dizionario per il livello massimo delle emozioni
+        self.emotional_levels = {"Felicità":2,"Rabbia":3,"Tristezza":1} # Dizionario per il livello massimo delle emozioni
     
         self.saetta_animation = []
         self.saetta_animation.append(pygame.image.load("img/animations/punch_animation00.png"))
@@ -85,10 +99,97 @@ class Raul():
 
             if not self.is_doing_animation:
                 boss.b.hp-= DAMAGE_DEALED
+                if self.current_emotion=="gioioso":
+                    print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico, e diventa felice!")
+                    self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico e diventa felice!"
+                    emotion.change_emotion(self, "gioioso")
+                elif self.current_emotion=="arrabbiato":
+                    print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico, e diventa iracondo!")
+                    self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico e diventa iracondo!"
+                    emotion.change_emotion(self, "arrabbiato")
+                elif self.current_emotion=="iracondo":
+                    print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico, e diventa furioso!")
+                    self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico e diventa furioso!"
+                    emotion.change_emotion(self, "furioso")
+                else:
+                    print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico!")
+                    self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Tempesta":
+            DMG_DEAL = 3
+            DAMAGE_DEALED = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
+            if self.is_doing_animation:
+                dw.saetta_animation()
+
+            if not self.is_doing_animation:
+                print("Raul ha reso tutti tristi e ha fatto", DAMAGE_DEALED, "danni al nemico")
+                emotion.change_emotion(y.y, "triste")
+                emotion.change_emotion(p.p, "triste")
+                emotion.change_emotion(r, "triste")
+                emotion.change_emotion(f.f, "triste")
+                self.text_action="Raul ha reso tutti tristi e ha fatto " + str(DAMAGE_DEALED) + " danni al nemico"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Bastonata":
+            DMG_DEAL = 6
+            DAMAGE_DEALED = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
+            if self.is_doing_animation:
+                dw.saetta_animation()
+
+            if not self.is_doing_animation:
+                boss.b.hp-= DAMAGE_DEALED
+                self.current_mna += int(self.mna/4)
                 print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico!")
                 self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
+        #TODO
+        if sel["has_cursor_on"]=="Pettoinfuori":
+            if self.is_doing_animation:
+                dw.saetta_animation()
+
+            if not self.is_doing_animation:
+                print("Raul ha aumentato il suo attacco!")
+                self.text_action="Raul ha aumentato il suo attacco!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Richiesta d'aiuto":
+            if self.is_doing_animation:
+                dw.saetta_animation()
+
+            if not self.is_doing_animation:
+                emotion.change_emotion(sel["is_choosing_target"], "arrabbiato")
+                print("Raul ha reso felice", sel["is_choosing_target"].name)
+                self.text_action="Raul ha reso felice", sel["is_choosing_target"].name
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Tensione esplosiva":
+            DMG_DEAL = 6
+            DAMAGE_DEALED=[]
+            for objectives in [y.y,p.p,self,f.f, boss.b]:
+                DAMAGE_DEALED.append(action.damage_deal(self.atk,DMG_DEAL,objectives.current_defn))
+            if self.is_doing_animation:
+                dw.saetta_animation()
+
+            if not self.is_doing_animation:
+                i=0
+                for objectives in [y.y,p.p,self,f.f,boss.b]:
+                    objectives.current_hp-=DAMAGE_DEALED[i]
+                    if(objectives.current_hp < 0):
+                        objectives.current_hp = 0
+                    i+=1
+                emotion.change_emotion(self, "arrabbiato")
+                print("Raul ha sfondato il campo di elettricita'!")
+                self.text_action="Raul ha sfondato il campo di elettricita'!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+        
 
 r = Raul()

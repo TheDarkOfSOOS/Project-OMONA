@@ -120,7 +120,7 @@ def find_target(sel, input):
     elif input=="down" and sel["is_choosing_target"]=="right-up":
         sel["is_choosing_target"]="right-down"
 
-    print(sel["is_choosing_target"])
+    #print(sel["is_choosing_target"])
 
     if sel["is_choosing_target"]=="left-down":
         pygame.draw.rect(WIN, (255,255,255), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
