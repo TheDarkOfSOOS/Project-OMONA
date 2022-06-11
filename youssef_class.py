@@ -62,7 +62,7 @@ class Youssef():
 
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
-        self.emotional_levels = {"Felicità":"2","Rabbia":"2","Tristezza":"2"} # Dizionario per il livello massimo delle emozioni
+        self.emotional_levels = {"Felicità":2,"Rabbia":2,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
 
         self.sforbiciata_animation = []
         self.sforbiciata_animation.append(pygame.image.load("img/animations/punch_animation00.png"))
