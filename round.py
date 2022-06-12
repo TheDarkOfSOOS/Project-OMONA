@@ -78,10 +78,10 @@ while run:
     #print(raul.r.current_emotion)
     #print(fabiano.f.current_emotion)
 
-    print(youssef.y.current_hp)
-    #print(pier.p.current_hp)
-    #print(raul.r.current_hp)
-    #print(fabiano.f.current_hp)
+    #print(youssef.y.current_vel)
+    #print(pier.p.current_vel)
+    #print(raul.r.current_vel)
+    #print(fabiano.f.current_vel)
 
     # Turno pg1
     if youssef.sel["is_choosing"]==True:

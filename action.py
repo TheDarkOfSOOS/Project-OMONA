@@ -37,3 +37,7 @@ def revive(target_current_HP, target_max_HP):
         result = 0
     print(result)
     return int(result)
+
+# Puo' anche essere una lista target_stat_to_upgrade
+def buff_stats(target_stat_to_upgrade):
+    return int(target_stat_to_upgrade/10)

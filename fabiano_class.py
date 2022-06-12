@@ -117,31 +117,26 @@ class Fabiano():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        #TODO
         if sel["has_cursor_on"]=="Benevento":
-            DMG_DEAL = 7
-            DAMAGE_DEALED = action.damage_deal(f.vel,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:
                 dw.pestata_animation()
 
             if not self.is_doing_animation:
-                boss.b.hp-= DAMAGE_DEALED
-                print("Fabiano ha fatto", DAMAGE_DEALED, "danni al nemico!")
-                self.text_action="Fabiano ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                for allies in [y.y,p.p,r.r,self]:
+                    allies.current_vel+=action.buff_stats(allies.vel)
+                print("Fabiano ha aumentato la velocità di tutti!")
+                self.text_action="Fabiano ha aumentato la velocità di tutti!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        #TODO
         if sel["has_cursor_on"]=="Malevento":
-            DMG_DEAL = 7
-            DAMAGE_DEALED = action.damage_deal(f.vel,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:
                 dw.pestata_animation()
 
             if not self.is_doing_animation:
-                boss.b.hp-= DAMAGE_DEALED
-                print("Fabiano ha fatto", DAMAGE_DEALED, "danni al nemico!")
-                self.text_action="Fabiano ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                boss.b.current_defn-=action.buff_stats(boss.b.defn)
+                print("Fabiano ha diminuito la difesa del nemico!")
+                self.text_action="Fabiano ha diminuito la difesa del nemico!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 

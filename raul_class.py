@@ -148,12 +148,12 @@ class Raul():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        #TODO
         if sel["has_cursor_on"]=="Pettoinfuori":
             if self.is_doing_animation:
                 dw.saetta_animation()
 
             if not self.is_doing_animation:
+                self.current_atk+=action.buff_stats(self.atk)
                 print("Raul ha aumentato il suo attacco!")
                 self.text_action="Raul ha aumentato il suo attacco!"
                 self.current_animation = 0
