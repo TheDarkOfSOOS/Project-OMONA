@@ -15,12 +15,17 @@ class Boss():
         self.img = pygame.transform.scale(BOSS,(WIDTH,HEIGHT))
 
         # STATISTICHE
-        self.max_hp = 8000
         self.hp = 8000 # Variabile per i punti vita
         self.atk = 145 # Variabile per i punti attacco
         self.defn = 156 # Variabile per i punti difesa
         self.vel = 131 # Variabile per i punti velocità
         self.eva = 15 # Variabile per i punti evasione
+
+        self.current_hp = self.hp
+        self.current_atk = self.atk
+        self.current_defn = self.defn
+        self.current_vel = self.vel
+        self.current_eva = self.eva
         
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
