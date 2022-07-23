@@ -46,13 +46,15 @@ allies_enemy_selections=[""]
 position_in_fight="left-down"
 
 class Youssef():
-    def __init__(self,):
+    def __init__(self):
 
         self.img = {"Profilo":pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         # STATISTICHE
-        self.hp = 432 # Variabile per i punti vita
+        self.max_hp = 450
+        self.hp = 450 # Variabile per i punti vita
         self.mna = 197 # Variabile per i punti mana
+        self.max_mna = 197
         self.atk = 145 # Variabile per i punti attacco
         self.defn = 156 # Variabile per i punti difesa
         self.vel = 131 # Variabile per i punti velocità

@@ -29,7 +29,7 @@ def gui(isFighting):
         pygame.draw.rect(WIN, (255,255,255), pygame.Rect( BOX_HORIZONTAL_SPACING, HEIGHT-BOX_HEIGHT, BOX_WIDTH, BOX_HEIGHT ), BOX_BORDER)
     # Barra della vita del Boss
     pygame.draw.rect(WIN, (BLACK), pygame.Rect( (WIDTH/2)-(ENEMY_HEALTH_BAR_WIDTH/2), BOX_HEIGHT+SPACING, ENEMY_HEALTH_BAR_WIDTH, ENEMY_HEALTH_BAR_HEIGHT ))
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( (WIDTH/2)-(ENEMY_HEALTH_BAR_WIDTH/2), BOX_HEIGHT+SPACING, ENEMY_HEALTH_BAR_WIDTH, ENEMY_HEALTH_BAR_HEIGHT ), BOX_BORDER)
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( (WIDTH/2)-(ENEMY_HEALTH_BAR_WIDTH/2), BOX_HEIGHT+SPACING, b.hp/(b.max_hp/ENEMY_HEALTH_BAR_WIDTH), ENEMY_HEALTH_BAR_HEIGHT ))
     # Carica ultimate
     pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH-ULTIMATE_BOX_WIDTH-(SPACING*2), (HEIGHT/2)-(ULTIMATE_BOX_HEIGTH/2), ULTIMATE_BOX_WIDTH, ULTIMATE_BOX_HEIGTH ))
     pygame.draw.rect(WIN, (0,255,0), pygame.Rect( WIDTH-ULTIMATE_BOX_WIDTH-(SPACING*2), (HEIGHT/2)-(ULTIMATE_BOX_HEIGTH/2), ULTIMATE_BOX_WIDTH, ULTIMATE_BOX_HEIGTH ), BOX_BORDER)
@@ -40,12 +40,22 @@ def characters():
     #Disegno Youssef
     pygame.draw.rect(WIN, (0,255,0), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     WIN.blit(y.img["Profilo"],(SPACING,HEIGHT-CHARA_HEIGHT-SPACING))
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    # Barra della vita di Youssef
+    pygame.draw.rect(WIN, (0,0,0), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ))
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, y.hp/(y.max_hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ))
+    # Barra del mana di Youssef
     pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (SPACING_PLAYER_BAR), CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    # Tab dell'emozione corrente di Youssef
     WIN.blit(y.img["Emozione"],(SPACING,HEIGHT-CHARA_HEIGHT-SPACING+SPACING_PLAYER_BAR))
+
 
     #Disegno Piergiorgio
     pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    # WIN.blit(p.img["Profilo"],(SPACING,HEIGHT-CHARA_HEIGHT-SPACING))
+
+
+
+
     #Disegno Raul
     pygame.draw.rect(WIN, (255,0,255), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     #Disegno Fabiano
