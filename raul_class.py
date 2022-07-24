@@ -1,8 +1,10 @@
 import pygame
 
+from data import *
 import action
 import boss
 import change_emotion as emotion
+from data import RAUL_NEUTRAL
 import drawer as dw
 import youssef_class as y
 import pier_class as p
@@ -44,6 +46,8 @@ class Raul():
 
         self.name = "Raul"
 
+        self.img = {"Profilo":pygame.transform.scale(RAUL_NEUTRAL,(CHARA_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+
         # STATISTICHE
         self.hp = 498 # Variabile per i punti vita
         self.mna = 325 # Variabile per i punti mana
@@ -52,7 +56,7 @@ class Raul():
         self.vel = 93 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = self.hp 
+        self.current_hp = 34
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
@@ -90,6 +94,30 @@ class Raul():
 
         self.is_showing_text_outputs = False
 
+    def change_img(self):
+        if self.current_emotion == "neutrale":
+            self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT))
+            self.img["Emozione"] = NEUTRAL_IMG
+
+        elif self.current_emotion == "gioioso":
+            self.img["Profilo"] = pygame.transform.scale(CHARA_HAPPY,(CHARA_WIDTH,CHARA_HEIGHT))
+            self.img["Emozione"] = HAPPY_IMG
+
+        elif self.current_emotion == "euforico":
+            self.img["Profilo"] = CHARA_EUFORIC
+
+        elif self.current_emotion == "triste":
+            self.img["Profilo"] = CHARA_SAD
+
+        elif self.current_emotion == "depresso":
+            self.img["Profilo"] = CHARA_DEPRESSED
+
+        elif self.current_emotion == "arrabbiato":
+            self.img["Profilo"] = CHARA_RAGE
+            
+        elif self.current_emotion == "iracondo":
+            self.img["Profilo"] = CHARA_FURY
+
     def do_something(self):
         if sel["has_cursor_on"]=="Saetta trascendente":
             DMG_DEAL = 8
@@ -98,7 +126,7 @@ class Raul():
                 dw.saetta_animation()
 
             if not self.is_doing_animation:
-                boss.b.hp-= DAMAGE_DEALED
+                boss.b.current_hp-=DAMAGE_DEALED
                 if self.current_emotion=="gioioso":
                     print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico, e diventa felice!")
                     self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico e diventa felice!"
@@ -141,7 +169,7 @@ class Raul():
                 dw.saetta_animation()
 
             if not self.is_doing_animation:
-                boss.b.hp-= DAMAGE_DEALED
+                boss.b.current_hp-=DAMAGE_DEALED
                 self.current_mna += int(self.mna/4)
                 print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico!")
                 self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"

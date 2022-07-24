@@ -1,5 +1,6 @@
 import pygame
 
+from data import *
 import action
 import boss
 import drawer as dw
@@ -43,6 +44,8 @@ class Pier():
     def __init__(self,):
 
         self.name = "Piergiorgio"
+
+        self.img = {"Profilo":pygame.transform.scale(PIER_NEUTRAL,(CHARA_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         # STATISTICHE
         self.hp = 525 # Variabile per i punti vita
@@ -90,7 +93,29 @@ class Pier():
         self.text_action=""
 
         self.is_showing_text_outputs = False
+    def change_img(self):
+        if self.current_emotion == "neutrale":
+            self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT))
+            self.img["Emozione"] = NEUTRAL_IMG
 
+        elif self.current_emotion == "gioioso":
+            self.img["Profilo"] = pygame.transform.scale(CHARA_HAPPY,(CHARA_WIDTH,CHARA_HEIGHT))
+            self.img["Emozione"] = HAPPY_IMG
+
+        elif self.current_emotion == "euforico":
+            self.img["Profilo"] = CHARA_EUFORIC
+
+        elif self.current_emotion == "triste":
+            self.img["Profilo"] = CHARA_SAD
+
+        elif self.current_emotion == "depresso":
+            self.img["Profilo"] = CHARA_DEPRESSED
+
+        elif self.current_emotion == "arrabbiato":
+            self.img["Profilo"] = CHARA_RAGE
+            
+        elif self.current_emotion == "iracondo":
+            self.img["Profilo"] = CHARA_FURY
 
     def do_something(self):
         #TODO
@@ -104,7 +129,7 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
-                boss.b.hp-=DAMAGE_DEALED
+                boss.b.current_hp-=DAMAGE_DEALED
                 print("Pier ha fatto", DAMAGE_DEALED, "danni al nemico!")
                 self.text_action="Pier ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
                 self.current_animation = 0
@@ -123,7 +148,16 @@ class Pier():
         
         #TODO
         if sel["has_cursor_on"]=='"Spessanza"':
-            print("TODO")
+            print("DA FINIRE")
+            if self.is_doing_animation:
+                boss.b.target = self
+                dw.sbracciata_animation()
+
+            if not self.is_doing_animation:
+                print("Pier ha preso le attenzioni del nemico!")
+                self.text_action="Pier ha preso le attenzioni del nemico!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
 
         if sel["has_cursor_on"]=="Bastione fiammante":
             heal_percentace = 40
@@ -146,7 +180,7 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
-                boss.b.hp-=DAMAGE_DEALED
+                boss.b.current_hp-=DAMAGE_DEALED
                 sel["is_choosing_target"].current_hp = 0
                 print("Pier ha fatto", DAMAGE_DEALED, "danni al nemico! Sacrificando " + sel["is_choosing_target"].name)
                 self.text_action="Pier ha fatto " + str(DAMAGE_DEALED) + " danni al nemico, Sacrificando " + sel["is_choosing_target"].name

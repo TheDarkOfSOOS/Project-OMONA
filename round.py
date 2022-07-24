@@ -26,6 +26,7 @@ run = True
 everyone_has_chosen = False
 everyone_has_finished_animation = False
 continue_animation = False
+new_turn_has_started = True
 
 pygame.display.set_caption("OMONA testing ROUND")
 
@@ -73,10 +74,18 @@ while run:
 
     # - Inizio round -
 
+    if new_turn_has_started:
+        print("NON DEVI VEDERMI")
+        boss.b.obtain_target()
+        new_turn_has_started = False
+
+    print(boss.b.target)
+
     #print(youssef.y.current_emotion)
     #print(pier.p.current_emotion)
     #print(raul.r.current_emotion)
     #print(fabiano.f.current_emotion)
+    print(boss.b.current_emotion)
 
     #print(youssef.y.current_vel)
     #print(pier.p.current_vel)
@@ -114,6 +123,7 @@ while run:
                 # ritorniamo al pg precedente: Youssef
                 youssef.sel["is_choosing"]=True
                 youssef.sel["has_done_first_selection"]=False
+                youssef.sel["is_choosing_target"]=False
                 input="null"
     # Turno pg3
     if raul.sel["is_choosing"]==True:
@@ -126,6 +136,7 @@ while run:
             else:
                 pier.sel["is_choosing"]=True
                 pier.sel["has_done_first_selection"]=False
+                pier.sel["is_choosing_target"]=False
                 input="null"
     # Turno pg4
     if fabiano.sel["is_choosing"]==True:
@@ -135,14 +146,51 @@ while run:
             if fabiano.sel["has_done_first_selection"]==False:
                 raul.sel["is_choosing"]=True
                 raul.sel["has_done_first_selection"]=False
+                raul.sel["is_choosing_target"]=False
                 input="null"
             else:
                 everyone_has_chosen = True
+                can_calculate_speed = True
                 animation_is_starting = True
+
     
     if everyone_has_chosen:
-        # Calcolo velocità TODO
-        list_speed_ordered=[youssef.y,pier.p,raul.r,fabiano.f,boss.b]
+        if can_calculate_speed:
+            list_speed_ordered=[youssef.y,pier.p,raul.r,fabiano.f,boss.b]
+            #print(range(len(list_speed_ordered)))
+            for i in range(len(list_speed_ordered)):
+                #print(list_speed_ordered)
+                pos_min = i
+                for j in range(i+1, len(list_speed_ordered)):
+                    if list_speed_ordered[pos_min].current_vel < list_speed_ordered[j].current_vel:
+                        pos_min = j
+                list_speed_ordered[i], list_speed_ordered[pos_min]  = list_speed_ordered[pos_min], list_speed_ordered[i]
+
+            # Ulteriori controlli per casi particolari
+            # Si toglie l'elemento dalla lista e lo si riaggiunge o all'ultimo indice o per primo
+
+            # DA FIXARE: non tiene conto della velocità, se due mosse hanno priority non vince la velocità
+            #TODO
+            
+            if youssef.sel["has_cursor_on"]=="Sforbiciata":
+                list_speed_ordered.pop(list_speed_ordered.index(youssef.y))
+                list_speed_ordered.insert(len(list_speed_ordered), youssef.y)
+
+            if pier.sel["has_cursor_on"]=="Fiamma protettrice":
+                list_speed_ordered.pop(list_speed_ordered.index(pier.p))
+                list_speed_ordered.insert(0, pier.p)
+
+            if pier.sel["has_cursor_on"]=='"Spessanza"':
+                list_speed_ordered.pop(list_speed_ordered.index(pier.p))
+                list_speed_ordered.insert(0, pier.p)
+
+            if fabiano.sel["has_cursor_on"]=="Cappe":
+                list_speed_ordered.pop(list_speed_ordered.index(fabiano.f))
+                list_speed_ordered.insert(0, fabiano.f)
+
+            can_calculate_speed = False
+            for i in list_speed_ordered:
+                print(i.name, i.current_vel)
 
         if animation_is_starting:
             list_speed_ordered[0].is_doing_animation = True
@@ -198,9 +246,8 @@ while run:
             #print("Si fa qualcosa", list_speed_ordered[3])
             list_speed_ordered[3].do_something()
             if not list_speed_ordered[3].is_doing_animation:
-                #list_speed_ordered[4].is_doing_animation = True
+                list_speed_ordered[4].is_doing_animation = True
                 print("passa avanti")
-                everyone_has_finished_animation = True
                 continue_animation = False
 
         if list_speed_ordered[3].is_showing_text_outputs:
@@ -210,11 +257,20 @@ while run:
             continue_animation = True
             list_speed_ordered[3].is_showing_text_outputs = False
 
-        #if list_speed_ordered[4].is_doing_animation:
-         #   print("Si fa qualcosa", list_speed_ordered[4])
-          #  list_speed_ordered[4].do_something()
-           # if not list_speed_ordered[4].is_doing_animation:
-                #everyone_has_finished_animation = True
+        if list_speed_ordered[4].is_doing_animation and continue_animation:
+            #print("Si fa qualcosa", list_speed_ordered[3])
+            list_speed_ordered[4].do_something()
+            if not list_speed_ordered[4].is_doing_animation:
+                print("finisci")
+                everyone_has_finished_animation = True
+                continue_animation = False
+
+        if list_speed_ordered[4].is_showing_text_outputs:
+            dw.text_action(list_speed_ordered[4].text_action)
+
+        if input=="return":
+            continue_animation = True
+            list_speed_ordered[4].is_showing_text_outputs = False
 
         if everyone_has_finished_animation and continue_animation:
             everyone_has_chosen = False
@@ -223,6 +279,7 @@ while run:
             youssef.sel["is_choosing"] = True
             for character in [youssef, pier, raul, fabiano]:
                 character.sel["has_done_first_selection"] = False
+                new_turn_has_started = True
 
 
         #for attacking_character in list_speed_ordered:

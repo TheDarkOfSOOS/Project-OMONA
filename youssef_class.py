@@ -55,7 +55,7 @@ class Youssef():
 
         self.name = "Youssef"
 
-        self.img = {"Profilo":pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT)),"Emozione":NEUTRAL_IMG}
+        self.img = {"Profilo":pygame.transform.scale(YOUSSEF_NEUTRAL,(CHARA_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         # STATISTICHE
         self.hp = 432 # Variabile per i punti vita
@@ -75,7 +75,14 @@ class Youssef():
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
         # EMOZIONI
-        self.current_emotion = "arrabbiato" # Emozione attuale
+        '''
+            neutrale
+            gioioso, felice, euforico
+            arrabbiato, iracondo, furioso
+            triste, depresso, disperato
+        '''
+        # SISTEMA EMOZIONE!
+        self.current_emotion = "neutrale" # Emozione attuale
         self.emotional_levels = {"Felicità":2,"Rabbia":2,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
 
         self.sforbiciata_animation = []
@@ -135,14 +142,25 @@ class Youssef():
                 dw.sforbiciata_animation()
 
             if not self.is_doing_animation:
-                boss.b.hp-=DAMAGE_DEALED
+                boss.b.current_hp-=DAMAGE_DEALED
                 print("Youssef ha fatto",DAMAGE_DEALED,"danni al nemico!")
                 self.text_action="Youssef ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
-        #TODO
+
         if sel["has_cursor_on"]=="Provocazione":
-            print("provocazione")
+            if self.is_doing_animation:
+                boss.b.focus_on_youssef = 3
+                emotion.change_emotion(boss.b, "arrabbiato")
+                boss.b.target = self
+                dw.sforbiciata_animation()
+
+            if not self.is_doing_animation:
+                print("Youssef ha provocato il nemico! Ora questo lo vuole fare fritto.")
+                self.text_action="Youssef ha provocato il nemico! Ora questo lo vuole fare fritto."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+                
         
         if sel["has_cursor_on"]=="Battutaccia":
             if self.is_doing_animation:
@@ -173,7 +191,7 @@ class Youssef():
             if not self.is_doing_animation:
                 for allies in [self, p.p, r.r, f.f]:
                     DAMAGE_DEALED += action.damage_deal(allies.current_atk,DMG_DEAL,boss.b.defn)
-                boss.b.hp-=DAMAGE_DEALED
+                boss.b.current_hp-=DAMAGE_DEALED
                 print("Tutto il party ha fatto",DAMAGE_DEALED,"danni al nemico!")
                 self.text_action="Tutto il party ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
                 self.current_animation = 0
@@ -190,15 +208,25 @@ class Youssef():
                 dw.sforbiciata_animation()
 
             if not self.is_doing_animation:
-                boss.b.hp-=DAMAGE_DEALED
+                boss.b.current_hp-=DAMAGE_DEALED
                 print("Youssef ha fatto",DAMAGE_DEALED,"danni al nemico!")
                 self.text_action="Youssef ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        #TODO
+        # DA MIGLIORARE
         if sel["has_cursor_on"]=="Delusione":
-            print("Delusione")
+            if self.is_doing_animation:
+                boss.b.target = self
+                dw.sforbiciata_animation()
+                if self.current_emotion=="triste" or self.current_emotion=="depresso":
+                    print("ABBASSA ATTACCO")
+
+            if not self.is_doing_animation:
+                print("Youssef ha provocato il nemico! Ora questo lo vuole fare fritto.")
+                self.text_action="Youssef ha provocato il nemico! Ora questo lo vuole fare fritto."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
 
 y = Youssef()
 
