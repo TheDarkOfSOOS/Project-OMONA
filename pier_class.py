@@ -65,7 +65,7 @@ class Pier():
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
         # EMOZIONI
-        self.current_emotion = "triste" # Emozione attuale
+        self.current_emotion = "neutrale" # Emozione attuale
         self.emotional_levels = {"Felicità":1,"Rabbia":2,"Tristezza":3} # Dizionario per il livello massimo delle emozioni
 
         
