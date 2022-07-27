@@ -87,13 +87,13 @@ while run:
         boss.b.obtain_target()
         new_turn_has_started = False
 
-    print(boss.b.target)
+    # print(boss.b.target)
 
     #print(youssef.y.current_emotion)
     #print(pier.p.current_emotion)
     #print(raul.r.current_emotion)
     #print(fabiano.f.current_emotion)
-    print(boss.b.current_emotion)
+    # print(boss.b.current_emotion)
 
     #print(youssef.y.current_vel)
     #print(pier.p.current_vel)
