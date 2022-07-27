@@ -141,11 +141,16 @@ class Youssef():
                 dw.sforbiciata_animation()
 
             if not self.is_doing_animation:
-                boss.b.current_hp-=DAMAGE_DEALED
-                print("Youssef ha fatto",DAMAGE_DEALED,"danni al nemico!")
-                self.text_action="Youssef ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
-                self.current_animation = 0
-                self.is_showing_text_outputs = True
+                if action.is_missed(boss.b.eva):
+                    self.text_action="Il nemico ha schivato il colpo!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
+                else:
+                    boss.b.current_hp-=DAMAGE_DEALED
+                    print("Youssef ha fatto",DAMAGE_DEALED,"danni al nemico!")
+                    self.text_action="Youssef ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
 
         if sel["has_cursor_on"]=="Provocazione":
             if self.is_doing_animation:
@@ -188,13 +193,18 @@ class Youssef():
                 dw.sforbiciata_animation()
 
             if not self.is_doing_animation:
-                for allies in [self, p.p, r.r, f.f]:
-                    DAMAGE_DEALED += action.damage_deal(allies.current_atk,DMG_DEAL,boss.b.defn)
-                boss.b.current_hp-=DAMAGE_DEALED
-                print("Tutto il party ha fatto",DAMAGE_DEALED,"danni al nemico!")
-                self.text_action="Tutto il party ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
-                self.current_animation = 0
-                self.is_showing_text_outputs = True 
+                if action.is_missed(boss.b.eva):
+                    self.text_action="Il nemico ha schivato il colpo!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
+                else:
+                    for allies in [self, p.p, r.r, f.f]:
+                        DAMAGE_DEALED += action.damage_deal(allies.current_atk,DMG_DEAL,boss.b.defn)
+                    boss.b.current_hp-=DAMAGE_DEALED
+                    print("Tutto il party ha fatto",DAMAGE_DEALED,"danni al nemico!")
+                    self.text_action="Tutto il party ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True 
                 
 
         if sel["has_cursor_on"]=="Pallonata":
@@ -207,11 +217,16 @@ class Youssef():
                 dw.sforbiciata_animation()
 
             if not self.is_doing_animation:
-                boss.b.current_hp-=DAMAGE_DEALED
-                print("Youssef ha fatto",DAMAGE_DEALED,"danni al nemico!")
-                self.text_action="Youssef ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
-                self.current_animation = 0
-                self.is_showing_text_outputs = True
+                if action.is_missed(boss.b.eva):
+                    self.text_action="Il nemico ha schivato il colpo!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
+                else:
+                    boss.b.current_hp-=DAMAGE_DEALED
+                    print("Youssef ha fatto",DAMAGE_DEALED,"danni al nemico!")
+                    self.text_action="Youssef ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
 
         # DA MIGLIORARE
         if sel["has_cursor_on"]=="Delusione":

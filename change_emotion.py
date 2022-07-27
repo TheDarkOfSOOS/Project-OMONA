@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 
 def change_emotion(objective, emotion):
-    print(objective.name, emotion, objective.current_emotion)
+    # print(objective.name, emotion, objective.current_emotion)
     if emotion == "neutrale":
         objective.current_emotion = "neutrale"
 
@@ -48,26 +48,26 @@ def change_emotion(objective, emotion):
     # FELICITA' LIVELLO 1 CON EMOZIONE NEUTRALE
     elif emotion == "gioioso" and (objective.current_emotion != "gioioso" and objective.current_emotion != "felice" and objective.current_emotion != "euforico"):
         objective.current_emotion = "gioioso"
-        print(objective.name, emotion, objective.current_emotion)
+        # print(objective.name, emotion, objective.current_emotion)
     # FELICITA' LIVELLO 1 + LIVELLO 1 CON MAX >=2 o DA NEUTRALE A LIVELLO 2
     elif emotion == "gioioso" and objective.current_emotion == "gioioso" and objective.emotional_levels["Felicità"] >= 2 or emotion == "felice" and (objective.current_emotion == "neutrale" or objective.current_emotion != "neutrale") and objective.emotional_levels["Felicità"] >= 2:
         objective.current_emotion = "felice"
-        print(objective.name, emotion, objective.current_emotion)
+        # print(objective.name, emotion, objective.current_emotion)
     # FELICITA' LIVELLO 1 + LIVELLO 2 CON MAX >=3 o DA NEUTRALE A LIVELLO 3
     elif emotion == "gioioso" and objective.current_emotion == "felice" and objective.emotional_levels["Felicità"] >= 3 or emotion == "euforico" and (objective.current_emotion == "neutrale" or objective.current_emotion != "neutrale") and objective.emotional_levels["Felicità"] >= 3:
         objective.current_emotion = "euforico"
-        print(objective.name, emotion, objective.current_emotion)
+        # print(objective.name, emotion, objective.current_emotion)
     # FELICITA' LIVELLO 2 + NEUTRALE CON MAX <2 o FELICITA' LIVELLO 1 + 1 CON MAX 1
     elif emotion == "felice" and objective.current_emotion == "neutrale" and objective.emotional_levels["Felicità"] < 2 or objective.current_emotion == "gioioso" and emotion == "gioioso" and objective.emotional_levels["Felicità"] < 2:
         objective.current_emotion = "gioioso"
-        print(objective.name, emotion, objective.current_emotion)
+        # print(objective.name, emotion, objective.current_emotion)
     # FELICITA' LIVELLO 3 + NEUTRALE CON MAX<3 o FELICITA' LIVELLO 2 + 1 CON MAX<3
     elif emotion == "euforico" and objective.current_emotion == "neutrale" and objective.emotional_levels["Felicità"] < 3 or objective.current_emotion == "felice" and emotion == "gioioso" and objective.emotional_levels["Felicità"] < 3:
         objective.current_emotion = "felice"
-        print(objective.name, emotion, objective.current_emotion)
+        # print(objective.name, emotion, objective.current_emotion)
     # FELICITA' LIVELLO 3 CON LIVELLO MASSIMO 1 o FELICITA' LIVELLO 2 + 1 CON LIVELLO MASSIMO 1
     elif emotion == "felice" and objective.current_emotion == "gioioso" and objective.emotional_levels["Felicità"] < 3:
         objective.current_emotion = "felice"
-        print(objective.name, emotion, objective.current_emotion)
+        # print(objective.name, emotion, objective.current_emotion)
 
     objective.change_img()

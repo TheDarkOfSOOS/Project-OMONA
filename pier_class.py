@@ -130,11 +130,16 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
-                boss.b.current_hp-=DAMAGE_DEALED
-                print("Pier ha fatto", DAMAGE_DEALED, "danni al nemico!")
-                self.text_action="Pier ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
-                self.current_animation = 0
-                self.is_showing_text_outputs = True
+                if action.is_missed(boss.b.eva):
+                    self.text_action="Il nemico ha schivato il colpo!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
+                else:
+                    boss.b.current_hp-=DAMAGE_DEALED
+                    print("Pier ha fatto", DAMAGE_DEALED, "danni al nemico!")
+                    self.text_action="Pier ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
 
         if sel["has_cursor_on"]=="Richiesta d'aiuto":
             if self.is_doing_animation:
@@ -166,13 +171,18 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
-                for allies in [y.y,p,r.r,f.f]:
-                    print(allies.current_hp, allies.hp)
-                    allies.current_hp = action.healing_percentage(heal_percentace, allies.current_hp, allies.hp)
-                print("Pier ha curato tutti gli alleati!")
-                self.text_action="Pier ha curato tutti gli alleati!"
-                self.current_animation = 0
-                self.is_showing_text_outputs = True
+                if action.is_missed(boss.b.eva):
+                    self.text_action="Il nemico ha schivato il colpo!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
+                else:
+                    for allies in [y.y,p,r.r,f.f]:
+                        print(allies.current_hp, allies.hp)
+                        allies.current_hp = action.healing_percentage(heal_percentace, allies.current_hp, allies.hp)
+                    print("Pier ha curato tutti gli alleati!")
+                    self.text_action="Pier ha curato tutti gli alleati!"
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
         
         if sel["has_cursor_on"]=="Sacrificio umano":
             if self.is_doing_animation:

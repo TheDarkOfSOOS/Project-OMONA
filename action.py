@@ -41,3 +41,7 @@ def revive(target_current_HP, target_max_HP):
 # Puo' anche essere una lista target_stat_to_upgrade
 def buff_stats(target_stat_to_upgrade):
     return int(target_stat_to_upgrade/10)
+
+def is_missed(target_eva):
+    if rng.randrange(1,101) < target_eva:
+        return True

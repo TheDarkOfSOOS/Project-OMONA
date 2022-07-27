@@ -37,6 +37,8 @@ class Boss():
         self.target = ["nobody"]
         self.focus_on_youssef = 0
 
+        # self.skills[""]
+
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
         # EMOZIONI
