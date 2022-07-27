@@ -62,6 +62,8 @@ class Fabiano():
         self.current_vel = self.vel
         self.current_eva = self.eva
 
+        self.is_dead = False
+
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
         # EMOZIONI
@@ -205,12 +207,12 @@ class Fabiano():
 
         if sel["has_cursor_on"]=="Soffio della morte":
             target = sel["is_choosing_target"]
-            if target.current_hp <= 0:
+            if target.is_dead:
                 if self.is_doing_animation:
                     dw.pestata_animation()
 
                 if not self.is_doing_animation:
-                    target.current_hp = action.revive(target.current_hp, target.hp)
+                    target.current_hp = action.revive(target.current_hp, target.hp,target)
                     print("Fabiano ha soffiato ", sel["is_choosing_target"].name)
                     self.text_action="Fabiano ha soffiato "+ str(sel["is_choosing_target"].name)
                     self.current_animation = 0
@@ -219,5 +221,6 @@ class Fabiano():
                 print("Fabiano non può soffiare ", sel["is_choosing_target"].name)
                 self.text_action="Fabiano non può soffiare "+ str(sel["is_choosing_target"].name)
                 self.current_animation = 0
-                self.is_showing_text_outputs = True     
+                self.is_showing_text_outputs = True
+                self.is_doing_animation = False
 f = Fabiano()

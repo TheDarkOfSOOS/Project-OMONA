@@ -27,9 +27,9 @@ def healing_percentage(percentage_heal, target_current_HP, target_max_HP):
         result = 0
     return int(result)
 
-def revive(target_current_HP, target_max_HP):
+def revive(target_current_HP, target_max_HP, target):
     percentage_heal = 50
-    if target_current_HP <= 0:
+    if target.is_dead:
         result = target_current_HP+((percentage_heal*target_max_HP)/100)
         if result > target_max_HP:
             result = target_max_HP

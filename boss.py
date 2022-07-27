@@ -39,6 +39,7 @@ class Boss():
 
         # self.skills[""]
 
+        self.is_dead = False
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
         # EMOZIONI
@@ -80,7 +81,7 @@ class Boss():
     def do_something(self):
         if self.is_doing_animation:
             DMG_DEAL = 10
-            DAMAGE_DEALED = action.damage_deal(b.atk,DMG_DEAL,y.y.defn)
+            DAMAGE_DEALED = action.damage_deal(b.current_atk,DMG_DEAL,self.target.current_defn)
             dw.sbracciata_animation()
             
         if not self.is_doing_animation:

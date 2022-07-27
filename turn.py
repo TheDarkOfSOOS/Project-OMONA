@@ -112,7 +112,7 @@ def of_character(current_player,input):
         #3. Si ritorna alla scelta generale
         if (input=="backspace" and sel["has_done_first_selection"]==True):
             sel["has_done_first_selection"]=False
-            reset_movement
+            reset_movement()
         #4. Si ritorna al personaggio precedente
         elif (input=="backspace" and sel["has_done_first_selection"]==False):
             sel["is_choosing"]=False

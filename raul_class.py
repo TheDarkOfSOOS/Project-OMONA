@@ -63,6 +63,8 @@ class Raul():
         self.current_vel = self.vel
         self.current_eva = self.eva
 
+        self.is_dead = False
+
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
         # EMOZIONI
