@@ -85,6 +85,21 @@ class Fabiano():
         self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
         self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
 
+        self.biscotto_animation = []
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation00.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation01.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation02.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation03.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation04.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation05.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation06.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation07.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation08.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation09.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation10.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation11.png"))
+
+
         self.current_animation = 0
 
         self.is_doing_animation = False
@@ -121,7 +136,7 @@ class Fabiano():
             heal_percentace = 75
             target = sel["is_choosing_target"]
             if self.is_doing_animation:
-                dw.pestata_animation()
+                dw.biscotto_animation(target)
 
             if not self.is_doing_animation:
                 target.current_hp = action.healing_percentage(heal_percentace, target.current_hp, target.hp)
