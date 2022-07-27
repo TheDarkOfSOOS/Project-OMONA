@@ -263,7 +263,7 @@ def sbracciata_animation():
 def saetta_animation():
     if r.is_doing_animation:
         WIN.blit(r.saetta_animation[int(r.current_animation)],(0,0))
-        r.current_animation+=0.25
+        r.current_animation+=0.75
     if r.current_animation >= len(r.saetta_animation):
         r.is_doing_animation = False
 

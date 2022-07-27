@@ -69,21 +69,21 @@ class Fabiano():
         self.emotional_levels = {"Felicità":3,"Rabbia":1,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
 
         self.pestata_animation = []
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation00.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation01.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation02.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation03.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation04.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation05.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation06.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation07.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation08.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation09.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation10.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation11.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation12.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation13.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/punch_animation14.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation02.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation03.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation04.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation05.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation06.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation07.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation08.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation09.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation10.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation11.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
 
         self.current_animation = 0
 

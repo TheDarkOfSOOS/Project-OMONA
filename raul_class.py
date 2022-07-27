@@ -56,7 +56,7 @@ class Raul():
         self.vel = 93 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = 34
+        self.current_hp = self.hp
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
@@ -70,21 +70,19 @@ class Raul():
         self.emotional_levels = {"Felicità":2,"Rabbia":3,"Tristezza":1} # Dizionario per il livello massimo delle emozioni
     
         self.saetta_animation = []
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation00.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation01.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation02.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation03.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation04.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation05.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation06.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation07.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation08.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation09.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation10.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation11.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation12.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation13.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/punch_animation14.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_00.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_01.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_02.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_03.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_04.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_05.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_06.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_07.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_08.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_09.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_10.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_11.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_12.png"))
 
         self.current_animation = 0
 
