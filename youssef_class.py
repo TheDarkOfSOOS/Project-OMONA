@@ -157,7 +157,7 @@ class Youssef():
         if sel["has_cursor_on"]=="Provocazione":
             if self.is_doing_animation:
                 boss.b.focus_on_youssef = 3
-                emotion.change_emotion(boss.b, "arrabbiato")
+                #emotion.change_emotion(boss.b, "arrabbiato")
                 boss.b.target = self
                 dw.sforbiciata_animation()
 

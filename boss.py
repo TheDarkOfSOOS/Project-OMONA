@@ -73,10 +73,17 @@ class Boss():
         self.is_showing_text_outputs = False
 
     def obtain_target(self):
+        if y.y.is_dead and self.focus_on_youssef > 0:
+            self.focus_on_youssef = 0
+
         if self.focus_on_youssef > 0:
             self.focus_on_youssef -=1
         else:
             self.target = rng.choice([y.y, p.p, r.r, f.f])
+
+            while self.target.is_dead:
+                if self.target:
+                    self.target = rng.choice([y.y, p.p, r.r, f.f])
 
     def do_something(self):
         if self.is_doing_animation:

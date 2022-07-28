@@ -99,6 +99,12 @@ while run:
         if chara.current_hp <= 0:
             chara.current_hp = 0
             chara.is_dead = True
+
+            # Resettiamo stats
+            chara.current_atk = chara.atk
+            chara.current_defn = chara.defn
+            chara.current_vel = chara.vel
+            chara.current_eva = chara.eva
         else:
             chara.is_dead = False
 
