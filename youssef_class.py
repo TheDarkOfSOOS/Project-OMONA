@@ -69,12 +69,16 @@ class Youssef():
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
-        self.current_vel = self.vel
+        self.current_vel = 300
         self.current_eva = self.eva
         
         self.is_dead = False
 
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
+
+        self.is_removing_bar = False
+        self.count_removed_bar = 0
+        self.damage_dealed = 0
 
         # EMOZIONI
         '''
@@ -138,9 +142,11 @@ class Youssef():
     def do_something(self):
         if sel["has_cursor_on"]=="Sforbiciata":
             DMG_DEAL = 10
-            DAMAGE_DEALED = action.damage_deal(y.atk,DMG_DEAL,boss.b.defn)
+            MNA_CONSUMPTION = 5
+            self.damage_dealed = action.damage_deal(y.atk,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.b.eva):
@@ -148,18 +154,21 @@ class Youssef():
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
                 else:
-                    boss.b.current_hp-=DAMAGE_DEALED
-                    print("Youssef ha fatto",DAMAGE_DEALED,"danni al nemico!")
-                    self.text_action="Youssef ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                    #bananajoe
+                    print("Youssef ha fatto",self.damage_dealed,"danni al nemico!")
+                    self.text_action="Youssef ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
+                    self.is_removing_bar = True
 
         if sel["has_cursor_on"]=="Provocazione":
+            boss.b.focus_on_youssef = 3
+            #emotion.change_emotion(boss.b, "arrabbiato")
+            boss.b.target = self
+            MNA_CONSUMPTION = 10
             if self.is_doing_animation:
-                boss.b.focus_on_youssef = 3
-                #emotion.change_emotion(boss.b, "arrabbiato")
-                boss.b.target = self
                 dw.sforbiciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 print("Youssef ha provocato il nemico! Ora questo lo vuole fare fritto.")
@@ -169,8 +178,10 @@ class Youssef():
                 
         
         if sel["has_cursor_on"]=="Battutaccia":
+            MNA_CONSUMPTION = 20
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 print("Youssef ha reso tutti felici!")
@@ -190,9 +201,11 @@ class Youssef():
 
         if sel["has_cursor_on"]=="Assedio":
             DMG_DEAL = 4
-            DAMAGE_DEALED = 0
+            self.damage_dealed = 0
+            MNA_CONSUMPTION = 15
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.b.eva):
@@ -201,22 +214,24 @@ class Youssef():
                     self.is_showing_text_outputs = True
                 else:
                     for allies in [self, p.p, r.r, f.f]:
-                        DAMAGE_DEALED += action.damage_deal(allies.current_atk,DMG_DEAL,boss.b.defn)
-                    boss.b.current_hp-=DAMAGE_DEALED
-                    print("Tutto il party ha fatto",DAMAGE_DEALED,"danni al nemico!")
-                    self.text_action="Tutto il party ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                        self.damage_dealed += action.damage_deal(allies.current_atk,DMG_DEAL,boss.b.defn)
+                    print("Tutto il party ha fatto",self.damage_dealed,"danni al nemico!")
+                    self.text_action="Tutto il party ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
                     self.current_animation = 0
-                    self.is_showing_text_outputs = True 
+                    self.is_showing_text_outputs = True
+                    self.is_removing_bar = True
                 
 
         if sel["has_cursor_on"]=="Pallonata":
             DMG_DEAL = 7
+            MNA_CONSUMPTION = 30
             if y.current_emotion=="arrabbiato" or y.current_emotion=="iracondo":
-                DAMAGE_DEALED = action.damage_deal(y.atk,DMG_DEAL,0)
+                self.damage_dealed = action.damage_deal(y.atk,DMG_DEAL,0)
             else:
-                DAMAGE_DEALED = action.damage_deal(y.atk,DMG_DEAL,boss.b.defn)
+                self.damage_dealed = action.damage_deal(y.atk,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.b.eva):
@@ -224,17 +239,19 @@ class Youssef():
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
                 else:
-                    boss.b.current_hp-=DAMAGE_DEALED
-                    print("Youssef ha fatto",DAMAGE_DEALED,"danni al nemico!")
-                    self.text_action="Youssef ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                    print("Youssef ha fatto",self.damage_dealed,"danni al nemico!")
+                    self.text_action="Youssef ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
+                    self.is_removing_bar = True
 
         # DA MIGLIORARE
         if sel["has_cursor_on"]=="Delusione":
-            if self.is_doing_animation:
-                boss.b.target = self
+            MNA_CONSUMPTION = 30
+            boss.b.target = self
+            if self.is_doing_animation:     
                 dw.sforbiciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
                 if self.current_emotion=="triste" or self.current_emotion=="depresso":
                     print("ABBASSA ATTACCO")
 
@@ -244,6 +261,20 @@ class Youssef():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
+    def remove_bar(self):
+        if self.is_removing_bar:
+            self.count_removed_bar = action.toggle_health(self.damage_dealed, boss.b, self.count_removed_bar)
+            if self.count_removed_bar == self.damage_dealed:
+                self.is_removing_bar = False
+                self.damage_dealed = 0
+                self.count_removed_bar = 0
+
+    def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
+        self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)
+        #print(self.count_removed_bar, available_frames)
+        if self.count_removed_bar == available_frames:
+            self.is_removing_bar = False
+            self.count_removed_bar = 0
 y = Youssef()
 
 

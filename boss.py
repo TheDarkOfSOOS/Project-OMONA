@@ -22,7 +22,7 @@ class Boss():
         self.img = pygame.transform.scale(BOSS,(WIDTH,HEIGHT))
 
         # STATISTICHE
-        self.hp = 8000 # Variabile per i punti vita
+        self.hp = 1000 # Variabile per i punti vita
         self.atk = 145 # Variabile per i punti attacco
         self.defn = 156 # Variabile per i punti difesa
         self.vel = 131 # Variabile per i punti velocità
@@ -41,6 +41,10 @@ class Boss():
 
         self.is_dead = False
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
+
+        self.is_removing_bar = False
+        self.count_removed_bar = 0
+        self.damage_dealed = 0
 
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
@@ -88,14 +92,22 @@ class Boss():
     def do_something(self):
         if self.is_doing_animation:
             DMG_DEAL = 10
-            DAMAGE_DEALED = action.damage_deal(b.current_atk,DMG_DEAL,self.target.current_defn)
+            self.damage_dealed = action.damage_deal(b.current_atk,DMG_DEAL,self.target.current_defn)
             dw.sbracciata_animation()
             
         if not self.is_doing_animation:
-            self.target.current_hp-= DAMAGE_DEALED
-            print("Boss ha fatto", DAMAGE_DEALED, " danni a " + self.target.name)
-            self.text_action="Boss ha fatto "+ str(DAMAGE_DEALED) + " danni a " + self.target.name
+            print("Boss ha fatto", self.damage_dealed, "danni a " + self.target.name)
+            self.text_action="Boss ha fatto "+ str(self.damage_dealed) + " danni a " + self.target.name
             self.current_animation = 0
             self.is_showing_text_outputs = True
+            self.is_removing_bar = True
+
+    def remove_bar(self):
+        if self.is_removing_bar:
+            self.count_removed_bar = action.toggle_health(self.damage_dealed, self.target, self.count_removed_bar)
+            if self.count_removed_bar == self.damage_dealed:
+                self.is_removing_bar = False
+                self.damage_dealed = 0
+                self.count_removed_bar = 0
 
 b = Boss()

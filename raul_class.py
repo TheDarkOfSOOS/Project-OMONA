@@ -67,6 +67,18 @@ class Raul():
 
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
+        self.is_removing_bar = False
+        self.count_removed_bar = 0
+        self.damage_dealed = 0
+        self.aoe_1 = 0
+        self.aoe_2 = 0
+        self.aoe_3 = 0
+        self.aoe_4 = 0
+        self.count_1 = 0
+        self.count_2 = 0
+        self.count_3 = 0
+        self.count_4 = 0
+
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
         self.emotional_levels = {"Felicità":2,"Rabbia":3,"Tristezza":1} # Dizionario per il livello massimo delle emozioni
@@ -120,9 +132,11 @@ class Raul():
     def do_something(self):
         if sel["has_cursor_on"]=="Saetta trascendente":
             DMG_DEAL = 8
-            DAMAGE_DEALED = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
+            MNA_CONSUMPTION = 25
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:
                 dw.saetta_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.b.eva):
@@ -130,45 +144,48 @@ class Raul():
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
                 else:
-                    boss.b.current_hp-=DAMAGE_DEALED
                     if self.current_emotion=="gioioso":
-                        print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico, e diventa felice!")
-                        self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico e diventa felice!"
+                        print("Raul ha fatto", self.damage_dealed, "danni al nemico, e diventa felice!")
+                        self.text_action="Raul ha fatto "+ str(self.damage_dealed) + " danni al nemico e diventa felice!"
                         emotion.change_emotion(self, "gioioso")
                     elif self.current_emotion=="arrabbiato":
-                        print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico, e diventa iracondo!")
-                        self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico e diventa iracondo!"
+                        print("Raul ha fatto", self.damage_dealed, "danni al nemico, e diventa iracondo!")
+                        self.text_action="Raul ha fatto "+ str(self.damage_dealed) + " danni al nemico e diventa iracondo!"
                         emotion.change_emotion(self, "arrabbiato")
                     elif self.current_emotion=="iracondo":
-                        print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico, e diventa furioso!")
-                        self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico e diventa furioso!"
+                        print("Raul ha fatto", self.damage_dealed, "danni al nemico, e diventa furioso!")
+                        self.text_action="Raul ha fatto "+ str(self.damage_dealed) + " danni al nemico e diventa furioso!"
                         emotion.change_emotion(self, "furioso")
                     else:
-                        print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico!")
-                        self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                        print("Raul ha fatto", self.damage_dealed, "danni al nemico!")
+                        self.text_action="Raul ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
 
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
+                    self.is_removing_bar = True
 
         if sel["has_cursor_on"]=="Tempesta":
             DMG_DEAL = 3
-            DAMAGE_DEALED = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
+            MNA_CONSUMPTION = 20
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:
                 dw.saetta_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
-                print("Raul ha reso tutti tristi e ha fatto", DAMAGE_DEALED, "danni al nemico")
+                print("Raul ha reso tutti tristi e ha fatto", self.damage_dealed, "danni al nemico")
                 emotion.change_emotion(y.y, "triste")
                 emotion.change_emotion(p.p, "triste")
                 emotion.change_emotion(r, "triste")
                 emotion.change_emotion(f.f, "triste")
-                self.text_action="Raul ha reso tutti tristi e ha fatto " + str(DAMAGE_DEALED) + " danni al nemico"
+                self.text_action="Raul ha reso tutti tristi e ha fatto " + str(self.damage_dealed) + " danni al nemico"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
+                self.is_removing_bar = True
 
         if sel["has_cursor_on"]=="Bastonata":
             DMG_DEAL = 6
-            DAMAGE_DEALED = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
             if self.is_doing_animation:
                 dw.saetta_animation()
 
@@ -178,18 +195,20 @@ class Raul():
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
                 else:
-                    boss.b.current_hp-=DAMAGE_DEALED
                     self.current_mna += int(self.mna/4)
                     if self.current_mna > self.mna:
                         self.current_mna = self.mna
-                    print("Raul ha fatto", DAMAGE_DEALED, "danni al nemico!")
-                    self.text_action="Raul ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                    print("Raul ha fatto", self.damage_dealed, "danni al nemico!")
+                    self.text_action="Raul ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
+                    self.is_removing_bar = True
 
         if sel["has_cursor_on"]=="Pettoinfuori":
+            MNA_CONSUMPTION = 10
             if self.is_doing_animation:
                 dw.saetta_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 self.current_atk+=action.buff_stats(self.atk)
@@ -199,8 +218,10 @@ class Raul():
                 self.is_showing_text_outputs = True
 
         if sel["has_cursor_on"]=="Bel Tempo":
+            MNA_CONSUMPTION = 10
             if self.is_doing_animation:
                 dw.saetta_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 emotion.change_emotion(sel["is_choosing_target"], "gioioso")
@@ -211,29 +232,51 @@ class Raul():
 
         if sel["has_cursor_on"]=="Tensione esplosiva":
             DMG_DEAL = 6
-            DAMAGE_DEALED=[]
-            for objectives in [y.y,p.p,self,f.f, boss.b]:
-                DAMAGE_DEALED.append(action.damage_deal(self.atk,DMG_DEAL,objectives.current_defn))
+            MNA_CONSUMPTION = 50
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.current_defn)
+            self.aoe_1 = action.damage_deal(r.atk,DMG_DEAL,y.y.current_defn)
+            self.aoe_2 = action.damage_deal(r.atk,DMG_DEAL,p.p.current_defn)
+            self.aoe_4 = action.damage_deal(r.atk,DMG_DEAL,f.f.current_defn)
             if self.is_doing_animation:
                 dw.saetta_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
+                # DUBT SUL MISSARE
                 if action.is_missed(boss.b.eva):
                     self.text_action="Il nemico ha schivato il colpo!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
                 else:
-                    i=0
-                    for objectives in [y.y,p.p,self,f.f,boss.b]:
-                        objectives.current_hp-=DAMAGE_DEALED[i]
-                        if(objectives.current_hp < 0):
-                            objectives.current_hp = 0
-                        i+=1
                     emotion.change_emotion(self, "arrabbiato")
                     print("Raul ha sfondato il campo di elettricita'!")
                     self.text_action="Raul ha sfondato il campo di elettricita'!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
+                    self.is_removing_bar = True
         
+    def remove_bar(self):
+        if self.is_removing_bar:
+            if sel["has_cursor_on"]=="Tensione esplosiva":
+                self.count_1 = action.toggle_health(self.aoe_1, y.y, self.count_1)
+                self.count_2 = action.toggle_health(self.aoe_2, p.p, self.count_2)
+                self.count_4 = action.toggle_health(self.aoe_4, f.f, self.count_4)
+                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss.b, self.count_removed_bar)
+                if (self.count_1 + self.count_2 + self.count_4 + self.count_removed_bar) == (self.aoe_1 + self.aoe_2+ self.aoe_4 + self.damage_dealed):
+                    self.is_removing_bar = False
+                    self.damage_dealed = 0
+                    self.count_removed_bar = 0
+            else:
+                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss.b, self.count_removed_bar)
+                if self.count_removed_bar == self.damage_dealed:
+                    self.is_removing_bar = False
+                    self.damage_dealed = 0
+                    self.count_removed_bar = 0
 
+    def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
+        self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)
+        #print(self.count_removed_bar, available_frames)
+        if self.count_removed_bar == available_frames:
+            self.is_removing_bar = False
+            self.count_removed_bar = 0
 r = Raul()

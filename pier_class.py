@@ -55,7 +55,7 @@ class Pier():
         self.vel = 119 # Variabile per i punti velocità
         self.eva = 5 # Variabile per i punti evasione
 
-        self.current_hp = self.hp
+        self.current_hp = 524
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
@@ -65,6 +65,18 @@ class Pier():
         self.is_dead = False
 
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
+
+        self.is_removing_bar = False
+        self.count_removed_bar = 0
+        self.damage_dealed = 0
+        self.aoe_1 = 0
+        self.aoe_2 = 0
+        self.aoe_3 = 0
+        self.aoe_4 = 0
+        self.count_1 = 0
+        self.count_2 = 0
+        self.count_3 = 0
+        self.count_4 = 0
 
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
@@ -123,13 +135,16 @@ class Pier():
     def do_something(self):
         #TODO
         if sel["has_cursor_on"]=="Fiamma protettrice":
+            MNA_CONSUMPTION = 45
             print("TODO")
     
         if sel["has_cursor_on"]=="Sbracciata":
+            DMG_DEAL = 6
+            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn)
+            MNA_CONSUMPTION = 15
             if self.is_doing_animation:
-                DMG_DEAL = 6
-                DAMAGE_DEALED = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn)
                 dw.sbracciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.b.eva):
@@ -137,15 +152,17 @@ class Pier():
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
                 else:
-                    boss.b.current_hp-=DAMAGE_DEALED
-                    print("Pier ha fatto", DAMAGE_DEALED, "danni al nemico!")
-                    self.text_action="Pier ha fatto "+ str(DAMAGE_DEALED) + " danni al nemico!"
+                    print("Pier ha fatto", self.damage_dealed, "danni al nemico!")
+                    self.text_action="Pier ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
+                    self.is_removing_bar = True
 
         if sel["has_cursor_on"]=="Richiesta d'aiuto":
+            MNA_CONSUMPTION = 20
             if self.is_doing_animation:
                 dw.sbracciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 emotion.change_emotion(sel["is_choosing_target"], "arrabbiato")
@@ -157,9 +174,12 @@ class Pier():
         #TODO
         if sel["has_cursor_on"]=='"Spessanza"':
             print("DA FINIRE")
+            boss.b.target = self
+            MNA_CONSUMPTION = 20
             if self.is_doing_animation:
-                boss.b.target = self
+                
                 dw.sbracciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 print("Pier ha preso le attenzioni del nemico!")
@@ -168,36 +188,62 @@ class Pier():
                 self.is_showing_text_outputs = True
 
         if sel["has_cursor_on"]=="Bastione fiammante":
-            heal_percentace = 40
+            heal_percentage = 40
+            MNA_CONSUMPTION = 40
+            self.aoe_1 = action.healing_percentage(heal_percentage, y.y.current_hp, y.y.hp)
+            self.aoe_2 = action.healing_percentage(heal_percentage, p.current_hp, p.hp)
+            self.aoe_3 = action.healing_percentage(heal_percentage, r.r.current_hp, r.r.hp)
+            self.aoe_4 = action.healing_percentage(heal_percentage, f.f.current_hp, f.f.hp)
             if self.is_doing_animation:
                 dw.sbracciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
-                if action.is_missed(boss.b.eva):
-                    self.text_action="Il nemico ha schivato il colpo!"
-                    self.current_animation = 0
-                    self.is_showing_text_outputs = True
-                else:
-                    for allies in [y.y,p,r.r,f.f]:
-                        print(allies.current_hp, allies.hp)
-                        allies.current_hp = action.healing_percentage(heal_percentace, allies.current_hp, allies.hp)
-                    print("Pier ha curato tutti gli alleati!")
-                    self.text_action="Pier ha curato tutti gli alleati!"
-                    self.current_animation = 0
-                    self.is_showing_text_outputs = True
-        
-        if sel["has_cursor_on"]=="Sacrificio umano":
-            if self.is_doing_animation:
-                DMG_DEAL = 25
-                DAMAGE_DEALED = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn)
-                dw.sbracciata_animation()
-
-            if not self.is_doing_animation:
-                boss.b.current_hp-=DAMAGE_DEALED
-                sel["is_choosing_target"].current_hp = 0
-                print("Pier ha fatto", DAMAGE_DEALED, "danni al nemico! Sacrificando " + sel["is_choosing_target"].name)
-                self.text_action="Pier ha fatto " + str(DAMAGE_DEALED) + " danni al nemico, Sacrificando " + sel["is_choosing_target"].name
+                print("Pier ha curato tutti gli alleati!")
+                self.text_action="Pier ha curato tutti gli alleati!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
+                self.is_removing_bar = True
+        
+        if sel["has_cursor_on"]=="Sacrificio umano":
+            DMG_DEAL = 25
+            MNA_CONSUMPTION = 50
+            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn)
+            if self.is_doing_animation:
+                dw.sbracciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
+            if not self.is_doing_animation:
+                # ANIMA LA BARRA
+                sel["is_choosing_target"].current_hp = 0
+                print("Pier ha fatto", self.damage_dealed, "danni al nemico! Sacrificando " + sel["is_choosing_target"].name)
+                self.text_action="Pier ha fatto " + str(self.damage_dealed) + " danni al nemico, Sacrificando " + sel["is_choosing_target"].name
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+                self.is_removing_bar = True
+
+    def remove_bar(self):
+        if self.is_removing_bar:
+            if sel["has_cursor_on"]=="Bastione fiammante":
+                self.count_1 = action.add_health(self.aoe_1, y.y, self.count_1)
+                self.count_2 = action.add_health(self.aoe_2, p, self.count_2)
+                self.count_3 = action.add_health(self.aoe_3, r.r, self.count_3)
+                self.count_4 = action.add_health(self.aoe_4, f.f, self.count_4)
+                if (self.count_1 + self.count_2 + self.count_3 + self.count_4) == (self.aoe_1 + self.aoe_2 + self.aoe_3 + self.aoe_4):
+                    self.is_removing_bar = False
+                    self.damage_dealed = 0
+                    self.count_removed_bar = 0
+            else:
+                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss.b, self.count_removed_bar)
+                if self.count_removed_bar == self.damage_dealed:
+                    self.is_removing_bar = False
+                    self.damage_dealed = 0
+                    self.count_removed_bar = 0
+
+    def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
+        self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)
+        #print(self.count_removed_bar, available_frames)
+        if self.count_removed_bar == available_frames:
+            self.is_removing_bar = False
+            self.count_removed_bar = 0
 p = Pier()

@@ -99,6 +99,7 @@ while run:
         if chara.current_hp <= 0:
             chara.current_hp = 0
             chara.is_dead = True
+            chara.current_emotion = "neutrale"
 
             # Resettiamo stats
             chara.current_atk = chara.atk
@@ -115,6 +116,11 @@ while run:
     #print(raul.r.current_emotion)
     #print(fabiano.f.current_emotion)
     #print(boss.b.current_emotion)
+
+    #print(youssef.y.current_mna)
+    #print(pier.p.current_mna)
+    #print(raul.r.current_mna)
+    #print(fabiano.f.current_mna)
 
     #print(youssef.y.current_vel)
     #print(pier.p.current_vel)
@@ -280,8 +286,11 @@ while run:
 
         if list_speed_ordered[0].is_showing_text_outputs and (not list_speed_ordered[0] in dead_list) and (not list_speed_ordered[0].is_dead):
             dw.text_action(list_speed_ordered[0].text_action)
+            print(youssef.y.current_mna)
+            list_speed_ordered[0].remove_bar()
+        #print(list_speed_ordered[0].is_removing_bar)
 
-        if input=="return" and (not list_speed_ordered[0] in dead_list) and (not list_speed_ordered[0].is_dead):
+        if input=="return" and (not list_speed_ordered[0].is_removing_bar and list_speed_ordered[0].is_showing_text_outputs) and (not list_speed_ordered[0] in dead_list) and (not list_speed_ordered[0].is_dead):
             continue_animation = True
             list_speed_ordered[0].is_showing_text_outputs = False
 
@@ -303,8 +312,9 @@ while run:
 
         if list_speed_ordered[1].is_showing_text_outputs and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
             dw.text_action(list_speed_ordered[1].text_action)
+            list_speed_ordered[1].remove_bar()
 
-        if input=="return" and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
+        if input=="return" and (not list_speed_ordered[1].is_removing_bar and list_speed_ordered[1].is_showing_text_outputs) and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
             continue_animation = True
             list_speed_ordered[1].is_showing_text_outputs = False
 
@@ -326,8 +336,9 @@ while run:
 
         if list_speed_ordered[2].is_showing_text_outputs and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
             dw.text_action(list_speed_ordered[2].text_action)
+            list_speed_ordered[2].remove_bar()
 
-        if input=="return" and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
+        if input=="return" and (not list_speed_ordered[2].is_removing_bar and list_speed_ordered[2].is_showing_text_outputs) and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
             continue_animation = True
             list_speed_ordered[2].is_showing_text_outputs = False
 
@@ -352,8 +363,9 @@ while run:
 
         if list_speed_ordered[3].is_showing_text_outputs and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
             dw.text_action(list_speed_ordered[3].text_action)
+            list_speed_ordered[3].remove_bar()
 
-        if input=="return" and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
+        if input=="return" and (not list_speed_ordered[3].is_removing_bar and list_speed_ordered[3].is_showing_text_outputs) and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
             continue_animation = True
             list_speed_ordered[3].is_showing_text_outputs = False
 
@@ -378,8 +390,9 @@ while run:
 
         if list_speed_ordered[4].is_showing_text_outputs and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
             dw.text_action(list_speed_ordered[4].text_action)
+            list_speed_ordered[4].remove_bar()
 
-        if input=="return" and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
+        if input=="return" and (not list_speed_ordered[4].is_removing_bar and list_speed_ordered[4].is_showing_text_outputs) and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
             continue_animation = True
             list_speed_ordered[4].is_showing_text_outputs = False
 
