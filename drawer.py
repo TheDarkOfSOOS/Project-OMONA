@@ -270,7 +270,7 @@ def saetta_animation():
 def pestata_animation():
     if f.is_doing_animation:
         WIN.blit(f.pestata_animation[int(f.current_animation)],(0,0))
-        f.current_animation+=0.25
+        f.current_animation+=0.50
     if f.current_animation >= len(f.pestata_animation):
         f.is_doing_animation = False
 

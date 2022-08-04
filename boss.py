@@ -48,7 +48,7 @@ class Boss():
 
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
-        self.emotional_levels = {"Felicità":"2","Rabbia":"2","Tristezza":"2"} # Dizionario per il livello massimo delle emozioni
+        self.emotional_levels = {"Felicità":2,"Rabbia":2,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
 
         self.sbracciata_animation = []
         self.sbracciata_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
@@ -92,10 +92,12 @@ class Boss():
     def do_something(self):
         if self.is_doing_animation:
             DMG_DEAL = 10
-            self.damage_dealed = action.damage_deal(b.current_atk,DMG_DEAL,self.target.current_defn)
+            self.damage_dealed = action.damage_deal(b.current_atk,DMG_DEAL,self.target.current_defn,self.current_emotion,self.target.current_emotion)
             dw.sbracciata_animation()
             
         if not self.is_doing_animation:
+            if p.sel["has_cursor_on"]=="Fiamma protettrice":
+                self.damage_dealed = int(self.damage_dealed/2)
             print("Boss ha fatto", self.damage_dealed, "danni a " + self.target.name)
             self.text_action="Boss ha fatto "+ str(self.damage_dealed) + " danni a " + self.target.name
             self.current_animation = 0

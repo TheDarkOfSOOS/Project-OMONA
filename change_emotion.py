@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+import boss
 
 def change_emotion(objective, emotion):
     if not objective.is_dead:
@@ -28,12 +29,15 @@ def change_emotion(objective, emotion):
 
         # RABBIA LIVELLO 1 CON EMOZIONE NEUTRALE
         elif emotion == "arrabbiato" and objective.current_emotion != "arrabbiato" and objective.current_emotion != "iracondo" and objective.current_emotion != "furioso":
+            # print("1")
             objective.current_emotion = "arrabbiato"
         # RABBIA LIVELLO 1 + LIVELLO 1 CON MAX >=2 o DA NEUTRALE A LIVELLO 2
         elif emotion == "arrabbiato" and objective.current_emotion == "arrabbiato" and objective.emotional_levels["Rabbia"] >= 2 or emotion == "iracondo" and (objective.current_emotion == "neutrale" or objective.current_emotion != "neutrale") and objective.emotional_levels["Rabbia"] >= 2:
+            # print("2")
             objective.current_emotion = "iracondo"
         # RABBIA LIVELLO 1 + LIVELLO 2 CON MAX >=3 o DA NEUTRALE A LIVELLO 3
         elif emotion == "arrabbiato" and objective.current_emotion == "iracondo" and objective.emotional_levels["Rabbia"] >= 3 or emotion == "furioso" and (objective.current_emotion == "neutrale" or objective.current_emotion != "neutrale") and objective.emotional_levels["Rabbia"] >= 3:
+            # print("3")
             objective.current_emotion = "furioso"
         # RABBIA LIVELLO 2 + NEUTRALE CON MAX <2 o RABBIA LIVELLO 1 + 1 CON MAX 1
         elif emotion == "iracondo" and objective.current_emotion == "neutrale" and objective.emotional_levels["Rabbia"] < 2 or objective.current_emotion == "arrabbiato" and emotion == "arrabbiato" and objective.emotional_levels["Rabbia"] < 2:
@@ -72,4 +76,5 @@ def change_emotion(objective, emotion):
             # print(objective.name, emotion, objective.current_emotion)
     else:
         objective.current_emotion = "neutrale"
-    objective.change_img()
+    if objective != boss.b:
+        objective.change_img()

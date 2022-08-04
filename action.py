@@ -5,11 +5,154 @@ import random as rng
 
 damage_per_frame = 5
 
-def damage_deal(user_atk, atk_dmg, target_def):
+def damage_deal(user_atk, atk_dmg, target_def, user_emotion, target_emotion):
     result = int(((user_atk)*(atk_dmg*0.3)) - (target_def+rng.randrange(0,7)))
     if result < 0:
         result = 0
-    return result
+    damage = emotion_effectiveness(result, target_emotion, user_emotion)
+    return damage
+
+def emotion_effectiveness(damage, target_emotion, user_emotion):
+    LOW_BOOST = abs(damage*0.25)
+    MED_BOOST = abs(damage*0.50)
+    MAX_BOOST = abs(damage*0.75)
+    
+    if user_emotion == "neutrale" and target_emotion == "neutrale":
+        damage = damage
+
+    # TRISTEZZA VS FELICITA'
+    elif user_emotion == "triste" and target_emotion == "gioioso":
+        damage += LOW_BOOST
+    elif user_emotion == "depresso" and target_emotion == "gioioso":
+        damage += MED_BOOST
+    elif user_emotion == "disperato" and target_emotion == "gioioso":
+        damage += MAX_BOOST
+
+    elif user_emotion == "triste" and target_emotion == "felice":
+        damage += 0
+    elif user_emotion == "depresso" and target_emotion == "felice":
+        damage += LOW_BOOST
+    elif user_emotion == "disperato" and target_emotion == "felice":
+        damage += MED_BOOST
+    
+    elif user_emotion == "triste" and target_emotion == "euforico":
+        damage += 0
+    elif user_emotion == "depresso" and target_emotion == "euforico":
+        damage += 0
+    elif user_emotion == "disperato" and target_emotion == "euforico":
+        damage += LOW_BOOST
+
+    # FELICITA' VS TRISTEZZA
+    elif user_emotion == "gioioso" and target_emotion == "triste":
+        damage += LOW_BOOST
+    elif user_emotion == "felice" and target_emotion == "triste":
+        damage += MED_BOOST
+    elif user_emotion == "euforico" and target_emotion == "triste":
+        damage += MAX_BOOST
+    
+    elif user_emotion == "gioioso" and target_emotion == "depresso":
+        damage += 0
+    elif user_emotion == "felice" and target_emotion == "depresso":
+        damage += LOW_BOOST
+    elif user_emotion == "euforico" and target_emotion == "depresso":
+        damage += MED_BOOST
+
+    elif user_emotion == "gioioso" and target_emotion == "disperato":
+        damage += 0
+    elif user_emotion == "felice" and target_emotion == "disperato":
+        damage += 0
+    elif user_emotion == "euforico" and target_emotion == "disperato":
+        damage += LOW_BOOST
+
+    # FELICITA' VS RABBIA
+    elif user_emotion == "gioioso" and target_emotion == "arrabbiato":
+        damage += LOW_BOOST
+    elif user_emotion == "felice" and target_emotion == "arrabbiato":
+        damage += MED_BOOST
+    elif user_emotion == "euforico" and target_emotion == "arrabbiato":
+        damage += MAX_BOOST
+    
+    elif user_emotion == "gioioso" and target_emotion == "iracondo":
+        damage += 0
+    elif user_emotion == "felice" and target_emotion == "iracondo":
+        damage += LOW_BOOST
+    elif user_emotion == "euforico" and target_emotion == "iracondo":
+        damage += MED_BOOST
+
+    elif user_emotion == "gioioso" and target_emotion == "furioso":
+        damage += 0
+    elif user_emotion == "felice" and target_emotion == "furioso":
+        damage += 0
+    elif user_emotion == "euforico" and target_emotion == "furioso":
+        damage += LOW_BOOST
+
+    # RABBIA VS FELICITA'
+    elif user_emotion == "arrabbiato" and target_emotion == "gioioso":
+        damage += LOW_BOOST
+    elif user_emotion == "iracondo" and target_emotion == "gioioso":
+        damage += MED_BOOST
+    elif user_emotion == "furioso" and target_emotion == "gioioso":
+        damage += MAX_BOOST
+    
+    elif user_emotion == "arrabbiato" and target_emotion == "felice":
+        damage += 0
+    elif user_emotion == "iracondo" and target_emotion == "felice":
+        damage += LOW_BOOST
+    elif user_emotion == "furioso" and target_emotion == "felice":
+        damage += MED_BOOST
+
+    elif user_emotion == "arrabbiato" and target_emotion == "euforico":
+        damage += 0
+    elif user_emotion == "iracondo" and target_emotion == "euforico":
+        damage += 0
+    elif user_emotion == "furioso" and target_emotion == "euforico":
+        damage += LOW_BOOST
+
+    # RABBIA VS TRISTEZZA
+    elif user_emotion == "arrabbiato" and target_emotion == "triste":
+        damage += LOW_BOOST
+    elif user_emotion == "iracondo" and target_emotion == "triste":
+        damage += MED_BOOST
+    elif user_emotion == "furioso" and target_emotion == "triste":
+        damage += MAX_BOOST
+    
+    elif user_emotion == "arrabbiato" and target_emotion == "depresso":
+        damage += 0
+    elif user_emotion == "iracondo" and target_emotion == "depresso":
+        damage += LOW_BOOST
+    elif user_emotion == "furioso" and target_emotion == "depresso":
+        damage += MED_BOOST
+
+    elif user_emotion == "arrabbiato" and target_emotion == "disperato":
+        damage += 0
+    elif user_emotion == "iracondo" and target_emotion == "disperato":
+        damage += 0
+    elif user_emotion == "furioso" and target_emotion == "disperato":
+        damage += LOW_BOOST
+
+    # TRISTEZZA VS RABBIA
+    elif user_emotion == "triste" and target_emotion == "arrabbiato":
+        damage += LOW_BOOST
+    elif user_emotion == "depresso" and target_emotion == "arrabbiato":
+        damage += MED_BOOST
+    elif user_emotion == "disperato" and target_emotion == "arrabbiato":
+        damage += MAX_BOOST
+
+    elif user_emotion == "triste" and target_emotion == "iracondo":
+        damage += 0
+    elif user_emotion == "depresso" and target_emotion == "iracondo":
+        damage += LOW_BOOST
+    elif user_emotion == "disperato" and target_emotion == "iracondo":
+        damage += MED_BOOST
+    
+    elif user_emotion == "triste" and target_emotion == "furioso":
+        damage += 0
+    elif user_emotion == "depresso" and target_emotion == "furioso":
+        damage += 0
+    elif user_emotion == "disperato" and target_emotion == "furioso":
+        damage += LOW_BOOST
+
+    return int(damage)
 
 def toggle_health(move_damage, target, count):
     #print(count, "<=", move_damage, "and", abs(count - move_damage), ">", damage_per_frame)

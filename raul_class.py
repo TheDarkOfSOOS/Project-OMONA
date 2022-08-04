@@ -133,7 +133,7 @@ class Raul():
         if sel["has_cursor_on"]=="Saetta trascendente":
             DMG_DEAL = 8
             MNA_CONSUMPTION = 25
-            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
@@ -167,7 +167,7 @@ class Raul():
         if sel["has_cursor_on"]=="Tempesta":
             DMG_DEAL = 3
             MNA_CONSUMPTION = 20
-            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
@@ -185,7 +185,7 @@ class Raul():
 
         if sel["has_cursor_on"]=="Bastonata":
             DMG_DEAL = 6
-            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn)
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
 
@@ -233,10 +233,10 @@ class Raul():
         if sel["has_cursor_on"]=="Tensione esplosiva":
             DMG_DEAL = 6
             MNA_CONSUMPTION = 50
-            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.current_defn)
-            self.aoe_1 = action.damage_deal(r.atk,DMG_DEAL,y.y.current_defn)
-            self.aoe_2 = action.damage_deal(r.atk,DMG_DEAL,p.p.current_defn)
-            self.aoe_4 = action.damage_deal(r.atk,DMG_DEAL,f.f.current_defn)
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL+4,boss.b.defn,self.current_emotion,boss.b.current_emotion)
+            self.aoe_1 = action.damage_deal(r.atk,DMG_DEAL,y.y.current_defn,self.current_emotion,y.y.current_emotion)
+            self.aoe_2 = action.damage_deal(r.atk,DMG_DEAL,p.p.current_defn,self.current_emotion,p.p.current_emotion)
+            self.aoe_4 = action.damage_deal(r.atk,DMG_DEAL,f.f.current_defn,self.current_emotion,f.f.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))

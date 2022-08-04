@@ -55,7 +55,7 @@ class Pier():
         self.vel = 119 # Variabile per i punti velocità
         self.eva = 5 # Variabile per i punti evasione
 
-        self.current_hp = 524
+        self.current_hp = self.hp
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
@@ -133,14 +133,21 @@ class Pier():
 
        
     def do_something(self):
-        #TODO
         if sel["has_cursor_on"]=="Fiamma protettrice":
             MNA_CONSUMPTION = 45
-            print("TODO")
+            if self.is_doing_animation:
+                dw.sbracciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
+
+            if not self.is_doing_animation:
+                print("Pier protegge gli alleati riducendo il danno ricevuto")
+                self.text_action="Pier protegge gli alleati riducendo il danno ricevuto"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
     
         if sel["has_cursor_on"]=="Sbracciata":
             DMG_DEAL = 6
-            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn)
+            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
             MNA_CONSUMPTION = 15
             if self.is_doing_animation:
                 dw.sbracciata_animation()
@@ -208,7 +215,7 @@ class Pier():
         if sel["has_cursor_on"]=="Sacrificio umano":
             DMG_DEAL = 25
             MNA_CONSUMPTION = 50
-            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn)
+            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
             if self.is_doing_animation:
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))

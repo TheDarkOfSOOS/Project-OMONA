@@ -115,7 +115,7 @@ while run:
     #print(pier.p.current_emotion)
     #print(raul.r.current_emotion)
     #print(fabiano.f.current_emotion)
-    #print(boss.b.current_emotion)
+    print(boss.b.current_emotion)
 
     #print(youssef.y.current_mna)
     #print(pier.p.current_mna)

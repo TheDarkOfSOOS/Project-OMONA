@@ -55,7 +55,7 @@ class Fabiano():
         self.vel = 179 # Variabile per i punti velocità
         self.eva = 25 # Variabile per i punti evasione
 
-        self.current_hp = 280
+        self.current_hp = self.hp
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
@@ -157,7 +157,7 @@ class Fabiano():
         if sel["has_cursor_on"]=="Pestata":
             DMG_DEAL = 7
             MNA_CONSUMPTION = 55
-            self.damage_dealed = action.damage_deal(f.vel,DMG_DEAL,boss.b.defn)
+            self.damage_dealed = action.damage_deal(f.current_vel,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
             if self.is_doing_animation:
                 dw.pestata_animation()
                 #print(round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
