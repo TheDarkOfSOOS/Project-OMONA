@@ -53,25 +53,25 @@ while run:
             #print(event.key)
             if event.key == pygame.K_RIGHT:
                 input="right"
-                print(pygame.K_RIGHT)
+                #print(pygame.K_RIGHT)
             elif event.key == pygame.K_LEFT:
                 input="left"
-                print(pygame.K_LEFT)
+                #print(pygame.K_LEFT)
             elif event.key == pygame.K_UP:
                 input="up"
-                print(pygame.K_UP)
+                #print(pygame.K_UP)
             elif event.key == pygame.K_DOWN:
                 input="down"
-                print(pygame.K_DOWN)
+                #print(pygame.K_DOWN)
             elif event.key == pygame.K_RETURN:
                 input="return"
-                print(pygame.K_RETURN)
+                #print(pygame.K_RETURN)
             elif event.key == pygame.K_BACKSPACE:
                 input="backspace"
-                print(pygame.K_BACKSPACE)
+                #print(pygame.K_BACKSPACE)
             elif event.key == pygame.K_LSHIFT:
                 input="shift"
-                print(pygame.K_LSHIFT)
+                #print(pygame.K_LSHIFT)
 
         # Se questo equivale alla chiusura della finestra
         if event.type == pygame.QUIT:
@@ -115,7 +115,7 @@ while run:
     #print(pier.p.current_emotion)
     #print(raul.r.current_emotion)
     #print(fabiano.f.current_emotion)
-    print(boss.b.current_emotion)
+    #print(boss.b.current_emotion)
 
     #print(youssef.y.current_mna)
     #print(pier.p.current_mna)
@@ -283,10 +283,10 @@ while run:
                 print("passa avanti")
                 list_speed_ordered[1].is_doing_animation = True
                 continue_animation = False
+                input = "null"
 
         if list_speed_ordered[0].is_showing_text_outputs and (not list_speed_ordered[0] in dead_list) and (not list_speed_ordered[0].is_dead):
             dw.text_action(list_speed_ordered[0].text_action)
-            print(youssef.y.current_mna)
             list_speed_ordered[0].remove_bar()
         #print(list_speed_ordered[0].is_removing_bar)
 
@@ -309,6 +309,7 @@ while run:
                 print("passa avanti")
                 list_speed_ordered[2].is_doing_animation = True
                 continue_animation = False
+                input = "null"
 
         if list_speed_ordered[1].is_showing_text_outputs and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
             dw.text_action(list_speed_ordered[1].text_action)
@@ -333,6 +334,7 @@ while run:
                 print("passa avanti")
                 list_speed_ordered[3].is_doing_animation = True
                 continue_animation = False
+                input = "null"
 
         if list_speed_ordered[2].is_showing_text_outputs and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
             dw.text_action(list_speed_ordered[2].text_action)
@@ -360,6 +362,7 @@ while run:
                 list_speed_ordered[4].is_doing_animation = True
                 print("passa avanti")
                 continue_animation = False
+                input = "null"
 
         if list_speed_ordered[3].is_showing_text_outputs and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
             dw.text_action(list_speed_ordered[3].text_action)
@@ -387,6 +390,7 @@ while run:
                 print("finisci")
                 everyone_has_finished_animation = True
                 continue_animation = False
+                input = "null"
 
         if list_speed_ordered[4].is_showing_text_outputs and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
             dw.text_action(list_speed_ordered[4].text_action)

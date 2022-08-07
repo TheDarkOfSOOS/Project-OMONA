@@ -240,6 +240,11 @@ def text_action(text):
     text=my_font.render(text,False,(255,255,255))
     WIN.blit(text,(BOX_HORIZONTAL_SPACING+SPACING, SPACING))
 
+# Parte delle animazioni
+# ATTENZIONE: SETTARE VALORE VELOCITA' ANIMAZIONE A 0.25 PER ABILITA' PERSONAGGI
+# SE SI VUOLE CAMBIARE, NECESSARIO ANDARE NELLA STESSA ABILITA' SULLA CLASSE
+# DEL PERSONAGGIO E CAMBIARE LA CORRISPETTIVA VELOCITA' DEL CONSUMO DI MANA
+
 def sforbiciata_animation():
     if y.is_doing_animation:
         WIN.blit(y.sforbiciata_animation[int(y.current_animation)],(0,0))
@@ -269,8 +274,8 @@ def saetta_animation():
 
 def pestata_animation():
     if f.is_doing_animation:
-        WIN.blit(f.pestata_animation[int(f.current_animation)],(0,0))
-        f.current_animation+=0.50
+        WIN.blit(f.pestata_animation[int(f.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        f.current_animation+=0.25
     if f.current_animation >= len(f.pestata_animation):
         f.is_doing_animation = False
 
