@@ -69,7 +69,7 @@ class Youssef():
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
-        self.current_vel = 300
+        self.current_vel = self.vel
         self.current_eva = self.eva
         
         self.is_dead = False

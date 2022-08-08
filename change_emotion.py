@@ -1,8 +1,11 @@
 import pygame
 from pygame.locals import *
+from data import *
 import boss
 
 def change_emotion(objective, emotion):
+    reset_emotion_stats(objective)
+    
     if not objective.is_dead:
         # print(objective.name, emotion, objective.current_emotion)
         if emotion == "neutrale":
@@ -78,3 +81,104 @@ def change_emotion(objective, emotion):
         objective.current_emotion = "neutrale"
     if objective != boss.b:
         objective.change_img()
+
+    set_emotion_stats(objective)
+
+def reset_emotion_stats(objective):
+    if objective.current_emotion == "triste":
+        print("reset stats", objective.name, objective.current_emotion)
+        objective.current_defn -= TRISTE_BUFF_DEFN
+        objective.current_eva -= TRISTE_BUFF_EVA
+
+    elif objective.current_emotion == "depresso":
+        print("reset stats", objective.name, objective.current_emotion)
+        objective.current_defn -= DEPRESSO_BUFF_DEFN
+        objective.current_eva -= DEPRESSO_BUFF_EVA
+        
+    elif objective.current_emotion == "disperato":
+        print("reset stats", objective.name, objective.current_emotion)
+        objective.current_defn -= DISPERATO_BUFF_DEFN
+        objective.current_eva -= DISPERATO_BUFF_EVA
+        
+    elif objective.current_emotion == "gioioso":
+        print("reset stats", objective.name, objective.current_emotion)
+        objective.current_vel -= GIOIOSO_BUFF_VEL
+        objective.current_eva -= GIOIOSO_BUFF_EVA
+        objective.current_atk -= GIOIOSO_BUFF_ATK
+        
+    elif objective.current_emotion == "felice":
+        print("reset stats", objective.name, objective.current_emotion)
+        objective.current_vel -= FELICE_BUFF_VEL
+        objective.current_eva -= FELICE_BUFF_EVA
+        objective.current_atk -= FELICE_BUFF_ATK
+        
+    elif objective.current_emotion == "euforico":
+        print("reset stats", objective.name, objective.current_emotion)
+        objective.current_vel -= EUFORICO_BUFF_VEL
+        objective.current_eva -= EUFORICO_BUFF_EVA
+        objective.current_atk -= EUFORICO_BUFF_ATK
+        
+    elif objective.current_emotion == "arrabbiato":
+        print("reset stats", objective.name, objective.current_emotion)
+        objective.current_atk -= ARRABBIATO_BUFF_ATK
+        objective.current_defn -= ARRABBIATO_BUFF_DEFN
+        
+    elif objective.current_emotion == "iracondo":
+        print("reset stats", objective.name, objective.current_emotion)
+        objective.current_atk -= IRACONDO_BUFF_ATK
+        objective.current_defn -= IRACONDO_BUFF_DEFN
+        
+    elif objective.current_emotion == "furioso":
+        print("reset stats", objective.name, objective.current_emotion)
+        objective.current_atk -= FURIOSO_BUFF_ATK
+        objective.current_defn -= FURIOSO_BUFF_DEFN
+        
+
+def set_emotion_stats(objective):
+    if objective.current_emotion == "triste":
+        print("set stats", objective.name, objective.current_emotion)
+        objective.current_defn += TRISTE_BUFF_DEFN
+        objective.current_eva += TRISTE_BUFF_EVA
+
+    elif objective.current_emotion == "depresso":
+        print("set stats", objective.name, objective.current_emotion)
+        objective.current_defn += DEPRESSO_BUFF_DEFN
+        objective.current_eva += DEPRESSO_BUFF_EVA
+        
+    elif objective.current_emotion == "disperato":
+        print("set stats", objective.name, objective.current_emotion)
+        objective.current_defn += DISPERATO_BUFF_DEFN
+        objective.current_eva += DISPERATO_BUFF_EVA
+        
+    elif objective.current_emotion == "gioioso":
+        print("set stats", objective.name, objective.current_emotion)
+        objective.current_vel += GIOIOSO_BUFF_VEL
+        objective.current_eva += GIOIOSO_BUFF_EVA
+        objective.current_atk += GIOIOSO_BUFF_ATK
+        
+    elif objective.current_emotion == "felice":
+        print("set stats", objective.name, objective.current_emotion)
+        objective.current_vel += FELICE_BUFF_VEL
+        objective.current_eva += FELICE_BUFF_EVA
+        objective.current_atk += FELICE_BUFF_ATK
+        
+    elif objective.current_emotion == "euforico":
+        print("set stats", objective.name, objective.current_emotion)
+        objective.current_vel += EUFORICO_BUFF_VEL
+        objective.current_eva += EUFORICO_BUFF_EVA
+        objective.current_atk += EUFORICO_BUFF_ATK
+        
+    elif objective.current_emotion == "arrabbiato":
+        print("set stats", objective.name, objective.current_emotion)
+        objective.current_atk += ARRABBIATO_BUFF_ATK
+        objective.current_defn += ARRABBIATO_BUFF_DEFN
+        
+    elif objective.current_emotion == "iracondo":
+        print("set stats", objective.name, objective.current_emotion)
+        objective.current_atk += IRACONDO_BUFF_ATK
+        objective.current_defn += IRACONDO_BUFF_DEFN
+        
+    elif objective.current_emotion == "furioso":
+        print("set stats", objective.name, objective.current_emotion)
+        objective.current_atk += FURIOSO_BUFF_ATK
+        objective.current_def += FURIOSO_BUFF_DEFN
