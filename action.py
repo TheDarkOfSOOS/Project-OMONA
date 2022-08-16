@@ -44,25 +44,25 @@ def emotion_effectiveness(damage, target_emotion, user_emotion):
 
     # FELICITA' VS TRISTEZZA
     elif user_emotion == "gioioso" and target_emotion == "triste":
-        damage += LOW_BOOST
+        damage -= LOW_BOOST
     elif user_emotion == "felice" and target_emotion == "triste":
-        damage += MED_BOOST
+        damage -= LOW_BOOST
     elif user_emotion == "euforico" and target_emotion == "triste":
-        damage += MAX_BOOST
+        damage -= LOW_BOOST
     
     elif user_emotion == "gioioso" and target_emotion == "depresso":
-        damage += 0
+        damage -= MED_BOOST
     elif user_emotion == "felice" and target_emotion == "depresso":
-        damage += LOW_BOOST
+        damage -= LOW_BOOST
     elif user_emotion == "euforico" and target_emotion == "depresso":
-        damage += MED_BOOST
+        damage -= LOW_BOOST
 
     elif user_emotion == "gioioso" and target_emotion == "disperato":
-        damage += 0
+        damage -= MAX_BOOST
     elif user_emotion == "felice" and target_emotion == "disperato":
-        damage += 0
+        damage -= MED_BOOST
     elif user_emotion == "euforico" and target_emotion == "disperato":
-        damage += LOW_BOOST
+        damage -= LOW_BOOST
 
     # FELICITA' VS RABBIA
     elif user_emotion == "gioioso" and target_emotion == "arrabbiato":
@@ -88,25 +88,25 @@ def emotion_effectiveness(damage, target_emotion, user_emotion):
 
     # RABBIA VS FELICITA'
     elif user_emotion == "arrabbiato" and target_emotion == "gioioso":
-        damage += LOW_BOOST
+        damage -= LOW_BOOST
     elif user_emotion == "iracondo" and target_emotion == "gioioso":
-        damage += MED_BOOST
+        damage -= LOW_BOOST
     elif user_emotion == "furioso" and target_emotion == "gioioso":
-        damage += MAX_BOOST
+        damage -= LOW_BOOST
     
     elif user_emotion == "arrabbiato" and target_emotion == "felice":
-        damage += 0
+        damage -= MED_BOOST
     elif user_emotion == "iracondo" and target_emotion == "felice":
-        damage += LOW_BOOST
+        damage -= LOW_BOOST
     elif user_emotion == "furioso" and target_emotion == "felice":
-        damage += MED_BOOST
+        damage -= LOW_BOOST
 
     elif user_emotion == "arrabbiato" and target_emotion == "euforico":
-        damage += 0
+        damage -= MAX_BOOST
     elif user_emotion == "iracondo" and target_emotion == "euforico":
-        damage += 0
+        damage -= MED_BOOST
     elif user_emotion == "furioso" and target_emotion == "euforico":
-        damage += LOW_BOOST
+        damage -= LOW_BOOST
 
     # RABBIA VS TRISTEZZA
     elif user_emotion == "arrabbiato" and target_emotion == "triste":
@@ -132,25 +132,25 @@ def emotion_effectiveness(damage, target_emotion, user_emotion):
 
     # TRISTEZZA VS RABBIA
     elif user_emotion == "triste" and target_emotion == "arrabbiato":
-        damage += LOW_BOOST
+        damage -= LOW_BOOST
     elif user_emotion == "depresso" and target_emotion == "arrabbiato":
-        damage += MED_BOOST
+        damage -= LOW_BOOST
     elif user_emotion == "disperato" and target_emotion == "arrabbiato":
-        damage += MAX_BOOST
+        damage -= LOW_BOOST
 
     elif user_emotion == "triste" and target_emotion == "iracondo":
-        damage += 0
-    elif user_emotion == "depresso" and target_emotion == "iracondo":
-        damage += LOW_BOOST
-    elif user_emotion == "disperato" and target_emotion == "iracondo":
         damage += MED_BOOST
+    elif user_emotion == "depresso" and target_emotion == "iracondo":
+        damage -= LOW_BOOST
+    elif user_emotion == "disperato" and target_emotion == "iracondo":
+        damage -= LOW_BOOST
     
     elif user_emotion == "triste" and target_emotion == "furioso":
-        damage += 0
+        damage -= MAX_BOOST
     elif user_emotion == "depresso" and target_emotion == "furioso":
-        damage += 0
+        damage -= MED_BOOST
     elif user_emotion == "disperato" and target_emotion == "furioso":
-        damage += LOW_BOOST
+        damage -= LOW_BOOST
 
     return int(damage)
 
