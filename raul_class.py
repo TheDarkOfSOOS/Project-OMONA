@@ -26,10 +26,17 @@ description={
     "Bel tempo":"Crea un arcobaleno con la pioggia delle tempeste e la luce delle scintille. Fa diventare gioioso un alleato o nemico.",
     "Tensione esplosiva":"Scarica dal suo corpo una forte elettricità. Diventa arrabbiato e causa danni a tutti: alleati, sé stesso e gravi danni al nemico.",
     # Friends
-    "Damonte":"[Rhythm Mayhem]: Aumenta la velocità di tutti gli alleati.",
-    "Cristian":"[Flash]: Aumenta l’attacco di tutti gli alleati e li rende arrabbiati.",
-    "Noce":"[Sangue freddo]: Esegue un headshot al nemico. Non tiene conto della difesa del nemico.",
-    "Mohammed (spirito)":"[Immortalità?]: Usa l’unica arma in grado di ucciderlo. Rende tutti gli alleati tristi e ne aumenta ulteriormente la difesa."
+    "Damonte": "Aumenta la velocità di tutti gli alleati di tanto.",
+    "Cristian":"Diminuisce l’evasione del nemico per 3 turni.",
+    "Noce": "Esegue un headshot al nemico. Non tiene conto della difesa del nemico.",
+    "Mohammed (spirito)": "Usa l’unica arma in grado di ucciderlo. Rende tutti gli alleati tristi e ne aumenta ulteriormente la difesa."
+}
+
+friends_title={
+    "Damonte":"[Rhythm Mayhem]",
+    "Cristian":"[Inquadrato]",
+    "Noce":"[Sangue freddo]",
+    "Mohammed (spirito)":"[Immortalità?]"
 }
 
 friends=[["Damonte","Cristian","-"],["Noce","Mohammed (spirito)","-"]]
@@ -46,7 +53,7 @@ class Raul():
 
         self.name = "Raul"
 
-        self.img = {"Profilo":pygame.transform.scale(RAUL_NEUTRAL,(CHARA_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+        self.img = {"Profilo":pygame.transform.scale(RAUL_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         # STATISTICHE
         self.hp = 498 # Variabile per i punti vita
@@ -108,7 +115,7 @@ class Raul():
 
     def change_img(self):
         if self.current_emotion == "neutrale":
-            #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT))
+            #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = NEUTRAL_IMG
 
         elif self.current_emotion == "gioioso":
@@ -198,6 +205,7 @@ class Raul():
                     self.current_mna += int(self.mna/4)
                     if self.current_mna > self.mna:
                         self.current_mna = self.mna
+                    print(self.current_mna, self.mna)
                     print("Raul ha fatto", self.damage_dealed, "danni al nemico!")
                     self.text_action="Raul ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
                     self.current_animation = 0
@@ -217,7 +225,7 @@ class Raul():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Bel Tempo":
+        if sel["has_cursor_on"]=="Bel tempo":
             MNA_CONSUMPTION = 10
             if self.is_doing_animation:
                 dw.saetta_animation()
@@ -226,7 +234,7 @@ class Raul():
             if not self.is_doing_animation:
                 emotion.change_emotion(sel["is_choosing_target"], "gioioso")
                 print("Raul ha reso felice", sel["is_choosing_target"].name)
-                self.text_action="Raul ha reso felice", sel["is_choosing_target"].name
+                self.text_action="Raul ha reso felice "+ str(sel["is_choosing_target"].name)
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
@@ -254,6 +262,56 @@ class Raul():
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
                     self.is_removing_bar = True
+
+        if sel["has_cursor_on"]=="Damonte":
+            if self.is_doing_animation:
+                dw.saetta_animation()
+
+            if not self.is_doing_animation:
+                for allies in [y.y,p.p,self,f.f]:
+                    allies.current_vel+=(action.buff_stats(allies.vel)*2)
+                print("Damonte ha dato il ritmo a tutti gli alleati!")
+                self.text_action="Damonte ha dato il ritmo a tutti gli alleati!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+        
+        if sel["has_cursor_on"]=="Cristian":
+            if self.is_doing_animation:
+                dw.saetta_animation()
+
+            if not self.is_doing_animation:
+                boss.b.current_eva-=action.buff_stats(boss.b.eva)
+                print("Il flash di Cristian ha accecato il nemico!")
+                self.text_action="Il flash di Cristian ha accecato il nemico!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Noce":
+            DMG_DEAL = 10
+            self.damage_dealed = action.damage_deal(150,DMG_DEAL,boss.b.defn,"neutrale",boss.b.current_emotion)
+            if self.is_doing_animation:
+                dw.saetta_animation()
+
+            if not self.is_doing_animation:
+                # L'attacco non manca
+                print("Noce ha preso in testa il nemico, causando " +str(self.damage_dealed)+ " danni!")
+                self.text_action="Noce ha preso in testa il nemico, causando " + str(self.damage_dealed)+ " danni!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+                self.is_removing_bar = True
+
+        if sel["has_cursor_on"]=="Mohammed (spirito)":
+            if self.is_doing_animation:
+                dw.saetta_animation()
+
+            if not self.is_doing_animation:
+                for allies in [y.y,p.p,self,f.f]:
+                    allies.current_defn+=action.buff_stats(allies.defn)
+                    emotion.change_emotion(allies, "triste")
+                print("Mohammed scompare e il gruppo, rattristito, prende determinazione.")
+                self.text_action="Mohammed scompare e il gruppo, rattristito, prende determinazione."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
         
     def remove_bar(self):
         if self.is_removing_bar:

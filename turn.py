@@ -41,28 +41,28 @@ def of_character(current_player,input):
     dw.choices(current_player, sel["is_selecting"])
 
     # Disegna il puntatore mentre rimane fisso
-    dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
-    if sel["is_choosing_target"]==False:
+    dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
+    if not sel["is_choosing_target"]:
         if (input=="right" and current_selection_X<2):
             # Spostiamo la X a destra
             current_selection_X+=1
             # Disegniamo le modifiche
-            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
+            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
 
         elif (input=="left" and current_selection_X>0):
             # Spostiamo la X a sinistra
             current_selection_X-=1
-            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
+            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
 
         elif (input=="up" and current_selection_Y>0):
             # Spostiamo la Y in alto
             current_selection_Y-=1
-            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
+            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
             
         elif (input=="down" and current_selection_Y<1):
             # Spostiamo la Y in basso
             current_selection_Y+=1
-            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"])
+            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
 
         # Se il player corrente non ha fatto la prima selezione
         if not current_player.sel["has_done_first_selection"]:

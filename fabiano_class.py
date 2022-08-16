@@ -25,10 +25,17 @@ description={
     "Servizietto":"Asseconda le gioie altrui. Rende gioioso al massimo un amico o nemico. Perde vita e qualcos’altro…",
     "Soffio della morte":"Riporta in vita un alleato con metà dei suoi HP.",
     # Friends
-    "Cappe":"[Sostituto]: Indica un alleato che subirà l’attacco del nemico. Attacca per primo.",
-    "Diego":'[“Camomilla”]: Rende gioiosi(??) tutti gli alleati al massimo, ma diminuisce la loro difesa.',
-    "Trentin":"[Consigliere]: Osserva il nemico e dirà la sua prossima mossa per 2 turni.",
-    "Pastorello (spirito)":"[Consiglio del maggiore]: Incita gli alleati a fare del loro meglio. Aumenta la difesa di tutti per 3 turni."
+    "Cappe":"Indica un alleato che subirà l’attacco del nemico. Attacca per primo.",
+    "Diego": 'Rende gioiosi(??) tutti gli alleati al massimo, ma diminuisce la loro difesa.',
+    "Trentin": "Osserva il nemico e dirà la sua prossima mossa per 2 turni.",
+    "Pastorello (spirito)": "Incita gli alleati a fare del loro meglio. Aumenta la difesa di tutti per 3 turni."
+}
+
+friends_title={
+    "Cappe":"[Sostituto]",
+    "Diego":'[“Camomilla”]',
+    "Trentin":"[Consigliere]",
+    "Pastorello (spirito)":"[Consiglio del maggiore]"
 }
 
 friends=[["Cappe","Trentin","-"],["Diego","Pastorello (spirito)","-"]]
@@ -45,7 +52,7 @@ class Fabiano():
 
         self.name = "Fabiano"
 
-        self.img = {"Profilo":pygame.transform.scale(FABIANO_NEUTRAL,(CHARA_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+        self.img = {"Profilo":pygame.transform.scale(FABIANO_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         # STATISTICHE
         self.hp = 312 # Variabile per i punti vita
@@ -69,6 +76,10 @@ class Fabiano():
         self.is_removing_bar = False
         self.count_removed_bar = 0
         self.damage_dealed = 0
+
+        #  -1    -->  non attivo
+        #  >= 0  -->  attivo
+        self.foresees_enemy_attacks = -1
 
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
@@ -112,7 +123,7 @@ class Fabiano():
 
     def change_img(self):
         if self.current_emotion == "neutrale":
-            #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT))
+            #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = NEUTRAL_IMG
 
         elif self.current_emotion == "gioioso":
@@ -237,6 +248,54 @@ class Fabiano():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
                 self.is_doing_animation = False
+
+        if sel["has_cursor_on"]=="Cappe":
+            if self.is_doing_animation:
+                dw.pestata_animation()
+
+            if not self.is_doing_animation:
+                boss.b.target = sel["is_choosing_target"]
+                print("Cappe ha indicato " + str((boss.b.target).name) + ".")
+                self.text_action="Cappe ha indicato " + str((boss.b.target).name) + "."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Diego":
+            if self.is_doing_animation:
+                dw.pestata_animation()
+
+            if not self.is_doing_animation:
+                for allies in [y.y,p.p,r.r,self]:
+                    allies.current_defn-=action.buff_stats(allies.defn)
+                    emotion.change_emotion(allies, "euforico")
+                print("Diego ha dato quella che sembra camomilla. Come fanno ad essere scatenati ora?")
+                self.text_action="Diego ha dato quella che sembra camomilla. Come fanno ad essere scatenati ora?"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Trentin":
+            # Il valore numerico indica per quanti turni si vedranno gli attacchi del nemico
+            self.foresees_enemy_attacks = 2
+            if self.is_doing_animation:
+                dw.pestata_animation()
+
+            if not self.is_doing_animation:
+                print("Trentin inizia ad osservare le prossime mosse del nemico.")
+                self.text_action="Trentin inizia ad osservare le prossime mosse del nemico."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Pastorello (spirito)":
+            if self.is_doing_animation:
+                dw.pestata_animation()
+
+            if not self.is_doing_animation:
+                for allies in [y.y,p.p,r.r,self]:
+                    allies.current_defn+=action.buff_stats(allies.defn)
+                print("Pastorello con il megafono ha incitato tutti aumentando la loro determinazione!")
+                self.text_action="Pastorello con il megafono ha incitato tutti aumentando la loro determinazione!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
 
     def remove_bar(self):
         if self.is_removing_bar:

@@ -27,10 +27,17 @@ description={
     "Pallonata":"Tira un pallone al nemico che ignora la difesa del nemico quando Youssef è arrabbiato.",
     "Delusione":"Il nemico lo prende di mira. Se Youssef è triste diminuisce l’attacco del nemico per 3 turni. Attacca per primo.",
     # Friends
-    "Pol":"[Bad Boy Gorilla]: Prende un banco e si fionda contro il nemico.",
-    "Anastasia":"[Intramente]: Entra nella mente del nemico, lo rende triste e diminuisce il suo attacco per 2 turni.",
-    "Borin":"[Intimidazione]: Non ha effetto l’intimidazione… Arrabbia il nemico e diminuisce la sua difesa per 3 turni.",
-    "Ciudin (spirito)":"[Superman]: Lascia l’ombrello a Youssef che lo distrugge, Youssef diventa felice e aumenta la sua velocità per tutto l’incontro."
+    "Pol":"Prende un banco e si fionda contro il nemico.",
+    "Anastasia":"Entra nella mente del nemico, lo rende triste e diminuisce il suo attacco per 2 turni.",
+    "Borin":"Non ha effetto l’intimidazione… Arrabbia il nemico e diminuisce la sua difesa per 3 turni.",
+    "Ciudin (spirito)":"Lascia l’ombrello a Youssef che lo distrugge, Youssef diventa felice e aumenta la sua velocità per tutto l’incontro."
+}
+
+friends_title={
+    "Pol":"[Bad Boy Gorilla]",
+    "Anastasia":"[Intramente]",
+    "Borin":"[Intimidazione]",
+    "Ciudin (spirito)":"[Superman]"
 }
 
 # Contiene il nome di tutti gli amici
@@ -47,6 +54,13 @@ sel={"is_choosing":True,"is_selecting":"skills","has_done_first_selection":False
 allies_selections=[""]
 allies_enemy_selections=[""]
 
+YOUSSEF_NEUTRALE = pygame.image.load("img/youssef/youssef_neutrale.png")
+YOUSSEF_GIOIOSO = pygame.image.load("img/youssef/youssef_gioioso.png")
+YOUSSEF_FELICE = pygame.image.load("img/youssef/youssef_felice.png")
+YOUSSEF_TRISTE = pygame.image.load("img/youssef/youssef_triste.png")
+YOUSSEF_DEPRESSO = pygame.image.load("img/youssef/youssef_depresso.png")
+YOUSSEF_ARRABBIATO = pygame.image.load("img/youssef/youssef_arrabbiato.png")
+YOUSSEF_IRACONDO = pygame.image.load("img/youssef/youssef_iracondo.png")
 
 position_in_fight="left-down"
 
@@ -55,7 +69,7 @@ class Youssef():
 
         self.name = "Youssef"
 
-        self.img = {"Profilo":pygame.transform.scale(YOUSSEF_NEUTRAL,(CHARA_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+        self.img = {"Profilo":pygame.transform.scale(YOUSSEF_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         # STATISTICHE
         self.hp = 432 # Variabile per i punti vita
@@ -118,25 +132,31 @@ class Youssef():
 
     def change_img(self):
         if self.current_emotion == "neutrale":
-            #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT))
+            self.img["Profilo"] = pygame.transform.scale(YOUSSEF_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = NEUTRAL_IMG
 
         elif self.current_emotion == "gioioso":
+            self.img["Profilo"] = pygame.transform.scale(YOUSSEF_GIOIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = JOY_IMG
 
         elif self.current_emotion == "felice":
+            self.img["Profilo"] = pygame.transform.scale(YOUSSEF_FELICE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = HAPPY_IMG
 
         elif self.current_emotion == "triste":
+            self.img["Profilo"] = pygame.transform.scale(YOUSSEF_TRISTE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = SAD_IMG
 
         elif self.current_emotion == "depresso":
+            self.img["Profilo"] = pygame.transform.scale(YOUSSEF_DEPRESSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = DEPRESSED_IMG
 
         elif self.current_emotion == "arrabbiato":
+            self.img["Profilo"] = pygame.transform.scale(YOUSSEF_ARRABBIATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = MAD_IMG
 
         elif self.current_emotion == "iracondo":
+            self.img["Profilo"] = pygame.transform.scale(YOUSSEF_IRACONDO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = RAGE_IMG
 
     def do_something(self):
@@ -258,6 +278,59 @@ class Youssef():
             if not self.is_doing_animation:
                 print("Youssef ha provocato il nemico! Ora questo lo vuole fare fritto.")
                 self.text_action="Youssef ha provocato il nemico! Ora questo lo vuole fare fritto."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Pol":
+            DMG_DEAL = 10
+            self.damage_dealed = action.damage_deal(150,DMG_DEAL,boss.b.defn,"neutrale",boss.b.current_emotion)
+            if self.is_doing_animation:
+                dw.sforbiciata_animation()
+
+            if not self.is_doing_animation:
+                #L'attacco non manca
+                print("Pol ha fatto",self.damage_dealed,"danni al nemico!")
+                self.text_action="Pol ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+                self.is_removing_bar = True
+
+        if sel["has_cursor_on"]=="Borin":
+            if self.is_doing_animation:
+                dw.sforbiciata_animation()
+
+            if not self.is_doing_animation:
+                print("Borin ha infastidito il nemico. Ora è arrabbiato, ma rimane scoperto!")
+                # Inizio attacco
+                emotion.change_emotion(boss.b, "arrabbiato")
+                boss.b.current_defn -= action.buff_stats(boss.b.defn)
+                self.text_action="Borin ha infastidito il nemico. Ora è arrabbiato, ma rimane scoperto!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Anastasia":
+            if self.is_doing_animation:
+                dw.sforbiciata_animation()
+
+            if not self.is_doing_animation:
+                print("Anastasia ha letto il nemico. È riuscita a deprimerlo e a diminuirgli l'attacco!")
+                # Inizio attacco
+                emotion.change_emotion(boss.b, "triste")
+                boss.b.current_atk -= action.buff_stats(boss.b.atk)
+                self.text_action="Anastasia ha letto il nemico. È riuscita a deprimerlo e a diminuirgli l'attacco!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Ciudin (spirito)":
+            if self.is_doing_animation:
+                dw.sforbiciata_animation()
+
+            if not self.is_doing_animation:
+                print("Ciudin ha dimenticato l'ombrello. Youssef lo distrugge e diventa Superman!")
+                # Inizio attacco
+                emotion.change_emotion(self, "felice")
+                self.current_vel += action.buff_stats(self.vel)
+                self.text_action="Ciudin ha dimenticato l'ombrello. Youssef lo distrugge e diventa Superman!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 

@@ -84,7 +84,6 @@ class Boss():
             self.focus_on_youssef -=1
         else:
             self.target = rng.choice([y.y, p.p, r.r, f.f])
-
             while self.target.is_dead:
                 if self.target:
                     self.target = rng.choice([y.y, p.p, r.r, f.f])

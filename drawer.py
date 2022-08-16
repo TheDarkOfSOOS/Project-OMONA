@@ -40,30 +40,31 @@ def gui(isFighting):
 def characters():
     #-Disegno Youssef
     # Background
-    pygame.draw.rect(WIN, (WHITE), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    pygame.draw.rect(WIN, (0,150,0), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     
     # Profilo
-    WIN.blit(y.img["Profilo"],(SPACING , HEIGHT-CHARA_HEIGHT-SPACING+(SPACING*2)))
+    WIN.blit(y.img["Profilo"],(SPACING+BOX_BORDER, HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
     
     # Background Bars
-    pygame.draw.rect(WIN, (BLACK), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT ))
+    pygame.draw.rect(WIN, (BLACK), pygame.Rect( SPACING + BOX_BORDER, HEIGHT - (SPACING + (SPACING_PLAYER_BAR*2) + BOX_BORDER + ENEMY_HEALTH_BAR_HEIGHT), CHARA_WIDTH - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT + (SPACING_PLAYER_BAR*2) ))
+
     # Border Health Bar
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + BOX_BORDER + SPACING_PLAYER_BAR, HEIGHT - (SPACING + SPACING_PLAYER_BAR + BOX_BORDER + ENEMY_HEALTH_BAR_HEIGHT), CHARA_WIDTH - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ), BOX_BORDER)
     
     # Health Bar
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, y.current_hp/(y.hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ))
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + BOX_BORDER + SPACING_PLAYER_BAR, HEIGHT - (SPACING + SPACING_PLAYER_BAR + BOX_BORDER + ENEMY_HEALTH_BAR_HEIGHT), y.current_hp/(y.hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ))
     
     # Border Mana Bar
-    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (SPACING_PLAYER_BAR), CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + BOX_BORDER + SPACING_PLAYER_BAR, HEIGHT - (SPACING + SPACING_PLAYER_BAR + ENEMY_HEALTH_BAR_HEIGHT/2), CHARA_WIDTH - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ), BOX_BORDER)
     
     # Mana Bar
-    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + SPACING_PLAYER_BAR, HEIGHT - (SPACING*2) - (SPACING_PLAYER_BAR), y.current_mna/(y.mna/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ))
+    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + BOX_BORDER + SPACING_PLAYER_BAR, HEIGHT - (SPACING + SPACING_PLAYER_BAR + ENEMY_HEALTH_BAR_HEIGHT/2), y.current_mna/(y.mna/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ))
     
     # Emotion panel
-    WIN.blit(y.img["Emozione"],(SPACING,HEIGHT-CHARA_HEIGHT-SPACING+SPACING_PLAYER_BAR))
+    WIN.blit(y.img["Emozione"],(SPACING + BOX_BORDER,HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER)))
     
     # Border Chara card
-    pygame.draw.rect(WIN, (BLACK), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+    pygame.draw.rect(WIN, (BLACK), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), BOX_BORDER)
 
 
     #-Disegno Piergiorgio
@@ -71,28 +72,28 @@ def characters():
     pygame.draw.rect(WIN, (WHITE), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     
     # Profilo
-    WIN.blit(p.img["Profilo"],(SPACING , SPACING+(SPACING*2)))
+    WIN.blit(p.img["Profilo"],(SPACING+BOX_BORDER, SPACING+BOX_BORDER+BANNER_HEIGHT))
     
     # Background Bars
-    pygame.draw.rect(WIN, (BLACK), pygame.Rect( SPACING + SPACING_PLAYER_BAR, CHARA_HEIGHT - SPACING_PLAYER_BAR - (ENEMY_HEALTH_BAR_HEIGHT/2), CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT ))
+    pygame.draw.rect(WIN, (BLACK), pygame.Rect( SPACING + BOX_BORDER, SPACING + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + BOX_BORDER, CHARA_WIDTH - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT + (SPACING_PLAYER_BAR*2) ))
     
     # Border Health Bar
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + SPACING_PLAYER_BAR, CHARA_HEIGHT - SPACING_PLAYER_BAR - (ENEMY_HEALTH_BAR_HEIGHT/2), CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + BOX_BORDER + SPACING_PLAYER_BAR, (SPACING + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + BOX_BORDER) + SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ), BOX_BORDER)
     
     # Health Bar
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + SPACING_PLAYER_BAR, CHARA_HEIGHT - SPACING_PLAYER_BAR - (ENEMY_HEALTH_BAR_HEIGHT/2), p.current_hp/(p.hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ))
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING + BOX_BORDER + SPACING_PLAYER_BAR, (SPACING + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + BOX_BORDER) + SPACING_PLAYER_BAR, p.current_hp/(p.hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ))
     
     # Border Mana Bar
-    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + SPACING_PLAYER_BAR, CHARA_HEIGHT - SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + BOX_BORDER + SPACING_PLAYER_BAR, CHARA_HEIGHT - (SPACING_PLAYER_BAR*2) - BOX_BORDER, CHARA_WIDTH - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ), BOX_BORDER)
     
     # Mana Bar
-    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + SPACING_PLAYER_BAR, CHARA_HEIGHT - SPACING_PLAYER_BAR, p.current_mna/(p.mna/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), )
+    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( SPACING + BOX_BORDER + SPACING_PLAYER_BAR, CHARA_HEIGHT - (SPACING_PLAYER_BAR*2) - BOX_BORDER, p.current_mna/(p.mna/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ))
     
     # Emotion panel
-    WIN.blit(p.img["Emozione"],(SPACING,SPACING+SPACING_PLAYER_BAR))
+    WIN.blit(p.img["Emozione"],(SPACING+BOX_BORDER,SPACING+BOX_BORDER))
     
     # Border Chara card
-    pygame.draw.rect(WIN, (BLACK), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+    pygame.draw.rect(WIN, (BLACK), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), BOX_BORDER)
 
 
     #-Disegno Raul
@@ -100,28 +101,28 @@ def characters():
     pygame.draw.rect(WIN, (WHITE), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     
     # Profilo
-    WIN.blit(r.img["Profilo"],(WIDTH-CHARA_WIDTH-SPACING , HEIGHT-CHARA_HEIGHT-SPACING+(SPACING*2)))
+    WIN.blit(r.img["Profilo"],( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
     
     # Background Bars
-    pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT ))
+    pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER), HEIGHT - (SPACING + (SPACING_PLAYER_BAR*2) + BOX_BORDER + ENEMY_HEALTH_BAR_HEIGHT), CHARA_WIDTH - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT + (SPACING_PLAYER_BAR*2) ))
     
     # Border Health Bar
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER - SPACING_PLAYER_BAR), HEIGHT - (SPACING + SPACING_PLAYER_BAR + BOX_BORDER + ENEMY_HEALTH_BAR_HEIGHT), CHARA_WIDTH - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ), BOX_BORDER)
     
     # Health Bar
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), HEIGHT - (SPACING*2) - (ENEMY_HEALTH_BAR_HEIGHT/2) - SPACING_PLAYER_BAR, r.current_hp/(r.hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ))
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER - SPACING_PLAYER_BAR), HEIGHT - (SPACING + SPACING_PLAYER_BAR + BOX_BORDER + ENEMY_HEALTH_BAR_HEIGHT), r.current_hp/(r.hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ))
     
     # Border Mana Bar
-    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), HEIGHT - (SPACING*2) - (SPACING_PLAYER_BAR), CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER - SPACING_PLAYER_BAR), HEIGHT - (SPACING + SPACING_PLAYER_BAR + ENEMY_HEALTH_BAR_HEIGHT/2), CHARA_WIDTH - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ), BOX_BORDER)
     
     # Mana Bar
-    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), HEIGHT - (SPACING*2) - (SPACING_PLAYER_BAR), r.current_mna/(r.mna/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ))
+    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER - SPACING_PLAYER_BAR), HEIGHT - (SPACING + SPACING_PLAYER_BAR + ENEMY_HEALTH_BAR_HEIGHT/2), r.current_mna/(r.mna/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER)))
     
     # Emotion panel
-    WIN.blit(r.img["Emozione"],(WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING+SPACING_PLAYER_BAR))
+    WIN.blit(r.img["Emozione"],(WIDTH-(CHARA_WIDTH+SPACING-BOX_BORDER), HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER)))
     
     # Border Chara card
-    pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+    pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), BOX_BORDER)
 
 
     #-Disegno Fabiano
@@ -129,28 +130,28 @@ def characters():
     pygame.draw.rect(WIN, (WHITE), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     
     # Profilo
-    WIN.blit(f.img["Profilo"],(WIDTH-CHARA_WIDTH-SPACING , SPACING+(SPACING*2)))
+    WIN.blit(f.img["Profilo"],(WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , SPACING+BOX_BORDER+BANNER_HEIGHT))
     
     # Background Bars
-    pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), CHARA_HEIGHT - SPACING_PLAYER_BAR - (ENEMY_HEALTH_BAR_HEIGHT/2), CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT ))
+    pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER), SPACING + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + BOX_BORDER, CHARA_WIDTH - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT + (SPACING_PLAYER_BAR*2) ))
     
     # Border Health Bar
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), CHARA_HEIGHT - SPACING_PLAYER_BAR - (ENEMY_HEALTH_BAR_HEIGHT/2), CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER - SPACING_PLAYER_BAR), (SPACING + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + BOX_BORDER) + SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ), BOX_BORDER)
     
     # Health Bar
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), CHARA_HEIGHT - SPACING_PLAYER_BAR - (ENEMY_HEALTH_BAR_HEIGHT/2), f.current_hp/(f.hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ))
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER - SPACING_PLAYER_BAR), (SPACING + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + BOX_BORDER) + SPACING_PLAYER_BAR, f.current_hp/(f.hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ))
     
     # Border Mana Bar
-    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), CHARA_HEIGHT - SPACING_PLAYER_BAR, CHARA_WIDTH - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ), BOX_BORDER)
+    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER - SPACING_PLAYER_BAR), CHARA_HEIGHT - (SPACING_PLAYER_BAR*2) - BOX_BORDER, CHARA_WIDTH - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER)), BOX_BORDER)
     
     # Mana Bar
-    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( WIDTH - (SPACING + SPACING_PLAYER_BAR + CHARA_WIDTH - (SPACING_PLAYER_BAR*2)), CHARA_HEIGHT - SPACING_PLAYER_BAR, f.current_mna/(f.mna/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2), ENEMY_HEALTH_BAR_HEIGHT/2 ))
+    pygame.draw.rect(WIN, (0,0,255), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER - SPACING_PLAYER_BAR), CHARA_HEIGHT - (SPACING_PLAYER_BAR*2) - BOX_BORDER, f.current_mna/(f.mna/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ))
 
     # Emotion panel
-    WIN.blit(f.img["Emozione"],(WIDTH-CHARA_WIDTH-SPACING, SPACING+SPACING_PLAYER_BAR))
+    WIN.blit(f.img["Emozione"],(WIDTH-(CHARA_WIDTH+SPACING-BOX_BORDER), SPACING+BOX_BORDER))
     
     # Border Chara card
-    pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+    pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), BOX_BORDER)
     
 # Scrive le scelte disponibili
 def choices(current_player, is_selecting):
@@ -159,25 +160,28 @@ def choices(current_player, is_selecting):
     ''' In base al tipo di selezione del personaggio,
         ci sara' del testo diverso '''
     if not current_player.sel["has_done_first_selection"]:
-        text_action("Cosa deve fare "+ current_player.name + "?")
+        if f.foresees_enemy_attacks >= 0:
+            text_action("Trentin comunica chi verrà attaccato: " + str(b.target.name), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+        else:
+            text_action("Cosa deve fare "+ current_player.name + "?", 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
         for i in range(3):
             for j in range(2):
                 text=my_font.render(turn.menu[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     elif current_player.sel["has_done_first_selection"] and is_selecting=="skills":
-        text_action(current_player.description.get(current_player.sel["has_cursor_on"]))
+        title_and_text_action(str(current_player.sel["has_cursor_on"]), (RED), str(current_player.description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
         for i in range(3):
             for j in range(2):
                 text=my_font.render(current_player.skills[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     elif current_player.sel["has_done_first_selection"] and is_selecting=="friends":
-        text_action(current_player.description.get(current_player.sel["has_cursor_on"]))
+        title_and_text_action(str(current_player.friends_title.get(current_player.sel["has_cursor_on"])), (RED), str(current_player.description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
         for i in range(3):
             for j in range(2):
                 text=my_font.render(current_player.friends[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     
-def selection(currX, currY, current_player, is_selecting):
+def selection(currX, currY, current_player, is_selecting, has_cursor_on, has_done_first_selection):
     # Ridisegniamo tutti gli elementi
     bg()
     boss()
@@ -185,22 +189,25 @@ def selection(currX, currY, current_player, is_selecting):
     gui(False)
     characters()
     choices(current_player, is_selecting)
+    if is_selecting == "friends" and has_done_first_selection:
+        friend_icon(has_cursor_on)
+
     # Disegna selettore abilita'
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( CHOICE_LOCATIONS[currY][currX][X], CHOICE_LOCATIONS[currY][currX][Y], 10, 10 ))
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( CHOICE_LOCATIONS[currY][currX][X]-SPACING, CHOICE_LOCATIONS[currY][currX][Y], 10, 10 ))
 
 # In base alla posizione del player, ci sara' un focus del bordo diverso
 def border_of(current_player):
     if current_player.position_in_fight=="left-down":
-        pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+        pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), BOX_BORDER)
 
     if current_player.position_in_fight=="left-up":
-        pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+        pygame.draw.rect(WIN, (255,0,0), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), BOX_BORDER)
 
     if current_player.position_in_fight=="right-down":
-        pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+        pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ), BOX_BORDER)
 
     if current_player.position_in_fight=="right-up":
-        pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
+        pygame.draw.rect(WIN, (255,0,0), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), BOX_BORDER)
 
 def find_target(sel, input):
     if input=="right" and sel["is_choosing_target"]=="left-down":
@@ -235,10 +242,112 @@ def find_target(sel, input):
     if sel["is_choosing_target"]=="right-up":
         pygame.draw.rect(WIN, (255,255,255), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), 5)
 
-def text_action(text):
-    my_font=pygame.font.SysFont("Freemono, Monospace",16)
-    text=my_font.render(text,False,(255,255,255))
-    WIN.blit(text,(BOX_HORIZONTAL_SPACING+SPACING, SPACING))
+def text_action(text, font_size, start_position, final_position):
+    y_current = start_position[Y]
+    x_might_be = 0
+    x_current = x_might_be
+    new_line = False
+    my_font = pygame.font.SysFont("Freemono, Monospace",font_size)
+    for word in text.split():
+        for i in range(len(word)+1):
+            x_might_be += font_size/1.5
+        
+        if start_position[X] + x_might_be >= final_position - SPACING*1.5:
+            #print("A capo")
+            new_line = True
+            x_current = 0
+            x_might_be = 0
+            y_current += font_size*1.3
+
+        if new_line:
+            for i in range(len(word)+1):
+                x_might_be += font_size/1.5
+            new_line = False
+
+        #print(word)
+        # Renderizza parola da mettere in output
+        word_render = my_font.render(word,False,(255,255,255))
+        # Output parola
+        WIN.blit(word_render, (start_position[X]+x_current, y_current))
+        #print(len(word))
+        x_current = x_might_be
+        #print(x_current+start_position[X], final_position )
+
+def title_and_text_action(text_title, color_title, text, font_size, start_position, final_position):
+    my_font = pygame.font.SysFont("Freemono, Monospace",(font_size*2))
+    title_render = my_font.render(text_title, False, color_title)
+    WIN.blit(title_render, start_position)
+    my_font = pygame.font.SysFont("Freemono, Monospace",font_size)
+    y_current = start_position[Y] + (font_size*2.6)
+    x_might_be = 0
+    x_current = x_might_be
+    new_line = False
+    for word in text.split():
+        for i in range(len(word)+1):
+            x_might_be += font_size/1.5
+        
+        if start_position[X] + x_might_be >= final_position - SPACING*1.5:
+            #print("A capo")
+            new_line = True
+            x_current = 0
+            x_might_be = 0
+            y_current += font_size*1.3
+
+        if new_line:
+            for i in range(len(word)+1):
+                x_might_be += font_size/1.5
+            new_line = False
+
+        #print(word)
+        # Renderizza parola da mettere in output
+        word_render = my_font.render(word,False,(255,255,255))
+        # Output parola
+        WIN.blit(word_render, (start_position[X]+x_current, y_current))
+        #print(len(word))
+        x_current = x_might_be
+        #print(x_current+start_position[X], final_position )
+
+def friend_icon(selected_friend):
+    #print(selected_friend)
+    friend_to_draw = "null"
+    if selected_friend == "Pol":
+        friend_to_draw = POL
+    elif selected_friend == "Borin":
+        friend_to_draw = BORIN
+    elif selected_friend == "Anastasia":
+        friend_to_draw = ANASTASIA
+    elif selected_friend == "Ciudin (spirito)":
+        friend_to_draw = BORIN
+    elif selected_friend == "Damonte":
+        friend_to_draw = DAMONTE
+    elif selected_friend == "Cristian":
+        friend_to_draw = CRISTIAN
+    elif selected_friend == "Noce":
+        friend_to_draw = NOCE
+    elif selected_friend == "Mohammed (spirito)":
+        friend_to_draw = BORIN
+    elif selected_friend == "Ilaria":
+        friend_to_draw = ILARIA
+    elif selected_friend == "Stefan":
+        friend_to_draw = STEFAN
+    elif selected_friend == "Prade":
+        friend_to_draw = PRADE
+    elif selected_friend == "Gonzato (spirito)":
+        friend_to_draw = BORIN
+    elif selected_friend == "Cappe":
+        friend_to_draw = CAPPE
+    elif selected_friend == "Diego":
+        friend_to_draw = DIEGO
+    elif selected_friend == "Trentin":
+        friend_to_draw = TRENTIN
+    elif selected_friend == "Pastorello (spirito)":
+        friend_to_draw = BORIN
+    
+    #print(friend_to_draw)
+    if not friend_to_draw == "null":
+        pygame.draw.rect(WIN, (225,225,255), pygame.Rect( (BOX_HORIZONTAL_SPACING + BOX_WIDTH) - CHARA_IMAGE_WIDTH - (BOX_BORDER*2), 0, CHARA_IMAGE_WIDTH + (BOX_BORDER*2), CHARA_IMAGE_HEIGHT+(BOX_BORDER*2)),BOX_BORDER)
+        WIN.blit(friend_to_draw, ((BOX_HORIZONTAL_SPACING + BOX_WIDTH) - BOX_BORDER - CHARA_IMAGE_WIDTH, BOX_BORDER))
+        #pygame.draw.rect(WIN, (255,25,0), pygame.Rect( (BOX_HORIZONTAL_SPACING + BOX_WIDTH) - BOX_BORDER - CHARA_WIDTH, BOX_BORDER, CHARA_WIDTH, CHARA_IMAGE_HEIGHT), BOX_BORDER)
 
 # Parte delle animazioni
 # ATTENZIONE: SETTARE VALORE VELOCITA' ANIMAZIONE A 0.25 PER ABILITA' PERSONAGGI

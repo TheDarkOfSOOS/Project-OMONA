@@ -25,10 +25,17 @@ description={
     "Bastione fiammante":"Cura leggermente tutti gli alleati.",
     "Sacrificio umano":"Manda al rogo un compagno a scelta e causa grandissimi danni al nemico.",
     # Friends
-    "Ilaria":"[Sentimenti contrastanti]: Rivista che ha diversi effetti in base contro chi viene usata: se usata su Youssef lo rende gioioso, se usata su Piergiorgio lo rende triste, se usata su Fabiano aumenta l’evasione, se usata su Raul lo rende arrabbiato.",
-    "Stefan":"[Best Maid]: Pulisce tutto il campo, toglie tutti gli effetti ed emozioni.",
-    "Prade":"[Spirito Romano]: Aumenta l’attacco di tutti gli alleati e li rende arrabbiati.",
-    "Gonzato (spirito)":"[Dormita pesante]: Il suo dolce russare cura tutti gli alleati e li rende neutri."
+    "Ilaria":"Rivista che ha diversi effetti in base contro chi viene usata: se usata su Youssef lo rende gioioso, se usata su Piergiorgio lo rende triste, se usata su Fabiano aumenta l’evasione, se usata su Raul lo rende arrabbiato.",
+    "Stefan":"Pulisce tutto il campo, toglie tutti gli effetti ed emozioni.",
+    "Prade":"Aumenta l’attacco di tutti gli alleati e li rende arrabbiati.",
+    "Gonzato (spirito)":"Il suo dolce russare cura tutti gli alleati e li rende neutri."
+}
+
+friends_title={
+    "Ilaria":"[Sentimenti contrastanti]",
+    "Stefan":"[Best Maid]",
+    "Prade":"[Spirito Romano]",
+    "Gonzato (spirito)":"[Dormita pesante]"
 }
 
 friends=[["Ilaria","Prade","-"],["Stefan","Gonzato (spirito)","-"]]
@@ -45,7 +52,7 @@ class Pier():
 
         self.name = "Piergiorgio"
 
-        self.img = {"Profilo":pygame.transform.scale(PIER_NEUTRAL,(CHARA_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+        self.img = {"Profilo":pygame.transform.scale(PIER_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         # STATISTICHE
         self.hp = 525 # Variabile per i punti vita
@@ -110,7 +117,7 @@ class Pier():
     
     def change_img(self):
         if self.current_emotion == "neutrale":
-            #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_WIDTH,CHARA_HEIGHT))
+            #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = NEUTRAL_IMG
 
         elif self.current_emotion == "gioioso":
@@ -229,9 +236,80 @@ class Pier():
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
 
+        if sel["has_cursor_on"]=="Ilaria":
+            if self.is_doing_animation:
+                dw.sbracciata_animation()
+
+            if not self.is_doing_animation:
+                if sel["is_choosing_target"] == y.y:
+                    emotion.change_emotion(y.y, "gioioso")
+                    print("Youssef è divertito da quello che ha letto! Lancia via la rivista e diventa " + y.y.current_emotion + ".")
+                    self.text_action="Youssef è divertito da quello che ha letto! Lancia via la rivista e diventa " + y.y.current_emotion + "."
+                elif sel["is_choosing_target"] == self:
+                    emotion.change_emotion(self, "triste")
+                    print("Pier rimane affascinato dalla storia. Riporta la rivista e diventa " + self.current_emotion + ".")
+                    self.text_action="Pier rimane affascinato dalla storia. Riporta la rivista e diventa " + self.current_emotion + "."
+                elif sel["is_choosing_target"] == r.r:
+                    emotion.change_emotion(r.r, "arrabbiato")
+                    print("Raul non sembra contento di quello che ha in mano. Strappa via la rivista e diventa " + r.r.current_emotion + ".")
+                    self.text_action="Raul non sembra contento di quello che ha in mano. Strappa via la rivista e diventa " + r.r.current_emotion + "."
+                elif sel["is_choosing_target"] == f.f:
+                    f.f.current_eva += action.buff_stats(f.f.eva)
+                    print("Fabiano cerca di evitare in tutti i modi di leggere la rivista. Senza volerlo si allena sulla schivata.")
+                    self.text_action="Fabiano cerca di evitare in tutti i modi di leggere la rivista. Senza volerlo si allena sulla schivata."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Stefan":
+            if self.is_doing_animation:
+                dw.sbracciata_animation()
+
+            if not self.is_doing_animation:
+                for target in [y.y,self,r.r,f.f,boss.b]:
+                    target.current_emotion = "neutrale"
+                    target.current_atk = target.atk
+                    target.current_defn = target.defn
+                    target.current_vel = target.vel
+                    target.current_eva = target.eva
+                print("Il campo è stato pulito, tutte le emozioni e potenziamenti sono stati resettati.")
+                self.text_action="Il campo è stato pulito, tutte le emozioni e potenziamenti sono stati resettati."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Prade":
+            if self.is_doing_animation:
+                dw.sbracciata_animation()
+
+            if not self.is_doing_animation:
+                for target in [y.y,self,r.r,f.f]:
+                    emotion.change_emotion(target, "arrabbiato")
+                    target.current_atk += action.buff_stats(target.atk)
+                print("Il gruppo si invogorisce e diventa aggressivo!")
+                self.text_action="Il gruppo si invogorisce e diventa aggressivo!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if sel["has_cursor_on"]=="Gonzato (spirito)":
+            heal_percentage = 30
+            self.aoe_1 = action.healing_percentage(heal_percentage, y.y.current_hp, y.y.hp)
+            self.aoe_2 = action.healing_percentage(heal_percentage, p.current_hp, p.hp)
+            self.aoe_3 = action.healing_percentage(heal_percentage, r.r.current_hp, r.r.hp)
+            self.aoe_4 = action.healing_percentage(heal_percentage, f.f.current_hp, f.f.hp)
+            if self.is_doing_animation:
+                dw.sbracciata_animation()
+
+            if not self.is_doing_animation:
+                for target in [y.y,self,r.r,f.f]:
+                    target.current_emotion = "neutrale"
+                print("Il russare di Gonzato rasserena il gruppo, recuperano tutti vita e ritornano normali.")
+                self.text_action="Il russare di Gonzato rasserena il gruppo, recuperano tutti vita e ritornano normali."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+                self.is_removing_bar = True
+
     def remove_bar(self):
         if self.is_removing_bar:
-            if sel["has_cursor_on"]=="Bastione fiammante":
+            if sel["has_cursor_on"]=="Bastione fiammante" or sel["has_cursor_on"]=="Gonzato (spirito)":
                 self.count_1 = action.add_health(self.aoe_1, y.y, self.count_1)
                 self.count_2 = action.add_health(self.aoe_2, p, self.count_2)
                 self.count_3 = action.add_health(self.aoe_3, r.r, self.count_3)

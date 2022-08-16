@@ -93,6 +93,10 @@ while run:
         boss.b.obtain_target()
         new_turn_has_started = False
 
+        # Ogni nuovo turno togliamo un turno di attivazione dell'abilità
+        if fabiano.f.foresees_enemy_attacks >= 0:
+            fabiano.f.foresees_enemy_attacks -= 1
+
     # Cambia parametri nella classe
     for chara in [youssef.y,pier.p,raul.r,fabiano.f]:
         # Controlliamo che quelli morti siano settati come tali
@@ -275,7 +279,7 @@ while run:
 
         # Attacchi
 
-        
+
         if list_speed_ordered[0].is_doing_animation and (not list_speed_ordered[0] in dead_list) and (not list_speed_ordered[0].is_dead):
             #print("Si fa qualcosa", list_speed_ordered[0])
             list_speed_ordered[0].do_something()
@@ -286,7 +290,7 @@ while run:
                 input = "null"
 
         if list_speed_ordered[0].is_showing_text_outputs and (not list_speed_ordered[0] in dead_list) and (not list_speed_ordered[0].is_dead):
-            dw.text_action(list_speed_ordered[0].text_action)
+            dw.text_action(list_speed_ordered[0].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[0].remove_bar()
         #print(list_speed_ordered[0].is_removing_bar)
 
@@ -312,7 +316,7 @@ while run:
                 input = "null"
 
         if list_speed_ordered[1].is_showing_text_outputs and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
-            dw.text_action(list_speed_ordered[1].text_action)
+            dw.text_action(list_speed_ordered[1].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[1].remove_bar()
 
         if input=="return" and (not list_speed_ordered[1].is_removing_bar and list_speed_ordered[1].is_showing_text_outputs) and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
@@ -337,7 +341,7 @@ while run:
                 input = "null"
 
         if list_speed_ordered[2].is_showing_text_outputs and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
-            dw.text_action(list_speed_ordered[2].text_action)
+            dw.text_action(list_speed_ordered[2].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[2].remove_bar()
 
         if input=="return" and (not list_speed_ordered[2].is_removing_bar and list_speed_ordered[2].is_showing_text_outputs) and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
@@ -365,7 +369,7 @@ while run:
                 input = "null"
 
         if list_speed_ordered[3].is_showing_text_outputs and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
-            dw.text_action(list_speed_ordered[3].text_action)
+            dw.text_action(list_speed_ordered[3].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[3].remove_bar()
 
         if input=="return" and (not list_speed_ordered[3].is_removing_bar and list_speed_ordered[3].is_showing_text_outputs) and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
@@ -393,7 +397,7 @@ while run:
                 input = "null"
 
         if list_speed_ordered[4].is_showing_text_outputs and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
-            dw.text_action(list_speed_ordered[4].text_action)
+            dw.text_action(list_speed_ordered[4].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[4].remove_bar()
 
         if input=="return" and (not list_speed_ordered[4].is_removing_bar and list_speed_ordered[4].is_showing_text_outputs) and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):

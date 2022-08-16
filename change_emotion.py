@@ -25,7 +25,12 @@ def change_emotion(objective, emotion):
             objective.current_emotion = "triste"
         # TRISTEZZA LIVELLO 3 + NEUTRALE CON MAX<3 o TRISTEZZA LIVELLO 2 + 1 CON MAX<3
         elif emotion == "disperato" and objective.current_emotion == "neutrale" and objective.emotional_levels["Tristezza"] < 3 or objective.current_emotion == "depresso" and emotion == "triste" and objective.emotional_levels["Tristezza"] < 3:
-            objective.current_emotion = "depresso"
+            # Per intensità massime controlla i livelli dell'emotional level
+            objective.current_emotion = "triste"
+            if objective.emotional_levels["Tristezza"] > 1:
+                objective.current_emotion = "depresso"
+                if objective.emotional_levels["Tristezza"] > 2:
+                    objective.current_emotion = "disperato"
         # TRISTEZZA LIVELLO 3 CON LIVELLO MASSIMO 1 o TRISTEZZA LIVELLO 2 + 1 CON LIVELLO MASSIMO 1
         elif emotion == "depresso" and objective.current_emotion == "triste" and objective.emotional_levels["Tristezza"] < 3:
             objective.current_emotion = "depresso"
@@ -47,7 +52,12 @@ def change_emotion(objective, emotion):
             objective.current_emotion = "arrabbiato"
         # Rabbia LIVELLO 3 + NEUTRALE CON MAX<3 o RABBIA LIVELLO 2 + 1 CON MAX<3
         elif emotion == "furioso" and objective.current_emotion == "neutrale" and objective.emotional_levels["Rabbia"] < 3 or objective.current_emotion == "iracondo" and emotion == "arrabbiato" and objective.emotional_levels["Rabbia"] < 3:
-            objective.current_emotion = "iracondo"
+            # Per intensità massime controlla i livelli dell'emotional level
+            objective.current_emotion = "arrabbiato"
+            if objective.emotional_levels["Rabbia"] > 1:
+                objective.current_emotion = "iracondo"
+                if objective.emotional_levels["Rabbia"] > 2:
+                    objective.current_emotion = "furioso"
         # RABBIA LIVELLO 3 CON LIVELLO MASSIMO 1 o RABBIA LIVELLO 2 + 1 CON LIVELLO MASSIMO 1
         elif emotion == "iracondo" and objective.current_emotion == "arrabbiato" and objective.emotional_levels["Rabbia"] < 3:
             objective.current_emotion = "iracondo"
@@ -71,7 +81,12 @@ def change_emotion(objective, emotion):
             # print(objective.name, emotion, objective.current_emotion)
         # FELICITA' LIVELLO 3 + NEUTRALE CON MAX<3 o FELICITA' LIVELLO 2 + 1 CON MAX<3
         elif emotion == "euforico" and objective.current_emotion == "neutrale" and objective.emotional_levels["Felicità"] < 3 or objective.current_emotion == "felice" and emotion == "gioioso" and objective.emotional_levels["Felicità"] < 3:
-            objective.current_emotion = "felice"
+            # Per intensità massime controlla i livelli dell'emotional level
+            objective.current_emotion = "gioioso"
+            if objective.emotional_levels["Felicità"] > 1:
+                objective.current_emotion = "felice"
+                if objective.emotional_levels["Felicità"] > 2:
+                    objective.current_emotion = "euforico"
             # print(objective.name, emotion, objective.current_emotion)
         # FELICITA' LIVELLO 3 CON LIVELLO MASSIMO 1 o FELICITA' LIVELLO 2 + 1 CON LIVELLO MASSIMO 1
         elif emotion == "felice" and objective.current_emotion == "gioioso" and objective.emotional_levels["Felicità"] < 3:
@@ -181,4 +196,4 @@ def set_emotion_stats(objective):
     elif objective.current_emotion == "furioso":
         print("set stats", objective.name, objective.current_emotion)
         objective.current_atk += FURIOSO_BUFF_ATK
-        objective.current_def += FURIOSO_BUFF_DEFN
+        objective.current_defn += FURIOSO_BUFF_DEFN

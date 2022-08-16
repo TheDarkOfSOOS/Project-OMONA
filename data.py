@@ -5,8 +5,8 @@ from pygame import mixer
 WIDTH, HEIGHT = 1280, 720
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
-#WIDTH, HEIGHT = 1920, 1080
-#WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
+WIDTH, HEIGHT = 1920, 1080
+WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 
 FPS = 30
 
@@ -20,17 +20,20 @@ RED = (255,0,0)
 
 
 # Game dimensions:
-
-CHARA_WIDTH = 250
-CHARA_HEIGHT = 350
-CHARA_IMAGE_HEIGHT = 250
-
+BOX_BORDER = 3
 SPACING = 25
 SPACING_PLAYER_BAR = 5
 
+CHARA_IMAGE_WIDTH = 250
+CHARA_IMAGE_HEIGHT = 250
+
+BANNER_HEIGHT = 51
+
+CHARA_WIDTH = CHARA_IMAGE_WIDTH+(BOX_BORDER*2)
+CHARA_HEIGHT = BOX_BORDER + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + (((CHARA_IMAGE_HEIGHT+(BOX_BORDER*2))/4) + (SPACING_PLAYER_BAR*2)) + BOX_BORDER
+
 BOX_WIDTH = WIDTH-(CHARA_WIDTH*2)-(SPACING*8)
-BOX_HEIGHT = (CHARA_HEIGHT/5)*3
-BOX_BORDER = 3
+BOX_HEIGHT = CHARA_IMAGE_HEIGHT+(BOX_BORDER*2)
 BOX_HORIZONTAL_SPACING = CHARA_WIDTH+(SPACING*4)
 
 ENEMY_HEALTH_BAR_WIDTH = BOX_WIDTH/2
@@ -39,10 +42,10 @@ ENEMY_HEALTH_BAR_HEIGHT = BOX_HEIGHT/4
 ULTIMATE_BOX_WIDTH = CHARA_WIDTH-(SPACING*2)
 ULTIMATE_BOX_HEIGTH = CHARA_WIDTH-(SPACING*2)
 
-BOX_LEFT_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*1, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT) )
-BOX_LEFT_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*1, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT) )
-BOX_CENTER_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT) )
-BOX_CENTER_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT) )
+BOX_LEFT_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*1*10/12, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT) )
+BOX_LEFT_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*1*10/12, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT) )
+BOX_CENTER_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2*11/12, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT) )
+BOX_CENTER_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2*11/12, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT) )
 BOX_RIGHT_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*3, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT) )
 BOX_RIGHT_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*3, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT) )
 
@@ -97,26 +100,36 @@ soundtrack = "./sounds/boss_ost.mp3"
 
 # Images
 
-# Youssef
-YOUSSEF_NEUTRAL = pygame.image.load("img/youssef/youssef_neutral.png")
+# NON SI IMPORTA PIU' DA DATA PER IL COMBATTIMENTO, SOLTANTO PER BOX DIALOGHI (i friends vengono presi da qui)
 
-# Pier
+YOUSSEF = pygame.transform.scale(pygame.image.load("img/youssef/youssef_neutrale.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+
 PIER_NEUTRAL = pygame.image.load("img/pier/pier_neutral.png")
+#pygame.transform.scale(pygame.image.load("img/pier/pier_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
-# Raul
 RAUL_NEUTRAL = pygame.image.load("img/raul/raul_neutral.png")
+#pygame.transform.scale(pygame.image.load("img/raul/raul_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
-# Fabiano
 FABIANO_NEUTRAL = pygame.image.load("img/fabiano/fabiano_neutral.png")
+#pygame.transform.scale(pygame.image.load("img/fabiano/fabiano_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
+POL = pygame.transform.scale(pygame.image.load("img/friends/pol.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+BORIN = pygame.transform.scale(pygame.image.load("img/friends/borin.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+ANASTASIA = pygame.transform.scale(pygame.image.load("img/friends/anastasia.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+#CIUDIN = pygame.transform.scale(dir,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+DAMONTE = pygame.transform.scale(pygame.image.load("img/friends/damonte.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+CRISTIAN = pygame.transform.scale(pygame.image.load("img/friends/cristian.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+NOCE = pygame.transform.scale(pygame.image.load("img/friends/noce.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+#MOHAMMED = pygame.transform.scale(dir,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+ILARIA = pygame.transform.scale(pygame.image.load("img/friends/ilaria.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+STEFAN = pygame.transform.scale(pygame.image.load("img/friends/stefan.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+PRADE = pygame.transform.scale(pygame.image.load("img/friends/prade.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+#GONZATO = pygame.transform.scale(dir,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+CAPPE = pygame.transform.scale(pygame.image.load("img/friends/cappe.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+DIEGO = pygame.transform.scale(pygame.image.load("img/friends/diego.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+TRENTIN = pygame.transform.scale(pygame.image.load("img/friends/trentin.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+#PASTORELLO = pygame.transform.scale(dir,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
-CHARA_NEUTRAL = pygame.image.load("img/chara_neutral.png")
-CHARA_HAPPY = pygame.image.load("img/chara_happy.png")
-CHARA_EUFORIC = pygame.image.load("img/chara_euforic.png")
-CHARA_SAD = pygame.image.load("img/chara_sad.png")
-CHARA_DEPRESSED = pygame.image.load("img/chara_depressed.png")
-CHARA_RAGE = pygame.image.load("img/chara_rage.png")
-CHARA_FURY = pygame.image.load("img/chara_fury.png")
 
 NEUTRAL_IMG = pygame.image.load("img/neutral_img.png")
 JOY_IMG = pygame.image.load("img/joy_img.png")
