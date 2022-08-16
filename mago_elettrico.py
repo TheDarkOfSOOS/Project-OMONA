@@ -13,20 +13,21 @@ import action
 pygame.init()
 
 # Contiene il nome di tutte le abilita'
+# VEDI SE EFFETTIVAMENTE SERVE AL BOSS
 skills=[["ab1","ab3","ab5"],["ab2","ab4","ab6"]]
 
-class Boss():
+class Mago_Elettrico():
     def __init__(self,):
 
-        self.name = "Boss"
-        self.img = pygame.transform.scale(BOSS,(WIDTH,HEIGHT))
+        self.name = "Mago Elettrico"
+        self.img = pygame.transform.scale(MAGO_ELETTRICO,(WIDTH,HEIGHT))
 
         # STATISTICHE
-        self.hp = 1000 # Variabile per i punti vita
+        self.hp = 500 # Variabile per i punti vita
         self.atk = 145 # Variabile per i punti attacco
-        self.defn = 156 # Variabile per i punti difesa
-        self.vel = 131 # Variabile per i punti velocità
-        self.eva = 15 # Variabile per i punti evasione
+        self.defn = 1 # Variabile per i punti difesa
+        self.vel = 52 # Variabile per i punti velocità
+        self.eva = 0 # Variabile per i punti evasione
 
         self.current_hp = self.hp 
         self.current_atk = self.atk
@@ -48,7 +49,7 @@ class Boss():
 
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
-        self.emotional_levels = {"Felicità":2,"Rabbia":2,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
+        self.emotional_levels = {"Felicità":1,"Rabbia":1,"Tristezza":1} # Dizionario per il livello massimo delle emozioni
 
         self.zzaaap_animation = []
         self.zzaaap_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
@@ -111,4 +112,4 @@ class Boss():
                 self.damage_dealed = 0
                 self.count_removed_bar = 0
 
-b = Boss()
+me = Mago_Elettrico()

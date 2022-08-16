@@ -9,17 +9,18 @@ from pier_class import p
 from raul_class import r
 from fabiano_class import f
 from boss import b
+from mago_elettrico import me
 
 # Drawer serve per disegnare ogni contenuto visibile
 
 def bg():
     WIN.fill((0,0,100))
-def boss():
-    WIN.blit(b.img,(0,100))
+def boss(boss):
+    WIN.blit(boss.img,(0,100))
 
 # Se riceve True, non viene messo il box delle voci
 # Se riceve False, viene integrata tutta la GUI
-def gui(isFighting):
+def gui(isFighting, boss):
     # Box Log / Info
     pygame.draw.rect(WIN, (0,0,0), pygame.Rect( BOX_HORIZONTAL_SPACING, 0, BOX_WIDTH, BOX_HEIGHT ))
     pygame.draw.rect(WIN, (255,255,255), pygame.Rect( BOX_HORIZONTAL_SPACING, 0, BOX_WIDTH, BOX_HEIGHT ), BOX_BORDER)
@@ -30,7 +31,7 @@ def gui(isFighting):
     # Barra della vita del Boss
     pygame.draw.rect(WIN, (BLACK), pygame.Rect( (WIDTH/2)-(ENEMY_HEALTH_BAR_WIDTH/2), BOX_HEIGHT+SPACING, ENEMY_HEALTH_BAR_WIDTH, ENEMY_HEALTH_BAR_HEIGHT ))
     pygame.draw.rect(WIN, (255,0,0), pygame.Rect( (WIDTH/2)-(ENEMY_HEALTH_BAR_WIDTH/2), BOX_HEIGHT+SPACING, ENEMY_HEALTH_BAR_WIDTH, ENEMY_HEALTH_BAR_HEIGHT ), BOX_BORDER)
-    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( (WIDTH/2)-(ENEMY_HEALTH_BAR_WIDTH/2), BOX_HEIGHT+SPACING, b.current_hp/(b.hp/ENEMY_HEALTH_BAR_WIDTH), ENEMY_HEALTH_BAR_HEIGHT ))
+    pygame.draw.rect(WIN, (255,0,0), pygame.Rect( (WIDTH/2)-(ENEMY_HEALTH_BAR_WIDTH/2), BOX_HEIGHT+SPACING, boss.current_hp/(boss.hp/ENEMY_HEALTH_BAR_WIDTH), ENEMY_HEALTH_BAR_HEIGHT ))
     # Carica ultimate
     pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH-ULTIMATE_BOX_WIDTH-(SPACING*2), (HEIGHT/2)-(ULTIMATE_BOX_HEIGTH/2), ULTIMATE_BOX_WIDTH, ULTIMATE_BOX_HEIGTH ))
     pygame.draw.rect(WIN, (0,255,0), pygame.Rect( WIDTH-ULTIMATE_BOX_WIDTH-(SPACING*2), (HEIGHT/2)-(ULTIMATE_BOX_HEIGTH/2), ULTIMATE_BOX_WIDTH, ULTIMATE_BOX_HEIGTH ), BOX_BORDER)
@@ -181,12 +182,12 @@ def choices(current_player, is_selecting):
                 text=my_font.render(current_player.friends[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     
-def selection(currX, currY, current_player, is_selecting, has_cursor_on, has_done_first_selection):
+def selection(currX, currY, current_player, is_selecting, has_cursor_on, has_done_first_selection, boss):
     # Ridisegniamo tutti gli elementi
-    bg()
-    boss()
+    #bg()
+    #boss()
     # False perche' ci serve il box sotto visto che si sta ancora scegliendo
-    gui(False)
+    gui(False, boss)
     characters()
     choices(current_player, is_selecting)
     if is_selecting == "friends" and has_done_first_selection:
@@ -367,12 +368,6 @@ def sbracciata_animation():
         p.current_animation+=0.25
     if p.current_animation >= len(p.sbracciata_animation):
         p.is_doing_animation = False
-    # TEMP, PER ORA BOSS E PIER STESSE ANIMAZIONI
-    if b.is_doing_animation:
-        WIN.blit(b.sbracciata_animation[int(b.current_animation)],(0,0))
-        b.current_animation+=0.25
-    if b.current_animation >= len(b.sbracciata_animation):
-        b.is_doing_animation = False
 
 def saetta_animation():
     if r.is_doing_animation:
@@ -404,3 +399,16 @@ def biscotto_animation(target):
             f.current_animation+=0.25
         if f.current_animation >= len(f.biscotto_animation):
             f.is_doing_animation = False
+
+def zzaaap_animation():
+    if me.is_doing_animation:
+        WIN.blit(me.zzaaap_animation[int(me.current_animation)],(0,0))
+        me.current_animation+=0.25
+    if me.current_animation >= len(me.zzaaap_animation):
+        me.is_doing_animation = False
+
+    if b.is_doing_animation:
+        WIN.blit(b.zzaaap_animation[int(b.current_animation)],(0,0))
+        b.current_animation+=0.25
+    if b.current_animation >= len(b.zzaaap_animation):
+        b.is_doing_animation = False

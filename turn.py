@@ -17,13 +17,13 @@ current_selection_Y = 0
 # La selezione e' una matrice, [Y][X]
 # per ottenere items: Y=0, X=1
 
-''' skills[0][0] items[0][1] log[0][2]
-    recover[1][0] friends[1][1] quit[1][2]
+''' skills[0][0] items[0][1] -[0][2]
+    recover[1][0] friends[1][1] -[1][2]
 '''
-menu=[["skills","items","log"],
-    ["recover","friends","quit"]]
+menu=[["skills","items","-"],
+    ["recover","friends","-"]]
 
-def of_character(current_player,input):
+def of_character(current_player, input, boss):
     # Rendiamo la selezione temporanea come quella del player corrente
     sel = current_player.sel
     # Boolean di controllo se si deve selezionare un target
@@ -41,28 +41,28 @@ def of_character(current_player,input):
     dw.choices(current_player, sel["is_selecting"])
 
     # Disegna il puntatore mentre rimane fisso
-    dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
+    dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)
     if not sel["is_choosing_target"]:
         if (input=="right" and current_selection_X<2):
             # Spostiamo la X a destra
             current_selection_X+=1
             # Disegniamo le modifiche
-            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
+            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)
 
         elif (input=="left" and current_selection_X>0):
             # Spostiamo la X a sinistra
             current_selection_X-=1
-            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
+            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)
 
         elif (input=="up" and current_selection_Y>0):
             # Spostiamo la Y in alto
             current_selection_Y-=1
-            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
+            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)
             
         elif (input=="down" and current_selection_Y<1):
             # Spostiamo la Y in basso
             current_selection_Y+=1
-            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"])
+            dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)
 
         # Se il player corrente non ha fatto la prima selezione
         if not current_player.sel["has_done_first_selection"]:
@@ -86,11 +86,12 @@ def of_character(current_player,input):
 
         # Casi in cui si deve reimpostare la selezione perche' cambio di pagina
         #1. E' stata aperta una sub-pagina (o CASI PARTICOLARI)
-        if (input=="return" and sel["has_done_first_selection"]==False):
+        if (input=="return" and sel["has_done_first_selection"]==False and (not sel["is_selecting"]=="-")):
             sel["has_done_first_selection"]=True
             reset_movement()
             # Caso receover:
             if (sel["is_selecting"]=="recover"):
+                sel["has_cursor_on"] = "recover"
                 sel["is_choosing"] = False
             # Caso quit:
             if (sel["is_selecting"]=="quit"):
@@ -98,7 +99,7 @@ def of_character(current_player,input):
             # Caso log:
             # DA APPROFONDIRE
         #2. Si sta cambiando personaggio
-        elif (input=="return") and sel["has_done_first_selection"]==True:
+        elif (input=="return") and sel["has_done_first_selection"]==True and (not sel["has_cursor_on"]=="-"):
             # Caso della scelta del target
             for options in current_player.allies_selections:
                 if options == sel["has_cursor_on"]:
@@ -128,16 +129,16 @@ def of_character(current_player,input):
     if input=="return" and sel["is_choosing_target"]!=False:
         sel["is_choosing"]=False
 
-        if sel["is_choosing_target"]==youssef.position_in_fight:
+        if sel["is_choosing_target"]==youssef.y.position_in_fight:
             sel["is_choosing_target"]=youssef.y
 
-        elif sel["is_choosing_target"]==pier.position_in_fight:
+        elif sel["is_choosing_target"]==pier.p.position_in_fight:
             sel["is_choosing_target"]=pier.p
 
-        elif sel["is_choosing_target"]==raul.position_in_fight:
+        elif sel["is_choosing_target"]==raul.r.position_in_fight:
             sel["is_choosing_target"]=raul.r
 
-        elif sel["is_choosing_target"]==fabiano.position_in_fight:
+        elif sel["is_choosing_target"]==fabiano.f.position_in_fight:
             sel["is_choosing_target"]=fabiano.f
 
     if find_target:

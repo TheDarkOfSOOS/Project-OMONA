@@ -14,45 +14,14 @@ pygame.init()
 
 name = "Pier"
 
-skills=[["Fiamma protettrice","Richiesta d'aiuto","Bastione fiammante"],["Sbracciata",'"Spessanza"',"Sacrificio umano"]]
-
-description={
-    # Skills
-    "Fiamma protettrice":"Protegge lievemente tutto il party dall’attacco del nemico. Attacca per primo.",
-    "Sbracciata":"Fa una T pose e continua a girare velocemente, colpendo il nemico.",
-    "Richiesta d'aiuto":"Infastidisce un alleato o nemico nel momento peggiore… portandogli rabbia e diminuendogli la difesa per 3 turni.",
-    '"Spessanza"':"Mostra tutta la sua fierezza, facendo concentrare il nemico su Piergiorgio, diminuendo l’attacco del nemico e degli alleati per un turno. Attacca per primo.",
-    "Bastione fiammante":"Cura leggermente tutti gli alleati.",
-    "Sacrificio umano":"Manda al rogo un compagno a scelta e causa grandissimi danni al nemico.",
-    # Friends
-    "Ilaria":"Rivista che ha diversi effetti in base contro chi viene usata: se usata su Youssef lo rende gioioso, se usata su Piergiorgio lo rende triste, se usata su Fabiano aumenta l’evasione, se usata su Raul lo rende arrabbiato.",
-    "Stefan":"Pulisce tutto il campo, toglie tutti gli effetti ed emozioni.",
-    "Prade":"Aumenta l’attacco di tutti gli alleati e li rende arrabbiati.",
-    "Gonzato (spirito)":"Il suo dolce russare cura tutti gli alleati e li rende neutri."
-}
-
-friends_title={
-    "Ilaria":"[Sentimenti contrastanti]",
-    "Stefan":"[Best Maid]",
-    "Prade":"[Spirito Romano]",
-    "Gonzato (spirito)":"[Dormita pesante]"
-}
-
-friends=[["Ilaria","Prade","-"],["Stefan","Gonzato (spirito)","-"]]
-
-sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
-
-allies_selections=["Sacrificio umano", "Ilaria"]
-allies_enemy_selections=["Richiesta d'aiuto"]
-
-position_in_fight="left-up"
-
 class Pier():
     def __init__(self,):
 
         self.name = "Piergiorgio"
 
         self.img = {"Profilo":pygame.transform.scale(PIER_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+
+        self.position_in_fight="left-up"
 
         # STATISTICHE
         self.hp = 525 # Variabile per i punti vita
@@ -63,7 +32,7 @@ class Pier():
         self.eva = 5 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = self.mna
+        self.current_mna = 0
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -114,6 +83,41 @@ class Pier():
         self.text_action=""
 
         self.is_showing_text_outputs = False
+
+        self.skills_template = [["Fiamma protettrice","Richiesta d'aiuto","Bastione fiammante"],["Sbracciata",'"Spessanza"',"Sacrificio umano"]]
+        self.skills = []
+
+        self.description_template = {
+            # Skills
+            "Fiamma protettrice":"Protegge lievemente tutto il party dall’attacco del nemico. Attacca per primo.",
+            "Sbracciata":"Fa una T pose e continua a girare velocemente, colpendo il nemico.",
+            "Richiesta d'aiuto":"Infastidisce un alleato o nemico nel momento peggiore… portandogli rabbia e diminuendogli la difesa per 3 turni.",
+            '"Spessanza"':"Mostra tutta la sua fierezza, facendo concentrare il nemico su Piergiorgio, diminuendo l’attacco del nemico e degli alleati per un turno. Attacca per primo.",
+            "Bastione fiammante":"Cura leggermente tutti gli alleati.",
+            "Sacrificio umano":"Manda al rogo un compagno a scelta e causa grandissimi danni al nemico.",
+            # Friends
+            "Ilaria":"Rivista che ha diversi effetti in base contro chi viene usata: se usata su Youssef lo rende gioioso, se usata su Piergiorgio lo rende triste, se usata su Fabiano aumenta l’evasione, se usata su Raul lo rende arrabbiato.",
+            "Stefan":"Pulisce tutto il campo, toglie tutti gli effetti ed emozioni.",
+            "Prade":"Aumenta l’attacco di tutti gli alleati e li rende arrabbiati.",
+            "Gonzato (spirito)":"Il suo dolce russare cura tutti gli alleati e li rende neutri."
+        }
+        self.description = {}
+
+        self.friends_title_template = {
+            "Ilaria":"[Sentimenti contrastanti]",
+            "Stefan":"[Best Maid]",
+            "Prade":"[Spirito Romano]",
+            "Gonzato (spirito)":"[Dormita pesante]"
+        }
+        self.friends_title = {}
+
+        self.friends_template = [["Ilaria","Prade","-"],["Stefan","Gonzato (spirito)","-"]]
+        self.friends = []
+
+        self.sel = {"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
+
+        self.allies_selections=["Sacrificio umano", "Ilaria"]
+        self.allies_enemy_selections=["Richiesta d'aiuto"]
     
     def change_img(self):
         if self.current_emotion == "neutrale":
@@ -139,8 +143,8 @@ class Pier():
             self.img["Emozione"] = RAGE_IMG
 
        
-    def do_something(self):
-        if sel["has_cursor_on"]=="Fiamma protettrice":
+    def do_something(self, boss):
+        if self.sel["has_cursor_on"]=="Fiamma protettrice":
             MNA_CONSUMPTION = 45
             if self.is_doing_animation:
                 dw.sbracciata_animation()
@@ -152,16 +156,16 @@ class Pier():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
     
-        if sel["has_cursor_on"]=="Sbracciata":
+        if self.sel["has_cursor_on"]=="Sbracciata":
             DMG_DEAL = 6
-            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
+            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             MNA_CONSUMPTION = 15
             if self.is_doing_animation:
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
-                if action.is_missed(boss.b.eva):
+                if action.is_missed(boss.eva):
                     self.text_action="Il nemico ha schivato il colpo!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
@@ -172,23 +176,23 @@ class Pier():
                     self.is_showing_text_outputs = True
                     self.is_removing_bar = True
 
-        if sel["has_cursor_on"]=="Richiesta d'aiuto":
+        if self.sel["has_cursor_on"]=="Richiesta d'aiuto":
             MNA_CONSUMPTION = 20
             if self.is_doing_animation:
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
-                emotion.change_emotion(sel["is_choosing_target"], "arrabbiato")
-                print("Pier ha fatto arrabbiare", sel["is_choosing_target"].name)
-                self.text_action="Pier ha fatto arrabbiare "+ str(sel["is_choosing_target"].name)
+                emotion.change_emotion(self.sel["is_choosing_target"], "arrabbiato")
+                print("Pier ha fatto arrabbiare", self.sel["is_choosing_target"].name)
+                self.text_action="Pier ha fatto arrabbiare "+ str(self.sel["is_choosing_target"].name)
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
         
         #TODO
-        if sel["has_cursor_on"]=='"Spessanza"':
+        if self.sel["has_cursor_on"]=='"Spessanza"':
             print("DA FINIRE")
-            boss.b.target = self
+            boss.target = self
             MNA_CONSUMPTION = 20
             if self.is_doing_animation:
                 
@@ -201,7 +205,7 @@ class Pier():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Bastione fiammante":
+        if self.sel["has_cursor_on"]=="Bastione fiammante":
             heal_percentage = 40
             MNA_CONSUMPTION = 40
             self.aoe_1 = action.healing_percentage(heal_percentage, y.y.current_hp, y.y.hp)
@@ -219,53 +223,53 @@ class Pier():
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
         
-        if sel["has_cursor_on"]=="Sacrificio umano":
+        if self.sel["has_cursor_on"]=="Sacrificio umano":
             DMG_DEAL = 25
             MNA_CONSUMPTION = 50
-            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
+            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 # ANIMA LA BARRA
-                sel["is_choosing_target"].current_hp = 0
-                print("Pier ha fatto", self.damage_dealed, "danni al nemico! Sacrificando " + sel["is_choosing_target"].name)
-                self.text_action="Pier ha fatto " + str(self.damage_dealed) + " danni al nemico, Sacrificando " + sel["is_choosing_target"].name
+                self.sel["is_choosing_target"].current_hp = 0
+                print("Pier ha fatto", self.damage_dealed, "danni al nemico! Sacrificando " + self.sel["is_choosing_target"].name)
+                self.text_action="Pier ha fatto " + str(self.damage_dealed) + " danni al nemico, Sacrificando " + self.sel["is_choosing_target"].name
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
 
-        if sel["has_cursor_on"]=="Ilaria":
+        if self.sel["has_cursor_on"]=="Ilaria":
             if self.is_doing_animation:
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
-                if sel["is_choosing_target"] == y.y:
+                if self.sel["is_choosing_target"] == y.y:
                     emotion.change_emotion(y.y, "gioioso")
                     print("Youssef è divertito da quello che ha letto! Lancia via la rivista e diventa " + y.y.current_emotion + ".")
                     self.text_action="Youssef è divertito da quello che ha letto! Lancia via la rivista e diventa " + y.y.current_emotion + "."
-                elif sel["is_choosing_target"] == self:
+                elif self.sel["is_choosing_target"] == self:
                     emotion.change_emotion(self, "triste")
                     print("Pier rimane affascinato dalla storia. Riporta la rivista e diventa " + self.current_emotion + ".")
                     self.text_action="Pier rimane affascinato dalla storia. Riporta la rivista e diventa " + self.current_emotion + "."
-                elif sel["is_choosing_target"] == r.r:
+                elif self.sel["is_choosing_target"] == r.r:
                     emotion.change_emotion(r.r, "arrabbiato")
                     print("Raul non sembra contento di quello che ha in mano. Strappa via la rivista e diventa " + r.r.current_emotion + ".")
                     self.text_action="Raul non sembra contento di quello che ha in mano. Strappa via la rivista e diventa " + r.r.current_emotion + "."
-                elif sel["is_choosing_target"] == f.f:
+                elif self.sel["is_choosing_target"] == f.f:
                     f.f.current_eva += action.buff_stats(f.f.eva)
                     print("Fabiano cerca di evitare in tutti i modi di leggere la rivista. Senza volerlo si allena sulla schivata.")
                     self.text_action="Fabiano cerca di evitare in tutti i modi di leggere la rivista. Senza volerlo si allena sulla schivata."
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Stefan":
+        if self.sel["has_cursor_on"]=="Stefan":
             if self.is_doing_animation:
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
-                for target in [y.y,self,r.r,f.f,boss.b]:
+                for target in [y.y,self,r.r,f.f,boss]:
                     target.current_emotion = "neutrale"
                     target.current_atk = target.atk
                     target.current_defn = target.defn
@@ -276,7 +280,7 @@ class Pier():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Prade":
+        if self.sel["has_cursor_on"]=="Prade":
             if self.is_doing_animation:
                 dw.sbracciata_animation()
 
@@ -289,7 +293,7 @@ class Pier():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Gonzato (spirito)":
+        if self.sel["has_cursor_on"]=="Gonzato (spirito)":
             heal_percentage = 30
             self.aoe_1 = action.healing_percentage(heal_percentage, y.y.current_hp, y.y.hp)
             self.aoe_2 = action.healing_percentage(heal_percentage, p.current_hp, p.hp)
@@ -307,9 +311,21 @@ class Pier():
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
 
-    def remove_bar(self):
+        if self.sel["has_cursor_on"]=="recover":
+            MNA_CONSUMPTION = -(self.mna/2)
+            if self.is_doing_animation:
+                dw.sbracciata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
+
+            if not self.is_doing_animation:
+                print("Pier ha recuperato mana!")
+                self.text_action="Pier ha recuperato mana!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+    def remove_bar(self, boss):
         if self.is_removing_bar:
-            if sel["has_cursor_on"]=="Bastione fiammante" or sel["has_cursor_on"]=="Gonzato (spirito)":
+            if self.sel["has_cursor_on"]=="Bastione fiammante" or self.sel["has_cursor_on"]=="Gonzato (spirito)":
                 self.count_1 = action.add_health(self.aoe_1, y.y, self.count_1)
                 self.count_2 = action.add_health(self.aoe_2, p, self.count_2)
                 self.count_3 = action.add_health(self.aoe_3, r.r, self.count_3)
@@ -319,7 +335,7 @@ class Pier():
                     self.damage_dealed = 0
                     self.count_removed_bar = 0
             else:
-                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss.b, self.count_removed_bar)
+                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
                 if self.count_removed_bar == self.damage_dealed:
                     self.is_removing_bar = False
                     self.damage_dealed = 0

@@ -15,45 +15,14 @@ pygame.init()
 
 name = "Raul"
 
-skills=[["Saetta trascendente","Bastonata","Bel tempo"],["Tempesta","Pettoinfuori","Tensione esplosiva"]]
-
-description={
-    # Skills
-    "Saetta trascendente":"Fulmini scagliati contro il nemico che aumentano l’emotività di Raul. Passa all’intensità successiva dell’emozione che sta provando.",
-    "Tempesta":"Scatena una tempesta, che rende tristi tutti gli alleati e causa lievi danni al nemico.",
-    "Bastonata":"Colpisce con la sua staffa elettrica. Ottiene un quarto del mana suo totale.",
-    "Pettoinfuori":"Si pompa, aumentando l’attacco per 3 turni.",
-    "Bel tempo":"Crea un arcobaleno con la pioggia delle tempeste e la luce delle scintille. Fa diventare gioioso un alleato o nemico.",
-    "Tensione esplosiva":"Scarica dal suo corpo una forte elettricità. Diventa arrabbiato e causa danni a tutti: alleati, sé stesso e gravi danni al nemico.",
-    # Friends
-    "Damonte": "Aumenta la velocità di tutti gli alleati di tanto.",
-    "Cristian":"Diminuisce l’evasione del nemico per 3 turni.",
-    "Noce": "Esegue un headshot al nemico. Non tiene conto della difesa del nemico.",
-    "Mohammed (spirito)": "Usa l’unica arma in grado di ucciderlo. Rende tutti gli alleati tristi e ne aumenta ulteriormente la difesa."
-}
-
-friends_title={
-    "Damonte":"[Rhythm Mayhem]",
-    "Cristian":"[Inquadrato]",
-    "Noce":"[Sangue freddo]",
-    "Mohammed (spirito)":"[Immortalità?]"
-}
-
-friends=[["Damonte","Cristian","-"],["Noce","Mohammed (spirito)","-"]]
-
-sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
-
-allies_selections=[]
-allies_enemy_selections=["Bel tempo"]
-
-position_in_fight="right-down"
-
 class Raul():
     def __init__(self):
 
         self.name = "Raul"
 
         self.img = {"Profilo":pygame.transform.scale(RAUL_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+
+        self.position_in_fight="right-down"
 
         # STATISTICHE
         self.hp = 498 # Variabile per i punti vita
@@ -64,7 +33,7 @@ class Raul():
         self.eva = 10 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = self.mna
+        self.current_mna = 0
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -113,6 +82,41 @@ class Raul():
 
         self.is_showing_text_outputs = False
 
+        self.skills_template = [["Saetta trascendente","Bastonata","Bel tempo"],["Tempesta","Pettoinfuori","Tensione esplosiva"]]
+        self.skills = []
+
+        self.description_template = {
+            # Skills
+            "Saetta trascendente":"Fulmini scagliati contro il nemico che aumentano l’emotività di Raul. Passa all’intensità successiva dell’emozione che sta provando.",
+            "Tempesta":"Scatena una tempesta, che rende tristi tutti gli alleati e causa lievi danni al nemico.",
+            "Bastonata":"Colpisce con la sua staffa elettrica. Ottiene un quarto del mana suo totale.",
+            "Pettoinfuori":"Si pompa, aumentando l’attacco per 3 turni.",
+            "Bel tempo":"Crea un arcobaleno con la pioggia delle tempeste e la luce delle scintille. Fa diventare gioioso un alleato o nemico.",
+            "Tensione esplosiva":"Scarica dal suo corpo una forte elettricità. Diventa arrabbiato e causa danni a tutti: alleati, sé stesso e gravi danni al nemico.",
+            # Friends
+            "Damonte": "Aumenta la velocità di tutti gli alleati di tanto.",
+            "Cristian":"Diminuisce l’evasione del nemico per 3 turni.",
+            "Noce": "Esegue un headshot al nemico. Non tiene conto della difesa del nemico.",
+            "Mohammed (spirito)": "Usa l’unica arma in grado di ucciderlo. Rende tutti gli alleati tristi e ne aumenta ulteriormente la difesa."
+        }
+        self.description = {}
+
+        self.friends_title_template = {
+            "Damonte":"[Rhythm Mayhem]",
+            "Cristian":"[Inquadrato]",
+            "Noce":"[Sangue freddo]",
+            "Mohammed (spirito)":"[Immortalità?]"
+        }
+        self.friends_title = {}
+
+        self.friends_template = [["Damonte","Cristian","-"],["Noce","Mohammed (spirito)","-"]]
+        self.friends = []
+
+        self.sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
+
+        self.allies_selections=[]
+        self.allies_enemy_selections=["Bel tempo"]
+
     def change_img(self):
         if self.current_emotion == "neutrale":
             #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
@@ -136,17 +140,17 @@ class Raul():
         elif self.current_emotion == "furioso":
             self.img["Emozione"] = FURIOUS_IMG
 
-    def do_something(self):
-        if sel["has_cursor_on"]=="Saetta trascendente":
+    def do_something(self, boss):
+        if self.sel["has_cursor_on"]=="Saetta trascendente":
             DMG_DEAL = 8
             MNA_CONSUMPTION = 25
-            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
-                if action.is_missed(boss.b.eva):
+                if action.is_missed(boss.eva):
                     self.text_action="Il nemico ha schivato il colpo!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
@@ -171,10 +175,10 @@ class Raul():
                     self.is_showing_text_outputs = True
                     self.is_removing_bar = True
 
-        if sel["has_cursor_on"]=="Tempesta":
+        if self.sel["has_cursor_on"]=="Tempesta":
             DMG_DEAL = 3
             MNA_CONSUMPTION = 20
-            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
@@ -190,14 +194,14 @@ class Raul():
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
 
-        if sel["has_cursor_on"]=="Bastonata":
+        if self.sel["has_cursor_on"]=="Bastonata":
             DMG_DEAL = 6
-            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
 
             if not self.is_doing_animation:
-                if action.is_missed(boss.b.eva):
+                if action.is_missed(boss.eva):
                     self.text_action="Il nemico ha schivato il colpo!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
@@ -212,7 +216,7 @@ class Raul():
                     self.is_showing_text_outputs = True
                     self.is_removing_bar = True
 
-        if sel["has_cursor_on"]=="Pettoinfuori":
+        if self.sel["has_cursor_on"]=="Pettoinfuori":
             MNA_CONSUMPTION = 10
             if self.is_doing_animation:
                 dw.saetta_animation()
@@ -225,23 +229,23 @@ class Raul():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Bel tempo":
+        if self.sel["has_cursor_on"]=="Bel tempo":
             MNA_CONSUMPTION = 10
             if self.is_doing_animation:
                 dw.saetta_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
-                emotion.change_emotion(sel["is_choosing_target"], "gioioso")
-                print("Raul ha reso felice", sel["is_choosing_target"].name)
-                self.text_action="Raul ha reso felice "+ str(sel["is_choosing_target"].name)
+                emotion.change_emotion(self.sel["is_choosing_target"], "gioioso")
+                print("Raul ha reso felice", self.sel["is_choosing_target"].name)
+                self.text_action="Raul ha reso felice "+ str(self.sel["is_choosing_target"].name)
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Tensione esplosiva":
+        if self.sel["has_cursor_on"]=="Tensione esplosiva":
             DMG_DEAL = 6
             MNA_CONSUMPTION = 50
-            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL+4,boss.b.defn,self.current_emotion,boss.b.current_emotion)
+            self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL+4,boss.defn,self.current_emotion,boss.current_emotion)
             self.aoe_1 = action.damage_deal(r.atk,DMG_DEAL,y.y.current_defn,self.current_emotion,y.y.current_emotion)
             self.aoe_2 = action.damage_deal(r.atk,DMG_DEAL,p.p.current_defn,self.current_emotion,p.p.current_emotion)
             self.aoe_4 = action.damage_deal(r.atk,DMG_DEAL,f.f.current_defn,self.current_emotion,f.f.current_emotion)
@@ -251,7 +255,7 @@ class Raul():
 
             if not self.is_doing_animation:
                 # DUBT SUL MISSARE
-                if action.is_missed(boss.b.eva):
+                if action.is_missed(boss.eva):
                     self.text_action="Il nemico ha schivato il colpo!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
@@ -263,7 +267,7 @@ class Raul():
                     self.is_showing_text_outputs = True
                     self.is_removing_bar = True
 
-        if sel["has_cursor_on"]=="Damonte":
+        if self.sel["has_cursor_on"]=="Damonte":
             if self.is_doing_animation:
                 dw.saetta_animation()
 
@@ -275,20 +279,20 @@ class Raul():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
         
-        if sel["has_cursor_on"]=="Cristian":
+        if self.sel["has_cursor_on"]=="Cristian":
             if self.is_doing_animation:
                 dw.saetta_animation()
 
             if not self.is_doing_animation:
-                boss.b.current_eva-=action.buff_stats(boss.b.eva)
+                boss.current_eva-=action.buff_stats(boss.eva)
                 print("Il flash di Cristian ha accecato il nemico!")
                 self.text_action="Il flash di Cristian ha accecato il nemico!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Noce":
+        if self.sel["has_cursor_on"]=="Noce":
             DMG_DEAL = 10
-            self.damage_dealed = action.damage_deal(150,DMG_DEAL,boss.b.defn,"neutrale",boss.b.current_emotion)
+            self.damage_dealed = action.damage_deal(150,DMG_DEAL,boss.defn,"neutrale",boss.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
 
@@ -300,7 +304,7 @@ class Raul():
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
 
-        if sel["has_cursor_on"]=="Mohammed (spirito)":
+        if self.sel["has_cursor_on"]=="Mohammed (spirito)":
             if self.is_doing_animation:
                 dw.saetta_animation()
 
@@ -312,20 +316,32 @@ class Raul():
                 self.text_action="Mohammed scompare e il gruppo, rattristito, prende determinazione."
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
+
+        if self.sel["has_cursor_on"]=="recover":
+            MNA_CONSUMPTION = -(self.mna/2)
+            if self.is_doing_animation:
+                dw.saetta_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
+
+            if not self.is_doing_animation:
+                print("Raul ha recuperato mana!")
+                self.text_action="Raul ha recuperato mana!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
         
-    def remove_bar(self):
+    def remove_bar(self, boss):
         if self.is_removing_bar:
-            if sel["has_cursor_on"]=="Tensione esplosiva":
+            if self.sel["has_cursor_on"]=="Tensione esplosiva":
                 self.count_1 = action.toggle_health(self.aoe_1, y.y, self.count_1)
                 self.count_2 = action.toggle_health(self.aoe_2, p.p, self.count_2)
                 self.count_4 = action.toggle_health(self.aoe_4, f.f, self.count_4)
-                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss.b, self.count_removed_bar)
+                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
                 if (self.count_1 + self.count_2 + self.count_4 + self.count_removed_bar) == (self.aoe_1 + self.aoe_2+ self.aoe_4 + self.damage_dealed):
                     self.is_removing_bar = False
                     self.damage_dealed = 0
                     self.count_removed_bar = 0
             else:
-                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss.b, self.count_removed_bar)
+                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
                 if self.count_removed_bar == self.damage_dealed:
                     self.is_removing_bar = False
                     self.damage_dealed = 0

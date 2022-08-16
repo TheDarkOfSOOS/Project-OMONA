@@ -14,45 +14,14 @@ pygame.init()
 
 name = "Fabiano"
 
-skills=[["Biscotto","Benevento","Servizietto"],["Pestata","Malevento","Soffio della morte"]]
-
-description={
-    # Skills
-    "Biscotto":"Manda un biscotto ad un alleato. Cura i suoi HP.",
-    "Pestata":"Fa danni in base alla sua velocità.",
-    "Benevento":"Aumenta la velocità di tutti per 3 turni.",
-    "Malevento":"Diminuisce la difesa del nemico per 3 turni.",
-    "Servizietto":"Asseconda le gioie altrui. Rende gioioso al massimo un amico o nemico. Perde vita e qualcos’altro…",
-    "Soffio della morte":"Riporta in vita un alleato con metà dei suoi HP.",
-    # Friends
-    "Cappe":"Indica un alleato che subirà l’attacco del nemico. Attacca per primo.",
-    "Diego": 'Rende gioiosi(??) tutti gli alleati al massimo, ma diminuisce la loro difesa.',
-    "Trentin": "Osserva il nemico e dirà la sua prossima mossa per 2 turni.",
-    "Pastorello (spirito)": "Incita gli alleati a fare del loro meglio. Aumenta la difesa di tutti per 3 turni."
-}
-
-friends_title={
-    "Cappe":"[Sostituto]",
-    "Diego":'[“Camomilla”]',
-    "Trentin":"[Consigliere]",
-    "Pastorello (spirito)":"[Consiglio del maggiore]"
-}
-
-friends=[["Cappe","Trentin","-"],["Diego","Pastorello (spirito)","-"]]
-
-sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
-
-allies_selections=["Biscotto","Soffio della morte","Cappe"]
-allies_enemy_selections=["Servizietto"]
-
-position_in_fight="right-up"
-
 class Fabiano():
     def __init__(self):
 
         self.name = "Fabiano"
 
         self.img = {"Profilo":pygame.transform.scale(FABIANO_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+
+        self.position_in_fight="right-up"
 
         # STATISTICHE
         self.hp = 312 # Variabile per i punti vita
@@ -63,7 +32,7 @@ class Fabiano():
         self.eva = 25 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = self.mna
+        self.current_mna = 0
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -121,6 +90,41 @@ class Fabiano():
 
         self.is_showing_text_outputs = False
 
+        self.skills_template = [["Biscotto","Benevento","Servizietto"],["Pestata","Malevento","Soffio della morte"]]
+        self.skills = []
+
+        self.description_template = {
+            # Skills
+            "Biscotto":"Manda un biscotto ad un alleato. Cura i suoi HP.",
+            "Pestata":"Fa danni in base alla sua velocità.",
+            "Benevento":"Aumenta la velocità di tutti per 3 turni.",
+            "Malevento":"Diminuisce la difesa del nemico per 3 turni.",
+            "Servizietto":"Asseconda le gioie altrui. Rende gioioso al massimo un amico o nemico. Perde vita e qualcos’altro…",
+            "Soffio della morte":"Riporta in vita un alleato con metà dei suoi HP.",
+            # Friends
+            "Cappe":"Indica un alleato che subirà l’attacco del nemico. Attacca per primo.",
+            "Diego": 'Rende gioiosi(??) tutti gli alleati al massimo, ma diminuisce la loro difesa.',
+            "Trentin": "Osserva il nemico e dirà la sua prossima mossa per 2 turni.",
+            "Pastorello (spirito)": "Incita gli alleati a fare del loro meglio. Aumenta la difesa di tutti per 3 turni."
+        }
+        self.description = {}
+
+        self.friends_title_template = {
+            "Cappe":"[Sostituto]",
+            "Diego":'[“Camomilla”]',
+            "Trentin":"[Consigliere]",
+            "Pastorello (spirito)":"[Consiglio del maggiore]"
+        }
+        self.friends_title = {}
+
+        self.friends_template=[["Cappe","Trentin","-"],["Diego","Pastorello (spirito)","-"]]
+        self.friends = []
+
+        self.sel = {"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
+
+        self.allies_selections=["Biscotto","Soffio della morte","Cappe"]
+        self.allies_enemy_selections=["Servizietto"]
+
     def change_img(self):
         if self.current_emotion == "neutrale":
             #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
@@ -144,10 +148,10 @@ class Fabiano():
         elif self.current_emotion == "arrabbiato":
             self.img["Emozione"] = MAD_IMG
             
-    def do_something(self):
-        if sel["has_cursor_on"]=="Biscotto":
+    def do_something(self, boss):
+        if self.sel["has_cursor_on"]=="Biscotto":
             heal_percentace = 75
-            target = sel["is_choosing_target"]
+            target = self.sel["is_choosing_target"]
             MNA_CONSUMPTION = 40
             if self.is_doing_animation:
                 dw.biscotto_animation(target)
@@ -161,17 +165,17 @@ class Fabiano():
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
         
-        if sel["has_cursor_on"]=="Pestata":
+        if self.sel["has_cursor_on"]=="Pestata":
             DMG_DEAL = 7
             MNA_CONSUMPTION = 55
-            self.damage_dealed = action.damage_deal(f.current_vel,DMG_DEAL,boss.b.defn,self.current_emotion,boss.b.current_emotion)
+            self.damage_dealed = action.damage_deal(f.current_vel,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.pestata_animation()
                 #print(round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
                 self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
 
             if not self.is_doing_animation:
-                if action.is_missed(boss.b.eva):
+                if action.is_missed(boss.eva):
                     self.text_action="Il nemico ha schivato il colpo!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
@@ -182,7 +186,7 @@ class Fabiano():
                     self.is_showing_text_outputs = True
                     self.is_removing_bar = True
 
-        if sel["has_cursor_on"]=="Benevento":
+        if self.sel["has_cursor_on"]=="Benevento":
             MNA_CONSUMPTION = 25
             if self.is_doing_animation:
                 dw.pestata_animation()
@@ -196,20 +200,20 @@ class Fabiano():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Malevento":
+        if self.sel["has_cursor_on"]=="Malevento":
             MNA_CONSUMPTION = 30
             if self.is_doing_animation:
                 dw.pestata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
 
             if not self.is_doing_animation:
-                boss.b.current_defn-=action.buff_stats(boss.b.defn)
+                boss.current_defn-=action.buff_stats(boss.defn)
                 print("Fabiano ha diminuito la difesa del nemico!")
                 self.text_action="Fabiano ha diminuito la difesa del nemico!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Servizietto":
+        if self.sel["has_cursor_on"]=="Servizietto":
             MNA_CONSUMPTION = 20
             if self.is_doing_animation:
                 dw.pestata_animation()
@@ -222,15 +226,15 @@ class Fabiano():
                     if self.current_hp <= 0:
                         self.current_hp = 1
 
-                emotion.change_emotion(sel["is_choosing_target"], "euforico")
-                print("Fabiano ha assecondato le richieste di ", sel["is_choosing_target"].name)
-                self.text_action="Fabiano ha assecondato le richieste di "+ str(sel["is_choosing_target"].name)
+                emotion.change_emotion(self.sel["is_choosing_target"], "euforico")
+                print("Fabiano ha assecondato le richieste di ", self.sel["is_choosing_target"].name)
+                self.text_action="Fabiano ha assecondato le richieste di "+ str(self.sel["is_choosing_target"].name)
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Soffio della morte":
+        if self.sel["has_cursor_on"]=="Soffio della morte":
             MNA_CONSUMPTION = 50
-            target = sel["is_choosing_target"]
+            target = self.sel["is_choosing_target"]
             if target.is_dead:
                 if self.is_doing_animation:
                     dw.pestata_animation()
@@ -238,29 +242,29 @@ class Fabiano():
 
                 if not self.is_doing_animation:
                     target.current_hp = action.revive(target.current_hp, target.hp,target)
-                    print("Fabiano ha soffiato ", sel["is_choosing_target"].name)
-                    self.text_action="Fabiano ha soffiato "+ str(sel["is_choosing_target"].name)
+                    print("Fabiano ha soffiato ", self.sel["is_choosing_target"].name)
+                    self.text_action="Fabiano ha soffiato "+ str(self.sel["is_choosing_target"].name)
                     self.current_animation = 0
                     self.is_showing_text_outputs = True     
             else:
-                print("Fabiano non può soffiare ", sel["is_choosing_target"].name)
-                self.text_action="Fabiano non può soffiare "+ str(sel["is_choosing_target"].name)
+                print("Fabiano non può soffiare ", self.sel["is_choosing_target"].name)
+                self.text_action="Fabiano non può soffiare "+ str(self.sel["is_choosing_target"].name)
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
                 self.is_doing_animation = False
 
-        if sel["has_cursor_on"]=="Cappe":
+        if self.sel["has_cursor_on"]=="Cappe":
             if self.is_doing_animation:
                 dw.pestata_animation()
 
             if not self.is_doing_animation:
-                boss.b.target = sel["is_choosing_target"]
-                print("Cappe ha indicato " + str((boss.b.target).name) + ".")
-                self.text_action="Cappe ha indicato " + str((boss.b.target).name) + "."
+                boss.target = self.sel["is_choosing_target"]
+                print("Cappe ha indicato " + str((boss.target).name) + ".")
+                self.text_action="Cappe ha indicato " + str((boss.target).name) + "."
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Diego":
+        if self.sel["has_cursor_on"]=="Diego":
             if self.is_doing_animation:
                 dw.pestata_animation()
 
@@ -273,7 +277,7 @@ class Fabiano():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Trentin":
+        if self.sel["has_cursor_on"]=="Trentin":
             # Il valore numerico indica per quanti turni si vedranno gli attacchi del nemico
             self.foresees_enemy_attacks = 2
             if self.is_doing_animation:
@@ -285,7 +289,7 @@ class Fabiano():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if sel["has_cursor_on"]=="Pastorello (spirito)":
+        if self.sel["has_cursor_on"]=="Pastorello (spirito)":
             if self.is_doing_animation:
                 dw.pestata_animation()
 
@@ -296,17 +300,29 @@ class Fabiano():
                 self.text_action="Pastorello con il megafono ha incitato tutti aumentando la loro determinazione!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
+        
+        if self.sel["has_cursor_on"]=="recover":
+            MNA_CONSUMPTION = -(self.mna/2)
+            if self.is_doing_animation:
+                dw.pestata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
 
-    def remove_bar(self):
+            if not self.is_doing_animation:
+                print("Fabiano ha recuperato mana!")
+                self.text_action="Fabiano ha recuperato mana!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+    def remove_bar(self, boss):
         if self.is_removing_bar:
-            if sel["has_cursor_on"]=="Biscotto":
-                self.count_removed_bar = action.add_health(self.damage_dealed, sel["is_choosing_target"], self.count_removed_bar)
+            if self.sel["has_cursor_on"]=="Biscotto":
+                self.count_removed_bar = action.add_health(self.damage_dealed, self.sel["is_choosing_target"], self.count_removed_bar)
                 if self.count_removed_bar == self.damage_dealed:
                     self.is_removing_bar = False
                     self.damage_dealed = 0
                     self.count_removed_bar = 0
             else:
-                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss.b, self.count_removed_bar)
+                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
                 if self.count_removed_bar == self.damage_dealed:
                     self.is_removing_bar = False
                     self.damage_dealed = 0

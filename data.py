@@ -5,8 +5,8 @@ from pygame import mixer
 WIDTH, HEIGHT = 1280, 720
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
-WIDTH, HEIGHT = 1920, 1080
-WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
+#WIDTH, HEIGHT = 1920, 1080
+#WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 
 FPS = 30
 
@@ -143,3 +143,4 @@ RAGE_IMG = pygame.image.load("img/rage_img.png")
 FURIOUS_IMG = pygame.image.load("img/furious_img.png")
 
 BOSS = pygame.image.load("img/boss.png")
+MAGO_ELETTRICO = pygame.image.load("img/boss.jpeg")
