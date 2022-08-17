@@ -2,7 +2,6 @@ import pygame
 
 from data import *
 import action
-import boss
 import drawer as dw
 import change_emotion as emotion
 import youssef_class as y
@@ -11,8 +10,6 @@ import fabiano_class as f
 import random as rng
 
 pygame.init()
-
-name = "Pier"
 
 class Pier():
     def __init__(self,):
@@ -32,7 +29,7 @@ class Pier():
         self.eva = 5 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = 0
+        self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -116,6 +113,15 @@ class Pier():
 
         self.sel = {"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
 
+        self.MNA_CONSUMPTION_SKILLS = {
+            "Fiamma protettrice":45,
+            "Sbracciata":15,
+            "Richiesta d'aiuto":20,
+            '"Spessanza"':20,
+            "Bastione fiammante":40,
+            "Sacrificio umano":50,
+        }
+
         self.allies_selections=["Sacrificio umano", "Ilaria"]
         self.allies_enemy_selections=["Richiesta d'aiuto"]
     
@@ -144,8 +150,8 @@ class Pier():
 
        
     def do_something(self, boss):
+        MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Fiamma protettrice":
-            MNA_CONSUMPTION = 45
             if self.is_doing_animation:
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
@@ -159,7 +165,6 @@ class Pier():
         if self.sel["has_cursor_on"]=="Sbracciata":
             DMG_DEAL = 6
             self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
-            MNA_CONSUMPTION = 15
             if self.is_doing_animation:
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
@@ -177,7 +182,6 @@ class Pier():
                     self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Richiesta d'aiuto":
-            MNA_CONSUMPTION = 20
             if self.is_doing_animation:
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
@@ -193,9 +197,7 @@ class Pier():
         if self.sel["has_cursor_on"]=='"Spessanza"':
             print("DA FINIRE")
             boss.target = self
-            MNA_CONSUMPTION = 20
-            if self.is_doing_animation:
-                
+            if self.is_doing_animation:        
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
@@ -207,7 +209,6 @@ class Pier():
 
         if self.sel["has_cursor_on"]=="Bastione fiammante":
             heal_percentage = 40
-            MNA_CONSUMPTION = 40
             self.aoe_1 = action.healing_percentage(heal_percentage, y.y.current_hp, y.y.hp)
             self.aoe_2 = action.healing_percentage(heal_percentage, p.current_hp, p.hp)
             self.aoe_3 = action.healing_percentage(heal_percentage, r.r.current_hp, r.r.hp)
@@ -225,7 +226,6 @@ class Pier():
         
         if self.sel["has_cursor_on"]=="Sacrificio umano":
             DMG_DEAL = 25
-            MNA_CONSUMPTION = 50
             self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.sbracciata_animation()

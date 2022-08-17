@@ -93,23 +93,33 @@ def of_character(current_player, input, boss):
             if (sel["is_selecting"]=="recover"):
                 sel["has_cursor_on"] = "recover"
                 sel["is_choosing"] = False
-            # Caso quit:
-            if (sel["is_selecting"]=="quit"):
-                pygame.quit()
-            # Caso log:
-            # DA APPROFONDIRE
         #2. Si sta cambiando personaggio
         elif (input=="return") and sel["has_done_first_selection"]==True and (not sel["has_cursor_on"]=="-"):
-            # Caso della scelta del target
-            for options in current_player.allies_selections:
-                if options == sel["has_cursor_on"]:
-                    find_target = True
-            for options in current_player.allies_enemy_selections:
-                if options == sel["has_cursor_on"]:
-                    find_target = True
-            if not find_target:        
-                sel["is_choosing"]=False
-                reset_movement()
+            # Caso selezione abilità con mana insufficiente
+            if sel["is_selecting"] == "skills" and current_player.MNA_CONSUMPTION_SKILLS.get(sel["has_cursor_on"]) <= current_player.current_mna:
+                # Caso della scelta del target
+                for options in current_player.allies_selections:
+                    if options == sel["has_cursor_on"]:
+                        find_target = True
+                for options in current_player.allies_enemy_selections:
+                    if options == sel["has_cursor_on"]:
+                        find_target = True
+                if not find_target:        
+                    sel["is_choosing"]=False
+                    reset_movement()
+
+            if not sel["is_selecting"] == "skills":
+                # Caso della scelta del target
+                for options in current_player.allies_selections:
+                    if options == sel["has_cursor_on"]:
+                        find_target = True
+                for options in current_player.allies_enemy_selections:
+                    if options == sel["has_cursor_on"]:
+                        find_target = True
+                if not find_target:        
+                    sel["is_choosing"]=False
+                    reset_movement()
+
         #3. Si ritorna alla scelta generale
         if (input=="backspace" and sel["has_done_first_selection"]==True):
             sel["has_done_first_selection"]=False

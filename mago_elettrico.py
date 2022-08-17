@@ -12,10 +12,6 @@ import action
 
 pygame.init()
 
-# Contiene il nome di tutte le abilita'
-# VEDI SE EFFETTIVAMENTE SERVE AL BOSS
-skills=[["ab1","ab3","ab5"],["ab2","ab4","ab6"]]
-
 class Mago_Elettrico():
     def __init__(self,):
 

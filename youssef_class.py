@@ -1,10 +1,7 @@
 import pygame
 
 from data import *
-from itertools import chain
-
 import action
-import boss
 import drawer as dw
 import change_emotion as emotion
 import pier_class as p
@@ -13,9 +10,6 @@ import fabiano_class as f
 import random as rng
 
 pygame.init()
-
-# Capisci se serve
-name = "Youssef"
 
 YOUSSEF_NEUTRALE = pygame.image.load("img/youssef/youssef_neutrale.png")
 YOUSSEF_GIOIOSO = pygame.image.load("img/youssef/youssef_gioioso.png")
@@ -43,7 +37,7 @@ class Youssef():
         self.eva = 15 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = 10
+        self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -134,6 +128,15 @@ class Youssef():
         '''
         self.sel={"is_choosing":True,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
 
+        self.MNA_CONSUMPTION_SKILLS = {
+            "Sforbiciata":5,
+            "Provocazione":10,
+            "Battutaccia":20,
+            "Assedio":15,
+            "Pallonata":30,
+            "Delusione":30,
+        }
+
         self.allies_selections=[""]
         self.allies_enemy_selections=[""]
 
@@ -167,9 +170,9 @@ class Youssef():
             self.img["Emozione"] = RAGE_IMG
 
     def do_something(self, boss):
+        MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Sforbiciata":
             DMG_DEAL = 10
-            MNA_CONSUMPTION = 5
             self.damage_dealed = action.damage_deal(y.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
@@ -191,7 +194,6 @@ class Youssef():
         if self.sel["has_cursor_on"]=="Provocazione":
             boss.focus_on_youssef = 3
             boss.target = self
-            MNA_CONSUMPTION = 10
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
@@ -205,7 +207,6 @@ class Youssef():
                 
         
         if self.sel["has_cursor_on"]=="Battutaccia":
-            MNA_CONSUMPTION = 20
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
@@ -229,7 +230,6 @@ class Youssef():
         if self.sel["has_cursor_on"]=="Assedio":
             DMG_DEAL = 4
             self.damage_dealed = 0
-            MNA_CONSUMPTION = 15
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
@@ -251,7 +251,6 @@ class Youssef():
 
         if self.sel["has_cursor_on"]=="Pallonata":
             DMG_DEAL = 7
-            MNA_CONSUMPTION = 30
             if y.current_emotion=="arrabbiato" or y.current_emotion=="iracondo":
                 self.damage_dealed = action.damage_deal(y.atk,DMG_DEAL,0,self.current_emotion,boss.current_emotion)
             else:
@@ -274,7 +273,6 @@ class Youssef():
 
         # DA MIGLIORARE
         if self.sel["has_cursor_on"]=="Delusione":
-            MNA_CONSUMPTION = 30
             boss.target = self
             if self.is_doing_animation:     
                 dw.sforbiciata_animation()

@@ -2,7 +2,6 @@ import pygame
 
 from data import *
 import action
-import boss
 import drawer as dw
 import change_emotion as emotion
 import youssef_class as y
@@ -11,8 +10,6 @@ import raul_class as r
 import random as rng
 
 pygame.init()
-
-name = "Fabiano"
 
 class Fabiano():
     def __init__(self):
@@ -32,7 +29,7 @@ class Fabiano():
         self.eva = 25 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = 0
+        self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -122,6 +119,15 @@ class Fabiano():
 
         self.sel = {"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
 
+        self.MNA_CONSUMPTION_SKILLS = {
+            "Biscotto":40,
+            "Pestata":55,
+            "Benevento":25,
+            "Malevento":30,
+            "Servizietto":20,
+            "Soffio della morte":50,
+        }
+
         self.allies_selections=["Biscotto","Soffio della morte","Cappe"]
         self.allies_enemy_selections=["Servizietto"]
 
@@ -149,10 +155,10 @@ class Fabiano():
             self.img["Emozione"] = MAD_IMG
             
     def do_something(self, boss):
+        MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Biscotto":
             heal_percentace = 75
             target = self.sel["is_choosing_target"]
-            MNA_CONSUMPTION = 40
             if self.is_doing_animation:
                 dw.biscotto_animation(target)
                 self.remove_mna(MNA_CONSUMPTION, len(self.biscotto_animation)/0.25, round(MNA_CONSUMPTION/(len(self.biscotto_animation)/0.25),2))
@@ -167,7 +173,6 @@ class Fabiano():
         
         if self.sel["has_cursor_on"]=="Pestata":
             DMG_DEAL = 7
-            MNA_CONSUMPTION = 55
             self.damage_dealed = action.damage_deal(f.current_vel,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.pestata_animation()
@@ -187,7 +192,6 @@ class Fabiano():
                     self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Benevento":
-            MNA_CONSUMPTION = 25
             if self.is_doing_animation:
                 dw.pestata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
@@ -201,7 +205,6 @@ class Fabiano():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Malevento":
-            MNA_CONSUMPTION = 30
             if self.is_doing_animation:
                 dw.pestata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
@@ -214,7 +217,6 @@ class Fabiano():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Servizietto":
-            MNA_CONSUMPTION = 20
             if self.is_doing_animation:
                 dw.pestata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
@@ -233,7 +235,6 @@ class Fabiano():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Soffio della morte":
-            MNA_CONSUMPTION = 50
             target = self.sel["is_choosing_target"]
             if target.is_dead:
                 if self.is_doing_animation:

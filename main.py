@@ -78,7 +78,7 @@ while run:
             run = False
 
     if not first_win and m_e.me.current_hp > 0:
-        round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], input, m_e.me, 1)
+        round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], input, m_e.me, 5)
     elif not first_win and m_e.me.current_hp <= 0:
         round_essentials_status = reset_res()
         round.reset_charas()

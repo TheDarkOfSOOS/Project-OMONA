@@ -2,7 +2,6 @@ import pygame
 
 from data import *
 import action
-import boss
 import change_emotion as emotion
 from data import RAUL_NEUTRAL
 import drawer as dw
@@ -12,8 +11,6 @@ import fabiano_class as f
 import random as rng
 
 pygame.init()
-
-name = "Raul"
 
 class Raul():
     def __init__(self):
@@ -33,7 +30,7 @@ class Raul():
         self.eva = 10 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = 0
+        self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -114,6 +111,15 @@ class Raul():
 
         self.sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
 
+        self.MNA_CONSUMPTION_SKILLS = {
+            "Saetta trascendente":25,
+            "Tempesta":20,
+            "Bastonata":0,
+            "Pettoinfuori":10,
+            "Bel tempo":10,
+            "Tensione esplosiva":50,
+        }
+
         self.allies_selections=[]
         self.allies_enemy_selections=["Bel tempo"]
 
@@ -141,9 +147,9 @@ class Raul():
             self.img["Emozione"] = FURIOUS_IMG
 
     def do_something(self, boss):
+        MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Saetta trascendente":
             DMG_DEAL = 8
-            MNA_CONSUMPTION = 25
             self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
@@ -177,7 +183,6 @@ class Raul():
 
         if self.sel["has_cursor_on"]=="Tempesta":
             DMG_DEAL = 3
-            MNA_CONSUMPTION = 20
             self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
@@ -217,7 +222,6 @@ class Raul():
                     self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Pettoinfuori":
-            MNA_CONSUMPTION = 10
             if self.is_doing_animation:
                 dw.saetta_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
@@ -230,7 +234,6 @@ class Raul():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Bel tempo":
-            MNA_CONSUMPTION = 10
             if self.is_doing_animation:
                 dw.saetta_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
@@ -244,7 +247,6 @@ class Raul():
 
         if self.sel["has_cursor_on"]=="Tensione esplosiva":
             DMG_DEAL = 6
-            MNA_CONSUMPTION = 50
             self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL+4,boss.defn,self.current_emotion,boss.current_emotion)
             self.aoe_1 = action.damage_deal(r.atk,DMG_DEAL,y.y.current_defn,self.current_emotion,y.y.current_emotion)
             self.aoe_2 = action.damage_deal(r.atk,DMG_DEAL,p.p.current_defn,self.current_emotion,p.p.current_emotion)
