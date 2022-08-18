@@ -30,7 +30,7 @@ class Raul():
         self.eva = 10 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = self.mna
+        self.current_mna = 0
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel

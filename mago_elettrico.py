@@ -20,9 +20,9 @@ class Mago_Elettrico():
 
         # STATISTICHE
         self.hp = 500 # Variabile per i punti vita
-        self.atk = 145 # Variabile per i punti attacco
+        self.atk = 500 # Variabile per i punti attacco
         self.defn = 1 # Variabile per i punti difesa
-        self.vel = 52 # Variabile per i punti velocità
+        self.vel = 452 # Variabile per i punti velocità
         self.eva = 0 # Variabile per i punti evasione
 
         self.current_hp = self.hp 
@@ -103,7 +103,8 @@ class Mago_Elettrico():
     def remove_bar(self, boss):
         if self.is_removing_bar:
             self.count_removed_bar = action.toggle_health(self.damage_dealed, self.target, self.count_removed_bar)
-            if self.count_removed_bar == self.damage_dealed:
+            print(self.target.current_hp <= 0)
+            if self.count_removed_bar == self.damage_dealed or self.target.current_hp <= 0:
                 self.is_removing_bar = False
                 self.damage_dealed = 0
                 self.count_removed_bar = 0

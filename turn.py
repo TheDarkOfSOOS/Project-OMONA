@@ -38,7 +38,7 @@ def of_character(current_player, input, boss):
         In base a quello che sta scegliendo
         ci saranno diverse voci, dipendenti
         anche dal tipo di personaggio '''
-    dw.choices(current_player, sel["is_selecting"])
+    dw.choices(current_player, sel["is_selecting"], boss)
 
     # Disegna il puntatore mentre rimane fisso
     dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)

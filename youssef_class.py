@@ -37,7 +37,7 @@ class Youssef():
         self.eva = 15 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = self.mna
+        self.current_mna = 15
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel

@@ -155,14 +155,14 @@ def characters():
     pygame.draw.rect(WIN, (BLACK), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ), BOX_BORDER)
     
 # Scrive le scelte disponibili
-def choices(current_player, is_selecting):
+def choices(current_player, is_selecting, boss):
     my_font=pygame.font.SysFont("Freemono, Monospace",16)
 
     ''' In base al tipo di selezione del personaggio,
         ci sara' del testo diverso '''
     if not current_player.sel["has_done_first_selection"]:
         if f.foresees_enemy_attacks >= 0:
-            text_action("Trentin comunica chi verrà attaccato: " + str(b.target.name), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+            text_action("Trentin comunica chi verrà attaccato: " + str(boss.target.name), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
         else:
             text_action("Cosa deve fare "+ current_player.name + "?", 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
         for i in range(3):
@@ -171,9 +171,12 @@ def choices(current_player, is_selecting):
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     elif current_player.sel["has_done_first_selection"] and is_selecting=="skills":
         title_and_text_action(str(current_player.sel["has_cursor_on"]), (RED), str(current_player.description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
-        for i in range(3):
+        for i in range(3):#(current_player.sel["has_cursor_on"]
             for j in range(2):
-                text=my_font.render(current_player.skills[j][i],False,(255,255,255))
+                if current_player.MNA_CONSUMPTION_SKILLS.get(current_player.skills[j][i]) <= current_player.current_mna:
+                    text=my_font.render(current_player.skills[j][i],False,(255,255,255))
+                else:
+                    text=my_font.render(current_player.skills[j][i],False,(100,100,100))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     elif current_player.sel["has_done_first_selection"] and is_selecting=="friends":
         title_and_text_action(str(current_player.friends_title.get(current_player.sel["has_cursor_on"])), (RED), str(current_player.description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
@@ -189,7 +192,7 @@ def selection(currX, currY, current_player, is_selecting, has_cursor_on, has_don
     # False perche' ci serve il box sotto visto che si sta ancora scegliendo
     gui(False, boss)
     characters()
-    choices(current_player, is_selecting)
+    choices(current_player, is_selecting, boss)
     if is_selecting == "friends" and has_done_first_selection:
         friend_icon(has_cursor_on)
 

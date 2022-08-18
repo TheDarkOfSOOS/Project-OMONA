@@ -179,6 +179,9 @@ def toggle_mna(mna_consumption, user, count, max_index, mna_to_remove_per_frame)
         print(int(user.current_mna))
         user.current_mna = int(user.current_mna)
     count += 1
+
+    if user.current_mna >= user.mna:
+        user.current_mna = user.mna
     return count
 
 def add_health(healing_quantity, target, count):
@@ -204,6 +207,7 @@ def healing_per_HP(HP_heal, target_current_HP, target_max_HP):
 
 def healing_percentage(percentage_heal, target_current_HP, target_max_HP):
     if target_current_HP > 0:
+        print("belandi")
         result = (percentage_heal*target_max_HP)/100
         if result+target_current_HP > target_max_HP:
             result = target_max_HP - target_current_HP
@@ -211,16 +215,13 @@ def healing_percentage(percentage_heal, target_current_HP, target_max_HP):
         result = 0
     return int(result)
 
-def revive(target_current_HP, target_max_HP, target):
-    percentage_heal = 50
+def revive(target):
+    result = 0
     if target.is_dead:
-        result = target_current_HP+((percentage_heal*target_max_HP)/100)
-        if result > target_max_HP:
-            result = target_max_HP
-    else:
-        result = 0
-    print(result)
-    return int(result)
+        result = 1
+        target.current_hp = 1
+        target.is_dead = False
+    return result
 
 # Puo' anche essere una lista target_stat_to_upgrade
 def buff_stats(target_stat_to_upgrade):

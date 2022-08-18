@@ -157,14 +157,14 @@ class Fabiano():
     def do_something(self, boss):
         MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Biscotto":
-            heal_percentace = 75
+            heal_percentage = 75
             target = self.sel["is_choosing_target"]
             if self.is_doing_animation:
                 dw.biscotto_animation(target)
                 self.remove_mna(MNA_CONSUMPTION, len(self.biscotto_animation)/0.25, round(MNA_CONSUMPTION/(len(self.biscotto_animation)/0.25),2))
 
             if not self.is_doing_animation:
-                self.damage_dealed = action.healing_percentage(heal_percentace, target.current_hp, target.hp)
+                self.damage_dealed = action.healing_percentage(heal_percentage, target.current_hp, target.hp)
                 print("Fabiano ha curato "+ target.name + "!")
                 self.text_action="Fabiano ha curato "+ target.name + "!"
                 self.current_animation = 0
@@ -235,6 +235,7 @@ class Fabiano():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Soffio della morte":
+            heal_percentage = 50
             target = self.sel["is_choosing_target"]
             if target.is_dead:
                 if self.is_doing_animation:
@@ -242,11 +243,20 @@ class Fabiano():
                     self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
 
                 if not self.is_doing_animation:
-                    target.current_hp = action.revive(target.current_hp, target.hp,target)
-                    print("Fabiano ha soffiato ", self.sel["is_choosing_target"].name)
-                    self.text_action="Fabiano ha soffiato "+ str(self.sel["is_choosing_target"].name)
+                    # result ==> 0 ==> non era morto quindi non e' stato rianimato
+                    # result ==> 1 ==> era morto quindi e' stato rianimato
+                    result = action.revive(target)
+                    if result == 1:
+                        print("Fabiano ha soffiato ", self.sel["is_choosing_target"].name)
+                        self.text_action="Fabiano ha soffiato "+ str(self.sel["is_choosing_target"].name)
+                    elif result == 0:
+                        print("Fabiano non ha potuto soffiare ", self.sel["is_choosing_target"].name)
+                        self.text_action="Fabiano non ha potuto soffiare "+ str(self.sel["is_choosing_target"].name)
+
+                    self.damage_dealed = action.healing_percentage(heal_percentage, target.current_hp, target.hp)
                     self.current_animation = 0
-                    self.is_showing_text_outputs = True     
+                    self.is_showing_text_outputs = True
+                    self.is_removing_bar = True  
             else:
                 print("Fabiano non può soffiare ", self.sel["is_choosing_target"].name)
                 self.text_action="Fabiano non può soffiare "+ str(self.sel["is_choosing_target"].name)
@@ -316,7 +326,7 @@ class Fabiano():
 
     def remove_bar(self, boss):
         if self.is_removing_bar:
-            if self.sel["has_cursor_on"]=="Biscotto":
+            if self.sel["has_cursor_on"]=="Biscotto" or self.sel["has_cursor_on"]=="Soffio della morte":
                 self.count_removed_bar = action.add_health(self.damage_dealed, self.sel["is_choosing_target"], self.count_removed_bar)
                 if self.count_removed_bar == self.damage_dealed:
                     self.is_removing_bar = False

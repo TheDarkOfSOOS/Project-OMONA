@@ -106,7 +106,11 @@ class Boss():
     def remove_bar(self, boss):
         if self.is_removing_bar:
             self.count_removed_bar = action.toggle_health(self.damage_dealed, self.target, self.count_removed_bar)
-            if self.count_removed_bar == self.damage_dealed:
+            skip_animation = 0
+            for hitted_charas in self.target:
+                if hitted_charas.current_hp <= 0:
+                    skip_animation += 1
+            if self.count_removed_bar == self.damage_dealed or skip_animation == len(self.target):
                 self.is_removing_bar = False
                 self.damage_dealed = 0
                 self.count_removed_bar = 0
