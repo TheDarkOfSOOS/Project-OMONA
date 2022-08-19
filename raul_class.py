@@ -30,7 +30,7 @@ class Raul():
         self.eva = 10 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = 0
+        self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -70,6 +70,32 @@ class Raul():
         self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_10.png"))
         self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_11.png"))
         self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_12.png"))
+
+        self.tempesta_animation = []
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation00.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation01.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation02.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation03.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation04.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation05.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation06.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation07.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation08.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation09.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation10.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation11.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation12.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation13.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation14.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation15.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation16.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation17.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation18.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation19.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation20.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation21.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation22.png"))
+        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation23.png"))
 
         self.current_animation = 0
 
@@ -185,8 +211,8 @@ class Raul():
             DMG_DEAL = 3
             self.damage_dealed = action.damage_deal(r.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
-                dw.saetta_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
+                dw.tempesta_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.tempesta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 print("Raul ha reso tutti tristi e ha fatto", self.damage_dealed, "danni al nemico")

@@ -37,7 +37,7 @@ class Youssef():
         self.eva = 15 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = 15
+        self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -78,6 +78,35 @@ class Youssef():
         self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
         self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
         self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
+
+        self.pallonata_animation = []
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation00.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation01.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation02.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation03.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation04.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation05.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation06.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation07.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation08.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation09.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation10.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation11.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation12.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation13.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation14.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation15.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation16.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation17.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation18.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation19.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation20.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation21.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation22.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation23.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation24.png"))
+        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation25.png"))
+
 
         self.current_animation = 0
 
@@ -256,8 +285,8 @@ class Youssef():
             else:
                 self.damage_dealed = action.damage_deal(y.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
-                dw.sforbiciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
+                dw.pallonata_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.pallonata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pallonata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.eva):

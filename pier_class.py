@@ -73,6 +73,81 @@ class Pier():
         self.sbracciata_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
         self.sbracciata_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
 
+        self.sacrificio_y_animation = []
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation05.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation06.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation07.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation08.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation09.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation10.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation11.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation12.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation13.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation14.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation15.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation16.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation17.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation18.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation19.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation20.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation21.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation22.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation23.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation24.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation25.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation26.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation27.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation28.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation29.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation30.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation31.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation32.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation33.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation34.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation35.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation36.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation37.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation38.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation39.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation40.png"))
+        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation41.png"))
+
+        self.sacrificio_p_animation = []
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation05.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation06.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation07.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation08.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation09.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation10.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation11.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation12.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation13.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation14.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation15.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation16.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation17.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation18.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation19.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation20.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation21.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation22.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation23.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation24.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation25.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation26.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation27.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation28.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation29.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation30.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation31.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation32.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation33.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation34.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation35.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation36.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation37.png"))
+        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation38.png"))
+
         self.current_animation = 0
 
         self.is_doing_animation = False
@@ -227,9 +302,21 @@ class Pier():
         if self.sel["has_cursor_on"]=="Sacrificio umano":
             DMG_DEAL = 25
             self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
-            if self.is_doing_animation:
-                dw.sbracciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
+            if self.is_doing_animation and self.sel["is_choosing_target"].name == "Youssef":
+                dw.sacrificio_y_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sacrificio_y_animation)/0.60, round(MNA_CONSUMPTION/(len(self.sacrificio_y_animation)/0.60),2))
+
+            if self.is_doing_animation and self.sel["is_choosing_target"].name == "Piergiorgio":
+                dw.sacrificio_p_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sacrificio_p_animation)/0.60, round(MNA_CONSUMPTION/(len(self.sacrificio_p_animation)/0.60),2))
+
+            if self.is_doing_animation and self.sel["is_choosing_target"].name == "Raul":
+                dw.sacrificio_r_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sacrificio_y_animation)/0.60, round(MNA_CONSUMPTION/(len(self.sacrificio_y_animation)/0.60),2))
+
+            if self.is_doing_animation and self.sel["is_choosing_target"].name == "Fabiano":
+                dw.sacrificio_f_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sacrificio_p_animation)/0.60, round(MNA_CONSUMPTION/(len(self.sacrificio_p_animation)/0.60),2))
 
             if not self.is_doing_animation:
                 # ANIMA LA BARRA

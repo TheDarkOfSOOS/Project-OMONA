@@ -172,12 +172,13 @@ def choices(current_player, is_selecting, boss):
     elif current_player.sel["has_done_first_selection"] and is_selecting=="skills":
         title_and_text_action(str(current_player.sel["has_cursor_on"]), (RED), str(current_player.description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
         for i in range(3):#(current_player.sel["has_cursor_on"]
-            for j in range(2):
-                if current_player.MNA_CONSUMPTION_SKILLS.get(current_player.skills[j][i]) <= current_player.current_mna:
-                    text=my_font.render(current_player.skills[j][i],False,(255,255,255))
-                else:
-                    text=my_font.render(current_player.skills[j][i],False,(100,100,100))
-                WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
+                for j in range(2):
+                    if current_player is not None:
+                        if current_player.MNA_CONSUMPTION_SKILLS.get(current_player.skills[j][i]) <= current_player.current_mna:
+                            text=my_font.render(current_player.skills[j][i],False,(255,255,255))
+                        else:
+                            text=my_font.render(current_player.skills[j][i],False,(100,100,100))
+                        WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     elif current_player.sel["has_done_first_selection"] and is_selecting=="friends":
         title_and_text_action(str(current_player.friends_title.get(current_player.sel["has_cursor_on"])), (RED), str(current_player.description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
         for i in range(3):
@@ -365,11 +366,46 @@ def sforbiciata_animation():
     if y.current_animation >= len(y.sforbiciata_animation):
         y.is_doing_animation = False
 
+def pallonata_animation():
+    if y.is_doing_animation:
+        WIN.blit(y.pallonata_animation[int(y.current_animation)],(0,0))
+        y.current_animation+=0.50
+    if y.current_animation >= len(y.pallonata_animation):
+        y.is_doing_animation = False
+
 def sbracciata_animation():
     if p.is_doing_animation:
         WIN.blit(p.sbracciata_animation[int(p.current_animation)],(0,0))
         p.current_animation+=0.25
     if p.current_animation >= len(p.sbracciata_animation):
+        p.is_doing_animation = False
+
+def sacrificio_y_animation():
+    if p.is_doing_animation:
+        WIN.blit(p.sacrificio_y_animation[int(p.current_animation)],(0,0))
+        p.current_animation+=0.60
+    if p.current_animation >= len(p.sacrificio_y_animation):
+        p.is_doing_animation = False
+
+def sacrificio_p_animation():
+    if p.is_doing_animation:
+        WIN.blit(p.sacrificio_p_animation[int(p.current_animation)],(0,0))
+        p.current_animation+=0.60
+    if p.current_animation >= len(p.sacrificio_p_animation):
+        p.is_doing_animation = False
+
+def sacrificio_r_animation():
+    if p.is_doing_animation:
+        WIN.blit(pygame.transform.flip(p.sacrificio_y_animation[int(p.current_animation)],True, False),(0,0))
+        p.current_animation+=0.60
+    if p.current_animation >= len(p.sacrificio_y_animation):
+        p.is_doing_animation = False
+
+def sacrificio_f_animation():
+    if p.is_doing_animation:
+        WIN.blit(pygame.transform.flip(p.sacrificio_p_animation[int(p.current_animation)],True, False),(0,0))
+        p.current_animation+=0.60
+    if p.current_animation >= len(p.sacrificio_p_animation):
         p.is_doing_animation = False
 
 def saetta_animation():
@@ -378,6 +414,14 @@ def saetta_animation():
         r.current_animation+=0.50
     if r.current_animation >= len(r.saetta_animation):
         r.is_doing_animation = False
+
+def tempesta_animation():
+    if r.is_doing_animation:
+        WIN.blit(r.tempesta_animation[int(r.current_animation)],(0,0))
+        r.current_animation+=0.50
+    if r.current_animation >= len(r.tempesta_animation):
+        r.is_doing_animation = False
+
 
 def pestata_animation():
     if f.is_doing_animation:
