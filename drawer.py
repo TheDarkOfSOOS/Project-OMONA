@@ -42,7 +42,7 @@ def gui(isFighting, boss):
 def characters():
     #-Disegno Youssef
     # Background
-    pygame.draw.rect(WIN, (0,150,0), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    pygame.draw.rect(WIN, (140,70,20), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     
     # Profilo
     WIN.blit(y.img["Profilo"],(SPACING+BOX_BORDER, HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
@@ -71,7 +71,7 @@ def characters():
 
     #-Disegno Piergiorgio
     # Background
-    pygame.draw.rect(WIN, (WHITE), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    pygame.draw.rect(WIN, (120,0,90), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     
     # Profilo
     WIN.blit(p.img["Profilo"],(SPACING+BOX_BORDER, SPACING+BOX_BORDER+BANNER_HEIGHT))
@@ -100,7 +100,7 @@ def characters():
 
     #-Disegno Raul
     # Background
-    pygame.draw.rect(WIN, (WHITE), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    pygame.draw.rect(WIN, (40,0,150), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
     
     # Profilo
     WIN.blit(r.img["Profilo"],( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))

@@ -86,7 +86,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
     #print(boss.target)
     # print(boss.current_defn)
 
-    print(youssef.y.sel, returning)
+    #print(youssef.y.sel, returning)
     #print(pier.p.current_emotion)
     #print(raul.r.current_emotion)
     #print(fabiano.f.current_emotion)

@@ -13,12 +13,20 @@ import items
 
 pygame.init()
 
+RAUL_NEUTRALE = pygame.image.load("img/raul/raul_neutrale.png")
+RAUL_GIOIOSO = pygame.image.load("img/raul/raul_gioioso.png")
+RAUL_FELICE = pygame.image.load("img/raul/raul_felice.png")
+RAUL_TRISTE = pygame.image.load("img/raul/raul_triste.png")
+RAUL_ARRABBIATO = pygame.image.load("img/raul/raul_arrabbiato.png")
+RAUL_IRACONDO = pygame.image.load("img/raul/raul_iracondo.png")
+RAUL_FURIOSO = pygame.image.load("img/raul/raul_furioso.png")
+
 class Raul():
     def __init__(self):
 
         self.name = "Raul"
 
-        self.img = {"Profilo":pygame.transform.scale(RAUL_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+        self.img = {"Profilo":pygame.transform.scale(RAUL_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         self.position_in_fight="right-down"
 
@@ -169,25 +177,31 @@ class Raul():
 
     def change_img(self):
         if self.current_emotion == "neutrale":
-            #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+            self.img["Profilo"] = pygame.transform.scale(RAUL_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = NEUTRAL_IMG
 
         elif self.current_emotion == "gioioso":
+            self.img["Profilo"] = pygame.transform.scale(RAUL_GIOIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = JOY_IMG
 
         elif self.current_emotion == "felice":
+            self.img["Profilo"] = pygame.transform.scale(RAUL_FELICE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = HAPPY_IMG
 
         elif self.current_emotion == "triste":
+            self.img["Profilo"] = pygame.transform.scale(RAUL_TRISTE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = SAD_IMG
 
         elif self.current_emotion == "arrabbiato":
+            self.img["Profilo"] = pygame.transform.scale(RAUL_ARRABBIATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = MAD_IMG
             
         elif self.current_emotion == "iracondo":
+            self.img["Profilo"] = pygame.transform.scale(RAUL_IRACONDO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = RAGE_IMG
 
         elif self.current_emotion == "furioso":
+            self.img["Profilo"] = pygame.transform.scale(RAUL_FURIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
             self.img["Emozione"] = FURIOUS_IMG
 
     def do_something(self, boss):
