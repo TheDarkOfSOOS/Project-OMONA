@@ -9,17 +9,23 @@ import raul_class as r
 import fabiano_class as f
 import random as rng
 import action
-
+ 
 pygame.init()
+
+M_E_NEUTRALE = pygame.image.load("img/boss.jpeg")
+M_E_ARRABBIATO = pygame.image.load("img/boss_angry.jpg")
+M_E_TRISTE = pygame.image.load("img/boss_sad.jpg")
+M_E_FELICE = pygame.image.load("img/boss_happy.jpg")
+
 
 class Mago_Elettrico():
     def __init__(self,):
 
         self.name = "Mago Elettrico"
-        self.img = pygame.transform.scale(MAGO_ELETTRICO,(WIDTH,HEIGHT))
+        self.img = pygame.transform.scale(M_E_NEUTRALE,(WIDTH,HEIGHT))
 
         # STATISTICHE
-        self.hp = 3000 # Variabile per i punti vita
+        self.hp = 8000 # Variabile per i punti vita
         self.atk = 126 # Variabile per i punti attacco
         self.defn = 70 # Variabile per i punti difesa
         self.vel = 123 # Variabile per i punti velocità
@@ -73,6 +79,19 @@ class Mago_Elettrico():
 
         self.is_showing_text_outputs = False
 
+    def change_img(self):
+        if self.current_emotion == "neutrale":
+            self.img = pygame.transform.scale(M_E_NEUTRALE,(WIDTH,HEIGHT))
+
+        elif self.current_emotion == "gioioso":
+            self.img = pygame.transform.scale(M_E_FELICE,(WIDTH,HEIGHT))
+
+        elif self.current_emotion == "arrabbiato":
+            self.img = pygame.transform.scale(M_E_ARRABBIATO,(WIDTH,HEIGHT))
+
+        elif self.current_emotion == "triste":
+            self.img = pygame.transform.scale(M_E_TRISTE,(WIDTH,HEIGHT))
+
     def obtain_target(self):
         if y.y.is_dead and self.focus_on_youssef > 0:
             self.focus_on_youssef = 0
@@ -103,7 +122,7 @@ class Mago_Elettrico():
     def remove_bar(self, boss):
         if self.is_removing_bar:
             self.count_removed_bar = action.toggle_health(self.damage_dealed, self.target, self.count_removed_bar)
-            print(self.target.current_hp <= 0)
+            # print(self.target.current_hp <= 0)
             if self.count_removed_bar == self.damage_dealed or self.target.current_hp <= 0:
                 self.is_removing_bar = False
                 self.damage_dealed = 0

@@ -8,6 +8,7 @@ import youssef_class as y
 import pier_class as p
 import raul_class as r
 import random as rng
+import items
 
 pygame.init()
 
@@ -78,6 +79,23 @@ class Fabiano():
         self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation10.png"))
         self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation11.png"))
 
+        self.item_animation = []
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation02.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation03.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation04.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation05.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation06.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation07.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation08.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation09.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation10.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation11.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
+
 
         self.current_animation = 0
 
@@ -128,7 +146,7 @@ class Fabiano():
             "Soffio della morte":50,
         }
 
-        self.allies_selections=["Biscotto","Soffio della morte","Cappe"]
+        self.allies_selections=["Biscotto","Soffio della morte","Cappe","Acqua di Destiny", "Parmigianino", "Ghiaccio dei Bidelli"]
         self.allies_enemy_selections=["Servizietto"]
 
     def change_img(self):
@@ -269,6 +287,7 @@ class Fabiano():
                 dw.pestata_animation()
 
             if not self.is_doing_animation:
+                self.friends[0][0] = "-"
                 boss.target = self.sel["is_choosing_target"]
                 print("Cappe ha indicato " + str((boss.target).name) + ".")
                 self.text_action="Cappe ha indicato " + str((boss.target).name) + "."
@@ -280,6 +299,7 @@ class Fabiano():
                 dw.pestata_animation()
 
             if not self.is_doing_animation:
+                self.friends[0][1] = "-"
                 for allies in [y.y,p.p,r.r,self]:
                     allies.current_defn-=action.buff_stats(allies.defn)
                     emotion.change_emotion(allies, "euforico")
@@ -295,12 +315,14 @@ class Fabiano():
                 dw.pestata_animation()
 
             if not self.is_doing_animation:
+                self.friends[1][0] = "-"
                 print("Trentin inizia ad osservare le prossime mosse del nemico.")
                 self.text_action="Trentin inizia ad osservare le prossime mosse del nemico."
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Pastorello (spirito)":
+            self.friends[1][1] = "-"
             if self.is_doing_animation:
                 dw.pestata_animation()
 
@@ -323,6 +345,10 @@ class Fabiano():
                 self.text_action="Fabiano ha recuperato mana!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
+
+        if self.sel["is_selecting"]=="items":
+            allies = [self,p.p,r.r,y.y]
+            items.use_item(self, boss, self.sel["is_choosing_target"], allies)
 
     def remove_bar(self, boss):
         if self.is_removing_bar:

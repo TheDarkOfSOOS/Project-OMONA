@@ -8,6 +8,7 @@ import youssef_class as y
 import raul_class as r
 import fabiano_class as f
 import random as rng
+import items
 
 pygame.init()
 
@@ -148,6 +149,23 @@ class Pier():
         self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation37.png"))
         self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation38.png"))
 
+        self.item_animation = []
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation02.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation03.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation04.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation05.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation06.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation07.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation08.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation09.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation10.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation11.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
+
         self.current_animation = 0
 
         self.is_doing_animation = False
@@ -197,7 +215,7 @@ class Pier():
             "Sacrificio umano":50,
         }
 
-        self.allies_selections=["Sacrificio umano", "Ilaria"]
+        self.allies_selections=["Sacrificio umano", "Ilaria","Acqua di Destiny", "Parmigianino", "Ghiaccio dei Bidelli"]
         self.allies_enemy_selections=["Richiesta d'aiuto"]
     
     def change_img(self):
@@ -332,6 +350,7 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
+                self.friends[0][0] = "-"
                 if self.sel["is_choosing_target"] == y.y:
                     emotion.change_emotion(y.y, "gioioso")
                     print("Youssef è divertito da quello che ha letto! Lancia via la rivista e diventa " + y.y.current_emotion + ".")
@@ -356,6 +375,7 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
+                self.friends[0][1] = "-"
                 for target in [y.y,self,r.r,f.f,boss]:
                     target.current_emotion = "neutrale"
                     target.current_atk = target.atk
@@ -372,6 +392,7 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
+                self.friends[1][0] = "-"
                 for target in [y.y,self,r.r,f.f]:
                     emotion.change_emotion(target, "arrabbiato")
                     target.current_atk += action.buff_stats(target.atk)
@@ -390,6 +411,7 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
+                self.friends[1][1] = "-"
                 for target in [y.y,self,r.r,f.f]:
                     target.current_emotion = "neutrale"
                 print("Il russare di Gonzato rasserena il gruppo, recuperano tutti vita e ritornano normali.")
@@ -409,6 +431,10 @@ class Pier():
                 self.text_action="Pier ha recuperato mana!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
+
+        if self.sel["is_selecting"]=="items":
+            allies = [self,y.y,r.r,f.f]
+            items.use_item(self,boss,self.sel["is_choosing_target"],allies)
 
     def remove_bar(self, boss):
         if self.is_removing_bar:

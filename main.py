@@ -29,15 +29,16 @@ run = True
     [1] : everyone_has_finished_animation
     [2] : continue_animation
     [3] : new_turn_has_started
-    [4] : list_speed_ordered[]
-    [5] : dead_list[]
+    [4] : returning
+    [5] : list_speed_ordered[]
+    [6] : dead_list[]
 '''
-round_essentials_status = [False, False, False, True, [], []]
+round_essentials_status = [False, False, False, True, False, [], []]
 first_win = False
 
 # Carica musica in loop
-mixer.music.load(soundtrack)
-#mixer.music.play(-1)
+mixer.music.load(soundtrack_2)
+mixer.music.play(-1)
 
 def reset_res():
     return [False, False, False, True, [], []]
@@ -78,14 +79,14 @@ while run:
             run = False
 
     if not first_win and m_e.me.current_hp > 0:
-        round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], input, m_e.me, 5)
+        round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], input, m_e.me, 5)
     elif not first_win and m_e.me.current_hp <= 0:
         round_essentials_status = reset_res()
         round.reset_charas()
         first_win = True
     
     if first_win and boss.b.current_hp > 0:
-        round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], input, boss.b, 4)
+        round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], input, boss.b, 4)
     elif first_win and boss.b.current_hp <= 0:
         run = False
 

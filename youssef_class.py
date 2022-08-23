@@ -1,5 +1,5 @@
 import pygame
-
+ 
 from data import *
 import action
 import drawer as dw
@@ -8,6 +8,7 @@ import pier_class as p
 import raul_class as r
 import fabiano_class as f
 import random as rng
+import items
 
 pygame.init()
 
@@ -107,6 +108,22 @@ class Youssef():
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation24.png"))
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation25.png"))
 
+        self.item_animation = []
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation02.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation03.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation04.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation05.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation06.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation07.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation08.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation09.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation10.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation11.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
 
         self.current_animation = 0
 
@@ -166,7 +183,7 @@ class Youssef():
             "Delusione":30,
         }
 
-        self.allies_selections=[""]
+        self.allies_selections=["Acqua di Destiny", "Parmigianino", "Ghiaccio dei Bidelli"]
         self.allies_enemy_selections=[""]
 
     def change_img(self):
@@ -200,6 +217,7 @@ class Youssef():
 
     def do_something(self, boss):
         MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
+
         if self.sel["has_cursor_on"]=="Sforbiciata":
             DMG_DEAL = 10
             self.damage_dealed = action.damage_deal(y.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
@@ -323,6 +341,7 @@ class Youssef():
 
             if not self.is_doing_animation:
                 #L'attacco non manca
+                self.friends[0][0] = "-"
                 print("Pol ha fatto",self.damage_dealed,"danni al nemico!")
                 self.text_action="Pol ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
                 self.current_animation = 0
@@ -334,6 +353,7 @@ class Youssef():
                 dw.sforbiciata_animation()
 
             if not self.is_doing_animation:
+                self.friends[0][1] = "-"
                 print("Borin ha infastidito il nemico. Ora è arrabbiato, ma rimane scoperto!")
                 # Inizio attacco
                 emotion.change_emotion(boss, "arrabbiato")
@@ -347,6 +367,7 @@ class Youssef():
                 dw.sforbiciata_animation()
 
             if not self.is_doing_animation:
+                self.friends[1][0] = "-"
                 print("Anastasia ha letto il nemico. È riuscita a deprimerlo e a diminuirgli l'attacco!")
                 # Inizio attacco
                 emotion.change_emotion(boss, "triste")
@@ -360,6 +381,7 @@ class Youssef():
                 dw.sforbiciata_animation()
 
             if not self.is_doing_animation:
+                self.friends[1][1] = "-"
                 print("Ciudin ha dimenticato l'ombrello. Youssef lo distrugge e diventa Superman!")
                 # Inizio attacco
                 emotion.change_emotion(self, "felice")
@@ -379,6 +401,10 @@ class Youssef():
                 self.text_action="Youssef ha recuperato mana!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
+        
+        if self.sel["is_selecting"]=="items":
+            allies = [self,p.p,r.r,f.f]
+            items.use_item(self, boss, self.sel["is_choosing_target"], allies)
 
     def remove_bar(self, boss):
         if self.is_removing_bar:

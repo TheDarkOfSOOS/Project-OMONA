@@ -95,7 +95,7 @@ def change_emotion(objective, emotion):
             # print(objective.name, emotion, objective.current_emotion)
     else:
         objective.current_emotion = "neutrale"
-    if objective != boss.b and objective != m_e.me:
+    if objective != boss.b:
         objective.change_img()
 
     set_emotion_stats(objective)

@@ -10,6 +10,7 @@ from raul_class import r
 from fabiano_class import f
 from boss import b
 from mago_elettrico import me
+from items import *
 
 # Drawer serve per disegnare ogni contenuto visibile
 
@@ -179,11 +180,20 @@ def choices(current_player, is_selecting, boss):
                         else:
                             text=my_font.render(current_player.skills[j][i],False,(100,100,100))
                         WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
+                        
     elif current_player.sel["has_done_first_selection"] and is_selecting=="friends":
         title_and_text_action(str(current_player.friends_title.get(current_player.sel["has_cursor_on"])), (RED), str(current_player.description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
         for i in range(3):
             for j in range(2):
                 text=my_font.render(current_player.friends[j][i],False,(255,255,255))
+                WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
+
+    elif current_player.sel["has_done_first_selection"] and is_selecting=="items":
+        # print(current_player.sel["has_cursor_on"])
+        title_and_text_action(str(items_title.get(current_player.sel["has_cursor_on"])), (RED), str(items_description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
+        for i in range(3):
+            for j in range(2):
+                text=my_font.render(items[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     
 def selection(currX, currY, current_player, is_selecting, has_cursor_on, has_done_first_selection, boss):
@@ -459,3 +469,10 @@ def zzaaap_animation():
         b.current_animation+=0.25
     if b.current_animation >= len(b.zzaaap_animation):
         b.is_doing_animation = False
+
+def item_animation(user):
+    if user.is_doing_animation:
+        WIN.blit(user.item_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        user.current_animation+=0.25
+    if user.current_animation >= len(user.item_animation):
+        user.is_doing_animation = False

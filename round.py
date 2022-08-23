@@ -33,7 +33,7 @@ new_turn_has_started = True
 
 pygame.display.set_caption("OMONA testing ROUND")
 
-def round(everyone_has_chosen, everyone_has_finished_animation, continue_animation, new_turn_has_started, list_speed_ordered, dead_list, input, boss, stage):
+def round(everyone_has_chosen, everyone_has_finished_animation, continue_animation, new_turn_has_started, returning, list_speed_ordered, dead_list, input, boss, stage):
     set_charas(stage)
     can_calculate_speed = False
     animation_is_starting = False
@@ -53,7 +53,9 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
     # Fai queste cose all'inizio del round
     if new_turn_has_started:
-        #Cambia parametri fuori dalla classe
+        # Non ci interessa sapere cosa fosse successo prima
+        returning = False
+        # Cambia parametri fuori dalla classe
         for chara in [youssef.y, pier.p, raul.r, fabiano.f]:
             chara.sel["is_choosing_target"] = False
 
@@ -71,6 +73,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             chara.current_hp = 0
             chara.is_dead = True
             chara.current_emotion = "neutrale"
+            print(chara.name+" is dead")
 
             # Resettiamo stats
             chara.current_atk = chara.atk
@@ -81,22 +84,25 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             chara.is_dead = False
 
     #print(boss.target)
+    # print(boss.current_defn)
 
-    print(youssef.y.current_hp)
+    print(youssef.y.sel, returning)
     #print(pier.p.current_emotion)
     #print(raul.r.current_emotion)
     #print(fabiano.f.current_emotion)
-    #print(boss.current_emotion)
+    # print(boss.current_emotion)
 
     #print(youssef.y.current_mna)
     #print(pier.p.current_mna)
     #print(raul.r.current_mna)
     #print(fabiano.f.current_mna)
 
+    # print(youssef.y.is_dead)
+
     #print(youssef.y.current_vel)
     #print(pier.p.current_vel)
-    #print(raul.r.current_vel)
-    #print(fabiano.f.current_vel)
+    # print(raul.r.current_vel)
+    # print(fabiano.f.current_vel)
 
     # Turno pg1
     if youssef.y.sel["is_choosing"]==True:
@@ -105,7 +111,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             youssef.y.sel["is_choosing"]=False
         else:
             # Fa partire il turno di youssef
-            youssef.y.sel=turn.of_character(youssef.y, input, boss)
+            youssef.y.sel, returning = turn.of_character(youssef.y, input, boss, returning)
             #print("youssef: ", youssef.y.sel)
             # Se non e' piu' il suo turno di scegliere
             if youssef.y.sel["is_choosing"]==False:
@@ -127,7 +133,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             raul.r.sel["is_choosing"]=True
             pier.p.sel["is_choosing"]=False
         else:
-            pier.p.sel=turn.of_character(pier.p, input, boss)
+            pier.p.sel, returning = turn.of_character(pier.p, input, boss, returning)
             #print("pier: ", pier.p.sel)
             if pier.p.sel["is_choosing"]==False:
                 if pier.p.sel["has_done_first_selection"]==True:
@@ -146,7 +152,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             fabiano.f.sel["is_choosing"]=True
             raul.r.sel["is_choosing"]=False
         else:
-            raul.r.sel=turn.of_character(raul.r, input, boss)
+            raul.r.sel, returning = turn.of_character(raul.r, input, boss, returning)
             #print("raul: ",raul.r.sel)
             if raul.r.sel["is_choosing"]==False:
                 if raul.r.sel["has_done_first_selection"]==True:
@@ -170,7 +176,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             animation_is_starting = True
             fabiano.f.sel["is_choosing"] = False
         else:
-            fabiano.f.sel=turn.of_character(fabiano.f, input, boss)
+            fabiano.f.sel, returning = turn.of_character(fabiano.f, input, boss, returning)
             #print("fab: ",fabiano.f.sel)
             if fabiano.f.sel["is_choosing"]==False:
                 if fabiano.f.sel["has_done_first_selection"]==False:
@@ -384,6 +390,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             everyone_has_chosen = False
             everyone_has_finished_animation = False
             continue_animation = False
+            dead_list.clear()
             youssef.y.sel["is_choosing"] = True
             for character in [youssef.y, pier.p, raul.r, fabiano.f]:
                 character.sel["has_done_first_selection"] = False
@@ -397,7 +404,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
     # Tutti hanno finito l'azione, finisce il round
 
-    return [everyone_has_chosen, everyone_has_finished_animation, continue_animation, new_turn_has_started, list_speed_ordered, dead_list]
+    return [everyone_has_chosen, everyone_has_finished_animation, continue_animation, new_turn_has_started, returning, list_speed_ordered, dead_list]
 
 
 def reset_charas():
