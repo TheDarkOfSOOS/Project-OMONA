@@ -8,7 +8,7 @@ import youssef_class as y
 import raul_class as r
 import fabiano_class as f
 import random as rng
-import items
+from items import items
 
 pygame.init()
 
@@ -271,13 +271,13 @@ class Pier():
     
         if self.sel["has_cursor_on"]=="Sbracciata":
             DMG_DEAL = 6
-            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
+            self.damage_dealed = action.damage_deal(p.current_atk,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
-                if action.is_missed(boss.eva):
+                if action.is_missed(boss.current_eva):
                     self.text_action="Il nemico ha schivato il colpo!"
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
@@ -303,12 +303,12 @@ class Pier():
         #TODO
         if self.sel["has_cursor_on"]=='"Spessanza"':
             print("DA FINIRE")
-            boss.target = self
             if self.is_doing_animation:        
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
+                boss.update_target(self)
                 print("Pier ha preso le attenzioni del nemico!")
                 self.text_action="Pier ha preso le attenzioni del nemico!"
                 self.current_animation = 0
@@ -333,7 +333,7 @@ class Pier():
         
         if self.sel["has_cursor_on"]=="Sacrificio umano":
             DMG_DEAL = 25
-            self.damage_dealed = action.damage_deal(p.atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
+            self.damage_dealed = action.damage_deal(p.current_atk,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation and self.sel["is_choosing_target"].name == "Youssef":
                 dw.sacrificio_y_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sacrificio_y_animation)/0.60, round(MNA_CONSUMPTION/(len(self.sacrificio_y_animation)/0.60),2))
@@ -389,7 +389,7 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
-                self.friends[0][1] = "-"
+                self.friends[1][0] = "-"
                 for target in [y.y,self,r.r,f.f,boss]:
                     target.current_emotion = "neutrale"
                     target.current_atk = target.atk
@@ -406,7 +406,7 @@ class Pier():
                 dw.sbracciata_animation()
 
             if not self.is_doing_animation:
-                self.friends[1][0] = "-"
+                self.friends[0][1] = "-"
                 for target in [y.y,self,r.r,f.f]:
                     emotion.change_emotion(target, "arrabbiato")
                     target.current_atk += action.buff_stats(target.atk)
@@ -457,10 +457,20 @@ class Pier():
                 self.count_2 = action.add_health(self.aoe_2, p, self.count_2)
                 self.count_3 = action.add_health(self.aoe_3, r.r, self.count_3)
                 self.count_4 = action.add_health(self.aoe_4, f.f, self.count_4)
+                print(self.count_1, self.count_2, self.count_3, self.count_4, self.aoe_1, self.aoe_2, self.aoe_3, self.aoe_4)
                 if (self.count_1 + self.count_2 + self.count_3 + self.count_4) == (self.aoe_1 + self.aoe_2 + self.aoe_3 + self.aoe_4):
                     self.is_removing_bar = False
                     self.damage_dealed = 0
                     self.count_removed_bar = 0
+                    self.aoe_1 = 0
+                    self.aoe_2 = 0
+                    self.aoe_3 = 0
+                    self.aoe_4 = 0
+
+                    self.count_1 = 0
+                    self.count_2 = 0
+                    self.count_3 = 0
+                    self.count_4 = 0
             else:
                 self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
                 if self.count_removed_bar == self.damage_dealed:

@@ -186,7 +186,7 @@ def toggle_mna(mna_consumption, user, count, max_index, mna_to_remove_per_frame)
 
 def add_health(healing_quantity, target, count):
     #print(count, "<", healing_quantity, "and", abs(count < healing_quantity), ">", damage_per_frame)
-    if count < healing_quantity and abs(count - healing_quantity) > damage_per_frame:
+    if count < healing_quantity and abs(count - healing_quantity) >= damage_per_frame:
         count += damage_per_frame
         target.current_hp += damage_per_frame
         #print(count, damage_per_frame)
@@ -207,7 +207,6 @@ def healing_per_HP(HP_heal, target_current_HP, target_max_HP):
 
 def healing_percentage(percentage_heal, target_current_HP, target_max_HP):
     if target_current_HP > 0:
-        print("belandi")
         result = (percentage_heal*target_max_HP)/100
         if result+target_current_HP > target_max_HP:
             result = target_max_HP - target_current_HP

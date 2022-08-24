@@ -7,7 +7,7 @@ import pier_class as pier
 import raul_class as raul
 import fabiano_class as fabiano
 import boss as boss
-from items import *
+from items import items
 
 # Turn contiene invece le azioni che un personaggio puo' fare in un turno 
 
@@ -43,36 +43,35 @@ def of_character(current_player, input, boss, returning):
 
     # Stato di returning
     if returning:
-        print("RESTORE_ITEM")
         if current_player.sel["has_cursor_on"] == "Acqua di Destiny":
-            items_usage[0][0] += 1
-            if items_usage[0][0] > 0:
-                items[0][0] = items_template[0][0]
+            items.items_usage[0][0] += 1
+            if items.items_usage[0][0] > 0:
+                items.items[0][0] = items.items_template[0][0]
 
         if current_player.sel["has_cursor_on"] == "Tiramisù (senza mascarpone)":
-            items_usage[0][1] += 1
-            if items_usage[0][1] > 0:
-                items[0][1] = items_template[0][1]
+            items.items_usage[0][1] += 1
+            if items.items_usage[0][1] > 0:
+                items.items[0][1] = items.items_template[0][1]
 
         if current_player.sel["has_cursor_on"] == "Orologio donato":
-            items_usage[0][2] += 1
-            if items_usage[0][2] > 0:
-                items[0][2] = items_template[0][2]
+            items.items_usage[0][2] += 1
+            if items.items_usage[0][2] > 0:
+                items.items[0][2] = items.items_template[0][2]
 
         if current_player.sel["has_cursor_on"] == "Laurea in Matematica":
-            items_usage[1][0] += 1
-            if items_usage[1][0] > 0:
-                items[1][0] = items_template[1][0]
+            items.items_usage[1][0] += 1
+            if items.items_usage[1][0] > 0:
+                items.items[1][0] = items.items_template[1][0]
 
         if current_player.sel["has_cursor_on"] == "Parmigianino":
-            items_usage[1][1] += 1
-            if items_usage[1][1] > 0:
-                items[1][1] = items_template[1][1]
+            items.items_usage[1][1] += 1
+            if items.items_usage[1][1] > 0:
+                items.items[1][1] = items.items_template[1][1]
 
         if current_player.sel["has_cursor_on"] == "Ghiaccio dei Bidelli":
-            items_usage[1][2] += 1
-            if items_usage[1][2] > 0:
-                items[1][2] = items_template[1][2]
+            items.items_usage[1][2] += 1
+            if items.items_usage[1][2] > 0:
+                items.items[1][2] = items.items_template[1][2]
 
         returning = False
 
@@ -114,7 +113,7 @@ def of_character(current_player, input, boss, returning):
             sel["has_cursor_on"]=current_player.friends[current_selection_Y][current_selection_X]
 
         elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="items":
-            sel["has_cursor_on"]=items[current_selection_Y][current_selection_X]
+            sel["has_cursor_on"]=items.items[current_selection_Y][current_selection_X]
         #print("sel:",sel)
         #print("menu[def]",menu[current_selection_Y][current_selection_X])
 
@@ -156,9 +155,9 @@ def of_character(current_player, input, boss, returning):
                         if options == sel["has_cursor_on"]:
                             find_target = True
                     if not find_target:
-                        items_usage[current_selection_Y][current_selection_X] -= 1
-                        if items_usage[current_selection_Y][current_selection_X] == 0:
-                            items[current_selection_Y][current_selection_X] = "-"  
+                        items.items_usage[current_selection_Y][current_selection_X] -= 1
+                        if items.items_usage[current_selection_Y][current_selection_X] == 0:
+                            items.items[current_selection_Y][current_selection_X] = "-"
                         sel["is_choosing"]=False
                         reset_movement()
                 else:
@@ -178,9 +177,9 @@ def of_character(current_player, input, boss, returning):
             reset_movement()
 
         # elif (input=="backspace" and sel["has_done_first_selection"]==False and sel["has_cursor_on"] == "Acqua di Destiny"):
-        #     items_usage[0][0] += 1
+        #     items.items_usage[0][0] += 1
         #     if items_usage[0][0] > 0:
-        #         items[0][0] = items_template[0][0]
+        #         items.items[0][0] = items.items_template[0][0]
         #     sel["is_choosing"]=False
         #     reset_movement()
 
@@ -198,9 +197,10 @@ def of_character(current_player, input, boss, returning):
         sel["is_choosing"]=False
 
     if input=="return" and sel["is_choosing_target"]!=False:
-        items_usage[current_selection_Y][current_selection_X] -= 1
-        if items_usage[current_selection_Y][current_selection_X] == 0:
-            items[current_selection_Y][current_selection_X] = "-"
+        if sel["is_selecting"]=="items":
+            items.items_usage[current_selection_Y][current_selection_X] -= 1
+            if items.items_usage[current_selection_Y][current_selection_X] == 0:
+                items.items[current_selection_Y][current_selection_X] = "-"
         sel["is_choosing"]=False
         reset_movement()
 

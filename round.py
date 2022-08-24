@@ -8,7 +8,7 @@ import youssef_class as youssef
 import pier_class as pier
 import raul_class as raul
 import fabiano_class as fabiano
-import boss
+from items import items
 
 from data import *
 
@@ -33,8 +33,7 @@ new_turn_has_started = True
 
 pygame.display.set_caption("OMONA testing ROUND")
 
-def round(everyone_has_chosen, everyone_has_finished_animation, continue_animation, new_turn_has_started, returning, list_speed_ordered, dead_list, input, boss, stage):
-    set_charas(stage)
+def round(everyone_has_chosen, everyone_has_finished_animation, continue_animation, new_turn_has_started, returning, list_speed_ordered, dead_list, input, boss):
     can_calculate_speed = False
     animation_is_starting = False
     # Disegno sfondo
@@ -59,7 +58,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
         for chara in [youssef.y, pier.p, raul.r, fabiano.f]:
             chara.sel["is_choosing_target"] = False
 
-        boss.obtain_target()
+        boss.obtain_attack()
         new_turn_has_started = False
 
         # Ogni nuovo turno togliamo un turno di attivazione dell'abilità
@@ -73,7 +72,6 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             chara.current_hp = 0
             chara.is_dead = True
             chara.current_emotion = "neutrale"
-            print(chara.name+" is dead")
 
             # Resettiamo stats
             chara.current_atk = chara.atk
@@ -84,25 +82,24 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             chara.is_dead = False
 
     #print(boss.target)
-    # print(boss.current_defn)
-
+    #print(boss.current_defn)
     #print(youssef.y.sel, returning)
     #print(pier.p.current_emotion)
     #print(raul.r.current_emotion)
     #print(fabiano.f.current_emotion)
-    # print(boss.current_emotion)
+    #print(boss.current_emotion)
 
     #print(youssef.y.current_mna)
     #print(pier.p.current_mna)
     #print(raul.r.current_mna)
     #print(fabiano.f.current_mna)
 
-    # print(youssef.y.is_dead)
+    #print(youssef.y.is_dead)
 
     #print(youssef.y.current_vel)
     #print(pier.p.current_vel)
-    # print(raul.r.current_vel)
-    # print(fabiano.f.current_vel)
+    #print(raul.r.current_vel)
+    #print(fabiano.f.current_vel)
 
     # Turno pg1
     if youssef.y.sel["is_choosing"]==True:
@@ -431,7 +428,6 @@ def reset_charas():
 
         # Specifici valori in base ai personaggi
         if chara == youssef.y:
-            print("svegliati")
             chara.sel["is_choosing"] = True
 
         if chara == pier.p or chara == raul.r:
@@ -456,28 +452,53 @@ def reset_charas():
 def set_charas(stage):
     for self in [youssef.y, pier.p, raul.r, fabiano.f]:
         if stage == 0: #[["Sforbiciata","Battutaccia","Pallonata"],["Provocazione","Assedio","Delusione"]]
-            self.skills = [["-","-","-"],["-","-","-"]]
+            self.skills = [[self.skills_template[0][0],self.skills_template[0][1],"-"],[self.skills_template[1][0],"-","-"]]
+            desc_keys = tuple(self.description_template)
             self.description = {
                 # Skills
-                "-":"-",
-                "-":"-",
-                "-":"-",
+                desc_keys[0]:self.description_template.get(desc_keys[0]),
+                desc_keys[1]:self.description_template.get(desc_keys[1]),
+                desc_keys[2]:self.description_template.get(desc_keys[2]),
                 "-":"-",
                 "-":"-",
                 "-":"-",
                 # Friends
-                "-":"-",
-                "-":"-",
+                desc_keys[6]:self.description_template.get(desc_keys[6]),
+                desc_keys[7]:self.description_template.get(desc_keys[7]),
                 "-":"-",
                 "-":"-"
             }
+            friends_keys = tuple(self.friends_title_template)
             self.friends_title = {
+                friends_keys[0]:self.friends_title_template.get(friends_keys[0]),
+                friends_keys[1]:self.friends_title_template.get(friends_keys[1]),
                 "-":"-",
+                "-":"-"
+            }
+            self.friends = [[self.friends_template[0][0],"-","-"],[self.friends_template[1][0],"-","-"]]
+
+            # Items
+            items.items = [[items.items_template[0][0],items.items_template[0][1],"-"],[items.items_template[1][0],"-","-"]]
+            items.items_usage = [[items.items_usage_template[0][0],items.items_usage_template[0][1],"-"],[items.items_usage_template[1][0],"-","-"]]
+
+            desc_keys = tuple(items.items_description_template)
+            items.items_description = {
+                desc_keys[0]:items.items_description_template.get(desc_keys[0]),
+                desc_keys[1]:items.items_description_template.get(desc_keys[1]),
+                desc_keys[2]:items.items_description_template.get(desc_keys[2]),
                 "-":"-",
                 "-":"-",
                 "-":"-"
             }
-            self.friends = [["-","-","-"],["-","-","-"]]
+            title_keys = tuple(items.items_title_template)
+            items.items_title = {
+                title_keys[0]:items.items_title_template.get(title_keys[0]),
+                title_keys[1]:items.items_title_template.get(title_keys[1]),
+                title_keys[2]:items.items_title_template.get(title_keys[2]),
+                "-":"-",
+                "-":"-",
+                "-":"-"
+            }
 
         if stage == 1:
             self.skills = [[self.skills_template[0][0],"-","-"],[self.skills_template[1][0],"-","-"]]
@@ -505,6 +526,28 @@ def set_charas(stage):
             }
             self.friends = [["-","-","-"],["-","-","-"]]
 
+            items.items = [[items.items_template[0][0],"-","-"],[items.items_template[1][0],"-","-"]]
+            items.items_usage = [[items.items_usage_template[0][0],"-","-"],[items.items_usage_template[1][0],"-","-"]]
+
+            desc_keys = tuple(items.items_description_template)
+            items.items_description = {
+                desc_keys[0]:items.items_description_template.get(desc_keys[0]),
+                desc_keys[1]:items.items_description_template.get(desc_keys[1]),
+                "-":"-",
+                "-":"-",
+                "-":"-",
+                "-":"-"
+            }
+            title_keys = tuple(items.items_title_template)
+            items.items_title = {
+                title_keys[0]:items.items_title_template.get(title_keys[0]),
+                title_keys[1]:items.items_title_template.get(title_keys[1]),
+                "-":"-",
+                "-":"-",
+                "-":"-",
+                "-":"-"
+            }
+
         if stage == 2:
             self.skills = [[self.skills_template[0][0],self.skills_template[0][1],"-"],[self.skills_template[1][0],"-","-"]]
             desc_keys = tuple(self.description_template)
@@ -530,6 +573,28 @@ def set_charas(stage):
                 "-":"-"
             }
             self.friends = [[self.friends_template[0][0],"-","-"],["-","-","-"]]
+
+            items.items = [[items.items_template[0][0],items.items_template[0][1],"-"],[items.items_template[1][0],"-","-"]]
+            items.items_usage = [[items.items_usage_template[0][0],items.items_usage_template[0][1],"-"],[items.items_usage_template[1][0],"-","-"]]
+
+            desc_keys = tuple(items.items_description_template)
+            items.items_description = {
+                desc_keys[0]:items.items_description_template.get(desc_keys[0]),
+                desc_keys[1]:items.items_description_template.get(desc_keys[1]),
+                desc_keys[2]:items.items_description_template.get(desc_keys[2]),
+                "-":"-",
+                "-":"-",
+                "-":"-"
+            }
+            title_keys = tuple(items.items_title_template)
+            items.items_title = {
+                title_keys[0]:items.items_title_template.get(title_keys[0]),
+                title_keys[1]:items.items_title_template.get(title_keys[1]),
+                title_keys[2]:items.items_title_template.get(title_keys[2]),
+                "-":"-",
+                "-":"-",
+                "-":"-"
+            }
 
         if stage == 3:
             self.skills = [[self.skills_template[0][0],self.skills_template[0][1],"-"],[self.skills_template[1][0],self.skills_template[1][1],"-"]]
@@ -557,6 +622,28 @@ def set_charas(stage):
             }
             self.friends = [[self.friends_template[0][0],"-","-"],[self.friends_template[1][0],"-","-"]]
 
+            items.items = [[items.items_template[0][0],items.items_template[0][1],"-"],[items.items_template[1][0],items.items_template[1][1],"-"]]
+            items.items_usage = [[items.items_usage_template[0][0],items.items_usage_template[0][1],"-"],[items.items_usage_template[1][0],items.items_usage_template[1][1],"-"]]
+
+            desc_keys = tuple(items.items_description_template)
+            items.items_description = {
+                desc_keys[0]:items.items_description_template.get(desc_keys[0]),
+                desc_keys[1]:items.items_description_template.get(desc_keys[1]),
+                desc_keys[2]:items.items_description_template.get(desc_keys[2]),
+                desc_keys[3]:items.items_description_template.get(desc_keys[3]),
+                "-":"-",
+                "-":"-"
+            }
+            title_keys = tuple(items.items_title_template)
+            items.items_title = {
+                title_keys[0]:items.items_title_template.get(title_keys[0]),
+                title_keys[1]:items.items_title_template.get(title_keys[1]),
+                title_keys[2]:items.items_title_template.get(title_keys[2]),
+                title_keys[3]:items.items_title_template.get(title_keys[3]),
+                "-":"-",
+                "-":"-"
+            }
+
         if stage == 4:
             self.skills = [[self.skills_template[0][0],self.skills_template[0][1],self.skills_template[0][2]],[self.skills_template[1][0],self.skills_template[1][1],"-"]]
             desc_keys = tuple(self.description_template)
@@ -582,8 +669,73 @@ def set_charas(stage):
                 "-":"-"
             }
             self.friends = [[self.friends_template[0][0],self.friends_template[0][1],"-"],[self.friends_template[1][0],"-","-"]]
+
+            items.items = [[items.items_template[0][0],items.items_template[0][1],items.items_template[0][2]],[items.items_template[1][0],items.items_template[1][1],"-"]]
+            items.items_usage = [[items.items_usage_template[0][0],items.items_usage_template[0][1],items.items_usage_template[0][2]],[items.items_usage_template[1][0],items.items_usage_template[1][1],"-"]]
+
+            desc_keys = tuple(items.items_description_template)
+            items.items_description = {
+                desc_keys[0]:items.items_description_template.get(desc_keys[0]),
+                desc_keys[1]:items.items_description_template.get(desc_keys[1]),
+                desc_keys[2]:items.items_description_template.get(desc_keys[2]),
+                desc_keys[3]:items.items_description_template.get(desc_keys[3]),
+                desc_keys[4]:items.items_description_template.get(desc_keys[4]),
+                "-":"-"
+            }
+            title_keys = tuple(items.items_title_template)
+            items.items_title = {
+                title_keys[0]:items.items_title_template.get(title_keys[0]),
+                title_keys[1]:items.items_title_template.get(title_keys[1]),
+                title_keys[2]:items.items_title_template.get(title_keys[2]),
+                title_keys[3]:items.items_title_template.get(title_keys[3]),
+                title_keys[4]:items.items_title_template.get(title_keys[4]),
+                "-":"-"
+            }
+
         if stage == 5:
-            self.skills = self.skills_template
-            self.description = self.description_template
-            self.friends_title = self.friends_title_template
-            self.friends = self.friends_template
+            self.skills = [[self.skills_template[0][0],self.skills_template[0][1],self.skills_template[0][2]],[self.skills_template[1][0],self.skills_template[1][1],self.skills_template[1][2]]]
+            desc_keys = tuple(self.description_template)
+            self.description = {
+                # Skills
+                desc_keys[0]:self.description_template.get(desc_keys[0]),
+                desc_keys[1]:self.description_template.get(desc_keys[1]),
+                desc_keys[2]:self.description_template.get(desc_keys[2]),
+                desc_keys[3]:self.description_template.get(desc_keys[3]),
+                desc_keys[4]:self.description_template.get(desc_keys[4]),
+                desc_keys[5]:self.description_template.get(desc_keys[5]),
+                # Friends
+                desc_keys[6]:self.description_template.get(desc_keys[6]),
+                desc_keys[7]:self.description_template.get(desc_keys[7]),
+                desc_keys[8]:self.description_template.get(desc_keys[8]),
+                desc_keys[9]:self.description_template.get(desc_keys[9]),
+            }
+            friends_keys = tuple(self.friends_title_template)
+            self.friends_title = {
+                friends_keys[0]:self.friends_title_template.get(friends_keys[0]),
+                friends_keys[1]:self.friends_title_template.get(friends_keys[1]),
+                friends_keys[2]:self.friends_title_template.get(friends_keys[2]),
+                friends_keys[3]:self.friends_title_template.get(friends_keys[3]),
+            }
+            self.friends = [[self.friends_template[0][0],self.friends_template[0][1],"-"],[self.friends_template[1][0],self.friends_template[1][1],"-"]]
+
+            items.items = [[items.items_template[0][0],items.items_template[0][1],items.items_template[0][2]],[items.items_template[1][0],items.items_template[1][1],items.items_template[1][2]]]
+            items.items_usage = [[items.items_usage_template[0][0],items.items_usage_template[0][1],items.items_usage_template[0][2]],[items.items_usage_template[1][0],items.items_usage_template[1][1],items.items_usage_template[1][2]]]
+
+            desc_keys = tuple(items.items_description_template)
+            items.items_description = {
+                desc_keys[0]:items.items_description_template.get(desc_keys[0]),
+                desc_keys[1]:items.items_description_template.get(desc_keys[1]),
+                desc_keys[2]:items.items_description_template.get(desc_keys[2]),
+                desc_keys[3]:items.items_description_template.get(desc_keys[3]),
+                desc_keys[4]:items.items_description_template.get(desc_keys[4]),
+                desc_keys[5]:items.items_description_template.get(desc_keys[5])
+            }
+            title_keys = tuple(items.items_title_template)
+            items.items_title = {
+                title_keys[0]:items.items_title_template.get(title_keys[0]),
+                title_keys[1]:items.items_title_template.get(title_keys[1]),
+                title_keys[2]:items.items_title_template.get(title_keys[2]),
+                title_keys[3]:items.items_title_template.get(title_keys[3]),
+                title_keys[4]:items.items_title_template.get(title_keys[4]),
+                title_keys[5]:items.items_title_template.get(title_keys[5])
+            }

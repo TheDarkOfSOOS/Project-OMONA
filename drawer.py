@@ -10,7 +10,9 @@ from raul_class import r
 from fabiano_class import f
 from boss import b
 from mago_elettrico import me
-from items import *
+from items import items
+
+from types import NoneType
 
 # Drawer serve per disegnare ogni contenuto visibile
 
@@ -174,7 +176,7 @@ def choices(current_player, is_selecting, boss):
         title_and_text_action(str(current_player.sel["has_cursor_on"]), (RED), str(current_player.description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
         for i in range(3):#(current_player.sel["has_cursor_on"]
                 for j in range(2):
-                    if current_player is not None:
+                    if type(current_player.MNA_CONSUMPTION_SKILLS.get(current_player.skills[j][i])) != NoneType:
                         if current_player.MNA_CONSUMPTION_SKILLS.get(current_player.skills[j][i]) <= current_player.current_mna:
                             text=my_font.render(current_player.skills[j][i],False,(255,255,255))
                         else:
@@ -189,11 +191,10 @@ def choices(current_player, is_selecting, boss):
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
 
     elif current_player.sel["has_done_first_selection"] and is_selecting=="items":
-        # print(current_player.sel["has_cursor_on"])
-        title_and_text_action(str(items_title.get(current_player.sel["has_cursor_on"])), (RED), str(items_description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
+        title_and_text_action(str(items.items_title.get(current_player.sel["has_cursor_on"])), (RED), str(items.items_description.get(current_player.sel["has_cursor_on"])), 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
         for i in range(3):
             for j in range(2):
-                text=my_font.render(items[j][i],False,(255,255,255))
+                text=my_font.render(items.items[j][i],False,(255,255,255))
                 WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     
 def selection(currX, currY, current_player, is_selecting, has_cursor_on, has_done_first_selection, boss):
@@ -457,18 +458,19 @@ def biscotto_animation(target):
         if f.current_animation >= len(f.biscotto_animation):
             f.is_doing_animation = False
 
-def zzaaap_animation():
+def zzaaap_animation(targets):
     if me.is_doing_animation:
-        WIN.blit(me.zzaaap_animation[int(me.current_animation)],(0,0))
-        me.current_animation+=0.25
-    if me.current_animation >= len(me.zzaaap_animation):
+        if y in targets:
+            WIN.blit(me.zzaaap_animation_bottom_left[int(me.current_animation)],(0,HEIGHT/2))
+        if p in targets:
+            WIN.blit(me.zzaaap_animation_top_left[int(me.current_animation)],(0,0))
+        if r in targets:
+            WIN.blit(me.zzaaap_animation_bottom_right[int(me.current_animation)],(WIDTH/2,HEIGHT/2))
+        if f in targets:
+            WIN.blit(me.zzaaap_animation_top_right[int(me.current_animation)],(WIDTH/2,0))
+        me.current_animation+=0.50
+    if me.current_animation >= len(me.zzaaap_animation_bottom_left):
         me.is_doing_animation = False
-
-    if b.is_doing_animation:
-        WIN.blit(b.zzaaap_animation[int(b.current_animation)],(0,0))
-        b.current_animation+=0.25
-    if b.current_animation >= len(b.zzaaap_animation):
-        b.is_doing_animation = False
 
 def item_animation(user):
     if user.is_doing_animation:
