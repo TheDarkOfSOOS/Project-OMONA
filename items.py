@@ -41,9 +41,6 @@ class items():
             if user.is_doing_animation:
                     dw.item_animation(user)
             if not user.is_doing_animation:
-                self.items_usage[0][0] -= 1
-                if self.items_usage[0][0] == 0:
-                    self.items[0][0] = "-"
                 target.current_hp = target.hp
                 target.current_mna = target.mna
                 emotion.change_emotion(target, "neutrale")
@@ -56,9 +53,6 @@ class items():
             if user.is_doing_animation:
                     dw.item_animation(user)
             if not user.is_doing_animation:
-                self.items_usage[0][1] -= 1
-                if self.items_usage[0][1] == 0:
-                    self.items[0][1] = "-"
                 emotion.change_emotion(boss,"arrabbiato")
                 boss.current_defn -= action.buff_stats(boss.defn)
                 print(user.name+" ha fatto mangiare il Tiramisù al nemico. Non ha il mascarpone! Che schifo!!")
@@ -70,9 +64,6 @@ class items():
             if user.is_doing_animation:
                     dw.item_animation(user)
             if not user.is_doing_animation:
-                self.items_usage[0][2] -= 1
-                if self.items_usage[0][2] == 0:
-                    self.items[0][2] = "-"
                 for i in allies:
                     i.current_atk += action.buff_stats(i.current_atk)
                     i.current_defn += action.buff_stats(i.current_defn)
@@ -87,9 +78,6 @@ class items():
             if user.is_doing_animation:
                     dw.item_animation(user)
             if not user.is_doing_animation:
-                self.items_usage[1][0] -= 1
-                if self.items_usage[1][0] == 0:
-                    self.items[1][0] = "-"
                 user.current_atk += action.buff_stats(user.current_atk)
                 user.current_atk += action.buff_stats(user.current_atk)
                 print(user.name+" legge la laurea del Mago Elettrico e si sente spronato a raggiungere quell'obiettivo! Il suo attacco aumenta di molto.")
@@ -101,9 +89,6 @@ class items():
             if user.is_doing_animation:
                     dw.item_animation(user)
             if not user.is_doing_animation:
-                self.items_usage[1][1] -= 1
-                if self.items_usage[1][1] == 0:
-                    self.items[1][1] = "-"
                 if target.name == "Fabiano":
                     target.current_vel += action.buff_stats(target.current_vel)
                     target.current_vel += action.buff_stats(target.current_vel)
@@ -135,9 +120,7 @@ class items():
                     if result == 1:
                         print(user.name+" ha usato il ghiaccio su "+target.name+" e ora si sente molto meglio!")
                         user.text_action=str(user.name+" ha usato il ghiaccio su "+target.name+" e ora si sente molto meglio!")
-                        self.items_usage[1][2] -= 1
-                        if self.items_usage[1][2] == 0:
-                            self.items[1][2] = "-"
+        
                     elif result == 0:
                         print(user.name+" ha provato ad usare il ghiaccio su "+target.name+" ma non ha avuto effetto")
                         user.text_action=user.name+" ha provato ad usare il ghiaccio su "+target.name+" ma non ha avuto effetto"

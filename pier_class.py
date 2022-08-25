@@ -157,6 +157,25 @@ class Pier():
         self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation37.png"))
         self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation38.png"))
 
+        self.f_protettrice_animation = []
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation00.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation01.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation02.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation03.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation04.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation05.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation06.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation07.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation08.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation09.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation10.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation11.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation12.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation13.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation14.png"))
+        self.f_protettrice_animation.append(pygame.image.load("img/animations/f_protettrice/f_protettrice_animation15.png"))
+
+
         self.item_animation = []
         self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
         self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
@@ -260,8 +279,8 @@ class Pier():
         MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Fiamma protettrice":
             if self.is_doing_animation:
-                dw.sbracciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
+                dw.f_protettrice_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.50, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 print("Pier protegge gli alleati riducendo il danno ricevuto")

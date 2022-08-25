@@ -3,7 +3,7 @@ import pygame
 from data import *
 import action
 import change_emotion as emotion
-from data import RAUL_NEUTRAL
+from data import *
 import drawer as dw
 import youssef_class as y
 import pier_class as p

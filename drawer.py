@@ -365,6 +365,20 @@ def friend_icon(selected_friend):
         WIN.blit(friend_to_draw, ((BOX_HORIZONTAL_SPACING + BOX_WIDTH) - BOX_BORDER - CHARA_IMAGE_WIDTH, BOX_BORDER))
         #pygame.draw.rect(WIN, (255,25,0), pygame.Rect( (BOX_HORIZONTAL_SPACING + BOX_WIDTH) - BOX_BORDER - CHARA_WIDTH, BOX_BORDER, CHARA_WIDTH, CHARA_IMAGE_HEIGHT), BOX_BORDER)
 
+def dialogue_gui(img):
+    # Drawer box
+    pygame.draw.rect(WIN, (0,0,0), pygame.Rect( SPACING*2, HEIGHT-BOX_HEIGHT-SPACING, WIDTH-SPACING*4, BOX_HEIGHT ))
+    pygame.draw.rect(WIN, (255,255,255), pygame.Rect( SPACING*2, HEIGHT-BOX_HEIGHT-SPACING, WIDTH-SPACING*4, BOX_HEIGHT ), BOX_BORDER)
+    # Drawer profile
+    pygame.draw.rect(WIN, (255,255,255), pygame.Rect( SPACING*2, HEIGHT-BOX_HEIGHT-SPACING*2-CHARA_IMAGE_HEIGHT, CHARA_IMAGE_WIDTH, CHARA_IMAGE_HEIGHT ))
+    WIN.blit(pygame.transform.scale(img, (CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)), ( SPACING*2, HEIGHT-BOX_HEIGHT-SPACING*2-CHARA_IMAGE_HEIGHT, CHARA_IMAGE_WIDTH, CHARA_IMAGE_HEIGHT ))
+    pygame.draw.rect(WIN, (0,0,0), pygame.Rect( SPACING*2, HEIGHT-BOX_HEIGHT-SPACING*2-CHARA_IMAGE_HEIGHT, CHARA_IMAGE_WIDTH, CHARA_IMAGE_HEIGHT ), BOX_BORDER)
+
+def dialogue_bg(img):
+    if img is "None":
+        WIN.fill((0,0,100))
+    else:
+        WIN.blit(pygame.transform.scale(img,(WIDTH,HEIGHT)),(0,0))
 # Parte delle animazioni
 # ATTENZIONE: SETTARE VALORE VELOCITA' ANIMAZIONE A 0.25 PER ABILITA' PERSONAGGI
 # SE SI VUOLE CAMBIARE, NECESSARIO ANDARE NELLA STESSA ABILITA' SULLA CLASSE
@@ -373,7 +387,7 @@ def friend_icon(selected_friend):
 def sforbiciata_animation():
     if y.is_doing_animation:
         WIN.blit(y.sforbiciata_animation[int(y.current_animation)],(0,0))
-        y.current_animation+=0.25
+        y.current_animation+=0.70
     if y.current_animation >= len(y.sforbiciata_animation):
         y.is_doing_animation = False
 
@@ -389,6 +403,13 @@ def sbracciata_animation():
         WIN.blit(p.sbracciata_animation[int(p.current_animation)],(0,0))
         p.current_animation+=0.25
     if p.current_animation >= len(p.sbracciata_animation):
+        p.is_doing_animation = False
+
+def f_protettrice_animation():
+    if p.is_doing_animation:
+        WIN.blit(p.f_protettrice_animation [int(p.current_animation)],(0,0))
+        p.current_animation+=0.50
+    if p.current_animation >= len(p.f_protettrice_animation):
         p.is_doing_animation = False
 
 def sacrificio_y_animation():
@@ -437,7 +458,7 @@ def tempesta_animation():
 def pestata_animation():
     if f.is_doing_animation:
         WIN.blit(f.pestata_animation[int(f.current_animation)],(WIDTH/2.5,HEIGHT/24))
-        f.current_animation+=0.25
+        f.current_animation+=0.30
     if f.current_animation >= len(f.pestata_animation):
         f.is_doing_animation = False
 

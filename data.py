@@ -5,8 +5,8 @@ from pygame import mixer
 WIDTH, HEIGHT = 1280, 720
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
  
-#WIDTH, HEIGHT = 1920, 1080
-#WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
+WIDTH, HEIGHT = 1920, 1080
+WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 
 FPS = 30
 
@@ -90,6 +90,8 @@ FURIOSO_BUFF_DEFN = -30
 
 # Backgrounds
 
+STATS_EXPLANATION = pygame.image.load("img/background/stats_explanation.png")
+
 # Examples
 soundtrack = "./sounds/boss_ost.mp3"
 soundtrack_2 = "./sounds/boss_ost_1.mp3"
@@ -101,16 +103,17 @@ soundtrack_2 = "./sounds/boss_ost_1.mp3"
 
 # NON SI IMPORTA PIU' DA DATA PER IL COMBATTIMENTO, SOLTANTO PER BOX DIALOGHI (i friends vengono presi da qui)
 
-YOUSSEF = pygame.transform.scale(pygame.image.load("img/youssef/youssef_neutrale.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+# YOUSSEF = pygame.transform.scale(pygame.image.load("img/youssef/youssef_neutrale.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
-PIER_NEUTRAL = pygame.image.load("img/pier/pier_neutral.png")
+# PIER = pygame.image.load("img/pier/pier_neutrale.png")
 #pygame.transform.scale(pygame.image.load("img/pier/pier_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
-RAUL_NEUTRAL = pygame.image.load("img/raul/raul_neutral.png")
+# RAUL = pygame.image.load("img/raul/raul_neutrale.png")
 #pygame.transform.scale(pygame.image.load("img/raul/raul_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
-FABIANO_NEUTRAL = pygame.image.load("img/fabiano/fabiano_neutral.png")
-#pygame.transform.scale(pygame.image.load("img/fabiano/fabiano_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+FABIANO = pygame.transform.scale(pygame.image.load("img/fabiano/fabiano_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+
+NOTHING = pygame.image.load("img/nothing.png")
 
 POL = pygame.transform.scale(pygame.image.load("img/friends/pol.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 BORIN = pygame.transform.scale(pygame.image.load("img/friends/borin.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))

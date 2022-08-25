@@ -17,7 +17,7 @@ class Fabiano():
 
         self.name = "Fabiano"
 
-        self.img = {"Profilo":pygame.transform.scale(FABIANO_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+        self.img = {"Profilo":pygame.transform.scale(FABIANO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         self.position_in_fight="right-up"
 
@@ -195,7 +195,7 @@ class Fabiano():
             if self.is_doing_animation:
                 dw.pestata_animation()
                 #print(round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
-                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
+                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.current_eva):
@@ -212,7 +212,7 @@ class Fabiano():
         if self.sel["has_cursor_on"]=="Benevento":
             if self.is_doing_animation:
                 dw.pestata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
+                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
                 for allies in [y.y,p.p,r.r,self]:
@@ -225,7 +225,7 @@ class Fabiano():
         if self.sel["has_cursor_on"]=="Malevento":
             if self.is_doing_animation:
                 dw.pestata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
+                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
                 boss.current_defn-=action.buff_stats(boss.defn)
@@ -237,7 +237,7 @@ class Fabiano():
         if self.sel["has_cursor_on"]=="Servizietto":
             if self.is_doing_animation:
                 dw.pestata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
+                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
                 is_getting_hurt = rng.randrange(0,2)
@@ -258,7 +258,7 @@ class Fabiano():
             if target.is_dead:
                 if self.is_doing_animation:
                     dw.pestata_animation()
-                    self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
+                    self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
                 if not self.is_doing_animation:
                     # result ==> 0 ==> non era morto quindi non e' stato rianimato

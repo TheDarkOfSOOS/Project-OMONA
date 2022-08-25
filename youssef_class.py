@@ -64,21 +64,29 @@ class Youssef():
         self.emotional_levels = {"Felicità":2,"Rabbia":2,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
 
         self.sforbiciata_animation = []
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation02.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation03.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation04.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation05.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation06.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation07.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation08.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation09.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation10.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation11.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation00.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation01.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation02.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation03.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation04.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation05.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation06.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation07.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation08.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation09.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation10.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation11.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation12.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation13.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation14.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation15.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation16.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation17.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation18.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation19.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation20.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation21.png"))
+        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation22.png"))
 
         self.pallonata_animation = []
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation00.png"))
@@ -223,7 +231,7 @@ class Youssef():
             self.damage_dealed = action.damage_deal(y.current_atk,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
+                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.current_eva):

@@ -12,10 +12,10 @@ import action
  
 pygame.init()
 
-M_E_NEUTRALE = pygame.image.load("img/boss.jpeg")
-M_E_ARRABBIATO = pygame.image.load("img/boss_angry.jpg")
-M_E_TRISTE = pygame.image.load("img/boss_sad.jpg")
-M_E_FELICE = pygame.image.load("img/boss_happy.jpg")
+M_E_NEUTRALE = pygame.image.load("img/mago_elettrico/mago_elettrico_neutrale.png")
+M_E_ARRABBIATO = pygame.image.load("img/mago_elettrico/mago_elettrico_arrabbiato.png")
+M_E_TRISTE = pygame.image.load("img/mago_elettrico/mago_elettrico_triste.png")
+M_E_GIOIOSO = pygame.image.load("img/mago_elettrico/mago_elettrico_gioioso.png")
 
 
 class Mago_Elettrico():
@@ -232,7 +232,7 @@ class Mago_Elettrico():
             self.img = pygame.transform.scale(M_E_NEUTRALE,(WIDTH,HEIGHT))
 
         elif self.current_emotion == "gioioso":
-            self.img = pygame.transform.scale(M_E_FELICE,(WIDTH,HEIGHT))
+            self.img = pygame.transform.scale(M_E_GIOIOSO,(WIDTH,HEIGHT))
 
         elif self.current_emotion == "arrabbiato":
             self.img = pygame.transform.scale(M_E_ARRABBIATO,(WIDTH,HEIGHT))
