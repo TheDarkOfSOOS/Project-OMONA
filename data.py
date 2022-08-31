@@ -12,11 +12,19 @@ FPS = 30
 
 X, Y = 0, 1
 
+# Colors
+
+ABSOLUTE_BLACK = (0,0,0)
 WHITE = (255,255,255)
-BLACK = (0,0,0)
-GREEN = (0,255,0)
-BLUE = (0,0,255)
-RED = (255,0,0)
+BLACK = (18,23,61)
+MANA_INSIDE = (53,74,178)
+MANA_BORDER = (29,26,89)
+HEALTH_INSIDE = (221,55,69)
+HEALTH_BORDER = (114,28,47)
+BACKGROUND_CHARA_CARDS = (162,147,196)
+SELECTION_COLOR = (255,105,90)
+
+BOSS_WIDTHxHEIGHT = (1480,720)
 
 
 # Game dimensions:
@@ -42,55 +50,59 @@ ENEMY_HEALTH_BAR_HEIGHT = BOX_HEIGHT/4
 ULTIMATE_BOX_WIDTH = CHARA_WIDTH-(SPACING*2)
 ULTIMATE_BOX_HEIGTH = CHARA_WIDTH-(SPACING*2)
 
-BOX_LEFT_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*1*10/12, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT) )
-BOX_LEFT_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*1*10/12, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT) )
-BOX_CENTER_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2*11/12, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT) )
-BOX_CENTER_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2*11/12, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT) )
-BOX_RIGHT_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*3, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT) )
-BOX_RIGHT_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*3, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT) )
+BOX_LEFT_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*1*2.5/12, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT)-(SPACING/2) )
+BOX_LEFT_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*1*2.5/12, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT)-(SPACING/2)  )
+BOX_CENTER_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2*9/12, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT)-(SPACING/2)  )
+BOX_CENTER_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2*9/12, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT)-(SPACING/2)  )
+BOX_RIGHT_UP = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2.6, (BOX_HEIGHT/3)*1+(HEIGHT-BOX_HEIGHT)-(SPACING/2)  )
+BOX_RIGHT_DOWN = ( BOX_HORIZONTAL_SPACING+(BOX_WIDTH/4)*2.6, (BOX_HEIGHT/3)*2+(HEIGHT-BOX_HEIGHT)-(SPACING/2)  )
+
+FONT_SIZE = int(WIDTH/60) # 32
+MY_FONT = "font/basis33.ttf"
 
 CHOICE_LOCATIONS = [[BOX_LEFT_UP,BOX_CENTER_UP,BOX_RIGHT_UP],[BOX_LEFT_DOWN,BOX_CENTER_DOWN,BOX_RIGHT_DOWN]]
 
 # Buff/Debuffs Emotions
 # Triste
-TRISTE_BUFF_DEFN = 20
-TRISTE_BUFF_EVA = -10
+TRISTE_BUFF_DEFN = 40
+TRISTE_BUFF_EVA = -20
 
-DEPRESSO_BUFF_DEFN = 40
-DEPRESSO_BUFF_EVA = -20
+DEPRESSO_BUFF_DEFN = 60
+DEPRESSO_BUFF_EVA = -40
 
-DISPERATO_BUFF_DEFN = 60
-DISPERATO_BUFF_EVA = -30
+DISPERATO_BUFF_DEFN = 80
+DISPERATO_BUFF_EVA = -60
 
 
 # Gioioso
-GIOIOSO_BUFF_VEL = 10
-GIOIOSO_BUFF_EVA = 10
-GIOIOSO_BUFF_ATK = -10
+GIOIOSO_BUFF_VEL = 20
+GIOIOSO_BUFF_EVA = 20
+GIOIOSO_BUFF_ATK = -20
 
-FELICE_BUFF_VEL = 20
-FELICE_BUFF_EVA = 20
-FELICE_BUFF_ATK = -20
+FELICE_BUFF_VEL = 30
+FELICE_BUFF_EVA = 30
+FELICE_BUFF_ATK = -40
 
-EUFORICO_BUFF_VEL = 30
-EUFORICO_BUFF_EVA = 30
-EUFORICO_BUFF_ATK = -30
+EUFORICO_BUFF_VEL = 40
+EUFORICO_BUFF_EVA = 40
+EUFORICO_BUFF_ATK = -60
 
 # Arrabbiato
-ARRABBIATO_BUFF_ATK = 20
-ARRABBIATO_BUFF_DEFN = -10
+ARRABBIATO_BUFF_ATK = 40
+ARRABBIATO_BUFF_DEFN = -20
 
-IRACONDO_BUFF_ATK = 40
-IRACONDO_BUFF_DEFN = -20
+IRACONDO_BUFF_ATK = 60
+IRACONDO_BUFF_DEFN = -40
 
-FURIOSO_BUFF_ATK = 60
-FURIOSO_BUFF_DEFN = -30
+FURIOSO_BUFF_ATK = 80
+FURIOSO_BUFF_DEFN = -60
 
 # Sounds
 
 # Backgrounds
 
 STATS_EXPLANATION = pygame.image.load("img/background/stats_explanation.png")
+EMOTION_EXPLANATION = pygame.image.load("img/background/emotion_explanation.png")
 
 # Examples
 soundtrack = "./sounds/boss_ost.mp3"
@@ -103,18 +115,12 @@ soundtrack_2 = "./sounds/boss_ost_1.mp3"
 
 # NON SI IMPORTA PIU' DA DATA PER IL COMBATTIMENTO, SOLTANTO PER BOX DIALOGHI (i friends vengono presi da qui)
 
-# YOUSSEF = pygame.transform.scale(pygame.image.load("img/youssef/youssef_neutrale.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-
-# PIER = pygame.image.load("img/pier/pier_neutrale.png")
-#pygame.transform.scale(pygame.image.load("img/pier/pier_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-
-# RAUL = pygame.image.load("img/raul/raul_neutrale.png")
-#pygame.transform.scale(pygame.image.load("img/raul/raul_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-
-FABIANO = pygame.transform.scale(pygame.image.load("img/fabiano/fabiano_neutral.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-
 NOTHING = pygame.image.load("img/nothing.png")
 
+YOUSSEF = pygame.transform.scale(pygame.image.load("img/friends/youssef.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+PIER = pygame.transform.scale(pygame.image.load("img/friends/pier.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+RAUL = pygame.transform.scale(pygame.image.load("img/friends/raul.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+FABIANO = pygame.transform.scale(pygame.image.load("img/friends/fabiano.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 POL = pygame.transform.scale(pygame.image.load("img/friends/pol.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 BORIN = pygame.transform.scale(pygame.image.load("img/friends/borin.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 ANASTASIA = pygame.transform.scale(pygame.image.load("img/friends/anastasia.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
@@ -134,6 +140,7 @@ TRENTIN = pygame.transform.scale(pygame.image.load("img/friends/trentin.png"),(C
 
 
 NEUTRAL_IMG = pygame.image.load("img/neutral_img.png")
+DEAD_IMG = pygame.image.load("img/dead_img.png")
 JOY_IMG = pygame.image.load("img/joy_img.png")
 HAPPY_IMG = pygame.image.load("img/happy_img.png")
 EUFORIC_IMG = pygame.image.load("img/euforic_img.png")
@@ -143,5 +150,3 @@ DESPAIR_IMG = pygame.image.load("img/despair_img.png")
 MAD_IMG = pygame.image.load("img/mad_img.png")
 RAGE_IMG = pygame.image.load("img/rage_img.png")
 FURIOUS_IMG = pygame.image.load("img/furious_img.png")
-
-BOSS = pygame.image.load("img/boss.png")

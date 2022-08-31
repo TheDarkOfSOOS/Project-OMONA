@@ -12,12 +12,20 @@ from items import items
 
 pygame.init()
 
+FABIANO_NEUTRALE = pygame.image.load("img/fabiano/fabiano_neutrale.png")
+FABIANO_GIOIOSO = pygame.image.load("img/fabiano/fabiano_gioioso.png")
+FABIANO_FELICE = pygame.image.load("img/fabiano/fabiano_felice.png")
+FABIANO_EUFORICO = pygame.image.load("img/fabiano/fabiano_euforico.png")
+FABIANO_TRISTE = pygame.image.load("img/fabiano/fabiano_triste.png")
+FABIANO_DEPRESSO = pygame.image.load("img/fabiano/fabiano_depresso.png")
+FABIANO_ARRABBIATO = pygame.image.load("img/fabiano/fabiano_arrabbiato.png")
+
 class Fabiano():
     def __init__(self):
 
         self.name = "Fabiano"
 
-        self.img = {"Profilo":pygame.transform.scale(FABIANO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
+        self.img = {"Profilo":pygame.transform.scale(FABIANO_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
         self.position_in_fight="right-up"
 
@@ -99,28 +107,31 @@ class Fabiano():
 
         self.current_animation = 0
 
+        self.is_buffed = -1
+        self.is_debuffed = -1
+
         self.is_doing_animation = False
 
         self.text_action=""
 
         self.is_showing_text_outputs = False
 
-        self.skills_template = [["Biscotto","Benevento","Servizietto"],["Pestata","Malevento","Soffio della morte"]]
+        self.skills_template = [["Biscotto","Benevento","Empatia"],["Pestata","Malevento","Soffio della morte"]]
         self.skills = []
 
         self.description_template = {
             # Skills
             "Biscotto":"Manda un biscotto ad un alleato. Cura i suoi HP.",
             "Pestata":"Fa danni in base alla sua velocità.",
-            "Benevento":"Aumenta la velocità di tutti per 3 turni.",
-            "Malevento":"Diminuisce la difesa del nemico per 3 turni.",
-            "Servizietto":"Asseconda le gioie altrui. Rende gioioso al massimo un amico o nemico. Perde vita e qualcos’altro…",
+            "Benevento":"Aumenta la velocità di tutti.",
+            "Malevento":"Diminuisce la difesa del nemico.",
+            "Empatia":"Si riposa e osserva il nemico provando capire i suoi problemi. Ne discute con lui rendendolo gioioso, gli aumenta l'attacco e recupera 30% di mana per aver fatto una buona azione (e anche per aver fatto un emerito nulla). Agisce per ultimo.",
             "Soffio della morte":"Riporta in vita un alleato con metà dei suoi HP.",
             # Friends
             "Cappe":"Indica un alleato che subirà l’attacco del nemico. Attacca per primo.",
             "Diego": 'Rende gioiosi(??) tutti gli alleati al massimo, ma diminuisce la loro difesa.',
             "Trentin": "Osserva il nemico e dirà la sua prossima mossa per 2 turni.",
-            "Pastorello (spirito)": "Incita gli alleati a fare del loro meglio. Aumenta la difesa di tutti per 3 turni."
+            "Pastorello (spirito)": "Incita gli alleati a fare del loro meglio. Aumenta la difesa di tutti."
         }
         self.description = {}
 
@@ -135,42 +146,51 @@ class Fabiano():
         self.friends_template=[["Cappe","Trentin","-"],["Diego","Pastorello (spirito)","-"]]
         self.friends = []
 
-        self.sel = {"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
+        self.sel = {"is_choosing":False,"is_selecting":"Skills","has_done_first_selection":False,"has_cursor_on":"Skills","is_choosing_target":False}
 
         self.MNA_CONSUMPTION_SKILLS = {
-            "Biscotto":40,
-            "Pestata":55,
-            "Benevento":25,
-            "Malevento":30,
-            "Servizietto":20,
-            "Soffio della morte":50,
+            "Biscotto":60,
+            "Pestata":30,
+            "Benevento":50,
+            "Malevento":60,
+            "Empatia":0,
+            "Soffio della morte":250,
         }
 
         self.allies_selections=["Biscotto","Soffio della morte","Cappe","Acqua di Destiny", "Parmigianino", "Ghiaccio dei Bidelli"]
-        self.allies_enemy_selections=["Servizietto"]
+        self.allies_enemy_selections=[]
 
     def change_img(self):
-        if self.current_emotion == "neutrale":
-            #self.img["Profilo"] = pygame.transform.scale(CHARA_NEUTRAL,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = NEUTRAL_IMG
+        if self.is_dead:
+            self.img["Emozione"] = DEAD_IMG
+        else:
+            if self.current_emotion == "neutrale":
+                self.img["Profilo"] = pygame.transform.scale(FABIANO_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = NEUTRAL_IMG
 
-        elif self.current_emotion == "gioioso":
-            self.img["Emozione"] = JOY_IMG
+            elif self.current_emotion == "gioioso":
+                self.img["Profilo"] = pygame.transform.scale(FABIANO_GIOIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = JOY_IMG
 
-        elif self.current_emotion == "felice":
-            self.img["Emozione"] = HAPPY_IMG
+            elif self.current_emotion == "felice":
+                self.img["Profilo"] = pygame.transform.scale(FABIANO_FELICE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = HAPPY_IMG
 
-        elif self.current_emotion == "euforico":
-            self.img["Emozione"] = EUFORIC_IMG
+            elif self.current_emotion == "euforico":
+                self.img["Profilo"] = pygame.transform.scale(FABIANO_EUFORICO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = EUFORIC_IMG
 
-        elif self.current_emotion == "triste":
-            self.img["Emozione"] = SAD_IMG
+            elif self.current_emotion == "triste":
+                self.img["Profilo"] = pygame.transform.scale(FABIANO_TRISTE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = SAD_IMG
 
-        elif self.current_emotion == "depresso":
-            self.img["Emozione"] = DEPRESSED_IMG
+            elif self.current_emotion == "depresso":
+                self.img["Profilo"] = pygame.transform.scale(FABIANO_DEPRESSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = DEPRESSED_IMG
 
-        elif self.current_emotion == "arrabbiato":
-            self.img["Emozione"] = MAD_IMG
+            elif self.current_emotion == "arrabbiato":
+                self.img["Profilo"] = pygame.transform.scale(FABIANO_ARRABBIATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = MAD_IMG
             
     def do_something(self, boss):
         MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
@@ -216,7 +236,7 @@ class Fabiano():
 
             if not self.is_doing_animation:
                 for allies in [y.y,p.p,r.r,self]:
-                    allies.current_vel+=action.buff_stats(allies.vel)
+                    allies.current_vel+=action.buff_stats(allies.vel,allies,"buff")
                 print("Fabiano ha aumentato la velocità di tutti!")
                 self.text_action="Fabiano ha aumentato la velocità di tutti!"
                 self.current_animation = 0
@@ -228,27 +248,22 @@ class Fabiano():
                 self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
-                boss.current_defn-=action.buff_stats(boss.defn)
+                boss.current_defn -= action.buff_stats(boss.defn, allies, "debuff")
                 print("Fabiano ha diminuito la difesa del nemico!")
                 self.text_action="Fabiano ha diminuito la difesa del nemico!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if self.sel["has_cursor_on"]=="Servizietto":
+        if self.sel["has_cursor_on"]=="Empatia":
             if self.is_doing_animation:
                 dw.pestata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
-                is_getting_hurt = rng.randrange(0,2)
-                if is_getting_hurt == 1:
-                    self.current_hp-=int(self.hp/10)
-                    if self.current_hp <= 0:
-                        self.current_hp = 1
-
-                emotion.change_emotion(self.sel["is_choosing_target"], "euforico")
-                print("Fabiano ha assecondato le richieste di ", self.sel["is_choosing_target"].name)
-                self.text_action="Fabiano ha assecondato le richieste di "+ str(self.sel["is_choosing_target"].name)
+                emotion.change_emotion(boss, "gioioso")
+                boss.current_atk += action.buff_stats(boss.current_atk,boss,"buff")
+                print("Fabiano ha cercato di capire il nemico, rendendolo felice e aumentandogli l'attacco. Nonostante questo ottiene parte di mana per aver fatto una buona azione.")
+                self.text_action="Fabiano ha cercato di capire il nemico, rendendolo felice e aumentandogli l'attacco. Nonostante questo ottiene parte di mana per aver fatto una buona azione."
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
@@ -301,7 +316,7 @@ class Fabiano():
             if not self.is_doing_animation:
                 self.friends[1][0] = "-"
                 for allies in [y.y,p.p,r.r,self]:
-                    allies.current_defn-=action.buff_stats(allies.defn)
+                    allies.current_defn-=action.buff_stats(allies.defn, allies, "debuff")
                     emotion.change_emotion(allies, "euforico")
                 print("Diego ha dato quella che sembra camomilla. Come fanno ad essere scatenati ora?")
                 self.text_action="Diego ha dato quella che sembra camomilla. Come fanno ad essere scatenati ora?"
@@ -328,13 +343,13 @@ class Fabiano():
 
             if not self.is_doing_animation:
                 for allies in [y.y,p.p,r.r,self]:
-                    allies.current_defn+=action.buff_stats(allies.defn)
+                    allies.current_defn+=action.buff_stats(allies.defn,allies, "buff")
                 print("Pastorello con il megafono ha incitato tutti aumentando la loro determinazione!")
                 self.text_action="Pastorello con il megafono ha incitato tutti aumentando la loro determinazione!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
         
-        if self.sel["has_cursor_on"]=="recover":
+        if self.sel["has_cursor_on"]=="Recover":
             MNA_CONSUMPTION = -(self.mna/2)
             if self.is_doing_animation:
                 dw.pestata_animation()
@@ -346,7 +361,7 @@ class Fabiano():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if self.sel["is_selecting"]=="items":
+        if self.sel["is_selecting"]=="Items":
             allies = [self,p.p,r.r,y.y]
             items.use_item(self, boss, self.sel["is_choosing_target"], allies)
 

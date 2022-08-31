@@ -1,4 +1,4 @@
-import pygame
+'''import pygame
 
 from data import *
 import drawer as dw
@@ -115,4 +115,4 @@ class Boss():
                 self.damage_dealed = 0
                 self.count_removed_bar = 0
 
-b = Boss()
+b = Boss()'''

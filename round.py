@@ -4,6 +4,7 @@ from pygame import mixer
 
 import turn
 import drawer as dw
+import action
 import youssef_class as youssef
 import pier_class as pier
 import raul_class as raul
@@ -21,8 +22,6 @@ clock = pygame.time.Clock()
 
 # Round contiene tutte le azioni che si svolgono in un round
 
-
-# TEMPORANEAMENTE AGISCE DA MAIN
 
 run = True
 
@@ -53,6 +52,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
     # Fai queste cose all'inizio del round
     if new_turn_has_started:
         # Non ci interessa sapere cosa fosse successo prima
+        action.dmg_reduction.is_active = False
         returning = False
         # Cambia parametri fuori dalla classe
         for chara in [youssef.y, pier.p, raul.r, fabiano.f]:
@@ -100,6 +100,16 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
     #print(pier.p.current_vel)
     #print(raul.r.current_vel)
     #print(fabiano.f.current_vel)
+
+    for each in [youssef.y,pier.p,raul.r,fabiano.f,boss]:
+        if not each.is_dead:
+            if each.is_buffed >= 0:
+                dw.buff_stats_animation(each)
+                input = "null"
+            elif each.is_debuffed >= 0:
+                dw.debuff_stats_animation(each)
+                input = "null"
+
 
     # Turno pg1
     if youssef.y.sel["is_choosing"]==True:
@@ -219,6 +229,10 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 list_speed_ordered.pop(list_speed_ordered.index(youssef.y))
                 list_speed_ordered.insert(len(list_speed_ordered), youssef.y)
 
+            if youssef.y.sel["has_cursor_on"]=="Delusione":
+                list_speed_ordered.pop(list_speed_ordered.index(youssef.y))
+                list_speed_ordered.insert(0, youssef.y)
+
             if pier.p.sel["has_cursor_on"]=="Fiamma protettrice":
                 list_speed_ordered.pop(list_speed_ordered.index(pier.p))
                 list_speed_ordered.insert(0, pier.p)
@@ -226,6 +240,10 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             if pier.p.sel["has_cursor_on"]=='"Spessanza"':
                 list_speed_ordered.pop(list_speed_ordered.index(pier.p))
                 list_speed_ordered.insert(0, pier.p)
+
+            if fabiano.f.sel["has_cursor_on"]=="Empatia":
+                list_speed_ordered.pop(list_speed_ordered.index(fabiano.f))
+                list_speed_ordered.insert(len(list_speed_ordered), fabiano.f)
 
             if fabiano.f.sel["has_cursor_on"]=="Cappe":
                 list_speed_ordered.pop(list_speed_ordered.index(fabiano.f))
@@ -260,7 +278,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 input = "null"
 
         if list_speed_ordered[0].is_showing_text_outputs and (not list_speed_ordered[0] in dead_list) and (not list_speed_ordered[0].is_dead):
-            dw.text_action(list_speed_ordered[0].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+            dw.text_action(list_speed_ordered[0].text_action, FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[0].remove_bar(boss)
         #print(list_speed_ordered[0].is_removing_bar)
 
@@ -286,7 +304,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 input = "null"
 
         if list_speed_ordered[1].is_showing_text_outputs and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
-            dw.text_action(list_speed_ordered[1].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+            dw.text_action(list_speed_ordered[1].text_action, FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[1].remove_bar(boss)
 
         if input=="return" and (not list_speed_ordered[1].is_removing_bar and list_speed_ordered[1].is_showing_text_outputs) and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
@@ -311,7 +329,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 input = "null"
 
         if list_speed_ordered[2].is_showing_text_outputs and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
-            dw.text_action(list_speed_ordered[2].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+            dw.text_action(list_speed_ordered[2].text_action, FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[2].remove_bar(boss)
 
         if input=="return" and (not list_speed_ordered[2].is_removing_bar and list_speed_ordered[2].is_showing_text_outputs) and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
@@ -339,7 +357,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 input = "null"
 
         if list_speed_ordered[3].is_showing_text_outputs and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
-            dw.text_action(list_speed_ordered[3].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+            dw.text_action(list_speed_ordered[3].text_action, FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[3].remove_bar(boss)
 
         if input=="return" and (not list_speed_ordered[3].is_removing_bar and list_speed_ordered[3].is_showing_text_outputs) and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
@@ -367,7 +385,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 input = "null"
 
         if list_speed_ordered[4].is_showing_text_outputs and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
-            dw.text_action(list_speed_ordered[4].text_action, 16, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+            dw.text_action(list_speed_ordered[4].text_action, FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             list_speed_ordered[4].remove_bar(boss)
 
         if input=="return" and (not list_speed_ordered[4].is_removing_bar and list_speed_ordered[4].is_showing_text_outputs) and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
@@ -424,7 +442,7 @@ def reset_charas():
 
         chara.current_emotion = "neutrale"
 
-        chara.sel = {"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
+        chara.sel = {"is_choosing":False,"is_selecting":"Skills","has_done_first_selection":False,"has_cursor_on":"Skills","is_choosing_target":False}
 
         # Specifici valori in base ai personaggi
         if chara == youssef.y:
@@ -739,3 +757,14 @@ def set_charas(stage):
                 title_keys[4]:items.items_title_template.get(title_keys[4]),
                 title_keys[5]:items.items_title_template.get(title_keys[5])
             }
+
+def team_lost():
+    count = 0
+    for chara in [youssef.y,pier.p,raul.r,fabiano.f]:
+        if chara.is_dead:
+            count += 1
+    if count == 4:
+        count = True
+    else:
+        count = False
+    return count

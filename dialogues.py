@@ -1,4 +1,3 @@
-from turtle import back
 import pygame
 from pygame.locals import *
 from pygame import mixer
@@ -7,6 +6,7 @@ from youssef_class import *
 from pier_class import *
 from raul_class import *
 from fabiano_class import *
+import sound
 
 import drawer as dw
 from data import *
@@ -40,28 +40,29 @@ class Dialogues():
             ["Raul","Mentre io ho abilità offensive, Pier usa abilità perlopiù difensive e di supporto. Youssef è un misto moderato tra offensive e difensive, mentre Fabiano sviluppa buone abilità di supporto."],
             ["Fabiano","I friends possono essere utili perché offrono delle abilità utilizzabili una singola volta, ma sanno liberarti da cattive situazioni."],
             ["Raul","Gli items non servono spiegarli. Fai attenzione che l'inventario è condiviso e gli item sono limitati."],
-            ["Fabiano","Infine i personaggi hanno accesso ad una “recover”, che permetterà di ripristinare parte del mana."],
+            ["Fabiano","Infine i personaggi hanno accesso a “recover”, una “abilità” di recupero che permetterà di ripristinare parte del mana."],
             ["Raul","Fabiano! Prima dobbiamo spiegargli le statistiche!"],
             ["Fabiano","Giusto! Le statistiche sono dei “punti” che indicano quanto un personaggio sia forte in qualcosa."],
             ["Raul","Per esempio io ho tanto attacco ma ho poca velocità. Mentre Pier ha tanta difesa ma poca evasione."],
-            ["",""],
+            ["",""], # 14
             ["Fabiano","Abbiamo cercato di rendere il gioco più accessibile possibile, ogni cosa ha una sua descrizione con il suo effetto, basta leggere."],
             ["Raul","Detto questo, noi vi lasciamo al resto."],
             ["Fabiano","Non ti sei dimenticato tipo la cosa che influenzerà di più il gioco?"],
             ["Raul","Cosa? Non dovrebbe essere rimasto altro."],
-            ["Fabiano","Arrabbiato… Triste… ti dice qualcosa?"],
+            ["Fabiano","Arrabbiato... Triste... ti dice qualcosa?"],
             ["Raul","Vero! Ogni personaggio durante il combattimento può provare emozioni differenti che vengono causati da varie abilità, friends o item."],
-            ["Fabiano","Le emozioni aumentano determinate statistiche, ma diminuiscono altre. Inoltre fungono da \"tipo dinamico\""],
+            ["Fabiano","Le emozioni aumentano determinate statistiche, ma diminuiscono altre. Inoltre fungono da \"tipo dinamico\"."],
             ["Raul","Fabiano, che cosa stai dicendo?"],
-            ["Fabiano","È un termine che ho pensato io. Le emozioni condividono il concetto Pokémon: Erba batte acqua che batte fuoco che batte erba."],
-            ["Raul","Ahh, quello intendi? Allora si. I friends possono tornare utili certe volte per manipolare i tipi, se avete difficoltà, provate a leggere qualche effetto."],
+            ["Fabiano","È un termine che ho pensato io. Le emozioni continuano a cambiare durante il turno, per questo le chiamo dinamiche. Mentre le chiamo tipo perché condividono il famoso concetto Pokémon: Erba batte acqua che batte fuoco che batte erba."],
+            ["",""], # 24
+            ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
             ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
             ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
-            ["Fabiano","Va bene… (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+            ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
             ["",""]
            ]
-           image_of_dialogue_0 = [NOTHING,FABIANO,RAUL_NEUTRALE]
-           background_0 = ["None",STATS_EXPLANATION]
+           image_of_dialogue_0 = [NOTHING,FABIANO,RAUL]
+           background_0 = ["None",STATS_EXPLANATION, EMOTION_EXPLANATION]
         
         self.text_of_dialogue = text_of_dialogue_0
         self.image_of_dialogue = image_of_dialogue_0
@@ -75,31 +76,35 @@ class Dialogues():
         # Disegno GUI
         if self.show_gui:
             dw.dialogue_gui(self.image_of_dialogue[self.image_visualized])
-
-        dw.title_and_text_action(str(self.text_of_dialogue[self.text_visualized][0]),(WHITE),self.text_of_dialogue[self.text_visualized][1], 18, (SPACING*3, HEIGHT-BOX_HEIGHT), WIDTH-SPACING*5)
-
-        if input == "return":
-            self.text_visualized += 1
-
-            if self.number_of_dialogue == 0:
-                if self.text_of_dialogue[self.text_visualized][0] == "Fabiano":
-                    self.image_visualized = 1
-                elif self.text_of_dialogue[self.text_visualized][0] == "Raul":
-                    self.image_visualized = 2
-                else:
-                    self.image_visualized = 0
-                
-                if self.text_visualized == 14:
-                    self.background_visualized = 1
-                    self.show_gui = False
-                else:
-                    self.background_visualized = 0
-                    self.show_gui = True
-                
-        if self.text_visualized == len(self.text_of_dialogue)-1:
-            return True
-
         
+        if dw.dialogue_box.current_width == dw.dialogue_box.desired_width:
+            dw.title_and_text_action(str(self.text_of_dialogue[self.text_visualized][0]),(WHITE),self.text_of_dialogue[self.text_visualized][1], FONT_SIZE, (SPACING*3, HEIGHT-BOX_HEIGHT), WIDTH-SPACING*5)
+
+            if input == "return":
+                pygame.mixer.Sound.play(sound.CONFIRM)
+                self.text_visualized += 1
+                dw.dialogue_box.in_closure = True
+                
+                if self.number_of_dialogue == 0:
+                    if self.text_of_dialogue[self.text_visualized][0] == "Fabiano":
+                        self.image_visualized = 1
+                    elif self.text_of_dialogue[self.text_visualized][0] == "Raul":
+                        self.image_visualized = 2
+                    else:
+                        self.image_visualized = 0
+                    
+                    if self.text_visualized == 14:
+                        self.background_visualized = 1
+                        self.show_gui = False
+                    elif self.text_visualized == 24:
+                        self.background_visualized = 2
+                        self.show_gui = False
+                    else:
+                        self.background_visualized = 0
+                        self.show_gui = True
+                    
+            if self.text_visualized == len(self.text_of_dialogue)-1:
+                return True
         
 
 

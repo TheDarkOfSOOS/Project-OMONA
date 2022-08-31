@@ -125,6 +125,9 @@ class Raul():
 
         self.current_animation = 0
 
+        self.is_buffed = -1
+        self.is_debuffed = -1
+
         self.is_doing_animation = False
 
         self.text_action=""
@@ -139,13 +142,13 @@ class Raul():
             "Saetta trascendente":"Fulmini scagliati contro il nemico che aumentano l’emotività di Raul. Passa all’intensità successiva dell’emozione che sta provando.",
             "Tempesta":"Scatena una tempesta, che rende tristi tutti gli alleati e causa lievi danni al nemico.",
             "Bastonata":"Colpisce con la sua staffa elettrica. Ottiene un quarto del mana suo totale.",
-            "Pettoinfuori":"Si pompa, aumentando l’attacco per 3 turni.",
+            "Pettoinfuori":"Si pompa, aumentando l’attacco.",
             "Bel tempo":"Crea un arcobaleno con la pioggia delle tempeste e la luce delle scintille. Fa diventare gioioso un alleato o nemico.",
             "Tensione esplosiva":"Scarica dal suo corpo una forte elettricità. Diventa arrabbiato e causa danni a tutti: alleati, sé stesso e gravi danni al nemico.",
             # Friends
             "Damonte": "Aumenta la velocità di tutti gli alleati di tanto.",
             "Noce": "Esegue un headshot al nemico. Non tiene conto della difesa del nemico.",
-            "Cristian":"Diminuisce l’evasione del nemico per 3 turni.",
+            "Cristian":"Diminuisce l’evasione del nemico.",
             "Mohammed (spirito)": "Usa l’unica arma in grado di ucciderlo. Rende tutti gli alleati tristi e ne aumenta ulteriormente la difesa."
         }
         self.description = {}
@@ -161,48 +164,51 @@ class Raul():
         self.friends_template = [["Damonte","Cristian","-"],["Noce","Mohammed (spirito)","-"]]
         self.friends = []
 
-        self.sel={"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
+        self.sel={"is_choosing":False,"is_selecting":"Skills","has_done_first_selection":False,"has_cursor_on":"Skills","is_choosing_target":False}
 
         self.MNA_CONSUMPTION_SKILLS = {
-            "Saetta trascendente":25,
-            "Tempesta":20,
+            "Saetta trascendente":55,
+            "Tempesta":66,
             "Bastonata":0,
-            "Pettoinfuori":10,
+            "Pettoinfuori":36,
             "Bel tempo":10,
-            "Tensione esplosiva":50,
+            "Tensione esplosiva":300,
         }
 
         self.allies_selections=["Acqua di Destiny", "Parmigianino", "Ghiaccio dei Bidelli"]
         self.allies_enemy_selections=["Bel tempo"]
 
     def change_img(self):
-        if self.current_emotion == "neutrale":
-            self.img["Profilo"] = pygame.transform.scale(RAUL_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = NEUTRAL_IMG
+        if self.is_dead:
+            self.img["Emozione"] = DEAD_IMG
+        else:
+            if self.current_emotion == "neutrale":
+                self.img["Profilo"] = pygame.transform.scale(RAUL_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = NEUTRAL_IMG
 
-        elif self.current_emotion == "gioioso":
-            self.img["Profilo"] = pygame.transform.scale(RAUL_GIOIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = JOY_IMG
+            elif self.current_emotion == "gioioso":
+                self.img["Profilo"] = pygame.transform.scale(RAUL_GIOIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = JOY_IMG
 
-        elif self.current_emotion == "felice":
-            self.img["Profilo"] = pygame.transform.scale(RAUL_FELICE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = HAPPY_IMG
+            elif self.current_emotion == "felice":
+                self.img["Profilo"] = pygame.transform.scale(RAUL_FELICE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = HAPPY_IMG
 
-        elif self.current_emotion == "triste":
-            self.img["Profilo"] = pygame.transform.scale(RAUL_TRISTE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = SAD_IMG
+            elif self.current_emotion == "triste":
+                self.img["Profilo"] = pygame.transform.scale(RAUL_TRISTE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = SAD_IMG
 
-        elif self.current_emotion == "arrabbiato":
-            self.img["Profilo"] = pygame.transform.scale(RAUL_ARRABBIATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = MAD_IMG
-            
-        elif self.current_emotion == "iracondo":
-            self.img["Profilo"] = pygame.transform.scale(RAUL_IRACONDO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = RAGE_IMG
+            elif self.current_emotion == "arrabbiato":
+                self.img["Profilo"] = pygame.transform.scale(RAUL_ARRABBIATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = MAD_IMG
+                
+            elif self.current_emotion == "iracondo":
+                self.img["Profilo"] = pygame.transform.scale(RAUL_IRACONDO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = RAGE_IMG
 
-        elif self.current_emotion == "furioso":
-            self.img["Profilo"] = pygame.transform.scale(RAUL_FURIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = FURIOUS_IMG
+            elif self.current_emotion == "furioso":
+                self.img["Profilo"] = pygame.transform.scale(RAUL_FURIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = FURIOUS_IMG
 
     def do_something(self, boss):
         MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
@@ -240,7 +246,7 @@ class Raul():
                     self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Tempesta":
-            DMG_DEAL = 3
+            DMG_DEAL = 4
             self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.tempesta_animation()
@@ -284,7 +290,7 @@ class Raul():
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
-                self.current_atk+=action.buff_stats(self.atk)
+                self.current_atk+=action.buff_stats(self.atk, self, "buff")
                 print("Raul ha aumentato il suo attacco!")
                 self.text_action="Raul ha aumentato il suo attacco!"
                 self.current_animation = 0
@@ -313,18 +319,12 @@ class Raul():
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
-                # DUBT SUL MISSARE
-                if action.is_missed(boss.current_eva):
-                    self.text_action="Il nemico ha schivato il colpo!"
-                    self.current_animation = 0
-                    self.is_showing_text_outputs = True
-                else:
-                    emotion.change_emotion(self, "arrabbiato")
-                    print("Raul ha sfondato il campo di elettricita'!")
-                    self.text_action="Raul ha sfondato il campo di elettricita'!"
-                    self.current_animation = 0
-                    self.is_showing_text_outputs = True
-                    self.is_removing_bar = True
+                emotion.change_emotion(self, "arrabbiato")
+                print("Raul ha sfondato il campo di elettricita'!")
+                self.text_action="Raul ha sfondato il campo di elettricita'!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+                self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Damonte":
             if self.is_doing_animation:
@@ -333,7 +333,7 @@ class Raul():
             if not self.is_doing_animation:
                 self.friends[0][0] = "-"
                 for allies in [y.y,p.p,self,f.f]:
-                    allies.current_vel+=(action.buff_stats(allies.vel)*2)
+                    allies.current_vel+=(action.buff_stats(allies.vel,allies, "buff")*2)
                 print("Damonte ha dato il ritmo a tutti gli alleati!")
                 self.text_action="Damonte ha dato il ritmo a tutti gli alleati!"
                 self.current_animation = 0
@@ -345,7 +345,7 @@ class Raul():
 
             if not self.is_doing_animation:
                 self.friends[0][1] = "-"
-                boss.current_eva-=action.buff_stats(boss.eva)
+                boss.current_eva-=action.buff_stats(boss.eva, boss, "debuff")
                 print("Il flash di Cristian ha accecato il nemico!")
                 self.text_action="Il flash di Cristian ha accecato il nemico!"
                 self.current_animation = 0
@@ -373,14 +373,14 @@ class Raul():
             if not self.is_doing_animation:
                 self.friends[1][1] = "-"
                 for allies in [y.y,p.p,self,f.f]:
-                    allies.current_defn+=action.buff_stats(allies.defn)
+                    allies.current_defn+=action.buff_stats(allies.defn, allies, "buff")
                     emotion.change_emotion(allies, "triste")
                 print("Mohammed scompare e il gruppo, rattristito, prende determinazione.")
                 self.text_action="Mohammed scompare e il gruppo, rattristito, prende determinazione."
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if self.sel["has_cursor_on"]=="recover":
+        if self.sel["has_cursor_on"]=="Recover":
             MNA_CONSUMPTION = -(self.mna/2)
             if self.is_doing_animation:
                 dw.saetta_animation()
@@ -392,7 +392,7 @@ class Raul():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if self.sel["is_selecting"]=="items":
+        if self.sel["is_selecting"]=="Items":
             allies = [self,p.p,f.f,y.y]
             items.use_item(self, boss, self.sel["is_choosing_target"],allies)
         

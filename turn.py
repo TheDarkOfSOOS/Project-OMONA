@@ -6,7 +6,7 @@ import youssef_class as youssef
 import pier_class as pier
 import raul_class as raul
 import fabiano_class as fabiano
-import boss as boss
+import sound
 from items import items
 
 # Turn contiene invece le azioni che un personaggio puo' fare in un turno 
@@ -18,11 +18,11 @@ current_selection_Y = 0
 # La selezione e' una matrice, [Y][X]
 # per ottenere items: Y=0, X=1
 
-''' skills[0][0] items[0][1] -[0][2]
-    recover[1][0] friends[1][1] -[1][2]
+''' Skills[0][0] Items[0][1] -[0][2]
+    Recover[1][0] Friends[1][1] -[1][2]
 '''
-menu=[["skills","items","-"],
-    ["recover","friends","-"]]
+menu=[["Skills","Items","-"],
+    ["Recover","Friends","-"]]
 
 def of_character(current_player, input, boss, returning):
     # Rendiamo la selezione temporanea come quella del player corrente
@@ -33,6 +33,7 @@ def of_character(current_player, input, boss, returning):
     # Prendiamo le variabili globali della selezione corrente
     global current_selection_X
     global current_selection_Y
+    
     #print(input)
 
     ''' Disegniamo le scelte del giocatore.
@@ -83,36 +84,40 @@ def of_character(current_player, input, boss, returning):
             current_selection_X+=1
             # Disegniamo le modifiche
             dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)
+            pygame.mixer.Sound.play(sound.DIRECTIONAL_SELECTION)
 
         elif (input=="left" and current_selection_X>0):
             # Spostiamo la X a sinistra
             current_selection_X-=1
             dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)
+            pygame.mixer.Sound.play(sound.DIRECTIONAL_SELECTION)
 
         elif (input=="up" and current_selection_Y>0):
             # Spostiamo la Y in alto
             current_selection_Y-=1
             dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)
-            
+            pygame.mixer.Sound.play(sound.DIRECTIONAL_SELECTION)
+
         elif (input=="down" and current_selection_Y<1):
             # Spostiamo la Y in basso
             current_selection_Y+=1
             dw.selection(current_selection_X, current_selection_Y, current_player, sel["is_selecting"], sel["has_cursor_on"], sel["has_done_first_selection"], boss)
+            pygame.mixer.Sound.play(sound.DIRECTIONAL_SELECTION)
 
         # Se il player corrente non ha fatto la prima selezione
         if not current_player.sel["has_done_first_selection"]:
             # Cambiamo cosa sta selezionando in base a quello che c'e' nel menu
             sel["is_selecting"]=menu[current_selection_Y][current_selection_X]
-        elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="skills":
-            # Se si ha gia' scelto skills si dovra' scegliere l'abilita'
+        elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="Skills":
+            # Se si ha gia' scelto Skills si dovra' scegliere l'abilita'
             # Le abilita' vengono prese dalla classe del pg
             sel["has_cursor_on"]=current_player.skills[current_selection_Y][current_selection_X]
-        #elif has_done_first_selection and sel["is_selecting"]=="items":
+        #elif has_done_first_selection and sel["is_selecting"]=="Items":
             #sel["has_cursor_on"]=current_player.skills[current_selection_Y][current_selection_X]
-        elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="friends":
+        elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="Friends":
             sel["has_cursor_on"]=current_player.friends[current_selection_Y][current_selection_X]
 
-        elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="items":
+        elif current_player.sel["has_done_first_selection"] and sel["is_selecting"]=="Items":
             sel["has_cursor_on"]=items.items[current_selection_Y][current_selection_X]
         #print("sel:",sel)
         #print("menu[def]",menu[current_selection_Y][current_selection_X])
@@ -125,16 +130,18 @@ def of_character(current_player, input, boss, returning):
         # Casi in cui si deve reimpostare la selezione perche' cambio di pagina
         #1. E' stata aperta una sub-pagina (o CASI PARTICOLARI)
         if (input=="return" and sel["has_done_first_selection"]==False and (not sel["is_selecting"]=="-")):
+            pygame.mixer.Sound.play(sound.CONFIRM)
             sel["has_done_first_selection"]=True
             reset_movement()
             # Caso receover:
-            if (sel["is_selecting"]=="recover"):
-                sel["has_cursor_on"] = "recover"
+            if (sel["is_selecting"]=="Recover"):
+                sel["has_cursor_on"] = "Recover"
                 sel["is_choosing"] = False
         #2. Si sta cambiando personaggio
         elif (input=="return") and sel["has_done_first_selection"]==True and (not sel["has_cursor_on"]=="-"):
+            pygame.mixer.Sound.play(sound.CONFIRM)
             # Caso selezione abilità con mana insufficiente
-            if sel["is_selecting"] == "skills" and current_player.MNA_CONSUMPTION_SKILLS.get(sel["has_cursor_on"]) <= current_player.current_mna:
+            if sel["is_selecting"] == "Skills" and current_player.MNA_CONSUMPTION_SKILLS.get(sel["has_cursor_on"]) <= current_player.current_mna:
                 # Caso della scelta del target
                 for options in current_player.allies_selections:
                     if options == sel["has_cursor_on"]:
@@ -146,8 +153,8 @@ def of_character(current_player, input, boss, returning):
                     sel["is_choosing"]=False
                     reset_movement()
 
-            if not sel["is_selecting"] == "skills":
-                if sel["is_selecting"] == "items":
+            if not sel["is_selecting"] == "Skills":
+                if sel["is_selecting"] == "Items":
                     for options in current_player.allies_selections:
                         if options == sel["has_cursor_on"]:
                             find_target = True
@@ -173,6 +180,7 @@ def of_character(current_player, input, boss, returning):
 
         #3. Si ritorna alla scelta generale
         if (input=="backspace" and sel["has_done_first_selection"]==True):
+            pygame.mixer.Sound.play(sound.MULTIPLE_HIT)
             sel["has_done_first_selection"]=False
             reset_movement()
 
@@ -185,19 +193,23 @@ def of_character(current_player, input, boss, returning):
 
         #4. Si ritorna al personaggio precedente
         elif (input=="backspace" and sel["has_done_first_selection"]==False):
+            pygame.mixer.Sound.play(sound.MULTIPLE_HIT)
             returning = True
             sel["is_choosing"]=False
             reset_movement()
 
     if input=="backspace":
+        pygame.mixer.Sound.play(sound.MULTIPLE_HIT)
         sel["is_choosing_target"]=False
 
-    if input=="shift":
+    if input=="shift" and sel["is_choosing_target"]:
+        pygame.mixer.Sound.play(sound.CONFIRM)
         sel["is_choosing_target"]=boss
         sel["is_choosing"]=False
 
     if input=="return" and sel["is_choosing_target"]!=False:
-        if sel["is_selecting"]=="items":
+        pygame.mixer.Sound.play(sound.CONFIRM)
+        if sel["is_selecting"]=="Items":
             items.items_usage[current_selection_Y][current_selection_X] -= 1
             if items.items_usage[current_selection_Y][current_selection_X] == 0:
                 items.items[current_selection_Y][current_selection_X] = "-"

@@ -22,14 +22,14 @@ class Mago_Elettrico():
     def __init__(self,):
 
         self.name = "Mago Elettrico"
-        self.img = pygame.transform.scale(M_E_NEUTRALE,(WIDTH,HEIGHT))
+        self.img = pygame.transform.scale(M_E_NEUTRALE,BOSS_WIDTHxHEIGHT)
 
         # STATISTICHE
-        self.hp = 10000 # Variabile per i punti vita
-        self.atk = 126 # Variabile per i punti attacco
-        self.defn = 120 # Variabile per i punti difesa
-        self.vel = 100 # Variabile per i punti velocità
-        self.eva = 15 # Variabile per i punti evasione
+        self.hp = 1000 # Variabile per i punti vita
+        self.atk = 151 # Variabile per i punti attacco
+        self.defn = 171 # Variabile per i punti difesa
+        self.vel = 134 # Variabile per i punti velocità
+        self.eva = 10 # Variabile per i punti evasione
 
         self.current_hp = self.hp 
         self.current_atk = self.atk
@@ -197,6 +197,9 @@ class Mago_Elettrico():
 
         self.current_animation = 0
 
+        self.is_buffed = -1
+        self.is_debuffed = -1
+
         self.is_doing_animation = False
 
         self.text_action=""
@@ -229,16 +232,16 @@ class Mago_Elettrico():
 
     def change_img(self):
         if self.current_emotion == "neutrale":
-            self.img = pygame.transform.scale(M_E_NEUTRALE,(WIDTH,HEIGHT))
+            self.img = pygame.transform.scale(M_E_NEUTRALE,BOSS_WIDTHxHEIGHT)
 
         elif self.current_emotion == "gioioso":
-            self.img = pygame.transform.scale(M_E_GIOIOSO,(WIDTH,HEIGHT))
+            self.img = pygame.transform.scale(M_E_GIOIOSO,BOSS_WIDTHxHEIGHT)
 
         elif self.current_emotion == "arrabbiato":
-            self.img = pygame.transform.scale(M_E_ARRABBIATO,(WIDTH,HEIGHT))
+            self.img = pygame.transform.scale(M_E_ARRABBIATO,BOSS_WIDTHxHEIGHT)
 
         elif self.current_emotion == "triste":
-            self.img = pygame.transform.scale(M_E_TRISTE,(WIDTH,HEIGHT))
+            self.img = pygame.transform.scale(M_E_TRISTE,BOSS_WIDTHxHEIGHT)
 
     # Algoritmo di scelta attacco
     def obtain_attack(self):
@@ -315,12 +318,13 @@ class Mago_Elettrico():
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
                 else:
+                    self.check_damage_reduction()
                     self.text_action="Mago elettrico ha fatto "+ str(self.damage_dealed) + " danni a " + self.target[0].name
-                    buff_or_not = rng.choices([0, action.buff_stats(self.target[0].current_eva)])
+                    buff_or_not = rng.choices([0, 1])
                     buff_or_not = buff_or_not[0]
                     print(buff_or_not)
                     if buff_or_not != 0:
-                        self.target[0].current_eva -= buff_or_not
+                        self.target[0].current_eva -= action.buff_stats(self.target[0].current_eva, self.target[0], "debuff")
                         self.text_action+=" e cala la sua evasione!"
                     print(self.target[0])
                     #print("Mago elettrico ha fatto", self.damage_dealed, "danni a " + str(self.target[0]).name)
@@ -342,6 +346,7 @@ class Mago_Elettrico():
                     self.is_showing_text_outputs = True
                 else:
                     self.aoe_1 = action.damage_deal(self.current_atk,DMG_DEAL,self.target[0].current_defn,self.current_emotion,self.target[0].current_emotion)
+                    self.check_damage_reduction()
                     print("Mago elettrico ha fatto", self.aoe_1, "danni a " + self.target[0].name)
                     self.text_action="Mago elettrico ha fatto "+ str(self.aoe_1) + " danni a " + self.target[0].name + ", mentre "
                     self.current_animation = 0
@@ -354,13 +359,14 @@ class Mago_Elettrico():
                         self.is_showing_text_outputs = True
                     else:
                         self.aoe_2 = action.damage_deal(self.current_atk,DMG_DEAL,self.target[1].current_defn,self.current_emotion,self.target[1].current_emotion)
+                        self.check_damage_reduction()
                         print("Mago elettrico ha fatto", self.aoe_2, "danni a " + self.target[1].name)
                         self.text_action+="Mago elettrico ha fatto "+ str(self.aoe_2) + " danni a " + self.target[1].name + ". "
                         self.current_animation = 0
                         self.is_showing_text_outputs = True
                         self.is_removing_bar = True
 
-                emo_or_not = rng.choices([0, action.buff_stats(self.target[0].eva)])
+                emo_or_not = rng.choices([0, 1])
                 emo_or_not = emo_or_not[0]
                 print(emo_or_not)
                 if emo_or_not != 0:
@@ -404,16 +410,20 @@ class Mago_Elettrico():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
-        
 
-        # SISTEMA STAMPA NEL TESTO
+    def check_damage_reduction(self):
         if p.p.sel["has_cursor_on"] == "Fiamma protettrice":
-            f_p_temp = 2
+            f_p_temp = 1.5
             self.damage_dealed /= f_p_temp
             self.aoe_1 /= f_p_temp
             self.aoe_2 /= f_p_temp
             self.aoe_3 /= f_p_temp
             self.aoe_4 /= f_p_temp
+            self.damage_dealed = int(self.damage_dealed)
+            self.aoe_1 = int(self.aoe_1)
+            self.aoe_2 = int(self.aoe_2)
+            self.aoe_3 = int(self.aoe_3)
+            self.aoe_4 = int(self.aoe_4)
 
     def update_target(self, new_target):
         self.focussed_allies.append(new_target)
@@ -444,9 +454,17 @@ class Mago_Elettrico():
     def remove_bar(self, boss):
         if self.is_removing_bar:
             if self.choosen_attack == self.list_attacks[1]:
-                self.count_1 = action.toggle_health(self.aoe_1, self.target[0], self.count_1)
-                self.count_2 = action.toggle_health(self.aoe_2, self.target[1], self.count_2)
-                print(self.count_1, self.count_2, self.aoe_1, self.aoe_2,)
+                if not self.target[0].is_dead:
+                    self.count_1 = action.toggle_health(self.aoe_1, self.target[0], self.count_1)
+                else:
+                    self.count_1 = 0
+                    self.aoe_1 = 0
+                if len(self.target) > 1:
+                    self.count_2 = action.toggle_health(self.aoe_2, self.target[1], self.count_2)
+                else:
+                    self.count_2 = 0
+                    self.aoe_2 = 0
+                #print(self.count_1, self.count_2, self.aoe_1, self.aoe_2,)
                 if (self.count_1 + self.count_2) == (self.aoe_1 + self.aoe_2):
                     self.is_removing_bar = False
                     self.aoe_1 = 0
@@ -457,11 +475,27 @@ class Mago_Elettrico():
                     self.damage_dealed = 0
 
             elif self.choosen_attack == self.list_attacks[2]:
-                self.count_1 = action.toggle_health(self.aoe_1, y.y, self.count_1)
-                self.count_2 = action.toggle_health(self.aoe_2, p.p, self.count_2)
-                self.count_3 = action.toggle_health(self.aoe_3, r.r, self.count_3)
-                self.count_4 = action.toggle_health(self.aoe_4, f.f, self.count_4)
-                print(self.count_1, self.count_2, self.count_3, self.count_4, self.aoe_1, self.aoe_2, self.aoe_3, self.aoe_4)
+                if not y.y.is_dead:
+                    self.count_1 = action.toggle_health(self.aoe_1, y.y, self.count_1)
+                else:
+                    self.count_1 = 0
+                    self.aoe_1 = 0
+                if not p.p.is_dead:
+                    self.count_2 = action.toggle_health(self.aoe_2, p.p, self.count_2)
+                else:
+                    self.count_2 = 0
+                    self.aoe_2 = 0
+                if not r.r.is_dead:
+                    self.count_3 = action.toggle_health(self.aoe_3, r.r, self.count_3)
+                else:
+                    self.count_3 = 0
+                    self.aoe_3 = 0
+                if not f.f.is_dead:
+                    self.count_4 = action.toggle_health(self.aoe_4, f.f, self.count_4)
+                else:
+                    self.count_4 = 0
+                    self.aoe_4 = 0
+                #print(self.count_1, self.count_2, self.count_3, self.count_4, self.aoe_1, self.aoe_2, self.aoe_3, self.aoe_4)
                 if (self.count_1 + self.count_2 + self.count_3 + self.count_4) == (self.aoe_1 + self.aoe_2 + self.aoe_3 + self.aoe_4):
                     self.is_removing_bar = False
                     self.aoe_1 = 0
@@ -477,8 +511,8 @@ class Mago_Elettrico():
                     self.count_removed_bar = 0
             else:
                 self.count_removed_bar = action.toggle_health(self.damage_dealed, self.target[0], self.count_removed_bar)
-                # print(self.target[0].current_hp <= 0)
-                if self.count_removed_bar == self.damage_dealed or self.target[0].current_hp <= 0:
+                #print(self.target[0].current_hp <= 0)
+                if self.count_removed_bar == self.damage_dealed or self.target[0].is_dead:
                     self.is_removing_bar = False
                     self.damage_dealed = 0
                     self.count_removed_bar = 0

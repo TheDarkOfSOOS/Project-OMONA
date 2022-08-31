@@ -195,6 +195,9 @@ class Pier():
 
         self.current_animation = 0
 
+        self.is_buffed = -1
+        self.is_debuffed = -1
+
         self.is_doing_animation = False
 
         self.text_action=""
@@ -207,10 +210,10 @@ class Pier():
         self.description_template = {
             # Skills
             "Fiamma protettrice":"Protegge lievemente tutto il party dall’attacco del nemico. Attacca per primo.",
-            "Sbracciata":"Fa una T pose e continua a girare velocemente, colpendo il nemico.",
-            "Richiesta d'aiuto":"Infastidisce un alleato o nemico nel momento peggiore… portandogli rabbia e diminuendogli la difesa per 3 turni.",
+            "Sbracciata":"Fa una T pose e continua a girare velocemente, colpendo il nemico. IMPOSSIBILE mancare.",
+            "Richiesta d'aiuto":"Infastidisce un alleato o nemico nel momento peggiore... portandogli rabbia.",
             '"Spessanza"':"Mostra tutta la sua fierezza, facendo concentrare il nemico su Piergiorgio, diminuendo l’attacco del nemico e degli alleati per un turno. Attacca per primo.",
-            "Bastione fiammante":"Cura leggermente tutti gli alleati.",
+            "Bastione fiammante":"Cura tutti gli alleati del 40%.",
             "Sacrificio umano":"Manda al rogo un compagno a scelta e causa grandissimi danni al nemico.",
             # Friends
             "Ilaria":"Rivista che ha diversi effetti in base contro chi viene usata: se usata su Youssef lo rende gioioso, se usata su Piergiorgio lo rende triste, se usata su Fabiano aumenta l’evasione, se usata su Raul lo rende arrabbiato.",
@@ -231,48 +234,51 @@ class Pier():
         self.friends_template = [["Ilaria","Prade","-"],["Stefan","Gonzato (spirito)","-"]]
         self.friends = []
 
-        self.sel = {"is_choosing":False,"is_selecting":"skills","has_done_first_selection":False,"has_cursor_on":"skills","is_choosing_target":False}
+        self.sel = {"is_choosing":False,"is_selecting":"Skills","has_done_first_selection":False,"has_cursor_on":"Skills","is_choosing_target":False}
 
         self.MNA_CONSUMPTION_SKILLS = {
-            "Fiamma protettrice":45,
-            "Sbracciata":15,
-            "Richiesta d'aiuto":20,
-            '"Spessanza"':20,
-            "Bastione fiammante":40,
-            "Sacrificio umano":50,
+            "Fiamma protettrice":104,
+            "Sbracciata":30,
+            "Richiesta d'aiuto":0,
+            '"Spessanza"':140,
+            "Bastione fiammante":200,
+            "Sacrificio umano":300,
         }
 
         self.allies_selections=["Sacrificio umano", "Ilaria","Acqua di Destiny", "Parmigianino", "Ghiaccio dei Bidelli"]
         self.allies_enemy_selections=["Richiesta d'aiuto"]
     
     def change_img(self):
-        if self.current_emotion == "neutrale":
-            self.img["Profilo"] = pygame.transform.scale(PIER_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = NEUTRAL_IMG
+        if self.is_dead:
+            self.img["Emozione"] = DEAD_IMG
+        else:
+            if self.current_emotion == "neutrale":
+                self.img["Profilo"] = pygame.transform.scale(PIER_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = NEUTRAL_IMG
 
-        elif self.current_emotion == "gioioso":
-            self.img["Profilo"] = pygame.transform.scale(PIER_GIOIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = JOY_IMG
+            elif self.current_emotion == "gioioso":
+                self.img["Profilo"] = pygame.transform.scale(PIER_GIOIOSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = JOY_IMG
 
-        elif self.current_emotion == "triste":
-            self.img["Profilo"] = pygame.transform.scale(PIER_TRISTE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = SAD_IMG
+            elif self.current_emotion == "triste":
+                self.img["Profilo"] = pygame.transform.scale(PIER_TRISTE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = SAD_IMG
 
-        elif self.current_emotion == "depresso":
-            self.img["Profilo"] = pygame.transform.scale(PIER_DEPRESSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = DEPRESSED_IMG
+            elif self.current_emotion == "depresso":
+                self.img["Profilo"] = pygame.transform.scale(PIER_DEPRESSO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = DEPRESSED_IMG
 
-        elif self.current_emotion == "disperato":
-            self.img["Profilo"] = pygame.transform.scale(PIER_DISPERATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = DESPAIR_IMG
+            elif self.current_emotion == "disperato":
+                self.img["Profilo"] = pygame.transform.scale(PIER_DISPERATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = DESPAIR_IMG
 
-        elif self.current_emotion == "arrabbiato":
-            self.img["Profilo"] = pygame.transform.scale(PIER_ARRABBIATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = MAD_IMG
-            
-        elif self.current_emotion == "iracondo":
-            self.img["Profilo"] = pygame.transform.scale(PIER_IRACONDO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-            self.img["Emozione"] = RAGE_IMG
+            elif self.current_emotion == "arrabbiato":
+                self.img["Profilo"] = pygame.transform.scale(PIER_ARRABBIATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = MAD_IMG
+                
+            elif self.current_emotion == "iracondo":
+                self.img["Profilo"] = pygame.transform.scale(PIER_IRACONDO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+                self.img["Emozione"] = RAGE_IMG
 
        
     def do_something(self, boss):
@@ -296,16 +302,11 @@ class Pier():
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
-                if action.is_missed(boss.current_eva):
-                    self.text_action="Il nemico ha schivato il colpo!"
-                    self.current_animation = 0
-                    self.is_showing_text_outputs = True
-                else:
-                    print("Pier ha fatto", self.damage_dealed, "danni al nemico!")
-                    self.text_action="Pier ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
-                    self.current_animation = 0
-                    self.is_showing_text_outputs = True
-                    self.is_removing_bar = True
+                print("Pier ha fatto", self.damage_dealed, "danni al nemico!")
+                self.text_action="Pier ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+                self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Richiesta d'aiuto":
             if self.is_doing_animation:
@@ -319,15 +320,14 @@ class Pier():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
         
-        #TODO
         if self.sel["has_cursor_on"]=='"Spessanza"':
-            print("DA FINIRE")
             if self.is_doing_animation:        
                 dw.sbracciata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 boss.update_target(self)
+                action.dmg_reduction.is_active = True
                 print("Pier ha preso le attenzioni del nemico!")
                 self.text_action="Pier ha preso le attenzioni del nemico!"
                 self.current_animation = 0
@@ -397,7 +397,7 @@ class Pier():
                     print("Raul non sembra contento di quello che ha in mano. Strappa via la rivista e diventa " + r.r.current_emotion + ".")
                     self.text_action="Raul non sembra contento di quello che ha in mano. Strappa via la rivista e diventa " + r.r.current_emotion + "."
                 elif self.sel["is_choosing_target"] == f.f:
-                    f.f.current_eva += action.buff_stats(f.f.eva)
+                    f.f.current_eva += action.buff_stats(f.f.eva, f.f, "buff")
                     print("Fabiano cerca di evitare in tutti i modi di leggere la rivista. Senza volerlo si allena sulla schivata.")
                     self.text_action="Fabiano cerca di evitare in tutti i modi di leggere la rivista. Senza volerlo si allena sulla schivata."
                 self.current_animation = 0
@@ -428,7 +428,7 @@ class Pier():
                 self.friends[0][1] = "-"
                 for target in [y.y,self,r.r,f.f]:
                     emotion.change_emotion(target, "arrabbiato")
-                    target.current_atk += action.buff_stats(target.atk)
+                    target.current_atk += action.buff_stats(target.atk, target, "buff")
                 print("Il gruppo si invogorisce e diventa aggressivo!")
                 self.text_action="Il gruppo si invogorisce e diventa aggressivo!"
                 self.current_animation = 0
@@ -453,7 +453,7 @@ class Pier():
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
 
-        if self.sel["has_cursor_on"]=="recover":
+        if self.sel["has_cursor_on"]=="Recover":
             MNA_CONSUMPTION = -(self.mna/2)
             if self.is_doing_animation:
                 dw.sbracciata_animation()
@@ -465,7 +465,7 @@ class Pier():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if self.sel["is_selecting"]=="items":
+        if self.sel["is_selecting"]=="Items":
             allies = [self,y.y,r.r,f.f]
             items.use_item(self,boss,self.sel["is_choosing_target"],allies)
 

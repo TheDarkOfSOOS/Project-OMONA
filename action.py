@@ -2,13 +2,25 @@ import pygame
 from pygame.locals import *
 
 import random as rng
+import sound
+
+class Get_Damage_Reduction_Active():
+    def __init__(self):
+        self.is_active = False
+
+dmg_reduction = Get_Damage_Reduction_Active()
 
 damage_per_frame = 5
 
 def damage_deal(user_atk, atk_dmg, target_def, user_emotion, target_emotion):
-    result = int(((user_atk)*(atk_dmg*0.3)) - (target_def+rng.randrange(0,7)))
+    if target_def == 0:
+        result = int(((user_atk*atk_dmg)/7)) - rng.randrange(0,6)
+    else:
+        result = int(((user_atk)*(atk_dmg*20)) / (target_def+rng.randrange(0,6)))
     if result < 0:
         result = 0
+    if dmg_reduction.is_active:
+        result = int(result/1.5)
     damage = emotion_effectiveness(result, target_emotion, user_emotion)
     return damage
 
@@ -155,6 +167,7 @@ def emotion_effectiveness(damage, target_emotion, user_emotion):
     return int(damage)
 
 def toggle_health(move_damage, target, count):
+    pygame.mixer.Sound.play(sound.MULTIPLE_LOW_HIT)
     #print(count, "<=", move_damage, "and", abs(count - move_damage), ">", damage_per_frame)
     if count < move_damage and abs(count - move_damage) >= damage_per_frame:
         count += damage_per_frame
@@ -223,8 +236,12 @@ def revive(target):
     return result
 
 # Puo' anche essere una lista target_stat_to_upgrade
-def buff_stats(target_stat_to_upgrade):
-    return int(target_stat_to_upgrade/10)
+def buff_stats(target_stat_to_upgrade, chara, type):
+    if type == "buff":
+        chara.is_buffed = 0
+    else:
+        chara.is_debuffed = 0
+    return int(target_stat_to_upgrade/20)
 
 def is_missed(target_eva):
     if rng.randrange(1,101) < target_eva:

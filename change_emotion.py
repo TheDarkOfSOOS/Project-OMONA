@@ -1,8 +1,6 @@
 import pygame
 from pygame.locals import *
 from data import *
-import boss
-import mago_elettrico as m_e
 
 def change_emotion(objective, emotion):
     reset_emotion_stats(objective)
@@ -95,8 +93,7 @@ def change_emotion(objective, emotion):
             # print(objective.name, emotion, objective.current_emotion)
     else:
         objective.current_emotion = "neutrale"
-    if objective != boss.b:
-        objective.change_img()
+    objective.change_img()
 
     set_emotion_stats(objective)
 
