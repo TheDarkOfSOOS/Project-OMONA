@@ -544,6 +544,13 @@ def pallonata_animation():
     if y.current_animation >= len(y.pallonata_animation):
         y.is_doing_animation = False
 
+def pol_animation():
+    if y.is_doing_animation:
+        WIN.blit(y.pol_animation[int(y.current_animation)],(0,HEIGHT/3))
+        y.current_animation+=0.50
+    if y.current_animation >= len(y.pol_animation):
+        y.is_doing_animation = False
+
 def anastasia_animation():
     if y.is_doing_animation:
         WIN.blit(y.anastasia_animation[int(y.current_animation)],(0,0))
@@ -554,7 +561,7 @@ def anastasia_animation():
 def sbracciata_animation():
     if p.is_doing_animation:
         WIN.blit(p.sbracciata_animation[int(p.current_animation)],(0,0))
-        p.current_animation+=0.80
+        p.current_animation+=0.65
     if p.current_animation >= len(p.sbracciata_animation):
         p.is_doing_animation = False
 

@@ -129,7 +129,7 @@ while run:
     dw.bg()
     dialogue.d.set_dialogue(0)
     # Entra subito nel fight togliendo il commento
-    #finish = True
+    finish = True
     if not finish:
         finish = dialogue.d.dialogue(input)    
     elif finish:

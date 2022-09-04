@@ -125,6 +125,37 @@ class Youssef():
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation24.png"))
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation25.png"))
 
+        self.pol_animation = []
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation00.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation01.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation02.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation03.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation04.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation05.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation06.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation07.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation08.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation09.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation10.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation11.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation12.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation13.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation14.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation15.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation16.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation17.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation18.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation19.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation20.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation21.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation22.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation23.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation24.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation25.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation26.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation27.png"))
+        self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation28.png"))
+
         self.anastasia_animation = []
         self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation00.png"))
         self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation01.png"))
@@ -369,7 +400,7 @@ class Youssef():
             DMG_DEAL = 10
             self.damage_dealed = action.damage_deal(150,DMG_DEAL,boss.current_defn,"neutrale",boss.current_emotion)
             if self.is_doing_animation:
-                dw.sforbiciata_animation()
+                dw.pol_animation()
 
             if not self.is_doing_animation:
                 #L'attacco non manca
@@ -379,20 +410,6 @@ class Youssef():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
-
-        if self.sel["has_cursor_on"]=="Borin":
-            if self.is_doing_animation:
-                dw.sforbiciata_animation()
-
-            if not self.is_doing_animation:
-                self.friends[0][1] = "-"
-                print("Borin ha infastidito il nemico. Ora è arrabbiato, ma rimane scoperto!")
-                # Inizio attacco
-                emotion.change_emotion(boss, "arrabbiato")
-                boss.current_defn -= action.buff_stats(boss.defn, boss, "debuff")
-                self.text_action="Borin ha infastidito il nemico. Ora è arrabbiato, ma rimane scoperto!"
-                self.current_animation = 0
-                self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Anastasia":
             if self.is_doing_animation:
@@ -405,6 +422,20 @@ class Youssef():
                 emotion.change_emotion(boss, "triste")
                 boss.current_atk -= action.buff_stats(boss.atk, boss, "debuff")
                 self.text_action="Anastasia ha letto il nemico. È riuscita a deprimerlo e a diminuirgli l'attacco!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if self.sel["has_cursor_on"]=="Borin":
+            if self.is_doing_animation:
+                dw.sforbiciata_animation()
+
+            if not self.is_doing_animation:
+                self.friends[0][1] = "-"
+                print("Borin ha infastidito il nemico. Ora è arrabbiato, ma rimane scoperto!")
+                # Inizio attacco
+                emotion.change_emotion(boss, "arrabbiato")
+                boss.current_defn -= action.buff_stats(boss.defn, boss, "debuff")
+                self.text_action="Borin ha infastidito il nemico. Ora è arrabbiato, ma rimane scoperto!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
