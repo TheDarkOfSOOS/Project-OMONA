@@ -105,23 +105,87 @@ class Raul():
         self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation21.png"))
         self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation22.png"))
         self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation23.png"))
+        
+        self.bastonata_animation = []
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation00.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation01.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation02.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation03.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation04.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation05.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation06.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation07.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation08.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation09.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation10.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation11.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation12.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation13.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation14.png"))
+        self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation15.png"))
+        
+        
+        self.noce_animation = []
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation00.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation01.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation02.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation03.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation04.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation05.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation06.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation07.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation08.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation09.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation10.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation11.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation12.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation13.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation14.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation15.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation16.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation17.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation18.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation19.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation20.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation21.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation22.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation23.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation24.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation25.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation26.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation27.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation28.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation29.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation30.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation31.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation32.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation33.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation34.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation35.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation36.png"))
+        self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation37.png"))
 
-        self.item_animation = []
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation02.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation03.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation04.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation05.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation06.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation07.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation08.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation09.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation10.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation11.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
+        self.damox_animation = []
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation00.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation01.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation02.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation03.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation04.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation05.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation06.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation07.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation08.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation09.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation10.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation11.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation12.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation13.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation14.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation15.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation16.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation17.png"))
+        self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation18.png"))
+
 
         self.current_animation = 0
 
@@ -268,7 +332,7 @@ class Raul():
             MNA_CONSUMPTION = -(self.mna/4)
             self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
-                dw.saetta_animation()
+                dw.bastonata_animation()
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
@@ -328,7 +392,7 @@ class Raul():
 
         if self.sel["has_cursor_on"]=="Damonte":
             if self.is_doing_animation:
-                dw.saetta_animation()
+                dw.damox_animation()
 
             if not self.is_doing_animation:
                 self.friends[0][0] = "-"
@@ -355,7 +419,7 @@ class Raul():
             DMG_DEAL = 15
             self.damage_dealed = action.damage_deal(150,DMG_DEAL,boss.defn,"neutrale",boss.current_emotion)
             if self.is_doing_animation:
-                dw.saetta_animation()
+                dw.noce_animation()
 
             if not self.is_doing_animation:
                 # L'attacco non manca

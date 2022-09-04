@@ -83,10 +83,19 @@ class Youssef():
         self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation16.png"))
         self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation17.png"))
         self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation18.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation19.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation20.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation21.png"))
-        self.sforbiciata_animation.append(pygame.image.load("img/animations/sforbiciata/sforbiciata_animation22.png"))
+
+        self.provocazione_animation = []
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation0.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation1.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation2.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation3.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation4.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation5.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation6.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation7.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation5.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation6.png"))
+        self.provocazione_animation.append(pygame.image.load("img/animations/provocazione/provocazione_animation7.png"))
 
         self.pallonata_animation = []
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation00.png"))
@@ -116,22 +125,34 @@ class Youssef():
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation24.png"))
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation25.png"))
 
-        self.item_animation = []
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation02.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation03.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation04.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation05.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation06.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation07.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation08.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation09.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation10.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation11.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
+        self.anastasia_animation = []
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation00.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation01.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation02.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation03.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation04.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation05.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation06.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation07.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation08.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation09.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation10.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation11.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation12.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation13.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation14.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation15.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation16.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation17.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation18.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation19.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation20.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation21.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation22.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation23.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation24.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation25.png"))
+        self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation26.png"))
 
         self.current_animation = 0
 
@@ -254,8 +275,8 @@ class Youssef():
         if self.sel["has_cursor_on"]=="Provocazione":
             boss.focus_on_youssef = 3
             if self.is_doing_animation:
-                dw.sforbiciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
+                dw.provocazione_animation()
+                self.remove_mna(MNA_CONSUMPTION, len(self.provocazione_animation)/0.50, round(MNA_CONSUMPTION/(len(self.provocazione_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 boss.update_target(self)
@@ -375,7 +396,7 @@ class Youssef():
 
         if self.sel["has_cursor_on"]=="Anastasia":
             if self.is_doing_animation:
-                dw.sforbiciata_animation()
+                dw.anastasia_animation()
 
             if not self.is_doing_animation:
                 self.friends[1][0] = "-"

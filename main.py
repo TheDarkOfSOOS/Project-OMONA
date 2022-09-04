@@ -214,6 +214,7 @@ while run:
 
     if finish and transitioner.scene_loader[1]:
         print("Giovanotto, cosa fa rima con allegro?")
+        print("Negro, signor agente")
         run = False
 
     # Evitiamo l'errore out of index

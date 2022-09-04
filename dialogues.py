@@ -102,6 +102,9 @@ class Dialogues():
                     else:
                         self.background_visualized = 0
                         self.show_gui = True
+                        
+            if input == "backspace":
+                return True
                     
             if self.text_visualized == len(self.text_of_dialogue)-1:
                 return True

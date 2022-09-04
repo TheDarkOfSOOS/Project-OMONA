@@ -36,6 +36,24 @@ class Items():
         }
         self.items_title = {}
 
+        self.item_animation = []
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation02.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation03.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation04.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation05.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation06.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation07.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation08.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation09.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation10.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation11.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
+        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
+    
+
     def use_item(self, user, boss, target, allies):
         if user.sel["has_cursor_on"] == "Acqua di Destiny":
             if user.is_doing_animation:
