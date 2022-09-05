@@ -48,8 +48,8 @@ wins = ["fighting", "ready", "ready", "ready", "ready"]
 def reset_res():
     return [False, False, False, True, False, [], []]
 
-mixer.music.load(soundtrack_2)
-mixer.music.play(-1)
+#mixer.music.load(soundtrack_2)
+#mixer.music.play(-1)
 
 class Transition_Animator():
     def __init__(self):
@@ -138,8 +138,8 @@ while run:
 
     if finish and transitioner.scene_loader[0]:
         if setters[0] == "fighting":
-            mixer.music.load(soundtrack)
-            mixer.music.play(-1)
+            #mixer.music.load(soundtrack)
+            #mixer.music.play(-1)
             round.set_charas(0)
             setters[0] = "waiting"
         if wins[0] == "fighting" and m_e.me.current_hp > 0 and not round.team_lost():

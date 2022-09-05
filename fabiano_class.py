@@ -60,154 +60,29 @@ class Fabiano():
         self.current_emotion = "neutrale" # Emozione attuale
         self.emotional_levels = {"Felicità":3,"Rabbia":1,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
 
-        self.pestata_animation = []
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation00.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation01.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation02.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation03.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation04.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation05.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation06.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation07.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation08.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation09.png"))
-        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation10.png"))
-
         self.biscotto_animation = []
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation00.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation01.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation02.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation03.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation04.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation05.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation06.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation07.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation08.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation09.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation10.png"))
-        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation11.png"))
+        self.biscotto_len = 12
+
+        self.pestata_animation = []
+        self.pestata_len = 11
 
         self.benevento_animation = []
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation00.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation01.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation02.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation03.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation04.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation05.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation06.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation07.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation08.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation09.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation10.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation11.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation12.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation13.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation14.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation15.png"))
-        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation16.png"))
-
-
-        self.nikradogna_animation = []
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation00.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation01.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation02.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation03.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation04.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation05.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation06.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation07.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation08.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation09.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation10.png"))
-        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation11.png"))
+        self.benevento_len = 17        
 
         self.cappello_y_animation = []
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation00.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation01.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation02.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation03.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation04.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation05.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation06.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation07.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation08.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation09.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation10.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation11.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation12.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation13.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation14.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation15.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation16.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17y.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17y.png"))
-        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17y.png"))
-        
-        self.cappello_r_animation = []
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation00.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation01.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation02.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation03.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation04.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation05.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation06.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation07.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation08.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation09.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation10.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation11.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation12.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation13.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation14.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation15.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation16.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17r.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17r.png"))
-        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17r.png"))
-
-        self.cappello_f_animation = []
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation00.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation01.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation02.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation03.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation04.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation05.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation06.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation07.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation08.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation09.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation10.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation11.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation12.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation13.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation14.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation15.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation16.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17f.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17f.png"))
-        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17f.png"))
+        self.cappello_y_len = 20
 
         self.cappello_p_animation = []
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation00.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation01.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation02.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation03.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation04.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation05.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation06.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation07.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation08.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation09.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation10.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation11.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation12.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation13.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation14.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation15.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation16.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17p.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17p.png"))
-        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17p.png"))
+        self.cappello_p_len = 20        
+
+        self.cappello_r_animation = []
+        self.cappello_r_len = 20
+
+        self.cappello_f_animation = []
+        self.cappello_f_len = 20
+
+        self.nikradogna_animation = []
+        self.nikradogna_len = 12
 
         self.current_animation = 0
 
@@ -295,6 +170,155 @@ class Fabiano():
             elif self.current_emotion == "arrabbiato":
                 self.img["Profilo"] = pygame.transform.scale(FABIANO_ARRABBIATO,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
                 self.img["Emozione"] = MAD_IMG
+
+    def load_biscotto(self):
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation00.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation01.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation02.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation03.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation04.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation05.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation06.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation07.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation08.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation09.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation10.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation11.png"))
+
+    def load_pestata(self):
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation00.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation01.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation02.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation03.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation04.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation05.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation06.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation07.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation08.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation09.png"))
+        self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation10.png"))
+
+    def load_benevento(self):
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation00.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation01.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation02.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation03.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation04.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation05.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation06.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation07.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation08.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation09.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation10.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation11.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation12.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation13.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation14.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation15.png"))
+        self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation16.png"))
+
+    def load_cappello_y(self):
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation00.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation01.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation02.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation03.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation04.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation05.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation06.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation07.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation08.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation09.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation10.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation11.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation12.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation13.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation14.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation15.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation16.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17y.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17y.png"))
+        self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17y.png"))
+
+    def load_cappello_p(self):
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation00.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation01.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation02.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation03.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation04.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation05.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation06.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation07.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation08.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation09.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation10.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation11.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation12.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation13.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation14.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation15.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation16.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17p.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17p.png"))
+        self.cappello_p_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17p.png"))
+
+    def load_cappello_r(self):
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation00.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation01.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation02.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation03.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation04.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation05.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation06.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation07.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation08.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation09.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation10.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation11.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation12.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation13.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation14.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation15.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation16.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17r.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17r.png"))
+        self.cappello_r_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17r.png"))
+
+    def load_cappello_f(self):
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation00.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation01.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation02.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation03.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation04.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation05.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation06.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation07.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation08.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation09.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation10.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation11.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation12.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation13.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation14.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation15.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation16.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17f.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17f.png"))
+        self.cappello_f_animation.append(pygame.image.load("img/animations/cappello/cappello_animation17f.png"))
+
+
+    def load_nikradogna(self):
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation00.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation01.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation02.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation03.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation04.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation05.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation06.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation07.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation08.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation09.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation10.png"))
+        self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation11.png"))
             
     def do_something(self, boss):
         MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
@@ -303,7 +327,7 @@ class Fabiano():
             target = self.sel["is_choosing_target"]
             if self.is_doing_animation:
                 dw.biscotto_animation(target)
-                self.remove_mna(MNA_CONSUMPTION, len(self.biscotto_animation)/0.25, round(MNA_CONSUMPTION/(len(self.biscotto_animation)/0.25),2))
+                self.remove_mna(MNA_CONSUMPTION, self.biscotto_len/0.25, round(MNA_CONSUMPTION/(self.biscotto_len/0.25),2))
 
             if not self.is_doing_animation:
                 self.damage_dealed = action.healing_percentage(heal_percentage, target.current_hp, target.hp)
@@ -318,8 +342,7 @@ class Fabiano():
             self.damage_dealed = action.damage_deal(f.current_vel,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.pestata_animation()
-                #print(round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
-                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
+                self.remove_mna(MNA_CONSUMPTION, self.pestata_len/0.30, round(MNA_CONSUMPTION/(self.pestata_len/0.30),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.current_eva):
@@ -336,7 +359,7 @@ class Fabiano():
         if self.sel["has_cursor_on"]=="Benevento":
             if self.is_doing_animation:
                 dw.benevento_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.benevento_animation)/0.30, round(MNA_CONSUMPTION/(len(self.benevento_animation)/0.30),2))
+                self.remove_mna(MNA_CONSUMPTION, self.benevento_len/0.30, round(MNA_CONSUMPTION/(self.benevento_len/0.30),2))
 
             if not self.is_doing_animation:
                 for allies in [y.y,p.p,r.r,self]:
