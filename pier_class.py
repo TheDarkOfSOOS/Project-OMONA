@@ -9,6 +9,7 @@ import raul_class as r
 import fabiano_class as f
 import random as rng
 from items import items
+import sound as sfx
 
 pygame.init()
 
@@ -237,15 +238,6 @@ class Pier():
         self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
         self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation1.png"))
         self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
-        self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation1.png"))
-        self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
-        self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation1.png"))
-        self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
-        self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation1.png"))
-        self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
-        self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation1.png"))
-        self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
-        self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation1.png"))
 
         self.ilaria_y_animation = []
         self.ilaria_y_animation.append(pygame.image.load("img/animations/ilaria/ilaria_y_animation00.png"))
@@ -672,7 +664,7 @@ class Pier():
         if self.sel["has_cursor_on"]=="Recover":
             MNA_CONSUMPTION = -(self.mna/2)
             if self.is_doing_animation:
-                dw.sbracciata_animation()
+                dw.recover_animation(self)
                 self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:

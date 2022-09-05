@@ -97,8 +97,6 @@ IRACONDO_BUFF_DEFN = -40
 FURIOSO_BUFF_ATK = 80
 FURIOSO_BUFF_DEFN = -60
 
-# Sounds
-
 # Backgrounds
 
 STATS_EXPLANATION = pygame.image.load("img/background/stats_explanation.png")

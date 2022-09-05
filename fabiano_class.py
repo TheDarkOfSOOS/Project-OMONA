@@ -463,8 +463,8 @@ class Fabiano():
         if self.sel["has_cursor_on"]=="Recover":
             MNA_CONSUMPTION = -(self.mna/2)
             if self.is_doing_animation:
-                dw.pestata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.25),2))
+                dw.recover_animation(self)
+                self.remove_mna(MNA_CONSUMPTION, len(dw.recover_animator.recover_animation)/0.25, round(MNA_CONSUMPTION/(len(dw.recover_animator.recover_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 print("Fabiano ha recuperato mana!")

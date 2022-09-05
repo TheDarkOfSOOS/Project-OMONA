@@ -66,19 +66,43 @@ class Raul():
         self.emotional_levels = {"Felicità":2,"Rabbia":3,"Tristezza":1} # Dizionario per il livello massimo delle emozioni
     
         self.saetta_animation = []
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_00.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_01.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_02.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_03.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_04.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_05.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_06.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_07.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_08.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_09.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_10.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_11.png"))
-        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_12.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation00.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation01.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation02.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation03.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation04.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation05.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation06.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation07.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation08.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation09.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation10.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation11.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation12.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation13.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation14.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation15.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation16.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation17.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation18.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation19.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation20.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation21.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation22.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation23.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation24.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation25.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation26.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation27.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation28.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation29.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation30.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation31.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation32.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation33.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation34.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation35.png"))
+        self.saetta_animation.append(pygame.image.load("img/animations/saetta/saetta_animation36.png"))
 
         self.tempesta_animation = []
         self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation00.png"))
@@ -416,7 +440,7 @@ class Raul():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Noce":
-            DMG_DEAL = 15
+            DMG_DEAL = 25
             self.damage_dealed = action.damage_deal(150,DMG_DEAL,boss.defn,"neutrale",boss.current_emotion)
             if self.is_doing_animation:
                 dw.noce_animation()
@@ -447,7 +471,7 @@ class Raul():
         if self.sel["has_cursor_on"]=="Recover":
             MNA_CONSUMPTION = -(self.mna/2)
             if self.is_doing_animation:
-                dw.saetta_animation()
+                dw.recover_animation(self)
                 self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:

@@ -25,7 +25,7 @@ class Mago_Elettrico():
         self.img = pygame.transform.scale(M_E_NEUTRALE,BOSS_WIDTHxHEIGHT)
 
         # STATISTICHE
-        self.hp = 1000 # Variabile per i punti vita
+        self.hp = 1500 # Variabile per i punti vita
         self.atk = 151 # Variabile per i punti attacco
         self.defn = 171 # Variabile per i punti difesa
         self.vel = 134 # Variabile per i punti velocità

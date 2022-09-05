@@ -38,7 +38,7 @@ class Youssef():
         self.eva = 15 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = self.mna
+        self.current_mna = int(self.mna/2)
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -456,7 +456,7 @@ class Youssef():
         if self.sel["has_cursor_on"]=="Recover":
             MNA_CONSUMPTION = -(self.mna/2)
             if self.is_doing_animation:
-                dw.sforbiciata_animation()
+                dw.recover_animation(self)
                 self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
