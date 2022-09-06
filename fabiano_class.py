@@ -51,6 +51,8 @@ class Fabiano():
         self.is_removing_bar = False
         self.count_removed_bar = 0
         self.damage_dealed = 0
+        self.aoe_1 = 0
+        self.count_1 = 0
 
         #  -1    -->  non attivo
         #  >= 0  -->  attivo
@@ -500,19 +502,22 @@ class Fabiano():
             items.use_item(self, boss, self.sel["is_choosing_target"], allies)
 
     def remove_bar(self, boss):
-        if self.is_removing_bar:
-            if self.sel["has_cursor_on"]=="Biscotto" or self.sel["has_cursor_on"]=="Soffio della morte":
-                self.count_removed_bar = action.add_health(self.damage_dealed, self.sel["is_choosing_target"], self.count_removed_bar)
-                if self.count_removed_bar == self.damage_dealed:
-                    self.is_removing_bar = False
-                    self.damage_dealed = 0
-                    self.count_removed_bar = 0
-            else:
-                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
-                if self.count_removed_bar == self.damage_dealed:
-                    self.is_removing_bar = False
-                    self.damage_dealed = 0
-                    self.count_removed_bar = 0
+        if not self.sel["is_selecting"] == "Items":
+            if self.is_removing_bar:
+                if self.sel["has_cursor_on"]=="Biscotto" or self.sel["has_cursor_on"]=="Soffio della morte":
+                    self.count_removed_bar = action.add_health(self.damage_dealed, self.sel["is_choosing_target"], self.count_removed_bar)
+                    if self.count_removed_bar == self.damage_dealed:
+                        self.is_removing_bar = False
+                        self.damage_dealed = 0
+                        self.count_removed_bar = 0
+                else:
+                    self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
+                    if self.count_removed_bar == self.damage_dealed:
+                        self.is_removing_bar = False
+                        self.damage_dealed = 0
+                        self.count_removed_bar = 0
+        else:
+            items.remove_bar(self)
     
     def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
         self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)

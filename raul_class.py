@@ -97,7 +97,7 @@ class Raul():
         self.description_template = {
             # Skills
             "Saetta trascendente":"Fulmini scagliati contro il nemico che aumentano l’emotività di Raul. Passa all’intensità successiva dell’emozione che sta provando.",
-            "Tempesta":"Scatena una tempesta, che rende tristi tutti gli alleati e causa lievi danni al nemico.",
+            "Tempesta":"Scatena una tempesta che rende tristi tutti gli alleati e causa lievi danni al nemico.",
             "Bastonata":"Colpisce con la sua staffa elettrica. Ottiene un quarto del mana suo totale.",
             "Pettoinfuori":"Si pompa, aumentando l’attacco.",
             "Bel tempo":"Crea un arcobaleno con la pioggia delle tempeste e la luce delle scintille. Fa diventare gioioso un alleato o nemico.",
@@ -499,32 +499,35 @@ class Raul():
             items.use_item(self, boss, self.sel["is_choosing_target"],allies)
         
     def remove_bar(self, boss):
-        if self.is_removing_bar:
-            if self.sel["has_cursor_on"]=="Tensione esplosiva":
-                self.count_1 = action.toggle_health(self.aoe_1, y.y, self.count_1)
-                self.count_2 = action.toggle_health(self.aoe_2, p.p, self.count_2)
-                self.count_4 = action.toggle_health(self.aoe_4, f.f, self.count_4)
-                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
-                print(self.count_1, self.count_2, self.count_4, self.count_removed_bar, self.aoe_1, self.aoe_2, self.aoe_4, self.damage_dealed)
-                if (self.count_1 + self.count_2 + self.count_4 + self.count_removed_bar) == (self.aoe_1 + self.aoe_2+ self.aoe_4 + self.damage_dealed):
-                    self.is_removing_bar = False
-                    self.damage_dealed = 0
-                    self.count_removed_bar = 0
-                    self.aoe_1 = 0
-                    self.aoe_2 = 0
-                    self.aoe_3 = 0
-                    self.aoe_4 = 0
+        if not self.sel["is_selecting"] == "Items":
+            if self.is_removing_bar:
+                if self.sel["has_cursor_on"]=="Tensione esplosiva":
+                    self.count_1 = action.toggle_health(self.aoe_1, y.y, self.count_1)
+                    self.count_2 = action.toggle_health(self.aoe_2, p.p, self.count_2)
+                    self.count_4 = action.toggle_health(self.aoe_4, f.f, self.count_4)
+                    self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
+                    print(self.count_1, self.count_2, self.count_4, self.count_removed_bar, self.aoe_1, self.aoe_2, self.aoe_4, self.damage_dealed)
+                    if (self.count_1 + self.count_2 + self.count_4 + self.count_removed_bar) == (self.aoe_1 + self.aoe_2+ self.aoe_4 + self.damage_dealed):
+                        self.is_removing_bar = False
+                        self.damage_dealed = 0
+                        self.count_removed_bar = 0
+                        self.aoe_1 = 0
+                        self.aoe_2 = 0
+                        self.aoe_3 = 0
+                        self.aoe_4 = 0
 
-                    self.count_1 = 0
-                    self.count_2 = 0
-                    self.count_3 = 0
-                    self.count_4 = 0
-            else:
-                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
-                if self.count_removed_bar == self.damage_dealed:
-                    self.is_removing_bar = False
-                    self.damage_dealed = 0
-                    self.count_removed_bar = 0
+                        self.count_1 = 0
+                        self.count_2 = 0
+                        self.count_3 = 0
+                        self.count_4 = 0
+                else:
+                    self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
+                    if self.count_removed_bar == self.damage_dealed:
+                        self.is_removing_bar = False
+                        self.damage_dealed = 0
+                        self.count_removed_bar = 0
+        else:
+            items.remove_bar(self)
 
     def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
         self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)

@@ -69,6 +69,13 @@ class Mago_Elettrico():
         # Too many animations.
         # Una animazione per posizione. Per usare le altre abilità vengono messe a video combinate.
 
+        self.background_animation = []
+        self.background_animation.append(pygame.image.load("img/background/background_mago_elettrico/background_mago_elettrico0.png"))
+        self.background_animation.append(pygame.image.load("img/background/background_mago_elettrico/background_mago_elettrico1.png"))
+        self.background_animation.append(pygame.image.load("img/background/background_mago_elettrico/background_mago_elettrico2.png"))
+
+        self.current_frame_background = 0
+
         self.zzaaap_animation_bottom_left = []
 
         self.zzaaap_animation_bottom_right = []

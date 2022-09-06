@@ -10,6 +10,7 @@ from raul_class import r
 from fabiano_class import f
 from mago_elettrico import me
 from items import items
+import random as rng
 import sound
 
 from types import NoneType
@@ -57,9 +58,59 @@ class Down_Box():
 action_box = Down_Box(BOX_WIDTH, 40, BOX_HORIZONTAL_SPACING, 0)
 dialogue_box = Down_Box(WIDTH-SPACING*4, 240, SPACING*2, SPACING)
 
+class Chara_bg_effect():
+    def __init__(self):
+        self.index = 0
+        self.count_for_animation = 0
+        self.chara_bg_animation = []
+        self.chara_bg_animation.append(pygame.transform.scale(pygame.image.load("img/background/chara_bg_effect/chara_bg_effect0.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT+1)))
+        self.chara_bg_animation.append(pygame.transform.scale(pygame.image.load("img/background/chara_bg_effect/chara_bg_effect1.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT+1)))
+        self.chara_bg_animation.append(pygame.transform.scale(pygame.image.load("img/background/chara_bg_effect/chara_bg_effect2.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT+1)))
+        
+    def get_random_index(self):
+        result = rng.randint(0,2)
+        while result == self.index:
+            result = rng.randint(0,2)
+        self.index = result
+        print(result)
+
+chara_bg_effect = Chara_bg_effect()
+
+def get_bg_color(chara):
+    result = (0,0,0)
+    if not chara.is_dead:
+        if chara.current_emotion == "neutrale":
+            result = ABSOLUTE_BLACK
+        elif chara.current_emotion == "gioioso":
+            result = (67,30,102)
+        elif chara.current_emotion == "felice":
+            result = (83,66,127)
+        elif chara.current_emotion == "euforico":
+            result = (123,106,165)
+        elif chara.current_emotion == "arrabbiato":
+            result = (255,170,110)
+        elif chara.current_emotion == "iracondo":
+            result = (255,105,90)
+        elif chara.current_emotion == "furioso":
+            result = (165,38,57)
+        elif chara.current_emotion == "triste":
+            result = (145,155,69)
+        elif chara.current_emotion == "depresso":
+            result = (92,93,65)
+        elif chara.current_emotion == "disperato":
+            result = (10,42,51)
+    else:
+        result = (255,255,255)
+    return result
+
+
 def bg():
     WIN.fill(ABSOLUTE_BLACK)
 def boss(boss):
+    WIN.blit(boss.background_animation[int(boss.current_frame_background)],(0,0))
+    boss.current_frame_background+=0.50
+    if boss.current_frame_background >= len(boss.background_animation):
+        boss.current_frame_background = 0
     WIN.blit(boss.img,(220,300))
 
 # Se riceve True, non viene messo il box delle voci
@@ -91,7 +142,15 @@ def gui(isFighting, boss):
 def characters():
     #-Disegno Youssef
     # Background
-    pygame.draw.rect(WIN, (140,70,20), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    pygame.draw.rect(WIN, get_bg_color(y), pygame.Rect( SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+
+    # Background - effect
+    if chara_bg_effect.count_for_animation >= 1:
+        chara_bg_effect.get_random_index()
+        chara_bg_effect.count_for_animation = 0
+    else:
+        chara_bg_effect.count_for_animation += 0.01
+    WIN.blit(chara_bg_effect.chara_bg_animation[chara_bg_effect.index], (SPACING+BOX_BORDER, HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)-1))
     
     # Profilo
     WIN.blit(y.img["Profilo"],(SPACING+BOX_BORDER, HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
@@ -120,14 +179,22 @@ def characters():
 
     #-Disegno Pier
     # Background
-    pygame.draw.rect(WIN, (120,0,90), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    pygame.draw.rect(WIN, get_bg_color(p), pygame.Rect( SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+
+    # Background - effect
+    if chara_bg_effect.count_for_animation >= 1:
+        chara_bg_effect.get_random_index()
+        chara_bg_effect.count_for_animation = 0
+    else:
+        chara_bg_effect.count_for_animation += 0.01
+    WIN.blit(chara_bg_effect.chara_bg_animation[chara_bg_effect.index], (SPACING+BOX_BORDER, SPACING+BOX_BORDER+BANNER_HEIGHT-1))
     
     # Profilo
     WIN.blit(p.img["Profilo"],(SPACING+BOX_BORDER, SPACING+BOX_BORDER+BANNER_HEIGHT))
-    
+
     # Background Bars
-    
     pygame.draw.rect(WIN, (BACKGROUND_CHARA_CARDS), pygame.Rect( SPACING + BOX_BORDER, SPACING + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + BOX_BORDER, CHARA_WIDTH - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT + (SPACING_PLAYER_BAR*2) ))
+    
     # Health Bar
     pygame.draw.rect(WIN, (HEALTH_INSIDE), pygame.Rect( SPACING + BOX_BORDER + SPACING_PLAYER_BAR, (SPACING + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + BOX_BORDER) + SPACING_PLAYER_BAR, p.current_hp/(p.hp/CHARA_WIDTH) - (SPACING_PLAYER_BAR*2) - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT/2 - (BOX_BORDER) ))
     
@@ -149,7 +216,15 @@ def characters():
 
     #-Disegno Raul
     # Background
-    pygame.draw.rect(WIN, (40,0,150), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    pygame.draw.rect(WIN, get_bg_color(r), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, HEIGHT-CHARA_HEIGHT-SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+
+    # Background - effect
+    if chara_bg_effect.count_for_animation >= 1:
+        chara_bg_effect.get_random_index()
+        chara_bg_effect.count_for_animation = 0
+    else:
+        chara_bg_effect.count_for_animation += 0.01
+    WIN.blit(chara_bg_effect.chara_bg_animation[chara_bg_effect.index], ( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)-1))
     
     # Profilo
     WIN.blit(r.img["Profilo"],( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
@@ -178,10 +253,18 @@ def characters():
 
     #-Disegno Fabiano
     # Background
-    pygame.draw.rect(WIN, (255,224,145), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+    pygame.draw.rect(WIN, get_bg_color(f), pygame.Rect( WIDTH-CHARA_WIDTH-SPACING, SPACING, CHARA_WIDTH, CHARA_HEIGHT ))
+
+    # Background - effect
+    if chara_bg_effect.count_for_animation >= 1:
+        chara_bg_effect.get_random_index()
+        chara_bg_effect.count_for_animation = 0
+    else:
+        chara_bg_effect.count_for_animation += 0.01
+    WIN.blit(chara_bg_effect.chara_bg_animation[chara_bg_effect.index], (WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , SPACING+BOX_BORDER+BANNER_HEIGHT-1))
     
     # Profilo
-    WIN.blit(f.img["Profilo"],(WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , SPACING+BOX_BORDER+BANNER_HEIGHT))
+    WIN.blit(f.img["Profilo"],(WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , SPACING+BOX_BORDER+BANNER_HEIGHT))    
     
     # Background Bars
     pygame.draw.rect(WIN, (BACKGROUND_CHARA_CARDS), pygame.Rect( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER), SPACING + BANNER_HEIGHT + CHARA_IMAGE_HEIGHT + BOX_BORDER, CHARA_WIDTH - (BOX_BORDER*2), ENEMY_HEALTH_BAR_HEIGHT + (SPACING_PLAYER_BAR*2) ))
@@ -223,6 +306,10 @@ def choices(current_player, is_selecting, boss):
                 for j in range(2):
                     text=my_font.render(turn.menu[j][i],False,(WHITE))
                     WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
+
+        elif current_player.sel["is_choosing_target"] != False:
+            title_and_text_action("Scegli un target", (SELECTION_COLOR), "Seleziona chi subirà l'attacco. Puoi premere shift per usare come target il nemico l'abilità lo permette.", FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
+        
         elif current_player.sel["has_done_first_selection"] and is_selecting=="Skills":
             if current_player.sel["has_cursor_on"] != "-":
                 text_to_show = str(current_player.description.get(current_player.sel["has_cursor_on"])) + " Consumo di mana: " + str(current_player.MNA_CONSUMPTION_SKILLS.get(current_player.sel["has_cursor_on"]))
@@ -230,13 +317,13 @@ def choices(current_player, is_selecting, boss):
                 text_to_show = "None"
             title_and_text_action(str(current_player.sel["has_cursor_on"]), (SELECTION_COLOR), text_to_show, FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             for i in range(3):#(current_player.sel["has_cursor_on"]
-                    for j in range(2):
-                        if type(current_player.MNA_CONSUMPTION_SKILLS.get(current_player.skills[j][i])) != NoneType:
-                            if current_player.MNA_CONSUMPTION_SKILLS.get(current_player.skills[j][i]) <= current_player.current_mna:
-                                text=my_font.render(current_player.skills[j][i],False,(WHITE))
-                            else:
-                                text=my_font.render(current_player.skills[j][i],False,(100,100,100))
-                            WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
+                for j in range(2):
+                    if type(current_player.MNA_CONSUMPTION_SKILLS.get(current_player.skills[j][i])) != NoneType:
+                        if current_player.MNA_CONSUMPTION_SKILLS.get(current_player.skills[j][i]) <= current_player.current_mna:
+                            text=my_font.render(current_player.skills[j][i],False,(WHITE))
+                        else:
+                            text=my_font.render(current_player.skills[j][i],False,(100,100,100))
+                        WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
                             
         elif current_player.sel["has_done_first_selection"] and is_selecting=="Friends":
             title_and_text_action(str(current_player.friends_title.get(current_player.sel["has_cursor_on"])), (SELECTION_COLOR), str(current_player.description.get(current_player.sel["has_cursor_on"])), FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
@@ -246,7 +333,25 @@ def choices(current_player, is_selecting, boss):
                     WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
 
         elif current_player.sel["has_done_first_selection"] and is_selecting=="Items":
-            title_and_text_action(str(items.items_title.get(current_player.sel["has_cursor_on"])), (SELECTION_COLOR), str(items.items_description.get(current_player.sel["has_cursor_on"])), FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
+            if current_player.sel["has_cursor_on"] != "-":
+                x,y = 0,0
+                if current_player.sel["has_cursor_on"] == "Acqua di Destiny":
+                    x,y = 0,0
+                elif current_player.sel["has_cursor_on"] == "Tiramisù (senza...)":
+                    x,y = 0,1
+                elif current_player.sel["has_cursor_on"] == "Orologio donato":
+                    x,y = 0,2
+                elif current_player.sel["has_cursor_on"] == "Laurea in Matematica":
+                    x,y = 1,0
+                elif current_player.sel["has_cursor_on"] == "Parmigianino":
+                    x,y = 1,1
+                elif current_player.sel["has_cursor_on"] == "Ghiaccio dei Bidelli":
+                    x,y = 1,2
+                
+                title_and_text_action(str(items.items_title.get(current_player.sel["has_cursor_on"])) + " (x" + str(items.items_usage[x][y]) + ")", (SELECTION_COLOR), str(items.items_description.get(current_player.sel["has_cursor_on"])), FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
+            else:
+                title_and_text_action(str(items.items_title.get(current_player.sel["has_cursor_on"])) + " (x0)", (SELECTION_COLOR), str(items.items_description.get(current_player.sel["has_cursor_on"])), FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
+            
             for i in range(3):
                 for j in range(2):
                     text=my_font.render(items.items[j][i],False,(WHITE))
@@ -262,6 +367,8 @@ def selection(currX, currY, current_player, is_selecting, has_cursor_on, has_don
     choices(current_player, is_selecting, boss)
     if is_selecting == "Friends" and has_done_first_selection:
         friend_icon(has_cursor_on)
+    if is_selecting == "Items" and has_done_first_selection:
+        item_icon(has_cursor_on)
 
     if not action_box.in_animation:
         # Disegna selettore abilita'
@@ -427,6 +534,21 @@ def friend_icon(selected_friend):
     if not friend_to_draw == "null":
         pygame.draw.rect(WIN, (225,225,255), pygame.Rect( (BOX_HORIZONTAL_SPACING + BOX_WIDTH) - CHARA_IMAGE_WIDTH - (BOX_BORDER*2), 0, CHARA_IMAGE_WIDTH + (BOX_BORDER*2), CHARA_IMAGE_HEIGHT+(BOX_BORDER*2)),BOX_BORDER)
         WIN.blit(friend_to_draw, ((BOX_HORIZONTAL_SPACING + BOX_WIDTH) - BOX_BORDER - CHARA_IMAGE_WIDTH, BOX_BORDER))
+        #pygame.draw.rect(WIN, (255,25,0), pygame.Rect( (BOX_HORIZONTAL_SPACING + BOX_WIDTH) - BOX_BORDER - CHARA_WIDTH, BOX_BORDER, CHARA_WIDTH, CHARA_IMAGE_HEIGHT), BOX_BORDER)
+
+def item_icon(selected_item):
+    item_to_draw = "null"
+    if selected_item == "Acqua di Destiny":
+        item_to_draw = ACQUA_DI_DESTINY
+    elif selected_item == "Laurea in Matematica":
+        item_to_draw = LAUREA_IN_MATEMATICA
+    elif selected_item == "Tiramisù (senza...)":
+        item_to_draw = TIRAMISU_SENZA_MASCARPONE
+
+    #print(friend_to_draw)
+    if not item_to_draw == "null":
+        pygame.draw.rect(WIN, (225,225,255), pygame.Rect( (BOX_HORIZONTAL_SPACING + BOX_WIDTH) - CHARA_IMAGE_WIDTH - (BOX_BORDER*2), 0, CHARA_IMAGE_WIDTH + (BOX_BORDER*2), CHARA_IMAGE_HEIGHT+(BOX_BORDER*2)),BOX_BORDER)
+        WIN.blit(item_to_draw, ((BOX_HORIZONTAL_SPACING + BOX_WIDTH) - BOX_BORDER - CHARA_IMAGE_WIDTH, BOX_BORDER))
         #pygame.draw.rect(WIN, (255,25,0), pygame.Rect( (BOX_HORIZONTAL_SPACING + BOX_WIDTH) - BOX_BORDER - CHARA_WIDTH, BOX_BORDER, CHARA_WIDTH, CHARA_IMAGE_HEIGHT), BOX_BORDER)
 
 def dialogue_gui(img):
@@ -1010,7 +1132,7 @@ def item_acqua_animation(user):
     if user.current_animation == 0:
         items.load_acqua()
     if user.is_doing_animation:
-        WIN.blit(items.acqua_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        WIN.blit(items.acqua_animation[int(user.current_animation)],(0,0))
         user.current_animation+=0.30
     if user.current_animation >= len(items.acqua_animation):
         user.is_doing_animation = False
@@ -1020,7 +1142,7 @@ def item_tiramisu_animation(user):
     if user.current_animation == 0:
         items.load_tiramisu_no_mascarpone()
     if user.is_doing_animation:
-        WIN.blit(items.tiramisu_no_mascarpone[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        WIN.blit(items.tiramisu_no_mascarpone[int(user.current_animation)],(0,0))
         user.current_animation+=0.30
     if user.current_animation >= len(items.tiramisu_no_mascarpone):
         user.is_doing_animation = False
@@ -1030,7 +1152,7 @@ def item_laurea_animation(user):
     if user.current_animation == 0:
         items.load_laurea()
     if user.is_doing_animation:
-        WIN.blit(items.laurea_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        WIN.blit(items.laurea_animation[int(user.current_animation)],(0,0))
         user.current_animation+=0.30
     if user.current_animation >= len(items.laurea_animation):
         user.is_doing_animation = False
@@ -1040,7 +1162,7 @@ def item_orologio_animation(user):
     if user.current_animation == 0:
         items.load_orologio()
     if user.is_doing_animation:
-        WIN.blit(items.orologio_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        WIN.blit(items.orologio_animation[int(user.current_animation)],(0,0))
         user.current_animation+=0.30
     if user.current_animation >= len(items.orologio_animation):
         user.is_doing_animation = False
@@ -1050,7 +1172,7 @@ def item_parmigianino_animation(user):
     if user.current_animation == 0:
         items.load_parmigianino()
     if user.is_doing_animation:
-        WIN.blit(items.parmigianino_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        WIN.blit(items.parmigianino_animation[int(user.current_animation)],(0,0))
         user.current_animation+=0.30
     if user.current_animation >= len(items.parmigianino_animation):
         user.is_doing_animation = False
@@ -1060,7 +1182,7 @@ def item_ghiaccio_animation(user):
     if user.current_animation == 0:
         items.load_ghiaccio()
     if user.is_doing_animation:
-        WIN.blit(items.ghiaccio_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        WIN.blit(items.ghiaccio_animation[int(user.current_animation)],(0,0))
         user.current_animation+=0.30
     if user.current_animation >= len(items.ghiaccio_animation):
         user.is_doing_animation = False

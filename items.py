@@ -131,13 +131,14 @@ class Items():
             if user.is_doing_animation:
                 dw.item_acqua_animation(user)
             if not user.is_doing_animation:
-                target.current_hp = target.hp
-                target.current_mna = target.mna
+                user.damage_dealed = action.healing_percentage(100, target.current_hp, target.hp)
+                user.aoe_1 = action.healing_percentage(100, target.current_mna, target.mna)
                 emotion.change_emotion(target, "neutrale")
                 print(user.name+" ha usato l'Acqua di Destiny su "+target.name+" ripristinando l'emozione, il mana e la vita!")
                 user.text_action=str(user.name+" ha usato l'Acqua di Destiny su "+target.name+" ripristinando l'emozione, il mana e la vita!")
                 user.current_animation = 0
                 user.is_showing_text_outputs = True
+                user.is_removing_bar = True
         
         if user.sel["has_cursor_on"] == "Tiramisù (senza...)":
             if user.is_doing_animation:
@@ -218,11 +219,29 @@ class Items():
                     user.current_animation = 0
                     user.is_showing_text_outputs = True
                     user.is_doing_animation = False
+                    user.is_removing_bar = True
             else:
                 print(user.name+" ha provato ad usare il ghiaccio su "+target.name+" ma non ha avuto effetto")
                 user.text_action=user.name+" ha provato ad usare il ghiaccio su "+target.name+" ma non ha avuto effetto"
                 user.current_animation = 0
                 user.is_showing_text_outputs = True
                 user.is_doing_animation = False
+        
+    def remove_bar(self, user):
+        if user.is_removing_bar:
+            if user.sel["has_cursor_on"]=="Acqua di Destiny":
+                user.count_removed_bar = action.add_health(user.damage_dealed, user.sel["is_choosing_target"], user.count_removed_bar)
+                user.count_1 = action.toggle_mna(user.aoe_1, user.sel["is_choosing_target"], user.count_1, 300, -5)
+                if (user.count_removed_bar + user.count_1) == (user.damage_dealed + user.aoe_1):
+                    user.is_removing_bar = False
+                    user.damage_dealed = 0
+                    user.count_removed_bar = 0
+
+            if user.sel["has_cursor_on"]=="Ghiaccio dei Bidelli":
+                user.count_removed_bar = action.add_health(user.damage_dealed, user.sel["is_choosing_target"], user.count_removed_bar)
+                if user.count_removed_bar == user.damage_dealed:
+                    user.is_removing_bar = False
+                    user.damage_dealed = 0
+                    user.count_removed_bar = 0
 
 items = Items()

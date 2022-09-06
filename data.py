@@ -21,7 +21,7 @@ MANA_INSIDE = (53,74,178)
 MANA_BORDER = (29,26,89)
 HEALTH_INSIDE = (221,55,69)
 HEALTH_BORDER = (114,28,47)
-BACKGROUND_CHARA_CARDS = (162,147,196)
+BACKGROUND_CHARA_CARDS = ABSOLUTE_BLACK
 SELECTION_COLOR = (255,105,90)
 
 BOSS_WIDTHxHEIGHT = (1480,720)
@@ -103,8 +103,8 @@ STATS_EXPLANATION = pygame.image.load("img/background/stats_explanation.png")
 EMOTION_EXPLANATION = pygame.image.load("img/background/emotion_explanation.png")
 
 # Examples
-soundtrack = "./sounds/boss_ost.mp3"
-soundtrack_2 = "./sounds/boss_ost_1.mp3"
+soundtrack = "./sounds/ost/cell.wav"
+soundtrack_2 = "./sounds/ost/field.wav"
 
 
 
@@ -135,6 +135,10 @@ CAPPE = pygame.transform.scale(pygame.image.load("img/friends/cappe.png"),(CHARA
 DIEGO = pygame.transform.scale(pygame.image.load("img/friends/diego.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 TRENTIN = pygame.transform.scale(pygame.image.load("img/friends/trentin.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 #PASTORELLO = pygame.transform.scale(dir,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+
+ACQUA_DI_DESTINY = pygame.transform.scale(pygame.image.load("img/items/acqua_di_destiny.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+LAUREA_IN_MATEMATICA = pygame.transform.scale(pygame.image.load("img/items/laurea_di_matematica.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+TIRAMISU_SENZA_MASCARPONE = pygame.transform.scale(pygame.image.load("img/items/tiramisu_no_mascarpone.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
 
 NEUTRAL_IMG = pygame.image.load("img/neutral_img.png")

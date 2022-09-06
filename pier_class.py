@@ -113,7 +113,7 @@ class Pier():
             # Skills
             "Fiamma protettrice":"Protegge lievemente tutto il party dall’attacco del nemico. Attacca per primo.",
             "Sbracciata":"Fa una T pose e continua a girare velocemente, colpendo il nemico. IMPOSSIBILE mancare.",
-            "Richiesta d'aiuto":"Infastidisce un alleato o nemico nel momento peggiore... portandogli rabbia.",
+            "Richiesta d'aiuto":"Infastidisce un alleato o nemico nel momento peggiore... portandogli rabbia. Durante la selezione, premi SHIFT per selezionare il nemico.",
             '"Spessanza"':"Mostra tutta la sua fierezza, facendo concentrare il nemico su Piergiorgio, diminuendo l’attacco del nemico e degli alleati per un turno. Attacca per primo.",
             "Bastione fiammante":"Cura tutti gli alleati del 40%.",
             "Sacrificio umano":"Manda al rogo un compagno a scelta e causa grandissimi danni al nemico.",
@@ -704,32 +704,35 @@ class Pier():
             items.use_item(self,boss,self.sel["is_choosing_target"],allies)
 
     def remove_bar(self, boss):
-        if self.is_removing_bar:
-            if self.sel["has_cursor_on"]=="Bastione fiammante" or self.sel["has_cursor_on"]=="Gonzato (spirito)":
-                self.count_1 = action.add_health(self.aoe_1, y.y, self.count_1)
-                self.count_2 = action.add_health(self.aoe_2, p, self.count_2)
-                self.count_3 = action.add_health(self.aoe_3, r.r, self.count_3)
-                self.count_4 = action.add_health(self.aoe_4, f.f, self.count_4)
-                print(self.count_1, self.count_2, self.count_3, self.count_4, self.aoe_1, self.aoe_2, self.aoe_3, self.aoe_4)
-                if (self.count_1 + self.count_2 + self.count_3 + self.count_4) == (self.aoe_1 + self.aoe_2 + self.aoe_3 + self.aoe_4):
-                    self.is_removing_bar = False
-                    self.damage_dealed = 0
-                    self.count_removed_bar = 0
-                    self.aoe_1 = 0
-                    self.aoe_2 = 0
-                    self.aoe_3 = 0
-                    self.aoe_4 = 0
+        if not self.sel["is_selecting"] == "Items":
+            if self.is_removing_bar:
+                if self.sel["has_cursor_on"]=="Bastione fiammante" or self.sel["has_cursor_on"]=="Gonzato (spirito)":
+                    self.count_1 = action.add_health(self.aoe_1, y.y, self.count_1)
+                    self.count_2 = action.add_health(self.aoe_2, p, self.count_2)
+                    self.count_3 = action.add_health(self.aoe_3, r.r, self.count_3)
+                    self.count_4 = action.add_health(self.aoe_4, f.f, self.count_4)
+                    print(self.count_1, self.count_2, self.count_3, self.count_4, self.aoe_1, self.aoe_2, self.aoe_3, self.aoe_4)
+                    if (self.count_1 + self.count_2 + self.count_3 + self.count_4) == (self.aoe_1 + self.aoe_2 + self.aoe_3 + self.aoe_4):
+                        self.is_removing_bar = False
+                        self.damage_dealed = 0
+                        self.count_removed_bar = 0
+                        self.aoe_1 = 0
+                        self.aoe_2 = 0
+                        self.aoe_3 = 0
+                        self.aoe_4 = 0
 
-                    self.count_1 = 0
-                    self.count_2 = 0
-                    self.count_3 = 0
-                    self.count_4 = 0
-            else:
-                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
-                if self.count_removed_bar == self.damage_dealed:
-                    self.is_removing_bar = False
-                    self.damage_dealed = 0
-                    self.count_removed_bar = 0
+                        self.count_1 = 0
+                        self.count_2 = 0
+                        self.count_3 = 0
+                        self.count_4 = 0
+                else:
+                    self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
+                    if self.count_removed_bar == self.damage_dealed:
+                        self.is_removing_bar = False
+                        self.damage_dealed = 0
+                        self.count_removed_bar = 0
+        else:
+            items.remove_bar(self)
 
     def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
         self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)

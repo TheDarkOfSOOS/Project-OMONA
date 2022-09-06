@@ -37,8 +37,8 @@ class Youssef():
         self.vel = 131 # Variabile per i punti velocità
         self.eva = 15 # Variabile per i punti evasione
 
-        self.current_hp = self.hp
-        self.current_mna = int(self.mna/2)
+        self.current_hp = self.hp/2
+        self.current_mna = self.mna/2
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -51,6 +51,8 @@ class Youssef():
         self.is_removing_bar = False
         self.count_removed_bar = 0
         self.damage_dealed = 0
+        self.aoe_1 = 0
+        self.count_1 = 0
 
         # EMOZIONI
         '''
@@ -97,13 +99,13 @@ class Youssef():
             # Skills
             "Sforbiciata":"Esegue un attacco che fa buoni danni. Attacca sempre per ultimo.",
             "Provocazione":"Provoca il nemico rendendolo arrabbiato e lo costringe a concentrarsi su Youssef per 3 turni.",
-            "Pallonata":"Tira un pallone al nemico che ignora la difesa del nemico quando Youssef è arrabbiato.",
+            "Pallonata":"Tira un pallone al nemico che ignora la sua difesa quando Youssef è arrabbiato.",
             "Delusione":"Il nemico lo prende di mira. Se Youssef è triste diminuisce l’attacco del nemico. Attacca per primo.",
             "Battutaccia":"Rende tutto il party gioioso in modo randomico.",
             "Assedio":"Sprona tutto il party ad attaccare il nemico. Ognuno farà pochi danni.",
             # Friends
             "Pol":"Prende un banco e si fionda contro il nemico.",
-            "Anastasia":"Entra nella mente del nemico, lo rende triste e diminuisce il suo attacco.",
+            "Anastasia":"Entra nella mente del nemico creandogli caos nella psiche. Lo rende triste e diminuisce il suo attacco.",
             "Borin":"Non ha effetto l’intimidazione... Arrabbia il nemico e diminuisce la sua difesa.",
             "Ciudin (spirito)":"Lascia l’ombrello a Youssef che lo distrugge, Youssef diventa felice e aumenta di molto la sua velocità."
         }
@@ -485,12 +487,15 @@ class Youssef():
             items.use_item(self, boss, self.sel["is_choosing_target"], allies)
 
     def remove_bar(self, boss):
-        if self.is_removing_bar:
-            self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
-            if self.count_removed_bar == self.damage_dealed:
-                self.is_removing_bar = False
-                self.damage_dealed = 0
-                self.count_removed_bar = 0
+        if not self.sel["is_selecting"] == "Items":
+            if self.is_removing_bar:
+                self.count_removed_bar = action.toggle_health(self.damage_dealed, boss, self.count_removed_bar)
+                if self.count_removed_bar == self.damage_dealed:
+                    self.is_removing_bar = False
+                    self.damage_dealed = 0
+                    self.count_removed_bar = 0
+        else:
+            items.remove_bar(self)
 
     def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
         self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)
