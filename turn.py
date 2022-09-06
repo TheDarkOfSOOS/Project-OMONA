@@ -203,7 +203,7 @@ def of_character(current_player, input, boss, returning):
         sel["is_choosing_target"]=False
 
     if input=="shift" and sel["is_choosing_target"]:
-        pygame.mixer.Sound.play(sound.CONFIRM)
+        pygame.mixer.Sound.play(sound.SELECTING_BOSS)
         sel["is_choosing_target"]=boss
         sel["is_choosing"]=False
 

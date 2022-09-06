@@ -505,6 +505,8 @@ def buff_stats_animation(chara):
         chara.is_buffed = -1
 
 def debuff_stats_animation(chara):
+    if int(chara.is_debuffed) == 0:
+        pygame.mixer.Sound.play(sound.STATS_DEBUFF)
     if chara == y:
         WIN.blit(pygame.transform.scale(b_d_animator.debuff_animation[int(chara.is_debuffed)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+BOX_BORDER, HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
     elif chara == p:
@@ -670,47 +672,47 @@ def richiesta_aiuto_animation():
     if int(p.current_animation) == 0:
         pygame.mixer.Sound.play(sound.HELP_REQUEST)
 
-def sacrificio_y_animation():
-    if p.current_animation == 0:
-        p.load_sacrificio_y()
-    if p.is_doing_animation:
-        WIN.blit(p.sacrificio_y_animation[int(p.current_animation)],(0,0))
-        p.current_animation+=0.60
-    if p.current_animation >= len(p.sacrificio_y_animation):
-        p.sacrificio_y_animation.clear()
-        p.is_doing_animation = False
+# def sacrificio_y_animation():
+#     if p.current_animation == 0:
+#         p.load_sacrificio_y()
+#     if p.is_doing_animation:
+#         WIN.blit(p.sacrificio_y_animation[int(p.current_animation)],(0,0))
+#         p.current_animation+=0.60
+#     if p.current_animation >= len(p.sacrificio_y_animation):
+#         p.sacrificio_y_animation.clear()
+#         p.is_doing_animation = False
 
-def sacrificio_p_animation():
-    if p.current_animation == 0:
-        p.load_sacrificio_p()
-    if p.is_doing_animation:
-        WIN.blit(p.sacrificio_p_animation[int(p.current_animation)],(0,0))
-        p.current_animation+=0.60
-    if p.current_animation >= len(p.sacrificio_p_animation):
-        p.sacrificio_p_animation.clear()
-        p.is_doing_animation = False
+# def sacrificio_p_animation():
+#     if p.current_animation == 0:
+#         p.load_sacrificio_p()
+#     if p.is_doing_animation:
+#         WIN.blit(p.sacrificio_p_animation[int(p.current_animation)],(0,0))
+#         p.current_animation+=0.60
+#     if p.current_animation >= len(p.sacrificio_p_animation):
+#         p.sacrificio_p_animation.clear()
+#         p.is_doing_animation = False
 
-def sacrificio_r_animation():
-    if p.current_animation == 0:
-        # Viene flippato dopo
-        p.load_sacrificio_y()
-    if p.is_doing_animation:
-        WIN.blit(pygame.transform.flip(p.sacrificio_y_animation[int(p.current_animation)],True, False),(0,0))
-        p.current_animation+=0.60
-    if p.current_animation >= len(p.sacrificio_y_animation):
-        p.sacrificio_y_animation.clear()
-        p.is_doing_animation = False
+# def sacrificio_r_animation():
+#     if p.current_animation == 0:
+#         # Viene flippato dopo
+#         p.load_sacrificio_y()
+#     if p.is_doing_animation:
+#         WIN.blit(pygame.transform.flip(p.sacrificio_y_animation[int(p.current_animation)],True, False),(0,0))
+#         p.current_animation+=0.60
+#     if p.current_animation >= len(p.sacrificio_y_animation):
+#         p.sacrificio_y_animation.clear()
+#         p.is_doing_animation = False
 
-def sacrificio_f_animation():
-    if p.current_animation == 0:
-        # Viene flippato dopo
-        p.load_sacrificio_p()
-    if p.is_doing_animation:
-        WIN.blit(pygame.transform.flip(p.sacrificio_p_animation[int(p.current_animation)],True, False),(0,0))
-        p.current_animation+=0.60
-    if p.current_animation >= len(p.sacrificio_p_animation):
-        p.sacrificio_p_animation.clear()
-        p.is_doing_animation = False
+# def sacrificio_f_animation():
+#     if p.current_animation == 0:
+#         # Viene flippato dopo
+#         p.load_sacrificio_p()
+#     if p.is_doing_animation:
+#         WIN.blit(pygame.transform.flip(p.sacrificio_p_animation[int(p.current_animation)],True, False),(0,0))
+#         p.current_animation+=0.60
+#     if p.current_animation >= len(p.sacrificio_p_animation):
+#         p.sacrificio_p_animation.clear()
+#         p.is_doing_animation = False
 
 def ilaria_y_animation():
     if p.current_animation == 0:
@@ -815,6 +817,8 @@ def tempesta_animation():
     if r.current_animation >= len(r.tempesta_animation):
         r.tempesta_animation.clear()
         r.is_doing_animation = False
+    if int(r.current_animation)%6 == 0:
+        pygame.mixer.Sound.play(sound.TORNADO)
 
 def bastonata_animation():
     if r.current_animation == 0:
@@ -852,17 +856,18 @@ def damox_animation():
     if r.is_doing_animation:
         WIN.blit(r.damox_animation[int(r.current_animation)],(0,0))
         r.current_animation+=0.65
+        print(int(r.current_animation))
     if r.current_animation >= len(r.damox_animation):
+        print(r.current_animation)
         r.damox_animation.clear()
         r.is_doing_animation = False
     if int(r.current_animation) == 10:
         pygame.mixer.Sound.play(sound.BEEP_UP)
-        print("sium")
     if int(r.current_animation) == 12:
         pygame.mixer.Sound.play(sound.BEEP_DOWN)
-    if int(r.current_animation) == 13:
+    if r.current_animation == 13.000000000000004:
         pygame.mixer.Sound.play(sound.BEEP_RIGHT)
-    if int(r.current_animation) == 16:
+    if r.current_animation == 16.250000000000004:
         pygame.mixer.Sound.play(sound.BEEP_LEFT)
 
 def biscotto_animation(target):
@@ -884,6 +889,8 @@ def biscotto_animation(target):
         if f.current_animation >= len(f.biscotto_animation):
             f.biscotto_animation.clear()
             f.is_doing_animation = False
+        if f.current_animation == 0.25:
+            pygame.mixer.Sound.play(sound.EATING)
 
 def pestata_animation():
     if f.current_animation == 0:
@@ -895,7 +902,7 @@ def pestata_animation():
         f.pestata_animation.clear()
         f.is_doing_animation = False
     if int(f.current_animation) == 7:
-        pygame.mixer.Sound.play(sound.FORZA_ROMA)
+        pygame.mixer.Sound.play(sound.OOF)
 
 def benevento_animation():
     if f.current_animation == 0:
@@ -918,6 +925,8 @@ def cappello_y_animation():
     if f.current_animation >= len(f.cappello_y_animation):
         f.cappello_y_animation.clear()
         f.is_doing_animation = False
+    if int(f.current_animation) == 1:
+        pygame.mixer.Sound.play(sound.HELP_REQUEST)
 
 def cappello_p_animation():
     if f.current_animation == 0:
@@ -928,6 +937,8 @@ def cappello_p_animation():
     if f.current_animation >= len(f.cappello_p_animation):
         f.cappello_p_animation.clear()
         f.is_doing_animation = False
+    if int(f.current_animation) == 1:
+        pygame.mixer.Sound.play(sound.HELP_REQUEST)
     
 def cappello_r_animation():
     if f.current_animation == 0:
@@ -938,6 +949,8 @@ def cappello_r_animation():
     if f.current_animation >= len(f.cappello_r_animation):
         f.cappello_r_animation.clear()
         f.is_doing_animation = False
+    if int(f.current_animation) == 1:
+        pygame.mixer.Sound.play(sound.HELP_REQUEST)
     
 def cappello_f_animation():
     if f.current_animation == 0:
@@ -948,18 +961,26 @@ def cappello_f_animation():
     if f.current_animation >= len(f.cappello_f_animation):
         f.cappello_f_animation.clear()
         f.is_doing_animation = False
+    if int(f.current_animation) == 1:
+        pygame.mixer.Sound.play(sound.HELP_REQUEST)
 
 def nikradogna_animation():
     if f.current_animation == 0:
         f.load_nikradogna()
+        pygame.mixer.Sound.play(sound.ANGELIC_CHORES)
     if f.is_doing_animation:
         WIN.blit(f.nikradogna_animation[int(f.current_animation)],(0,0))
         f.current_animation+=0.30
     if f.current_animation >= len(f.nikradogna_animation):
         f.nikradogna_animation.clear()
+        pygame.mixer.Sound.stop(sound.ANGELIC_CHORES)
         f.is_doing_animation = False
 
 def zzaaap_animation(targets):
+    if int(me.current_animation) <= 14:
+        pygame.mixer.Sound.play(sound.ZZAAP_CHARGE)
+    if int(me.current_animation) <= 19:
+        pygame.mixer.Sound.play(sound.ZZAAP_END)
     if me.is_doing_animation:
         if y in targets:
             if me.current_animation == 0:
@@ -985,9 +1006,62 @@ def zzaaap_animation(targets):
         me.zzaaap_animation_top_right.clear()
         me.is_doing_animation = False
 
-def item_animation(user):
+def item_acqua_animation(user):
+    if user.current_animation == 0:
+        items.load_acqua()
     if user.is_doing_animation:
-        WIN.blit(items.item_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
-        user.current_animation+=0.25
-    if user.current_animation >= len(items.item_animation):
+        WIN.blit(items.acqua_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        user.current_animation+=0.30
+    if user.current_animation >= len(items.acqua_animation):
         user.is_doing_animation = False
+        items.acqua_animation.clear()
+    
+def item_tiramisu_animation(user):
+    if user.current_animation == 0:
+        items.load_tiramisu_no_mascarpone()
+    if user.is_doing_animation:
+        WIN.blit(items.tiramisu_no_mascarpone[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        user.current_animation+=0.30
+    if user.current_animation >= len(items.tiramisu_no_mascarpone):
+        user.is_doing_animation = False
+        items.tiramisu_no_mascarpone.clear()
+
+def item_laurea_animation(user):
+    if user.current_animation == 0:
+        items.load_laurea()
+    if user.is_doing_animation:
+        WIN.blit(items.laurea_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        user.current_animation+=0.30
+    if user.current_animation >= len(items.laurea_animation):
+        user.is_doing_animation = False
+        items.laurea_animation.clear()
+    
+def item_orologio_animation(user):
+    if user.current_animation == 0:
+        items.load_orologio()
+    if user.is_doing_animation:
+        WIN.blit(items.orologio_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        user.current_animation+=0.30
+    if user.current_animation >= len(items.orologio_animation):
+        user.is_doing_animation = False
+        items.orologio_animation.clear()
+
+def item_parmigianino_animation(user):
+    if user.current_animation == 0:
+        items.load_parmigianino()
+    if user.is_doing_animation:
+        WIN.blit(items.parmigianino_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        user.current_animation+=0.30
+    if user.current_animation >= len(items.parmigianino_animation):
+        user.is_doing_animation = False
+        items.parmigianino_animation.clear()
+
+def item_ghiaccio_animation(user):
+    if user.current_animation == 0:
+        items.load_ghiaccio()
+    if user.is_doing_animation:
+        WIN.blit(items.ghiaccio_animation[int(user.current_animation)],(WIDTH/2.5,HEIGHT/24))
+        user.current_animation+=0.30
+    if user.current_animation >= len(items.ghiaccio_animation):
+        user.is_doing_animation = False
+        items.ghiaccio_animation.clear()

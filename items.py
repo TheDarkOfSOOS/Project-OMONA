@@ -36,28 +36,100 @@ class Items():
         }
         self.items_title = {}
 
-        self.item_animation = []
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation00.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation01.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation02.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation03.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation04.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation05.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation06.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation07.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation08.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation09.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation10.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation11.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation12.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation13.png"))
-        self.item_animation.append(pygame.image.load("img/animations/punch/punch_animation14.png"))
+        self.acqua_animation = []
+
+        self.tiramisu_no_mascarpone = []
     
+        self.laurea_animation = []
+    
+        self.orologio_animation = []
+
+        self.parmigianino_animation = []
+
+        self.ghiaccio_animation = []
+
+    def load_acqua(self):
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua00.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua01.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua02.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua03.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua04.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua05.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua06.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua07.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua08.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua09.png"))
+        self.acqua_animation.append(pygame.image.load("img/items/animation/animation_acqua/animation_acqua10.png"))
+    
+    def load_tiramisu_no_mascarpone(self):
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone00.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone01.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone02.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone03.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone04.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone05.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone06.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone07.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone08.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone09.png"))
+        self.tiramisu_no_mascarpone.append(pygame.image.load("img/items/animation/animation_tiramisu_no_mascarpone/animation_tiramisu_no_mascarpone10.png"))
+    
+    def load_laurea(self):
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica00.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica01.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica02.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica03.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica04.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica05.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica06.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica07.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica08.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica09.png"))
+        self.laurea_animation.append(pygame.image.load("img/items/animation/animation_laurea_di_matematica/animation_laurea_di_matematica10.png"))
+    
+    def load_orologio(self):
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato00.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato01.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato02.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato03.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato04.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato05.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato06.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato07.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato08.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato09.png"))
+        self.orologio_animation.append(pygame.image.load("img/animations/items/animation/animation_orologio_donato/animation_orologio_donato10.png"))
+    
+    def load_parmigianino(self):
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino00.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino01.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino02.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino03.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino04.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino05.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino06.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino07.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino08.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino09.png"))
+        self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino10.png"))
+    
+    def load_ghiaccio(self):
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli00.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli01.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli02.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli03.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli04.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli05.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli06.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli07.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli08.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli09.png"))
+        self.ghiaccio_animation.append(pygame.image.load("img/items/animation/animation_ghiaccio_dei_bidelli/animation_ghiaccio_dei_bidelli10.png"))
 
     def use_item(self, user, boss, target, allies):
         if user.sel["has_cursor_on"] == "Acqua di Destiny":
             if user.is_doing_animation:
-                dw.item_animation(user)
+                dw.item_acqua_animation(user)
             if not user.is_doing_animation:
                 target.current_hp = target.hp
                 target.current_mna = target.mna
@@ -69,7 +141,7 @@ class Items():
         
         if user.sel["has_cursor_on"] == "Tiramisù (senza...)":
             if user.is_doing_animation:
-                dw.item_animation(user)
+                dw.item_tiramisu_animation(user)
             if not user.is_doing_animation:
                 emotion.change_emotion(boss,"arrabbiato")
                 boss.current_defn -= action.buff_stats(boss.defn, boss, "debuff")
@@ -80,7 +152,7 @@ class Items():
 
         if user.sel["has_cursor_on"] == "Orologio donato":
             if user.is_doing_animation:
-                dw.item_animation(user)
+                dw.item_orologio_animation(user)
             if not user.is_doing_animation:
                 for i in allies:
                     i.current_atk += action.buff_stats(i.atk, i, "buff")
@@ -94,7 +166,7 @@ class Items():
 
         if user.sel["has_cursor_on"] == "Laurea in Matematica":
             if user.is_doing_animation:
-                dw.item_animation(user)
+                dw.item_laurea_animation(user)
             if not user.is_doing_animation:
                 user.current_atk += (action.buff_stats(user.atk, user, "buff")*2)
                 print(user.name+" legge la laurea del Mago Elettrico e si sente spronato a raggiungere quell'obiettivo! Il suo attacco aumenta di molto.")
@@ -104,7 +176,7 @@ class Items():
 
         if user.sel["has_cursor_on"] == "Parmigianino":
             if user.is_doing_animation:
-                dw.item_animation(user)
+                dw.item_parmigianino_animation(user)
             if not user.is_doing_animation:
                 if target.name == "Fabiano":
                     target.current_vel += (action.buff_stats(target.vel, target, "buff")*2)
@@ -126,7 +198,7 @@ class Items():
         if user.sel["has_cursor_on"] == "Ghiaccio dei Bidelli":
             if target.is_dead:
                 if user.is_doing_animation:
-                    dw.item_animation(user)
+                    dw.item_ghiaccio_animation(user)
 
                 if not user.is_doing_animation:
                     # result ==> 0 ==> non era morto quindi non e' stato rianimato

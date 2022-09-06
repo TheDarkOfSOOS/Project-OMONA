@@ -79,6 +79,8 @@ class Transition_Animator():
         self.new_transition_animation.append(pygame.image.load("img/animations/new_transition/new_transition_animation16.png"))
 
     def make_transitions(self):
+        if int(self.current_frame) == 0:
+            pygame.mixer.Sound.play(sound.TRANSITION)
         self.is_transitioning = True
         if self.is_transitioning:
             WIN.blit(self.new_transition_animation[int(self.current_frame)],(0,0))
