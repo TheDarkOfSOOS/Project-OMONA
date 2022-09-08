@@ -47,6 +47,9 @@ class Pier():
 
         self.is_dead = False
 
+        self.changing_mna = 0
+        self.MNA_CONSUMPTION = False
+
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
         self.is_removing_bar = False
@@ -505,11 +508,12 @@ class Pier():
         self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
        
     def do_something(self, boss):
-        MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
+        if self.MNA_CONSUMPTION == True:
+            self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Fiamma protettrice":
             if self.is_doing_animation:
                 dw.f_protettrice_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.f_protettrice_len/0.50, round(MNA_CONSUMPTION/(self.f_protettrice_len/0.50),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.f_protettrice_len/0.50, round(MNA_CONSUMPTION/(self.f_protettrice_len/0.50),2))
 
             if not self.is_doing_animation:
                 print("Pier protegge gli alleati riducendo il danno ricevuto")
@@ -522,7 +526,7 @@ class Pier():
             self.damage_dealed = action.damage_deal(p.current_atk,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.sbracciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.sbracciata_len/0.80, round(MNA_CONSUMPTION/(self.sbracciata_len/0.80),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.sbracciata_len/0.65, round(MNA_CONSUMPTION/(self.sbracciata_len/0.65),2))
 
             if not self.is_doing_animation:
                 print("Pier ha fatto", self.damage_dealed, "danni al nemico!")
@@ -534,7 +538,7 @@ class Pier():
         if self.sel["has_cursor_on"]=="Richiesta d'aiuto":
             if self.is_doing_animation:
                 dw.richiesta_aiuto_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.richiesta_aiuto_len/0.65, round(MNA_CONSUMPTION/(self.richiesta_aiuto_len/0.65),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.richiesta_aiuto_len/0.65, round(MNA_CONSUMPTION/(self.richiesta_aiuto_len/0.65),2))
 
             if not self.is_doing_animation:
                 emotion.change_emotion(self.sel["is_choosing_target"], "arrabbiato")
@@ -550,7 +554,7 @@ class Pier():
         if self.sel["has_cursor_on"]=='"Spessanza"':
             if self.is_doing_animation:        
                 dw.sbracciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 boss.update_target(self)
@@ -568,7 +572,7 @@ class Pier():
             self.aoe_4 = action.healing_percentage(heal_percentage, f.f.current_hp, f.f.hp)
             if self.is_doing_animation:
                 dw.sbracciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 print("Pier ha curato tutti gli alleati!")
@@ -582,19 +586,19 @@ class Pier():
             self.damage_dealed = action.damage_deal(p.current_atk,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation and self.sel["is_choosing_target"].name == "Youssef":
                 dw.sacrificio_y_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.sacrificio_y_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_y_len/0.60),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_y_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_y_len/0.60),2))
 
             if self.is_doing_animation and self.sel["is_choosing_target"].name == "Piergiorgio":
                 dw.sacrificio_p_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.sacrificio_p_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_p_len/0.60),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_p_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_p_len/0.60),2))
 
             if self.is_doing_animation and self.sel["is_choosing_target"].name == "Raul":
                 dw.sacrificio_r_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.sacrificio_r_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_r_len/0.60),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_r_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_r_len/0.60),2))
 
             if self.is_doing_animation and self.sel["is_choosing_target"].name == "Fabiano":
                 dw.sacrificio_f_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.sacrificio_f_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_f_len/0.60),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_f_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_f_len/0.60),2))
 
             if not self.is_doing_animation:
                 # ANIMA LA BARRA
@@ -688,10 +692,11 @@ class Pier():
                 self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Recover":
-            MNA_CONSUMPTION = -(self.mna/2)
+            if self.MNA_CONSUMPTION == None:
+                self.MNA_CONSUMPTION = int(-(self.mna/2))
             if self.is_doing_animation:
                 dw.recover_animation(self)
-                self.remove_mna(MNA_CONSUMPTION, len(dw.recover_animator.recover_animation)/0.25, round(MNA_CONSUMPTION/(len(dw.recover_animator.recover_animation)/0.25),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(dw.recover_animator.recover_animation)/0.25, round(MNA_CONSUMPTION/(len(dw.recover_animator.recover_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 print("Pier ha recuperato mana!")
@@ -734,10 +739,10 @@ class Pier():
         else:
             items.remove_bar(self)
 
-    def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
+    '''def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
         self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)
         #print(self.count_removed_bar, available_frames)
         if self.count_removed_bar == available_frames:
             self.is_removing_bar = False
-            self.count_removed_bar = 0
+            self.count_removed_bar = 0'''
 p = Pier()

@@ -78,7 +78,9 @@ class Dialogues():
             dw.dialogue_gui(self.image_of_dialogue[self.image_visualized])
         
         if dw.dialogue_box.current_width == dw.dialogue_box.desired_width:
-            dw.title_and_text_action(str(self.text_of_dialogue[self.text_visualized][0]),(WHITE),self.text_of_dialogue[self.text_visualized][1], FONT_SIZE, (SPACING*3, HEIGHT-BOX_HEIGHT), WIDTH-SPACING*5)
+            dw.title_and_text_action(str(self.text_of_dialogue[self.text_visualized][0]),(WHITE),self.text_of_dialogue[self.text_visualized][1], int(FONT_SIZE*1.3), (SPACING*3, HEIGHT-dw.dialogue_box.height), WIDTH-SPACING*5)
+            dw.text_given_last_coordinates('Premi "Enter" per continuare.', int(FONT_SIZE*1.3), ( (WIDTH-(SPACING*2)-BOX_BORDER), HEIGHT-(SPACING*2)-BOX_BORDER), MANA_INSIDE)
+            #WIDTH-SPACING*4, int(BOX_HEIGHT*1.2),  SPACING*2, SPACING,
 
             if input == "return":
                 pygame.mixer.Sound.play(sound.CONFIRM)

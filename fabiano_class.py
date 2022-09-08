@@ -38,13 +38,16 @@ class Fabiano():
         self.eva = 25 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = self.mna
+        self.current_mna = 0
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
         self.current_eva = self.eva
 
         self.is_dead = False
+
+        self.changing_mna = 0
+        self.MNA_CONSUMPTION = False
 
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
@@ -323,13 +326,14 @@ class Fabiano():
         self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation11.png"))
             
     def do_something(self, boss):
-        MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
+        if self.MNA_CONSUMPTION == True:
+            self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Biscotto":
             heal_percentage = 75
             target = self.sel["is_choosing_target"]
             if self.is_doing_animation:
                 dw.biscotto_animation(target)
-                self.remove_mna(MNA_CONSUMPTION, self.biscotto_len/0.25, round(MNA_CONSUMPTION/(self.biscotto_len/0.25),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.biscotto_len/0.25, round(MNA_CONSUMPTION/(self.biscotto_len/0.25),2))
 
             if not self.is_doing_animation:
                 self.damage_dealed = action.healing_percentage(heal_percentage, target.current_hp, target.hp)
@@ -344,7 +348,7 @@ class Fabiano():
             self.damage_dealed = action.damage_deal(f.current_vel,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.pestata_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.pestata_len/0.30, round(MNA_CONSUMPTION/(self.pestata_len/0.30),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.pestata_len/0.30, round(MNA_CONSUMPTION/(self.pestata_len/0.30),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.current_eva):
@@ -361,7 +365,7 @@ class Fabiano():
         if self.sel["has_cursor_on"]=="Benevento":
             if self.is_doing_animation:
                 dw.benevento_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.benevento_len/0.30, round(MNA_CONSUMPTION/(self.benevento_len/0.30),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.benevento_len/0.30, round(MNA_CONSUMPTION/(self.benevento_len/0.30),2))
 
             if not self.is_doing_animation:
                 for allies in [y.y,p.p,r.r,self]:
@@ -374,7 +378,7 @@ class Fabiano():
         if self.sel["has_cursor_on"]=="Malevento":
             if self.is_doing_animation:
                 dw.pestata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
                 boss.current_defn -= action.buff_stats(boss.defn, allies, "debuff")
@@ -386,7 +390,7 @@ class Fabiano():
         if self.sel["has_cursor_on"]=="Empatia":
             if self.is_doing_animation:
                 dw.pestata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
                 emotion.change_emotion(boss, "gioioso")
@@ -402,7 +406,7 @@ class Fabiano():
             if target.is_dead:
                 if self.is_doing_animation:
                     dw.pestata_animation()
-                    self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
+                    #self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
                 if not self.is_doing_animation:
                     # result ==> 0 ==> non era morto quindi non e' stato rianimato
@@ -486,10 +490,11 @@ class Fabiano():
                 self.is_showing_text_outputs = True
         
         if self.sel["has_cursor_on"]=="Recover":
-            MNA_CONSUMPTION = -(self.mna/2)
+            if self.MNA_CONSUMPTION == None:
+                self.MNA_CONSUMPTION = int(-(self.mna/2))
             if self.is_doing_animation:
                 dw.recover_animation(self)
-                self.remove_mna(MNA_CONSUMPTION, len(dw.recover_animator.recover_animation)/0.25, round(MNA_CONSUMPTION/(len(dw.recover_animator.recover_animation)/0.25),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(dw.recover_animator.recover_animation)/0.25, round(MNA_CONSUMPTION/(len(dw.recover_animator.recover_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 print("Fabiano ha recuperato mana!")
@@ -519,11 +524,11 @@ class Fabiano():
         else:
             items.remove_bar(self)
     
-    def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
+    '''def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
         self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)
         #print(self.count_removed_bar, available_frames)
         if self.count_removed_bar == available_frames:
             self.is_removing_bar = False
-            self.count_removed_bar = 0
+            self.count_removed_bar = 0'''
 
 f = Fabiano()

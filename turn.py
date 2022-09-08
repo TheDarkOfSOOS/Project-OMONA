@@ -49,7 +49,7 @@ def of_character(current_player, input, boss, returning):
             if items.items_usage[0][0] > 0:
                 items.items[0][0] = items.items_template[0][0]
 
-        if current_player.sel["has_cursor_on"] == "Tiramisù (senza mascarpone)":
+        if current_player.sel["has_cursor_on"] == "Tiramisù (senza...)":
             items.items_usage[0][1] += 1
             if items.items_usage[0][1] > 0:
                 items.items[0][1] = items.items_template[0][1]

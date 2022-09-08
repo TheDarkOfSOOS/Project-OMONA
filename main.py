@@ -102,25 +102,25 @@ while run:
         if event.type == pygame.KEYDOWN:
             # Controlla se input valido
             #print(event.key)
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 input="right"
                 #print(pygame.K_RIGHT)
-            elif event.key == pygame.K_LEFT:
+            elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 input="left"
                 #print(pygame.K_LEFT)
-            elif event.key == pygame.K_UP:
+            elif event.key == pygame.K_UP or event.key == pygame.K_w:
                 input="up"
                 #print(pygame.K_UP)
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 input="down"
                 #print(pygame.K_DOWN)
-            elif event.key == pygame.K_RETURN:
+            elif event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
                 input="return"
                 #print(pygame.K_RETURN)
-            elif event.key == pygame.K_BACKSPACE:
+            elif event.key == pygame.K_BACKSPACE or event.key == pygame.K_ESCAPE:
                 input="backspace"
                 #print(pygame.K_BACKSPACE)
-            elif event.key == pygame.K_LSHIFT:
+            elif event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
                 input="shift"
                 #print(pygame.K_LSHIFT)
 
@@ -128,10 +128,14 @@ while run:
         if event.type == pygame.QUIT:
             # Imposta lo stato di run a falso
             run = False
-    dw.bg()
+    #dw.bg()
+
+    # Subnezia.
+
+
     dialogue.d.set_dialogue(0)
     # Entra subito nel fight togliendo il commento
-    #finish = True
+    finish = True
     if not finish:
         finish = dialogue.d.dialogue(input)    
     elif finish:

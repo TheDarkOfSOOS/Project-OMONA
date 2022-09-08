@@ -37,14 +37,17 @@ class Youssef():
         self.vel = 131 # Variabile per i punti velocità
         self.eva = 15 # Variabile per i punti evasione
 
-        self.current_hp = self.hp/2
-        self.current_mna = self.mna/2
+        self.current_hp = self.hp
+        self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
         self.current_eva = self.eva
         
         self.is_dead = False
+
+        self.changing_mna = 0
+        self.MNA_CONSUMPTION = False
 
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
@@ -299,14 +302,14 @@ class Youssef():
         self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation26.png"))
 
     def do_something(self, boss):
-        MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
-
+        if self.MNA_CONSUMPTION == True:
+            self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Sforbiciata":
             DMG_DEAL = 11
             self.damage_dealed = action.damage_deal(y.current_atk,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.sforbiciata_len/0.70, round(MNA_CONSUMPTION/(self.sforbiciata_len/0.70),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.sforbiciata_len/0.70, round(MNA_CONSUMPTION/(self.sforbiciata_len/0.70),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.current_eva):
@@ -324,7 +327,7 @@ class Youssef():
             boss.focus_on_youssef = 3
             if self.is_doing_animation:
                 dw.provocazione_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.provocazione_len/0.50, round(MNA_CONSUMPTION/(self.provocazione_len/0.50),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.provocazione_len/0.50, round(MNA_CONSUMPTION/(self.provocazione_len/0.50),2))
 
             if not self.is_doing_animation:
                 boss.update_target(self)
@@ -342,7 +345,7 @@ class Youssef():
                 self.damage_dealed = action.damage_deal(y.current_atk,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.pallonata_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.pallonata_len /0.25, round(MNA_CONSUMPTION/(self.pallonata_len/0.25),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.pallonata_len /0.25, round(MNA_CONSUMPTION/(self.pallonata_len/0.25),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.current_eva):
@@ -359,7 +362,7 @@ class Youssef():
         if self.sel["has_cursor_on"]=="Delusione":
             if self.is_doing_animation:     
                 dw.sforbiciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
 
             if not self.is_doing_animation:
                 self.text_action="Youssef ha attirato le attenzioni del nemico. "
@@ -374,7 +377,7 @@ class Youssef():
         if self.sel["has_cursor_on"]=="Battutaccia":
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
 
             if not self.is_doing_animation:
                 print("Youssef ha reso tutti felici!")
@@ -397,7 +400,7 @@ class Youssef():
             self.damage_dealed = 0
             if self.is_doing_animation:
                 dw.sforbiciata_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.current_eva) and not (self.current_emotion == "gioioso" or self.current_emotion == "felice"):
@@ -414,7 +417,7 @@ class Youssef():
                     self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Pol":
-            DMG_DEAL = 10
+            DMG_DEAL = 17
             self.damage_dealed = action.damage_deal(150,DMG_DEAL,boss.current_defn,"neutrale",boss.current_emotion)
             if self.is_doing_animation:
                 dw.pol_animation()
@@ -471,10 +474,11 @@ class Youssef():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Recover":
-            MNA_CONSUMPTION = -(self.mna/2)
+            if self.MNA_CONSUMPTION == None:
+                self.MNA_CONSUMPTION = int(-(self.mna/2))
             if self.is_doing_animation:
                 dw.recover_animation(self)
-                self.remove_mna(MNA_CONSUMPTION, len(dw.recover_animator.recover_animation)/0.25, round(MNA_CONSUMPTION/(len(dw.recover_animator.recover_animation)/0.25),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(dw.recover_animator.recover_animation)/0.25, round(MNA_CONSUMPTION/(len(dw.recover_animator.recover_animation)/0.25),2))
 
             if not self.is_doing_animation:
                 print("Youssef ha recuperato mana!")
@@ -497,12 +501,12 @@ class Youssef():
         else:
             items.remove_bar(self)
 
-    def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
+    '''def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
         self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)
         #print(self.count_removed_bar, available_frames)
         if self.count_removed_bar == available_frames:
             self.is_removing_bar = False
-            self.count_removed_bar = 0
+            self.count_removed_bar = 0'''
 y = Youssef()
 
 

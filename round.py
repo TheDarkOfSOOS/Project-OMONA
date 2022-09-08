@@ -46,9 +46,6 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
     # - Inizio round -
 
-    for chara in [youssef.y,pier.p,raul.r,fabiano.f]:
-        chara.change_img()
-
     # Fai queste cose all'inizio del round
     if new_turn_has_started:
         # Non ci interessa sapere cosa fosse successo prima
@@ -81,12 +78,19 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
         else:
             chara.is_dead = False
 
+        if type(chara.MNA_CONSUMPTION) is int:
+            action.remove_mna(chara)
+            input = "null"
+
+        # Aggiorniamo la visual
+        chara.change_img()
+        
     #print(boss.target)
     #print(boss.current_defn)
     #print(youssef.y.sforbiciata_len)
     #print(pier.p.current_emotion)
     #print(raul.r.current_emotion)
-    #print(fabiano.f.current_emotion)
+    #print(fabiano.f.count_removed_bar)
     #print(boss.current_emotion)
 
     #print(youssef.y.current_mna)
@@ -260,6 +264,8 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                     dead_list.append(chara)
 
         if animation_is_starting:
+            for chara in [youssef.y,pier.p,raul.r,fabiano.f]:
+                chara.MNA_CONSUMPTION = True
             list_speed_ordered[0].is_doing_animation = True
             animation_is_starting = False
             print("Animazione inizia..." + str(len(list_speed_ordered)))

@@ -47,6 +47,9 @@ class Raul():
 
         self.is_dead = False
 
+        self.changing_mna = 0
+        self.MNA_CONSUMPTION = False
+
         self.skill_atk = 0 # Variabile per la potenza dell'attacco (cambia in base all'abilità)
 
         self.is_removing_bar = False
@@ -313,13 +316,14 @@ class Raul():
     
 
     def do_something(self, boss):
-        MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
+        if self.MNA_CONSUMPTION == True:
+            self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Saetta trascendente":
             DMG_DEAL = 8
             self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.saetta_len/0.50, round(MNA_CONSUMPTION/(self.saetta_len/0.50),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.saetta_len/0.50, round(MNA_CONSUMPTION/(self.saetta_len/0.50),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.current_eva):
@@ -352,7 +356,7 @@ class Raul():
             self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.tempesta_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.tempesta_len/0.50, round(MNA_CONSUMPTION/(self.tempesta_len/0.50),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.tempesta_len/0.50, round(MNA_CONSUMPTION/(self.tempesta_len/0.50),2))
 
             if not self.is_doing_animation:
                 print("Raul ha reso tutti tristi e ha fatto", self.damage_dealed, "danni al nemico")
@@ -367,11 +371,12 @@ class Raul():
 
         if self.sel["has_cursor_on"]=="Bastonata":
             DMG_DEAL = 6
-            MNA_CONSUMPTION = -(self.mna/4)
+            if self.MNA_CONSUMPTION == 0:
+                self.MNA_CONSUMPTION = int(-(self.mna/4))
             self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.bastonata_animation()
-                self.remove_mna(MNA_CONSUMPTION, self.bastonata_len/0.50, round(MNA_CONSUMPTION/(self.bastonata_len/0.50),2))
+                #self.remove_mna(MNA_CONSUMPTION, self.bastonata_len/0.50, round(MNA_CONSUMPTION/(self.bastonata_len/0.50),2))
 
             if not self.is_doing_animation:
                 if action.is_missed(boss.current_eva):
@@ -389,7 +394,7 @@ class Raul():
         if self.sel["has_cursor_on"]=="Pettoinfuori":
             if self.is_doing_animation:
                 dw.saetta_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 self.current_atk+=action.buff_stats(self.atk, self, "buff")
@@ -401,7 +406,7 @@ class Raul():
         if self.sel["has_cursor_on"]=="Bel tempo":
             if self.is_doing_animation:
                 dw.saetta_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 emotion.change_emotion(self.sel["is_choosing_target"], "gioioso")
@@ -418,7 +423,7 @@ class Raul():
             self.aoe_4 = action.damage_deal(r.current_atk,DMG_DEAL,f.f.current_defn,self.current_emotion,f.f.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
-                self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 emotion.change_emotion(self, "arrabbiato")
@@ -454,7 +459,7 @@ class Raul():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Noce":
-            DMG_DEAL = 25
+            DMG_DEAL = 15
             self.damage_dealed = action.damage_deal(150,DMG_DEAL,boss.defn,"neutrale",boss.current_emotion)
             if self.is_doing_animation:
                 dw.noce_animation()
@@ -483,10 +488,11 @@ class Raul():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Recover":
-            MNA_CONSUMPTION = -(self.mna/2)
+            if self.MNA_CONSUMPTION == None:
+                self.MNA_CONSUMPTION = int(-(self.mna/2))
             if self.is_doing_animation:
                 dw.recover_animation(self)
-                self.remove_mna(MNA_CONSUMPTION, len(dw.recover_animator.recover_animation)/0.50, round(MNA_CONSUMPTION/(len(dw.recover_animator.recover_animation)/0.50),2))
+                #self.remove_mna(MNA_CONSUMPTION, len(dw.recover_animator.recover_animation)/0.50, round(MNA_CONSUMPTION/(len(dw.recover_animator.recover_animation)/0.50),2))
 
             if not self.is_doing_animation:
                 print("Raul ha recuperato mana!")
@@ -529,10 +535,10 @@ class Raul():
         else:
             items.remove_bar(self)
 
-    def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
+    '''def remove_mna(self, mna_to_remove, available_frames, mna_less_per_frame):
         self.count_removed_bar = action.toggle_mna(mna_to_remove, self, self.count_removed_bar, available_frames, mna_less_per_frame)
         #print(self.count_removed_bar, available_frames)
         if self.count_removed_bar == available_frames:
             self.is_removing_bar = False
-            self.count_removed_bar = 0
+            self.count_removed_bar = 0'''
 r = Raul()

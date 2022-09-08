@@ -131,7 +131,9 @@ class Items():
             if user.is_doing_animation:
                 dw.item_acqua_animation(user)
             if not user.is_doing_animation:
+                print("before", user.damage_dealed)
                 user.damage_dealed = action.healing_percentage(100, target.current_hp, target.hp)
+                print("after", user.damage_dealed)
                 user.aoe_1 = action.healing_percentage(100, target.current_mna, target.mna)
                 emotion.change_emotion(target, "neutrale")
                 print(user.name+" ha usato l'Acqua di Destiny su "+target.name+" ripristinando l'emozione, il mana e la vita!")
@@ -230,8 +232,11 @@ class Items():
     def remove_bar(self, user):
         if user.is_removing_bar:
             if user.sel["has_cursor_on"]=="Acqua di Destiny":
-                user.count_removed_bar = action.add_health(user.damage_dealed, user.sel["is_choosing_target"], user.count_removed_bar)
-                user.count_1 = action.toggle_mna(user.aoe_1, user.sel["is_choosing_target"], user.count_1, 300, -5)
+                if not user.count_removed_bar >= user.damage_dealed:
+                    user.count_removed_bar = action.add_health(user.damage_dealed, user.sel["is_choosing_target"], user.count_removed_bar)
+                if not user.count_1 >= user.aoe_1:
+                    user.count_1 = action.toggle_mna(user.aoe_1, user.sel["is_choosing_target"], user.count_1, 300, -5)
+                print(user.count_removed_bar, user.count_1, user.damage_dealed, user.aoe_1)
                 if (user.count_removed_bar + user.count_1) == (user.damage_dealed + user.aoe_1):
                     user.is_removing_bar = False
                     user.damage_dealed = 0
