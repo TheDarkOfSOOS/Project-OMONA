@@ -616,6 +616,34 @@ def dialogue_bg(img):
         WIN.fill((0,0,100))
     else:
         WIN.blit(pygame.transform.scale(img,(WIDTH,HEIGHT)),(0,0))
+
+class GameOverMenu():
+    def __init__(self):
+        self.game_over_status = True
+        self.gm_menu = [["Riprova"],["Esci"]]
+        self.sel = {"has_cursor_on":"Riprova"}
+    
+    def gm_background(self):
+        WIN.fill((ABSOLUTE_BLACK))
+        WIN.blit(pygame.image.load("img/background/game_over.png"),(0,0))
+    
+    def gm_box(self):
+        pygame.draw.rect(WIN, (BLACK), pygame.Rect( BOX_HORIZONTAL_SPACING, HEIGHT-action_box.height, BOX_WIDTH, action_box.height ))
+        pygame.draw.rect(WIN, (WHITE), pygame.Rect( BOX_HORIZONTAL_SPACING, HEIGHT-action_box.height, BOX_WIDTH, action_box.height ), BOX_BORDER)
+        text_action("Riprova", 35, BOX_LEFT_UP,WIDTH)
+        text_action("Esci", 35, BOX_RIGHT_UP,WIDTH)
+
+    def gm_selector(self, current_X, current_Y):
+        pygame.draw.rect(WIN, (SELECTION_COLOR), pygame.Rect( GM_CHOICE_LOCATIONS[current_Y][current_X][X]-SPACING, GM_CHOICE_LOCATIONS[current_Y][current_X][Y]+(SPACING/4), 15, 15 ))
+
+    def game_over(self, input):
+        self.gm_background()
+        self.gm_box()
+        turn.game_over_input(self, input)
+
+        return self.game_over_status
+
+game_over_loader = GameOverMenu()
 # Parte delle animazioni
 # ATTENZIONE: SETTARE VALORE VELOCITA' ANIMAZIONE A 0.25 PER ABILITA' PERSONAGGI
 # SE SI VUOLE CAMBIARE, NECESSARIO ANDARE NELLA STESSA ABILITA' SULLA CLASSE

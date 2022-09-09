@@ -238,6 +238,37 @@ def of_character(current_player, input, boss, returning):
 
     return sel, returning
 
+def game_over_input(loader, input):
+    sel = loader.sel
+
+    global current_selection_Y
+
+    sel["has_cursor_on"]=loader.gm_menu[current_selection_Y][0]
+
+    loader.gm_selector(current_selection_Y, 0)
+
+    if (input=="right" and current_selection_Y<1): #  and current_selection_X<1
+        # Spostiamo la X a destra
+        current_selection_Y+=1
+        # Disegniamo le modifiche
+        loader.gm_selector(current_selection_Y, 0)
+        pygame.mixer.Sound.play(sound.DIRECTIONAL_SELECTION)
+
+    elif (input=="left" and current_selection_Y>0):
+        # Spostiamo la X a sinistra
+        current_selection_Y-=1
+        loader.gm_selector(current_selection_Y, 0)
+        pygame.mixer.Sound.play(sound.DIRECTIONAL_SELECTION)
+    
+    if input=="return" and sel["has_cursor_on"] == "Riprova":
+        loader.game_over_status = False
+    
+    if input=="return" and sel["has_cursor_on"] == "Esci":
+        pygame.quit()
+    
+
+    return sel
+
 # Funzione veloce per resettare movimento
 def reset_movement():
     global current_selection_X
