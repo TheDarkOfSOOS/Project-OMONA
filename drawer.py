@@ -9,6 +9,7 @@ from pier_class import p
 from raul_class import r
 from fabiano_class import f
 from mago_elettrico import me
+from doraemon import d
 from items import items
 import random as rng
 import sound
@@ -325,7 +326,9 @@ def choices(current_player, is_selecting, boss):
         ''' In base al tipo di selezione del personaggio,
             ci sara' del testo diverso '''
         if not current_player.sel["has_done_first_selection"]:
-            if f.foresees_enemy_attacks >= 0:
+            if boss.ultimate_status == "will_activate":
+                text_action(boss.name + " sembra voler attivare qualcosa...", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+            elif f.foresees_enemy_attacks >= 0:
                 text_focus = ""
                 for targets in boss.target:
                     text_focus +=", " + targets.name
@@ -370,15 +373,15 @@ def choices(current_player, is_selecting, boss):
                 if current_player.sel["has_cursor_on"] == "Acqua di Destiny":
                     x,y = 0,0
                 elif current_player.sel["has_cursor_on"] == "Tiramisù (senza...)":
-                    x,y = 0,1
-                elif current_player.sel["has_cursor_on"] == "Orologio donato":
-                    x,y = 0,2
-                elif current_player.sel["has_cursor_on"] == "Laurea in Matematica":
                     x,y = 1,0
+                elif current_player.sel["has_cursor_on"] == "Orologio donato":
+                    x,y = 1,2
+                elif current_player.sel["has_cursor_on"] == "Laurea in Matematica":
+                    x,y = 0,1
                 elif current_player.sel["has_cursor_on"] == "Parmigianino":
                     x,y = 1,1
                 elif current_player.sel["has_cursor_on"] == "Ghiaccio dei Bidelli":
-                    x,y = 1,2
+                    x,y = 0,2
                 
                 title_and_text_action(str(items.items_title.get(current_player.sel["has_cursor_on"])) + " (x" + str(items.items_usage[x][y]) + ")", (SELECTION_COLOR), str(items.items_description.get(current_player.sel["has_cursor_on"])), FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH - CHARA_WIDTH)
             else:
@@ -389,6 +392,10 @@ def choices(current_player, is_selecting, boss):
                     text=my_font.render(items.items[j][i],False,(WHITE))
                     WIN.blit(text,(CHOICE_LOCATIONS[j][i][X], CHOICE_LOCATIONS[j][i][Y]))
     
+def ulti_allert(boss):
+    text_action(boss.name +": "+boss.ulti_dialog, FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+    text_given_last_coordinates('Premi "Enter" per andare avanti.', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING+(SPACING*2)-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
+
 def selection(currX, currY, current_player, is_selecting, has_cursor_on, has_done_first_selection, boss):
     # Ridisegniamo tutti gli elementi
     #bg()
@@ -1201,6 +1208,78 @@ def zzaaap_animation(targets):
         me.zzaaap_animation_bottom_right.clear()
         me.zzaaap_animation_top_right.clear()
         me.is_doing_animation = False
+
+# SPAZIO PER HUMTPY DUMPTY (togli commento dopo)
+
+
+
+def dono_inaspettato_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_dono_inaspettato()
+            print(d.dono_inaspettato_animation)
+        WIN.blit(d.dono_inaspettato_animation[int(d.current_animation)],(0,0))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.dono_inaspettato_animation):
+        d.dono_inaspettato_animation.clear()
+        d.is_doing_animation = False
+
+def missile_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_missile()
+        WIN.blit(d.missile_animation[int(d.current_animation)],(0,0))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.missile_animation):
+        d.missile_animation.clear()
+        d.is_doing_animation = False
+
+def macchina_del_tempo_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_macchina_del_tempo()
+        WIN.blit(d.macchina_del_tempo_animation[int(d.current_animation)],(0,0))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.macchina_del_tempo_animation):
+        d.macchina_del_tempo_animation.clear()
+        d.is_doing_animation = False
+
+def chopter_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_chopter()
+        WIN.blit(d.chopter_animation[int(d.current_animation)],(0,0))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.chopter_animation):
+        d.chopter_animation.clear()
+        d.is_doing_animation = False
+
+def sfuriate_meccaniche_animation(target):
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_sfuriate_meccaniche()
+        if target == y:
+            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+SPACING,HEIGHT-CHARA_HEIGHT-SPACING+(SPACING*3)))
+        elif target == p:
+            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+SPACING,SPACING+(SPACING*3)))
+        elif target == r:
+            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(WIDTH-CHARA_WIDTH,HEIGHT-CHARA_HEIGHT+SPACING))
+        elif target == f:
+            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(WIDTH-CHARA_WIDTH,SPACING+(SPACING*3)))
+        d.current_animation+=0.20
+    if d.current_animation >= len(d.sfuriate_meccaniche_animation):
+        d.sfuriate_meccaniche_animation.clear()
+        d.is_doing_animation = False
+
+def bomba_ad_idrogeno_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_bomba_ad_idrogeno()
+        WIN.blit(d.bomba_ad_idrogeno_animation[int(d.current_animation)],(0,0))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.bomba_ad_idrogeno_animation):
+        d.bomba_ad_idrogeno_animation.clear()
+        d.is_doing_animation = False
 
 def item_acqua_animation(user):
     if user.current_animation == 0:

@@ -105,7 +105,7 @@ STATS_EXPLANATION = pygame.image.load("img/background/stats_explanation.png")
 EMOTION_EXPLANATION = pygame.image.load("img/background/emotion_explanation.png")
 
 # Examples
-soundtrack = "./sounds/ost/cell.wav"
+pewpew = "./sounds/ost/pewpew.wav"
 soundtrack_2 = "./sounds/ost/field.wav"
 
 

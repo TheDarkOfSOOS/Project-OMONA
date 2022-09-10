@@ -24,7 +24,7 @@ PIER_IRACONDO = pygame.image.load("img/pier/pier_iracondo.png")
 class Pier():
     def __init__(self,):
 
-        self.name = "Piergiorgio"
+        self.name = "Pier"
 
         self.img = {"Profilo":pygame.transform.scale(PIER_NEUTRALE,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),"Emozione":NEUTRAL_IMG}
 
@@ -507,7 +507,7 @@ class Pier():
         self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation1.png"))
         self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
        
-    def do_something(self, boss):
+    def do_something(self, boss, input):
         if self.MNA_CONSUMPTION == True:
             self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Fiamma protettrice":

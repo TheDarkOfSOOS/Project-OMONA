@@ -315,7 +315,7 @@ class Raul():
         self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation18.png"))
     
 
-    def do_something(self, boss):
+    def do_something(self, boss, input):
         if self.MNA_CONSUMPTION == True:
             self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Saetta trascendente":

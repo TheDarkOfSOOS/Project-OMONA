@@ -10,29 +10,29 @@ from data import *
 
 class Items():
     def __init__(self):
-        self.items_template = [["Acqua di Destiny","Tiramisù (senza...)","Orologio donato"],["Laurea in Matematica","Parmigianino","Ghiaccio dei Bidelli"]]
+        self.items_template = [["Acqua di Destiny","Laurea in Matematica","Ghiaccio dei Bidelli"],["Tiramisù (senza...)","Parmigianino","Orologio donato"]]
         self.items = []
 
-        self.items_usage_template = [[1,2,1],[1,2,3]]
+        self.items_usage_template = [[1,1,2],[2,2,1]]
         self.items_usage = []
 
         self.items_description_template = {
             "Acqua di Destiny":"Acqua santa, portatrice di benessere e serenità, la quintessenza della pace. Resetta l’emozione di un alleato, lo cura completamente e ripristina il suo mana.",
-            "Laurea in Matematica":"Laurea “ad honorem” ritrovata per terra vicino al portone del mago elettrico, la sua sapienza è inaspettata... Aumenta di molto l’attacco dell’usatore.",
             "Tiramisù (senza...)":"Il dolce più amato con un errore colossale: l’assenza del mascarpone... Rende arrabbiato il nemico e diminuisce la sua difesa.",
+            "Laurea in Matematica":"Laurea “ad honorem” ritrovata per terra vicino al portone del mago elettrico, la sua sapienza è inaspettata... Aumenta di molto l’attacco dell’usatore.",
             "Parmigianino":"Panino dalle proprietà mistiche, incomprensibili dagli adepti del Muratore ai quali cura metà HP. Se usato su Fabiano aumenta di molto la sua velocità, se usato su Raul aumenta di molto il suo attacco.",
-            "Orologio donato":"Regalo da parte del professor Tagetti Mariano alla passata 1Ci, gli studenti lo portano tutt’ora appresso come ricordo dell’insegnante. Aumenta tutte le statistiche di tutti gli alleati.",
-            "Ghiaccio dei Bidelli":"La cura di tutti i mali, grazie a questo Bocelli ha acquisito la vista. Riporta in vita un alleato con metà HP."
+            "Ghiaccio dei Bidelli":"La cura di tutti i mali, grazie a questo Bocelli ha acquisito la vista. Riporta in vita un alleato con metà HP.",
+            "Orologio donato":"Regalo da parte del professor Tagetti Mariano alla passata 1Ci, gli studenti lo portano tutt’ora appresso come ricordo dell’insegnante. Aumenta tutte le statistiche di tutti gli alleati."
         }
         self.items_description = {}
 
         self.items_title_template = {
             "Acqua di Destiny":"Acqua di Destiny",
-            "Laurea in Matematica":"Laurea in Matematica",
             "Tiramisù (senza...)":"Tiramisù (senza...)",
+            "Laurea in Matematica":"Laurea in Matematica",
             "Parmigianino":"Parmigianino",
-            "Orologio donato":"Orologio donato",
-            "Ghiaccio dei Bidelli":"Ghiaccio dei Bidelli"
+            "Ghiaccio dei Bidelli":"Ghiaccio dei Bidelli",
+            "Orologio donato":"Orologio donato"
         }
         self.items_title = {}
 

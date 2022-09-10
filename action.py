@@ -199,16 +199,16 @@ def toggle_mna(mna_consumption, user, count, max_index, mna_to_remove_per_frame)
 
 def remove_mna(self):
     per_frame_changed_mna = (int(abs(self.MNA_CONSUMPTION)/50)+3)
-    print("Mana tolti per frame:", per_frame_changed_mna)
+    #print("Mana tolti per frame:", per_frame_changed_mna)
     if self.MNA_CONSUMPTION > 0:
         self.current_mna -= per_frame_changed_mna
         self.changing_mna += per_frame_changed_mna
-        print(self.changing_mna, self.MNA_CONSUMPTION)
+        #print(self.changing_mna, self.MNA_CONSUMPTION)
         if self.changing_mna >= self.MNA_CONSUMPTION:
             self.current_mna += self.changing_mna - self.MNA_CONSUMPTION
             self.MNA_CONSUMPTION = False
     else:
-        print(self.changing_mna, self.MNA_CONSUMPTION)
+        #print(self.changing_mna, self.MNA_CONSUMPTION)
         self.current_mna += per_frame_changed_mna
         self.changing_mna -= per_frame_changed_mna
 

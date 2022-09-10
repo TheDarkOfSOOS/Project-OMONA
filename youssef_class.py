@@ -301,7 +301,7 @@ class Youssef():
         self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation25.png"))
         self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation26.png"))
 
-    def do_something(self, boss):
+    def do_something(self, boss, input):
         if self.MNA_CONSUMPTION == True:
             self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Sforbiciata":

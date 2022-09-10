@@ -9,6 +9,7 @@ import youssef_class as youssef
 import pier_class as pier
 import raul_class as raul
 import fabiano_class as fabiano
+import mago_elettrico as m_e
 from items import items
 
 from data import *
@@ -48,6 +49,13 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
     # Fai queste cose all'inizio del round
     if new_turn_has_started:
+        # Controlliamo se boss puo' attivare ultimate
+        if boss.ultimate_status == "used":
+            boss.ultimate_status = "off"
+
+        if boss.current_hp <= boss.ultimate_hp_to_reach and not boss.ultimate_status == "off":
+            boss.ultimate_status = "will_activate"
+
         # Non ci interessa sapere cosa fosse successo prima
         action.dmg_reduction.is_active = False
         returning = False
@@ -84,8 +92,8 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
         # Aggiorniamo la visual
         chara.change_img()
-        
-    #print(boss.target)
+
+    boss.change_img()
     #print(boss.current_defn)
     #print(youssef.y.sforbiciata_len)
     #print(pier.p.current_emotion)
@@ -253,6 +261,10 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 list_speed_ordered.pop(list_speed_ordered.index(fabiano.f))
                 list_speed_ordered.insert(0, fabiano.f)
 
+            if boss.choosen_attack == "Chopter":
+                list_speed_ordered.pop(list_speed_ordered.index(boss))
+                list_speed_ordered.insert(0, boss)
+
             can_calculate_speed = False
             for i in list_speed_ordered:
                 print(i.name, i.current_vel)
@@ -276,7 +288,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
         if list_speed_ordered[0].is_doing_animation and (not list_speed_ordered[0] in dead_list) and (not list_speed_ordered[0].is_dead):
             #print("Si fa qualcosa", list_speed_ordered[0])
-            list_speed_ordered[0].do_something(boss)
+            list_speed_ordered[0].do_something(boss, input)
             if not list_speed_ordered[0].is_doing_animation:
                 print("passa avanti")
                 list_speed_ordered[1].is_doing_animation = True
@@ -291,6 +303,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
         if input=="return" and (not list_speed_ordered[0].is_removing_bar and list_speed_ordered[0].is_showing_text_outputs) and (not list_speed_ordered[0] in dead_list) and (not list_speed_ordered[0].is_dead):
             continue_animation = True
             list_speed_ordered[0].is_showing_text_outputs = False
+            input = "null"
 
         if (list_speed_ordered[0].is_doing_animation) and ((list_speed_ordered[0] in dead_list) or list_speed_ordered[0].is_dead):
             print("dead e passa avanti " + list_speed_ordered[0].name)
@@ -302,7 +315,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
         if list_speed_ordered[1].is_doing_animation and continue_animation and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
             #print("Si fa qualcosa", list_speed_ordered[1])
-            list_speed_ordered[1].do_something(boss)
+            list_speed_ordered[1].do_something(boss, input)
             if not list_speed_ordered[1].is_doing_animation:
                 print("passa avanti")
                 list_speed_ordered[2].is_doing_animation = True
@@ -316,6 +329,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
         if input=="return" and (not list_speed_ordered[1].is_removing_bar and list_speed_ordered[1].is_showing_text_outputs) and (not list_speed_ordered[1] in dead_list) and (not list_speed_ordered[1].is_dead):
             continue_animation = True
             list_speed_ordered[1].is_showing_text_outputs = False
+            input = "null"
 
         if (list_speed_ordered[1].is_doing_animation and continue_animation) and ((list_speed_ordered[1] in dead_list) or list_speed_ordered[1].is_dead):
             print("dead e passa avanti " + list_speed_ordered[1].name)
@@ -327,7 +341,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
         if list_speed_ordered[2].is_doing_animation and continue_animation and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
             #print("Si fa qualcosa", list_speed_ordered[2])
-            list_speed_ordered[2].do_something(boss)
+            list_speed_ordered[2].do_something(boss, input)
             if not list_speed_ordered[2].is_doing_animation:
                 print("passa avanti")
                 list_speed_ordered[3].is_doing_animation = True
@@ -341,6 +355,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
         if input=="return" and (not list_speed_ordered[2].is_removing_bar and list_speed_ordered[2].is_showing_text_outputs) and (not list_speed_ordered[2] in dead_list) and (not list_speed_ordered[2].is_dead):
             continue_animation = True
             list_speed_ordered[2].is_showing_text_outputs = False
+            input = "null"
 
 
         if (list_speed_ordered[2].is_doing_animation and continue_animation) and ((list_speed_ordered[2] in dead_list) or list_speed_ordered[2].is_dead):
@@ -355,7 +370,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
         if list_speed_ordered[3].is_doing_animation and continue_animation and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
             #print("Si fa qualcosa", list_speed_ordered[3])
-            list_speed_ordered[3].do_something(boss)
+            list_speed_ordered[3].do_something(boss, input)
             if not list_speed_ordered[3].is_doing_animation:
                 list_speed_ordered[4].is_doing_animation = True
                 print("passa avanti")
@@ -369,6 +384,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
         if input=="return" and (not list_speed_ordered[3].is_removing_bar and list_speed_ordered[3].is_showing_text_outputs) and (not list_speed_ordered[3] in dead_list) and (not list_speed_ordered[3].is_dead):
             continue_animation = True
             list_speed_ordered[3].is_showing_text_outputs = False
+            input = "null"
 
         if (list_speed_ordered[3].is_doing_animation and continue_animation) and ((list_speed_ordered[3] in dead_list) or list_speed_ordered[3].is_dead):
             print("dead e passa avanti " + list_speed_ordered[3].name)
@@ -383,7 +399,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
         if list_speed_ordered[4].is_doing_animation and continue_animation and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
             #print("Si fa qualcosa", list_speed_ordered[4])
-            list_speed_ordered[4].do_something(boss)
+            list_speed_ordered[4].do_something(boss, input)
             if not list_speed_ordered[4].is_doing_animation:
                 print("finisci")
                 everyone_has_finished_animation = True
@@ -397,6 +413,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
         if input=="return" and (not list_speed_ordered[4].is_removing_bar and list_speed_ordered[4].is_showing_text_outputs) and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
             continue_animation = True
             list_speed_ordered[4].is_showing_text_outputs = False
+            input = "null"
 
         if (list_speed_ordered[4].is_doing_animation and continue_animation) and ((list_speed_ordered[4] in dead_list) or list_speed_ordered[4].is_dead):
             print("dead e passa avanti " + list_speed_ordered[4].name)
@@ -424,6 +441,10 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             #attacking_character.do_something()
 
     # Tutti hanno finito l'azione, finisce il round
+
+    # Rendiamo il boss immortale se deve ancora usare la sua ultimate
+    if (boss.ultimate_status == "will_activate" or boss.ultimate_status == "to_activate") and boss.current_hp <= 0:
+        boss.current_hp = 1
 
     return [everyone_has_chosen, everyone_has_finished_animation, continue_animation, new_turn_has_started, returning, list_speed_ordered, dead_list]
 
@@ -471,6 +492,29 @@ def reset_charas():
             #  -1    -->  non attivo
             #  >= 0  -->  attivo
             chara.foresees_enemy_attacks = -1
+
+def reset_boss(boss):
+    boss.current_hp = boss.hp
+    boss.current_atk = boss.atk
+    boss.current_defn = boss.defn
+    boss.current_vel = boss.vel
+    boss.current_eva = boss.eva
+    boss.is_dead = False
+    boss.skill_atk = 0
+    boss.is_removing_bar = False
+    boss.count_removed_bar = 0
+    boss.damage_dealed = 0
+    boss.current_animation = 0
+    boss.is_doing_animation = False
+    boss.text_action=""
+    boss.is_showing_text_outputs = False
+
+    boss.current_emotion = "neutrale"
+
+    if boss == m_e.me:
+        boss.ultimate_status = "off"
+    else:
+        boss.ultimate_status = "to_activate"
 
 
 def set_charas(stage):

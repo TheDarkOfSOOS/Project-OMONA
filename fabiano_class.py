@@ -38,7 +38,7 @@ class Fabiano():
         self.eva = 25 # Variabile per i punti evasione
 
         self.current_hp = self.hp
-        self.current_mna = 0
+        self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -325,7 +325,7 @@ class Fabiano():
         self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation10.png"))
         self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation11.png"))
             
-    def do_something(self, boss):
+    def do_something(self, boss, input):
         if self.MNA_CONSUMPTION == True:
             self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Biscotto":
@@ -381,7 +381,7 @@ class Fabiano():
                 #self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
-                boss.current_defn -= action.buff_stats(boss.defn, allies, "debuff")
+                boss.current_defn -= action.buff_stats(boss.defn, boss, "debuff")
                 print("Fabiano ha diminuito la difesa del nemico!")
                 self.text_action="Fabiano ha diminuito la difesa del nemico!"
                 self.current_animation = 0

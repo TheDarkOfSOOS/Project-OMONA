@@ -29,7 +29,7 @@ class Dialogues():
     def set_dialogue(self, number_of_dialogue):
         self.number_of_dialogue = number_of_dialogue
         if number_of_dialogue == 0:
-           text_of_dialogue_0 = [
+            text_of_dialogue_0 = [
             ["Premi 'Enter' per iniziare",""],
             ["Fabiano","Salve! Benvenuto nella demo del nostro gioco."],
             ["Raul","Noi siamo i creatori, vi spiegheremo in breve come giocare."],
@@ -60,13 +60,114 @@ class Dialogues():
             ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
             ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
             ["",""]
-           ]
-           image_of_dialogue_0 = [NOTHING,FABIANO,RAUL]
-           background_0 = ["None",STATS_EXPLANATION, EMOTION_EXPLANATION]
+            ]
+            image_of_dialogue_0 = [NOTHING,FABIANO,RAUL]
+            background_0 = ["None",STATS_EXPLANATION, EMOTION_EXPLANATION]   
         
-        self.text_of_dialogue = text_of_dialogue_0
-        self.image_of_dialogue = image_of_dialogue_0
-        self.background = background_0
+            self.text_of_dialogue = text_of_dialogue_0
+            self.image_of_dialogue = image_of_dialogue_0
+            self.background = background_0
+
+        if number_of_dialogue == 1:
+            text_of_dialogue_1 = [
+                ["ou","Mi mangio il sushi con il pesce agagaga"],
+                ["",""], # 24
+                ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
+                ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
+                ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
+                ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+                ["",""]
+            ]
+            self.text_of_dialogue = text_of_dialogue_1
+            
+        if number_of_dialogue == 2:
+            text_of_dialogue_2 = [
+                ["dialogo n.3","Mi mangio il sushi con il pesce agagaga"],
+                ["",""], # 24
+                ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
+                ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
+                ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
+                ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+                ["",""]
+            ]
+            self.text_of_dialogue = text_of_dialogue_2
+        if number_of_dialogue == 3:
+            text_of_dialogue_3 = [
+                ["dialogo n.4","Mi mangio il sushi con il pesce agagaga"],
+                ["",""], # 24
+                ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
+                ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
+                ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
+                ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+                ["",""]
+            ]
+            self.text_of_dialogue = text_of_dialogue_3
+        if number_of_dialogue == 4:
+            text_of_dialogue_4 = [
+                ["dialogo n.5","Mi mangio il sushi con il pesce agagaga"],
+                ["",""], # 24
+                ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
+                ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
+                ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
+                ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+                ["",""]
+            ]
+            self.text_of_dialogue = text_of_dialogue_4
+        if number_of_dialogue == 5:
+            text_of_dialogue_5 = [
+                ["dialogo n.6","Mi mangio il sushi con il pesce agagaga"],
+                ["",""], # 24
+                ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
+                ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
+                ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
+                ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+                ["",""]
+            ]
+            self.text_of_dialogue = text_of_dialogue_5
+        if number_of_dialogue == 6:
+            text_of_dialogue_6 = [
+                ["dialogo n.7","Mi mangio il sushi con il pesce agagaga"],
+                ["",""], # 24
+                ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
+                ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
+                ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
+                ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+                ["",""]
+            ]
+            self.text_of_dialogue = text_of_dialogue_6
+        if number_of_dialogue == 7:
+            text_of_dialogue_7 = [
+                ["dialogo n.8","Mi mangio il sushi con il pesce agagaga"],
+                ["",""], # 24
+                ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
+                ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
+                ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
+                ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+                ["",""]
+            ]
+            self.text_of_dialogue = text_of_dialogue_7
+        if number_of_dialogue == 8:
+            text_of_dialogue_8 = [
+                ["dialogo n.9","Mi mangio il sushi con il pesce agagaga"],
+                ["",""], # 24
+                ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
+                ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
+                ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
+                ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+                ["",""]
+            ]
+            self.text_of_dialogue = text_of_dialogue_8
+        if number_of_dialogue == 9:
+            text_of_dialogue_9 = [
+                ["dialogo n.10","Mi mangio il sushi con il pesce agagaga"],
+                ["",""], # 24
+                ["Raul","I friends possono tornare utili certe volte per manipolare le emozioni, se avete difficoltà, provate a leggere qualche effetto."],
+                ["Fabiano","Anche gli item hanno effetti del genere e pure qualche abilità."],
+                ["Raul","Ok stiamo parlando troppo. Facciamolo giocare."],
+                ["Fabiano","Va bene... (Piccolo suggerimento: prova ad usare la mia skill Benevento per qualche turno, rendi me euforico e il nemico arrabbiato, poi usa Pestata, non te ne pentirai!)."],
+                ["",""]
+            ]
+            self.text_of_dialogue = text_of_dialogue_9
         # print("")
 
 
@@ -106,9 +207,11 @@ class Dialogues():
                         self.show_gui = True
                         
             if input == "backspace":
+                self.text_visualized = 0
                 return True
                     
             if self.text_visualized == len(self.text_of_dialogue)-1:
+                self.text_visualized = 0
                 return True
         
 

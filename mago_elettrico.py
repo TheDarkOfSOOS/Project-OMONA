@@ -31,7 +31,7 @@ class Mago_Elettrico():
         self.vel = 134 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = self.hp 
+        self.current_hp = 1
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -82,6 +82,10 @@ class Mago_Elettrico():
         self.zzaaap_len = 29
 
         self.current_animation = 0
+
+        self.ultimate_status = "off"
+
+        self.ultimate_hp_to_reach = 0
 
         self.is_buffed = -1
         self.is_debuffed = -1
@@ -313,7 +317,7 @@ class Mago_Elettrico():
 
         #if self.attacks_target[self.choosen_attack] > 0:
 
-    def do_something(self, boss):
+    def do_something(self, boss, input):
         
         # ZZAAAP! - Target singolo
         if self.choosen_attack == self.list_attacks[0]:

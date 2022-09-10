@@ -49,17 +49,17 @@ def of_character(current_player, input, boss, returning):
             if items.items_usage[0][0] > 0:
                 items.items[0][0] = items.items_template[0][0]
 
-        if current_player.sel["has_cursor_on"] == "Tiramisù (senza...)":
+        if current_player.sel["has_cursor_on"] == "Laurea in Matematica":
             items.items_usage[0][1] += 1
             if items.items_usage[0][1] > 0:
                 items.items[0][1] = items.items_template[0][1]
 
-        if current_player.sel["has_cursor_on"] == "Orologio donato":
+        if current_player.sel["has_cursor_on"] == "Ghiaccio dei Bidelli":
             items.items_usage[0][2] += 1
             if items.items_usage[0][2] > 0:
                 items.items[0][2] = items.items_template[0][2]
 
-        if current_player.sel["has_cursor_on"] == "Laurea in Matematica":
+        if current_player.sel["has_cursor_on"] == "Tiramisù (senza...)":
             items.items_usage[1][0] += 1
             if items.items_usage[1][0] > 0:
                 items.items[1][0] = items.items_template[1][0]
@@ -69,7 +69,7 @@ def of_character(current_player, input, boss, returning):
             if items.items_usage[1][1] > 0:
                 items.items[1][1] = items.items_template[1][1]
 
-        if current_player.sel["has_cursor_on"] == "Ghiaccio dei Bidelli":
+        if current_player.sel["has_cursor_on"] == "Orologio donato":
             items.items_usage[1][2] += 1
             if items.items_usage[1][2] > 0:
                 items.items[1][2] = items.items_template[1][2]
