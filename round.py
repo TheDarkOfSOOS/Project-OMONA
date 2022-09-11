@@ -49,6 +49,9 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
     # Fai queste cose all'inizio del round
     if new_turn_has_started:
+        # Resettiamo lo stato di provocazione
+        boss.focus_on_youssef = 0
+
         # Controlliamo se boss puo' attivare ultimate
         if boss.ultimate_status == "used":
             boss.ultimate_status = "off"
@@ -237,6 +240,10 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             # DA FIXARE: non tiene conto della velocità, se due mosse hanno priority non vince la velocità
             #TODO
             
+            if youssef.y.sel["has_cursor_on"]=="Provocazione":
+                list_speed_ordered.pop(list_speed_ordered.index(youssef.y))
+                list_speed_ordered.insert(0, youssef.y)
+
             if youssef.y.sel["has_cursor_on"]=="Sforbiciata":
                 list_speed_ordered.pop(list_speed_ordered.index(youssef.y))
                 list_speed_ordered.insert(len(list_speed_ordered), youssef.y)

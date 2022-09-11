@@ -10,6 +10,7 @@ from raul_class import r
 from fabiano_class import f
 from mago_elettrico import me
 from doraemon import d
+from humpty_d import hd
 from items import items
 import random as rng
 import sound
@@ -108,6 +109,9 @@ def bg():
     WIN.fill((140,218,255))
 def boss(boss):
     WIN.blit(boss.img,(220,300))
+
+# MISURE PER PAOLO LUCIO ANAFESTO
+#  WIN.blit(pygame.transform.scale(boss.img,(592,880)),(620,HEIGHT-850)) 
 
 # Se riceve True, non viene messo il box delle voci
 # Se riceve False, viene integrata tutta la GUI
@@ -958,7 +962,7 @@ def ilaria_r_animation():
         p.load_ilaria_r()
     if p.is_doing_animation:
         WIN.blit(p.ilaria_r_animation[int(p.current_animation)],(0,0))
-        p.current_animation+=0.65
+        p.current_animation+=0.45
     if p.current_animation >= len(p.ilaria_r_animation):
         p.ilaria_r_animation.clear()
         p.is_doing_animation = False
@@ -1280,6 +1284,105 @@ def bomba_ad_idrogeno_animation():
     if d.current_animation >= len(d.bomba_ad_idrogeno_animation):
         d.bomba_ad_idrogeno_animation.clear()
         d.is_doing_animation = False
+
+def ovetto_animation(target):
+    if target.name == "Youssef":
+        if hd.is_doing_animation:
+            if hd.current_animation == 0:
+                hd.load_ovetto()
+            WIN.blit(pygame.transform.flip(hd.ovetto_animation[int(hd.current_animation)],True, False),(0,0))
+            hd.current_animation+=0.45
+    if hd.current_animation >= len(hd.ovetto_animation):
+        hd.ovetto_animation.clear()
+        hd.is_doing_animation = False
+
+    if target.name == "Raul":
+        if hd.is_doing_animation:
+            if hd.current_animation == 0:
+                hd.load_ovetto()
+            WIN.blit(hd.ovetto_animation[int(hd.current_animation)],(0,0))
+            hd.current_animation+=0.45
+    if hd.current_animation >= len(hd.ovetto_animation):
+        hd.ovetto_animation.clear()
+        hd.is_doing_animation = False
+
+def ovetto_1_animation(target):
+    if target.name == "Pier":
+        if hd.is_doing_animation:
+            if hd.current_animation == 0:
+                hd.load_ovetto_1()
+            WIN.blit(pygame.transform.flip(hd.ovetto_1_animation[int(hd.current_animation)],True, False),(0,0))
+            hd.current_animation+=0.50
+    if hd.current_animation >= len(hd.ovetto_1_animation):
+        hd.ovetto_1_animation.clear()
+        hd.is_doing_animation = False
+
+    if target.name == "Fabiano":
+        if hd.is_doing_animation:
+            if hd.current_animation == 0:
+                hd.load_ovetto_1()
+            WIN.blit(hd.ovetto_1_animation[int(hd.current_animation)],(0,0))
+            hd.current_animation+=0.50
+    if hd.current_animation >= len(hd.ovetto_1_animation):
+        hd.ovetto_1_animation.clear()
+        hd.is_doing_animation = False
+
+def avidita_animation():
+    if hd.is_doing_animation:
+        if hd.current_animation == 0:
+            hd.load_avidita()
+        WIN.blit(hd.avidita_animaiton[int(hd.current_animation)],(0,0))
+        hd.current_animation+=0.40
+    if hd.current_animation >= len(hd.avidita_animaiton):
+        hd.avidita_animaiton.clear()
+        hd.is_doing_animation = False
+
+def germogli_animation(target):
+    if hd.is_doing_animation:
+        if hd.current_animation == 0:
+            hd.load_germogli()
+        if target == y:
+            WIN.blit(hd.germogli_animation[int(hd.current_animation)],(0,HEIGHT-CHARA_HEIGHT-SPACING))
+        if target == p:
+            WIN.blit(hd.germogli_animation[int(hd.current_animation)],(SPACING,(SPACING*3)))
+        if target == r:
+            WIN.blit(hd.germogli_animation[int(hd.current_animation)],(WIDTH-CHARA_WIDTH,HEIGHT-CHARA_HEIGHT-SPACING))
+        if target == f:
+            WIN.blit(hd.germogli_animation[int(hd.current_animation)],(WIDTH-CHARA_WIDTH,(SPACING*3)))
+        hd.current_animation+=0.35
+    if hd.current_animation >= len(hd.germogli_animation):
+        hd.germogli_animation.clear()
+        hd.is_doing_animation = False
+
+def chiamata_animation():
+    if hd.is_doing_animation:
+        if hd.current_animation == 0:
+            hd.load_chiamata()
+        WIN.blit(hd.chiamata_animation[int(hd.current_animation)],(0,0))
+        hd.current_animation+=0.60
+    if hd.current_animation >= len(hd.chiamata_animation):
+        hd.chiamata_animation.clear()
+        hd.is_doing_animation = False
+
+def travestimento_animation():
+    if hd.is_doing_animation:
+        if hd.current_animation == 0:
+            hd.load_travestimento()
+        WIN.blit(hd.travestimento_animation[int(hd.current_animation)],(5,0))
+        hd.current_animation+=0.45
+    if hd.current_animation >= len(hd.travestimento_animation):
+        hd.travestimento_animation.clear()
+        hd.is_doing_animation = False
+
+def gallina_animation():
+    if hd.is_doing_animation:
+        if hd.current_animation == 0:
+            hd.load_gallina()
+        WIN.blit(hd.gallina_animation[int(hd.current_animation)],(0,0))
+        hd.current_animation+=0.45
+    if hd.current_animation >= len(hd.gallina_animation):
+        hd.gallina_animation.clear()
+        hd.is_doing_animation = False
 
 def item_acqua_animation(user):
     if user.current_animation == 0:

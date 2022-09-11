@@ -103,10 +103,10 @@ class Doraemon():
         self.list_available_attacks = []
 
         self.attacks_target = {
-            self.list_attacks[0]:0,
+            self.list_attacks[0]:4,
             self.list_attacks[1]:4,
-            self.list_attacks[2]:0,
-            self.list_attacks[3]:0,
+            self.list_attacks[2]:4,
+            self.list_attacks[3]:4,
             self.list_attacks[4]:1,
         }
 
@@ -304,6 +304,7 @@ class Doraemon():
                     dw.missile_animation()
 
                 if not self.is_doing_animation:
+                    self.check_damage_reduction()
                     print("Doraemon ha lanciato un missile!")
                     self.text_action="Doraemon ha lanciato un missile! "
                     if action.is_missed(y.y.current_eva) and (not y.y.is_dead):
@@ -369,13 +370,13 @@ class Doraemon():
             # Sfuriate meccaniche
             if self.choosen_attack == self.list_attacks[4]:
                 DMG_DEAL = 10
-                self.damage_dealed = action.damage_deal(boss.current_atk,DMG_DEAL,y.y.current_defn,self.current_emotion,y.y.current_emotion)
+                self.damage_dealed = action.damage_deal(boss.current_atk,DMG_DEAL,self.target[0].current_defn,self.current_emotion,self.target[0].current_emotion)
                 if self.is_doing_animation:
                     dw.sfuriate_meccaniche_animation(self.target[0])
 
                 if not self.is_doing_animation:
                     print("Doraemon ha riempito di graffi "+ str(self.target[0].name)+"!")
-                    self.text_action="Doraemon ha riempito di graffi "+ str(self.target[0].name)+" causando "+str(self.damage_dealed)+". Gli altri si sono inteneriti a vedere come Doraemon graffiava il loro alleato."
+                    self.text_action="Doraemon ha riempito di graffi "+ str(self.target[0].name)+" causando "+str(self.damage_dealed)+". Gli altri si sono divertiti a vedere come Doraemon graffiava il loro alleato."
                     for chara in [y.y,p.p,r.r,f.f]:
                         if chara != self.target[0]:
                             emotion.change_emotion(chara,"gioioso")
@@ -400,6 +401,7 @@ class Doraemon():
                 dw.bomba_ad_idrogeno_animation()
 
             if not self.is_doing_animation:
+                self.check_damage_reduction()
                 print("Doraemon ha lanciato una bomba ad idrogeno!")
                 self.text_action="Doraemon ha lanciato una bomba ad idrogeno!"
                 for chara in [y.y,p.p,r.r,f.f]:
