@@ -104,10 +104,10 @@ class Humpty_Dumpty():
 
         self.attacks_target = {
             self.list_attacks[0]:1,
-            self.list_attacks[1]:4,
+            self.list_attacks[1]:0,
             self.list_attacks[2]:1,
             self.list_attacks[3]:4,
-            self.list_attacks[4]:4,
+            self.list_attacks[4]:0,
         }
 
         self.attacks_cooldown = {
@@ -407,7 +407,7 @@ class Humpty_Dumpty():
 
                     for allies in [y.y,p.p,r.r,f.f]:
                         emotion.change_emotion(allies,"arrabbiato")
-                        action.buff_stats(allies.current_vel,allies,"debuff")
+                        allies.current_vel -= action.buff_stats(allies.current_vel,allies,"debuff")
 
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
@@ -490,9 +490,9 @@ class Humpty_Dumpty():
                     print("Humpty Dumpty si veste e debuffa tutti")
                     self.text_action="Humpty Dumpty indossa il suo cosplay dell'uovo dorato, aumenta la sua difesa e diminuisce l'evasione di tutti per via della sua lucentezza."
 
-                    action.buff_stats(self.current_defn,self,"buff")
+                    self.current_defn += action.buff_stats(self.current_defn,self,"buff")
                     for allies in [y.y,p.p,r.r,f.f]:
-                        action.buff_stats(allies.current_eva,allies,"debuff")
+                        allies.current_eva = -action.buff_stats(allies.current_eva,allies,"debuff")
 
                     self.current_animation = 0
                     self.is_showing_text_outputs = True

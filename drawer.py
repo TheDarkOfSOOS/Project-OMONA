@@ -9,8 +9,9 @@ from pier_class import p
 from raul_class import r
 from fabiano_class import f
 from mago_elettrico import me
-from doraemon import d
 from humpty_d import hd
+from doraemon import d
+from anafesto import a
 from items import items
 import random as rng
 import sound
@@ -108,10 +109,10 @@ def get_bg_color(chara):
 def bg():
     WIN.fill((140,218,255))
 def boss(boss):
-    WIN.blit(boss.img,(220,300))
-
-# MISURE PER PAOLO LUCIO ANAFESTO
-#  WIN.blit(pygame.transform.scale(boss.img,(592,880)),(620,HEIGHT-850)) 
+    if boss == a:
+        WIN.blit(pygame.transform.scale(boss.img,(592,880)),(620,HEIGHT-850)) 
+    else:
+        WIN.blit(boss.img,(220,300))
 
 # Se riceve True, non viene messo il box delle voci
 # Se riceve False, viene integrata tutta la GUI
@@ -879,47 +880,47 @@ def richiesta_aiuto_animation():
     if int(p.current_animation) == 0:
         pygame.mixer.Sound.play(sound.HELP_REQUEST)
 
-# def sacrificio_y_animation():
-#     if p.current_animation == 0:
-#         p.load_sacrificio_y()
-#     if p.is_doing_animation:
-#         WIN.blit(p.sacrificio_y_animation[int(p.current_animation)],(0,0))
-#         p.current_animation+=0.60
-#     if p.current_animation >= len(p.sacrificio_y_animation):
-#         p.sacrificio_y_animation.clear()
-#         p.is_doing_animation = False
+def sacrificio_y_animation():
+    if p.current_animation == 0:
+        p.load_sacrificio_y()
+    if p.is_doing_animation:
+        WIN.blit(p.sacrificio_y_animation[int(p.current_animation)],(0,0))
+        p.current_animation+=0.60
+    if p.current_animation >= len(p.sacrificio_y_animation):
+        p.sacrificio_y_animation.clear()
+        p.is_doing_animation = False
 
-# def sacrificio_p_animation():
-#     if p.current_animation == 0:
-#         p.load_sacrificio_p()
-#     if p.is_doing_animation:
-#         WIN.blit(p.sacrificio_p_animation[int(p.current_animation)],(0,0))
-#         p.current_animation+=0.60
-#     if p.current_animation >= len(p.sacrificio_p_animation):
-#         p.sacrificio_p_animation.clear()
-#         p.is_doing_animation = False
+def sacrificio_p_animation():
+    if p.current_animation == 0:
+        p.load_sacrificio_p()
+    if p.is_doing_animation:
+        WIN.blit(p.sacrificio_p_animation[int(p.current_animation)],(0,0))
+        p.current_animation+=0.60
+    if p.current_animation >= len(p.sacrificio_p_animation):
+        p.sacrificio_p_animation.clear()
+        p.is_doing_animation = False
 
-# def sacrificio_r_animation():
-#     if p.current_animation == 0:
-#         # Viene flippato dopo
-#         p.load_sacrificio_y()
-#     if p.is_doing_animation:
-#         WIN.blit(pygame.transform.flip(p.sacrificio_y_animation[int(p.current_animation)],True, False),(0,0))
-#         p.current_animation+=0.60
-#     if p.current_animation >= len(p.sacrificio_y_animation):
-#         p.sacrificio_y_animation.clear()
-#         p.is_doing_animation = False
+def sacrificio_r_animation():
+    if p.current_animation == 0:
+        # Viene flippato dopo
+        p.load_sacrificio_y()
+    if p.is_doing_animation:
+        WIN.blit(pygame.transform.flip(p.sacrificio_y_animation[int(p.current_animation)],True, False),(0,0))
+        p.current_animation+=0.60
+    if p.current_animation >= len(p.sacrificio_y_animation):
+        p.sacrificio_y_animation.clear()
+        p.is_doing_animation = False
 
-# def sacrificio_f_animation():
-#     if p.current_animation == 0:
-#         # Viene flippato dopo
-#         p.load_sacrificio_p()
-#     if p.is_doing_animation:
-#         WIN.blit(pygame.transform.flip(p.sacrificio_p_animation[int(p.current_animation)],True, False),(0,0))
-#         p.current_animation+=0.60
-#     if p.current_animation >= len(p.sacrificio_p_animation):
-#         p.sacrificio_p_animation.clear()
-#         p.is_doing_animation = False
+def sacrificio_f_animation():
+    if p.current_animation == 0:
+        # Viene flippato dopo
+        p.load_sacrificio_p()
+    if p.is_doing_animation:
+        WIN.blit(pygame.transform.flip(p.sacrificio_p_animation[int(p.current_animation)],True, False),(0,0))
+        p.current_animation+=0.60
+    if p.current_animation >= len(p.sacrificio_p_animation):
+        p.sacrificio_p_animation.clear()
+        p.is_doing_animation = False
 
 def ilaria_y_animation():
     if p.current_animation == 0:
@@ -1213,10 +1214,6 @@ def zzaaap_animation(targets):
         me.zzaaap_animation_top_right.clear()
         me.is_doing_animation = False
 
-# SPAZIO PER HUMTPY DUMPTY (togli commento dopo)
-
-
-
 def dono_inaspettato_animation():
     if d.is_doing_animation:
         if d.current_animation == 0:
@@ -1383,6 +1380,115 @@ def gallina_animation():
     if hd.current_animation >= len(hd.gallina_animation):
         hd.gallina_animation.clear()
         hd.is_doing_animation = False
+
+
+
+
+
+# PAOLO LUCIO ANAFESTO
+
+def spirito_animation():
+    if a.is_doing_animation:
+        if a.current_animation == 0:
+            a.load_spirito()
+        WIN.blit(a.spirito_animation[int(a.current_animation)],(0,0))
+        a.current_animation+=0.40
+    if a.current_animation >= len(a.spirito_animation):
+        a.spirito_animation.clear()
+        a.is_doing_animation = False
+
+def mulinello_animation(target):
+    if a.is_doing_animation:
+        if a.current_animation == 0:
+            a.load_mulinello()
+        if target == y:
+            WIN.blit(a.mulinello_animation[int(a.current_animation)],(0,HEIGHT-CHARA_HEIGHT-SPACING))
+        if target == p:
+            WIN.blit(a.mulinello_animation[int(a.current_animation)],(SPACING,(SPACING*3)))
+        if target == r:
+            WIN.blit(a.mulinello_animation[int(a.current_animation)],(WIDTH-CHARA_WIDTH,HEIGHT-CHARA_HEIGHT-SPACING))
+        if target == f:
+            WIN.blit(a.mulinello_animation[int(a.current_animation)],(WIDTH-CHARA_WIDTH,(SPACING*3)))
+        a.current_animation+=0.40
+    if a.current_animation >= len(a.mulinello_animation):
+        a.mulinello_animation.clear()
+        a.is_doing_animation = False
+
+def tsunami_animation():
+    if a.is_doing_animation:
+        if a.current_animation == 0:
+            a.load_tsunami()
+        WIN.blit(a.tsunami_animation[int(a.current_animation)],(0,0))
+        a.current_animation+=0.40
+    if a.current_animation >= len(a.tsunami_animation):
+        a.tsunami_animation.clear()
+        a.is_doing_animation = False
+
+def isolamento_animation(target):
+    if a.is_doing_animation:
+        if a.current_animation == 0:
+            a.load_isolamento()
+        if target == y:
+            WIN.blit(a.isolamento_animation[int(a.current_animation)],(0,0))
+        if target == p:
+            WIN.blit(pygame.transform.flip(a.isolamento_animation[int(a.current_animation)],False,True),(0,0))
+        if target == r:
+            WIN.blit(pygame.transform.flip(a.isolamento_animation[int(a.current_animation)],True,False),(0,0))
+        if target == f:
+            WIN.blit(pygame.transform.flip(a.isolamento_animation[int(a.current_animation)],True,True),(0,0))
+        a.current_animation+=0.40
+    if a.current_animation >= len(a.isolamento_animation):
+        a.isolamento_animation.clear()
+        a.is_doing_animation = False
+
+# ANIMAZIONE DA FARE PARTIRE SE IL PERSONAGGIO USA UN FRIEND O UN ITEM SOTTO EFFETTO DI ISOLAMENTO
+def isolamento_pg_animation(user):
+    if user.current_animation == 0:
+        a.load_isolamento()
+    if user.is_doing_animation:
+        if user == y:
+            WIN.blit(a.isolamento_animation[int(a.current_animation)],(0,0))
+        if user == p:
+            WIN.blit(pygame.transform.flip(a.isolamento_animation[int(a.current_animation)],False,True),(0,0))
+        if user == r:
+            WIN.blit(pygame.transform.flip(a.isolamento_animation[int(a.current_animation)],True,False),(0,0))
+        if user == f:
+            WIN.blit(pygame.transform.flip(a.isolamento_animation[int(a.current_animation)],True,True),(0,0))
+        user.current_animation+=0.40
+    if user.current_animation >= len(a.isolamento_animation):
+        user.is_doing_animation = False
+        a.isolamento_animation.clear()
+
+def tridente_animation(target):
+    if a.is_doing_animation:
+        if a.current_animation == 0:
+            a.load_tridente()
+        if target == y:
+            WIN.blit(a.tridente_animation[int(a.current_animation)],(0,0))
+        if target == p:
+            WIN.blit(pygame.transform.flip(a.tridente_animation[int(a.current_animation)],False,True),(0,0))
+        if target == r:
+            WIN.blit(pygame.transform.flip(a.tridente_animation[int(a.current_animation)],True,False),(0,0))
+        if target == f:
+            WIN.blit(pygame.transform.flip(a.tridente_animation[int(a.current_animation)],True,True),(0,0))
+        a.current_animation+=0.40
+    if a.current_animation >= len(a.tridente_animation):
+        a.tridente_animation.clear()
+        a.is_doing_animation = False
+
+def nei_mari_piu_profondi():
+    if a.is_doing_animation:
+        if a.current_animation == 0:
+            a.load_ulti()
+        WIN.blit(a.nei_mari_piu_profondi[int(a.current_animation)],(0,0))
+        if int(a.current_animation) <= 64:
+            a.current_animation+=0.50
+        else:
+            a.current_animation+=0.15
+    if a.current_animation >= len(a.nei_mari_piu_profondi):
+        a.nei_mari_piu_profondi.clear()
+        a.is_doing_animation = False
+
 
 def item_acqua_animation(user):
     if user.current_animation == 0:

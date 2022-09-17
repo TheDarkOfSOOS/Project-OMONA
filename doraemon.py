@@ -31,7 +31,7 @@ class Doraemon():
         self.vel = 138 # Variabile per i punti velocità
         self.eva = 3 # Variabile per i punti evasione
 
-        self.current_hp = self.hp
+        self.current_hp = 1
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -406,7 +406,7 @@ class Doraemon():
                 self.text_action="Doraemon ha lanciato una bomba ad idrogeno!"
                 for chara in [y.y,p.p,r.r,f.f]:
                     emotion.change_emotion(chara,"neutrale")
-                action.buff_stats(self.current_defn,self,"debuff")*2
+                self.current_defn =- action.buff_stats(self.current_defn,self,"debuff")*2
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True

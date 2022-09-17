@@ -272,6 +272,17 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 list_speed_ordered.pop(list_speed_ordered.index(boss))
                 list_speed_ordered.insert(0, boss)
 
+            if boss.choosen_attack == "Tridente del Governante":
+                list_speed_ordered.pop(list_speed_ordered.index(boss))
+                list_speed_ordered.insert(len(list_speed_ordered), boss)
+
+            if boss.choosen_attack == "Isolamento":
+                list_speed_ordered.pop(list_speed_ordered.index(boss))
+                list_speed_ordered.insert(0, boss)
+
+                list_speed_ordered.pop(list_speed_ordered.index(boss.target[0]))
+                list_speed_ordered.insert(len(list_speed_ordered), boss.target[0])
+
             can_calculate_speed = False
             for i in list_speed_ordered:
                 print(i.name, i.current_vel)
@@ -288,6 +299,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             list_speed_ordered[0].is_doing_animation = True
             animation_is_starting = False
             print("Animazione inizia..." + str(len(list_speed_ordered)))
+            input = "null"
             #print(not list_speed_ordered[1] in dead_list)
 
         # Attacchi
@@ -401,17 +413,26 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
 
 
-
-
-
         if list_speed_ordered[4].is_doing_animation and continue_animation and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
             #print("Si fa qualcosa", list_speed_ordered[4])
-            list_speed_ordered[4].do_something(boss, input)
-            if not list_speed_ordered[4].is_doing_animation:
-                print("finisci")
-                everyone_has_finished_animation = True
-                continue_animation = False
-                input = "null"
+            if boss.choosen_attack == "Isolamento" and (list_speed_ordered[4].sel["is_selecting"] == "Items" or list_speed_ordered[4].sel["is_selecting"] == "Friends"):
+                if list_speed_ordered[4].is_doing_animation:
+                    dw.isolamento_pg_animation(list_speed_ordered[4])
+                if not list_speed_ordered[4].is_doing_animation:
+                    list_speed_ordered[4].text_action = list_speed_ordered[4].name+" non è riuscito ad agire per colpa di Isolamento di Anafesto..."
+                    list_speed_ordered[4].current_animation = 0
+                    list_speed_ordered[4].is_showing_text_outputs = True
+                    print("finisci")
+                    everyone_has_finished_animation = True
+                    continue_animation = False
+                    input = "null"
+            else:
+                list_speed_ordered[4].do_something(boss, input)
+                if not list_speed_ordered[4].is_doing_animation:
+                    print("finisci")
+                    everyone_has_finished_animation = True
+                    continue_animation = False
+                    input = "null"
 
         if list_speed_ordered[4].is_showing_text_outputs and (not list_speed_ordered[4] in dead_list) and (not list_speed_ordered[4].is_dead):
             dw.text_action(list_speed_ordered[4].text_action, FONT_SIZE, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)

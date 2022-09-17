@@ -98,7 +98,7 @@ class Items():
         self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato07.png"))
         self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato08.png"))
         self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato09.png"))
-        self.orologio_animation.append(pygame.image.load("img/animations/items/animation/animation_orologio_donato/animation_orologio_donato10.png"))
+        self.orologio_animation.append(pygame.image.load("img/items/animation/animation_orologio_donato/animation_orologio_donato10.png"))
     
     def load_parmigianino(self):
         self.parmigianino_animation.append(pygame.image.load("img/items/animation/animation_parmigianino/animation_parmigianino00.png"))
