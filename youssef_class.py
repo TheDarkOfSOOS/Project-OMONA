@@ -324,13 +324,14 @@ class Youssef():
                     self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Provocazione":
-            boss.focus_on_youssef = 3
             if self.is_doing_animation:
                 dw.provocazione_animation()
                 #self.remove_mna(MNA_CONSUMPTION, self.provocazione_len/0.50, round(MNA_CONSUMPTION/(self.provocazione_len/0.50),2))
 
             if not self.is_doing_animation:
                 boss.update_target(self)
+                boss.focus_on_youssef = 3
+                print(boss)
                 emotion.change_emotion(boss, "arrabbiato")
                 print("Youssef ha provocato il nemico! Ora questo lo vuole fare fritto.")
                 self.text_action="Youssef ha provocato il nemico! Ora questo lo vuole fare fritto."

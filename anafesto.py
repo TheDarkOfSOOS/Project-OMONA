@@ -29,7 +29,7 @@ class Anafesto():
         self.vel = 345 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = 1000#self.hp
+        self.current_hp = self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -102,7 +102,7 @@ class Anafesto():
         self.list_available_attacks = []
 
         self.attacks_target = {
-            self.list_attacks[0]:4,
+            self.list_attacks[0]:0,
             self.list_attacks[1]:1,
             self.list_attacks[2]:4,
             self.list_attacks[3]:1,
@@ -368,15 +368,18 @@ class Anafesto():
             self.obtain_target(self.attacks_target[self.choosen_attack])
 
     def obtain_target(self, count):
+        print(self.focus_on_youssef)
         alive_charas = []
         for chara in [y.y, p.p, r.r, f.f]:
             if not chara.is_dead:
                 alive_charas.append(chara)
 
         if y.y.is_dead and self.focus_on_youssef > 0:
+            print("eh no cari miei")
             self.focus_on_youssef = 0
 
         if self.focus_on_youssef > 0:
+            print("no capito")
             self.focus_on_youssef -= 1
             self.target.append(y.y)
             self.focussed_allies.append(y.y)
@@ -512,8 +515,8 @@ class Anafesto():
             if input == "return" and self.ultimate_status == "will_activate":
                 self.ultimate_status = "used"
             elif self.ultimate_status == "will_activate":
-                dw.text_action("Anafesto: NON MI FERMERETE MAI, IO VINCERO'. 'NEI MARI PIU PROFONDI'!!!", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
-                dw.text_given_last_coordinates('"Enter" per confermare, le freccette direz. per selezionare. "Backspace" per tornare a scelta precedente', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING+(SPACING*2)-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
+                dw.text_action("Anafesto: No, non mi fermerete mai, saro' vittorioso. Andate tutti voi... 'Nei mari piu' profondi'!", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING+(SPACING*2)-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
             self.damage_dealed = self.current_hp - 1
             DMG_DEAL = 9999
             if self.last_standing == r.r:
@@ -566,30 +569,31 @@ class Anafesto():
             self.aoe_4 = int(self.aoe_4)
 
     def update_target(self, new_target):
-        self.focussed_allies.append(new_target)
-        found_slot = False
-        # Controlla che non sia gia' nei target
-        if not new_target in self.target:
-            for index in range(len(self.target)):
-                if (not self.target[index] in self.focussed_allies) and (not found_slot):
-                    self.target[index] = new_target
-                    print("TARGET CAMBIATO", self.target)
-                    found_slot = True
+        if len(self.target) != 0:
+            self.focussed_allies.append(new_target)
+            found_slot = False
+            # Controlla che non sia gia' nei target
+            if not new_target in self.target:
+                for index in range(len(self.target)):
+                    if (not self.target[index] in self.focussed_allies) and (not found_slot):
+                        self.target[index] = new_target
+                        print("TARGET CAMBIATO", self.target)
+                        found_slot = True
 
-        # Caso in cui tutti hanno gia' preso le attenzioni
-        count = 0
-        if not found_slot:
-            for index in range(len(self.target)):
-                if self.target[index] in self.focussed_allies:
-                    count +=1
-            if count == len(self.target):
-                for index in range(len(self.focussed_allies)):
-                    if self.target[0] == self.focussed_allies[index] and (not found_slot):
-                        if not new_target in self.target:
-                            self.target[0] = new_target
-                            print("TARGET CAMBIATO, tutti attenzioni prese", self.target)
-                            self.focussed_allies[index] = new_target
-                            found_slot = True
+            # Caso in cui tutti hanno gia' preso le attenzioni
+            count = 0
+            if not found_slot:
+                for index in range(len(self.target)):
+                    if self.target[index] in self.focussed_allies:
+                        count +=1
+                if count == len(self.target):
+                    for index in range(len(self.focussed_allies)):
+                        if self.target[0] == self.focussed_allies[index] and (not found_slot):
+                            if not new_target in self.target:
+                                self.target[0] = new_target
+                                print("TARGET CAMBIATO, tutti attenzioni prese", self.target)
+                                self.focussed_allies[index] = new_target
+                                found_slot = True
 
     def remove_bar(self, boss):
         if self.is_removing_bar:

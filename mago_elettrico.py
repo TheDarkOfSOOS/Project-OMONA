@@ -31,7 +31,7 @@ class Mago_Elettrico():
         self.vel = 134 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = 1
+        self.current_hp = self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -440,30 +440,31 @@ class Mago_Elettrico():
             self.aoe_4 = int(self.aoe_4)
 
     def update_target(self, new_target):
-        self.focussed_allies.append(new_target)
-        found_slot = False
-        # Controlla che non sia gia' nei target
-        if not new_target in self.target:
-            for index in range(len(self.target)):
-                if (not self.target[index] in self.focussed_allies) and (not found_slot):
-                    self.target[index] = new_target
-                    print("TARGET CAMBIATO", self.target)
-                    found_slot = True
+        if len(self.target) != 0:
+            self.focussed_allies.append(new_target)
+            found_slot = False
+            # Controlla che non sia gia' nei target
+            if not new_target in self.target:
+                for index in range(len(self.target)):
+                    if (not self.target[index] in self.focussed_allies) and (not found_slot):
+                        self.target[index] = new_target
+                        print("TARGET CAMBIATO", self.target)
+                        found_slot = True
 
-        # Caso in cui tutti hanno gia' preso le attenzioni
-        count = 0
-        if not found_slot:
-            for index in range(len(self.target)):
-                if self.target[index] in self.focussed_allies:
-                    count +=1
-            if count == len(self.target):
-                for index in range(len(self.focussed_allies)):
-                    if self.target[0] == self.focussed_allies[index] and (not found_slot):
-                        if not new_target in self.target:
-                            self.target[0] = new_target
-                            print("TARGET CAMBIATO, tutti attenzioni prese", self.target)
-                            self.focussed_allies[index] = new_target
-                            found_slot = True
+            # Caso in cui tutti hanno gia' preso le attenzioni
+            count = 0
+            if not found_slot:
+                for index in range(len(self.target)):
+                    if self.target[index] in self.focussed_allies:
+                        count +=1
+                if count == len(self.target):
+                    for index in range(len(self.focussed_allies)):
+                        if self.target[0] == self.focussed_allies[index] and (not found_slot):
+                            if not new_target in self.target:
+                                self.target[0] = new_target
+                                print("TARGET CAMBIATO, tutti attenzioni prese", self.target)
+                                self.focussed_allies[index] = new_target
+                                found_slot = True
 
     def remove_bar(self, boss):
         if self.is_removing_bar:

@@ -11,6 +11,7 @@ import round
 import mago_elettrico as m_e
 import humpty_d as hd
 import doraemon as d
+import spirito_amalgamato as s_a
 import anafesto as a
 import dialogues as dialogue
 import sound
@@ -150,7 +151,7 @@ while run:
     #print(dialogue_index)
 
     # Mago Elettrico
-    '''if out_of_dialog and transitioner.scene_loader[0]:
+    if out_of_dialog and transitioner.scene_loader[0]:
         if setters[0] == "fighting":
             mixer.music.load(pewpew)
             mixer.music.play(-1)
@@ -187,47 +188,7 @@ while run:
                     setters[0] = "fighting"
                     round_essentials_status = reset_res()
                     round.reset_charas()
-                    round.reset_boss(m_e.me)'''
-
-    #                                               PROVA PAOLO LUCIO ANAFESTO
-    if out_of_dialog and transitioner.scene_loader[0]:
-        if setters[0] == "fighting":
-            mixer.music.load(pewpew)
-            mixer.music.play(-1)
-            round.set_charas(5)
-            setters[0] = "waiting"
-        if wins[0] == "fighting" and m_e.me.current_hp > 0 and not round.team_lost():
-            round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], input, a.a)
-            # round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], input, m_e.me)
-        elif wins[0] == "fighting" and m_e.me.current_hp <= 0:
-            # Continuiamo a caricare il fight fino a quando non ha caricato la scena, interrompendo l'input
-            if not transitioner.scene_loader[1]:
-                round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", a.a)
-            transitioner.current_loader = 1
-            if transitioner.scene_loader[1]:
-                round_essentials_status = reset_res()
-                round.reset_charas()
-                round.reset_boss(a.a)
-                wins[0] = "done"
-                #wins[1] = "waiting" sotto e' temporaneo
-                wins[1] = "fighting"
-                setters[0] = "done"
-                setters[1] = "fighting"
-                dialogue_index += 1
-                out_of_dialog = True
-        elif wins[0] == "fighting" and round.team_lost():
-            if not transitioner.scene_loader[1]:
-                round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", a.a)
-            transitioner.current_loader = 1
-            if transitioner.scene_loader[1]:
-                mixer.music.stop()
-                dw.game_over_loader.game_over(input)
-                if dw.game_over_loader.game_over_status == False:
-                    dw.game_over_loader.game_over_status = True
-                    setters[0] = "fighting"
-                    round_essentials_status = reset_res()
-                    round.reset_charas()
-                    round.reset_boss(a.a)
+                    round.reset_boss(m_e.me)
 
     # Humpty Dumpty
     if out_of_dialog and transitioner.scene_loader[2]:
@@ -313,16 +274,16 @@ while run:
             mixer.music.play(-1)
             round.set_charas(4)
             setters[3] = "waiting"
-        if wins[3] == "fighting" and a.a.current_hp > 0 and not round.team_lost():
-            round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], input, a.a)
-        elif wins[3] == "fighting" and a.a.current_hp <= 0:
+        if wins[3] == "fighting" and s_a.sa.current_hp > 0 and not round.team_lost():
+            round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], input, s_a.sa)
+        elif wins[3] == "fighting" and s_a.sa.current_hp <= 0:
             if not transitioner.scene_loader[7]:
-                round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", a.a)
+                round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", s_a.sa)
             transitioner.current_loader = 7
             if transitioner.scene_loader[7]:
                 round_essentials_status = reset_res()
                 round.reset_charas()
-                round.reset_boss(a.a)
+                round.reset_boss(s_a.sa)
                 wins[3] = "done"
                 #wins[4] = "waiting" sotto e' temporaneo
                 wins[4] = "fighting"
@@ -332,7 +293,7 @@ while run:
                 out_of_dialog = False
         elif wins[3] == "fighting" and round.team_lost():
             if not transitioner.scene_loader[7]:
-                round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", a.a)
+                round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", s_a.sa)
             transitioner.current_loader = 7
             if transitioner.scene_loader[7]:
                 mixer.music.stop()
@@ -341,7 +302,7 @@ while run:
                     setters[3] = "fighting"
                     round_essentials_status = reset_res()
                     round.reset_charas()
-                    round.reset_boss(a.a)
+                    round.reset_boss(s_a.sa)
         
     # Paolo Lucio Anafesto
     if out_of_dialog and transitioner.scene_loader[8]:

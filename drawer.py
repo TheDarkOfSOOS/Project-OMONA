@@ -11,6 +11,7 @@ from fabiano_class import f
 from mago_elettrico import me
 from humpty_d import hd
 from doraemon import d
+from spirito_amalgamato import sa
 from anafesto import a
 from items import items
 import random as rng
@@ -337,7 +338,11 @@ def choices(current_player, is_selecting, boss):
                 text_focus = ""
                 for targets in boss.target:
                     text_focus +=", " + targets.name
-                text_action("Trentin comunica chi verrà attaccato" + text_focus, FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+
+                if len(boss.target) > 0:
+                    text_action("Trentin comunica chi verrà attaccato" + text_focus, FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+                else:
+                    text_action("Trentin nota che l'avversario non ha intenzione di attaccarli", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             else:
                 text_action("Cosa deve fare "+ current_player.name + "?", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             for i in range(3):
@@ -1214,74 +1219,6 @@ def zzaaap_animation(targets):
         me.zzaaap_animation_top_right.clear()
         me.is_doing_animation = False
 
-def dono_inaspettato_animation():
-    if d.is_doing_animation:
-        if d.current_animation == 0:
-            d.load_dono_inaspettato()
-            print(d.dono_inaspettato_animation)
-        WIN.blit(d.dono_inaspettato_animation[int(d.current_animation)],(0,0))
-        d.current_animation+=0.25
-    if d.current_animation >= len(d.dono_inaspettato_animation):
-        d.dono_inaspettato_animation.clear()
-        d.is_doing_animation = False
-
-def missile_animation():
-    if d.is_doing_animation:
-        if d.current_animation == 0:
-            d.load_missile()
-        WIN.blit(d.missile_animation[int(d.current_animation)],(0,0))
-        d.current_animation+=0.25
-    if d.current_animation >= len(d.missile_animation):
-        d.missile_animation.clear()
-        d.is_doing_animation = False
-
-def macchina_del_tempo_animation():
-    if d.is_doing_animation:
-        if d.current_animation == 0:
-            d.load_macchina_del_tempo()
-        WIN.blit(d.macchina_del_tempo_animation[int(d.current_animation)],(0,0))
-        d.current_animation+=0.25
-    if d.current_animation >= len(d.macchina_del_tempo_animation):
-        d.macchina_del_tempo_animation.clear()
-        d.is_doing_animation = False
-
-def chopter_animation():
-    if d.is_doing_animation:
-        if d.current_animation == 0:
-            d.load_chopter()
-        WIN.blit(d.chopter_animation[int(d.current_animation)],(0,0))
-        d.current_animation+=0.25
-    if d.current_animation >= len(d.chopter_animation):
-        d.chopter_animation.clear()
-        d.is_doing_animation = False
-
-def sfuriate_meccaniche_animation(target):
-    if d.is_doing_animation:
-        if d.current_animation == 0:
-            d.load_sfuriate_meccaniche()
-        if target == y:
-            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+SPACING,HEIGHT-CHARA_HEIGHT-SPACING+(SPACING*3)))
-        elif target == p:
-            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+SPACING,SPACING+(SPACING*3)))
-        elif target == r:
-            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(WIDTH-CHARA_WIDTH,HEIGHT-CHARA_HEIGHT+SPACING))
-        elif target == f:
-            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(WIDTH-CHARA_WIDTH,SPACING+(SPACING*3)))
-        d.current_animation+=0.20
-    if d.current_animation >= len(d.sfuriate_meccaniche_animation):
-        d.sfuriate_meccaniche_animation.clear()
-        d.is_doing_animation = False
-
-def bomba_ad_idrogeno_animation():
-    if d.is_doing_animation:
-        if d.current_animation == 0:
-            d.load_bomba_ad_idrogeno()
-        WIN.blit(d.bomba_ad_idrogeno_animation[int(d.current_animation)],(0,0))
-        d.current_animation+=0.25
-    if d.current_animation >= len(d.bomba_ad_idrogeno_animation):
-        d.bomba_ad_idrogeno_animation.clear()
-        d.is_doing_animation = False
-
 def ovetto_animation(target):
     if target.name == "Youssef":
         if hd.is_doing_animation:
@@ -1382,6 +1319,153 @@ def gallina_animation():
         hd.is_doing_animation = False
 
 
+def dono_inaspettato_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_dono_inaspettato()
+            print(d.dono_inaspettato_animation)
+        WIN.blit(d.dono_inaspettato_animation[int(d.current_animation)],(0,0))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.dono_inaspettato_animation):
+        d.dono_inaspettato_animation.clear()
+        d.is_doing_animation = False
+
+def missile_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_missile()
+        WIN.blit(d.missile_animation[int(d.current_animation)],(0,0))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.missile_animation):
+        d.missile_animation.clear()
+        d.is_doing_animation = False
+
+def macchina_del_tempo_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_macchina_del_tempo()
+        WIN.blit(d.macchina_del_tempo_animation[int(d.current_animation)],(0,0))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.macchina_del_tempo_animation):
+        d.macchina_del_tempo_animation.clear()
+        d.is_doing_animation = False
+
+def copter_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_copter()
+        WIN.blit(d.copter_animation[int(d.current_animation)],(WIDTH//2.1,HEIGHT//2.1))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.copter_animation):
+        d.copter_animation.clear()
+        d.is_doing_animation = False
+
+def sfuriate_meccaniche_animation(target):
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_sfuriate_meccaniche()
+        if target == y:
+            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+SPACING,HEIGHT-CHARA_HEIGHT-SPACING+(SPACING*3)))
+        elif target == p:
+            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+SPACING,SPACING+(SPACING*3)))
+        elif target == r:
+            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(WIDTH-CHARA_WIDTH,HEIGHT-CHARA_HEIGHT+SPACING))
+        elif target == f:
+            WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(WIDTH-CHARA_WIDTH,SPACING+(SPACING*3)))
+        d.current_animation+=0.20
+    if d.current_animation >= len(d.sfuriate_meccaniche_animation):
+        d.sfuriate_meccaniche_animation.clear()
+        d.is_doing_animation = False
+
+def bomba_ad_idrogeno_animation():
+    if d.is_doing_animation:
+        if d.current_animation == 0:
+            d.load_bomba_ad_idrogeno()
+        WIN.blit(d.bomba_ad_idrogeno_animation[int(d.current_animation)],(0,0))
+        d.current_animation+=0.25
+    if d.current_animation >= len(d.bomba_ad_idrogeno_animation):
+        d.bomba_ad_idrogeno_animation.clear()
+        d.is_doing_animation = False
+
+# Spirito amalgamato
+
+def cambiaforma_animation():
+    if sa.is_doing_animation:
+        if sa.current_animation == 0:
+            sa.load_cambiaforma()
+            print(sa.cambiaforma_animation)
+        WIN.blit(sa.cambiaforma_animation[int(sa.current_animation)],(0,0))
+        sa.current_animation+=0.10
+    if sa.current_animation >= len(sa.cambiaforma_animation):
+        sa.cambiaforma_animation.clear()
+        sa.is_doing_animation = False
+
+def lamento_animation():
+    if sa.is_doing_animation:
+        if sa.current_animation == 0:
+            sa.load_lamento()
+            print(sa.lamento_animation)
+        WIN.blit(sa.lamento_animation[int(sa.current_animation)],(0,0))
+        sa.current_animation+=0.35
+    if sa.current_animation >= len(sa.lamento_animation):
+        sa.lamento_animation.clear()
+        sa.is_doing_animation = False
+
+def rilascio_spiritico_animation():
+    if sa.is_doing_animation:
+        if sa.current_animation == 0:
+            sa.load_rilascio_spiritico()
+            print(sa.rilascio_spiritico_animation)
+        WIN.blit(sa.rilascio_spiritico_animation[int(sa.current_animation)],(0,0))
+        sa.current_animation+=0.35
+    if sa.current_animation >= len(sa.rilascio_spiritico_animation):
+        sa.rilascio_spiritico_animation.clear()
+        sa.is_doing_animation = False
+
+def onda_di_disperazione_animation():
+    if sa.is_doing_animation:
+        if sa.current_animation == 0:
+            sa.load_onda_di_disperazione()
+            print(sa.onda_di_disperazione_animation)
+        WIN.blit(sa.onda_di_disperazione_animation[int(sa.current_animation)],(0,0))
+        sa.current_animation+=0.35
+    if sa.current_animation >= len(sa.onda_di_disperazione_animation):
+        sa.onda_di_disperazione_animation.clear()
+        sa.is_doing_animation = False
+
+def affoga_animation(target):
+    if sa.is_doing_animation:
+        if sa.current_animation == 0:
+            sa.load_affoga()
+        if target == y:
+            WIN.blit(pygame.transform.scale(sa.affoga_animation[int(sa.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+BOX_BORDER, HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
+        elif target == p:
+            WIN.blit(pygame.transform.scale(sa.affoga_animation[int(sa.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+BOX_BORDER, SPACING+BOX_BORDER+BANNER_HEIGHT))
+        elif target == r:
+            WIN.blit(pygame.transform.scale(sa.affoga_animation[int(sa.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),( WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
+        elif target == f:
+            WIN.blit(pygame.transform.scale(sa.affoga_animation[int(sa.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , SPACING+BOX_BORDER+BANNER_HEIGHT))
+        sa.current_animation+=0.25
+    if sa.current_animation >= len(sa.affoga_animation):
+        sa.affoga_animation.clear()
+        sa.is_doing_animation = False
+
+def raggio_spiritico_animation(targets):
+    if sa.is_doing_animation:
+        if sa.current_animation == 0:
+            sa.load_raggio_spiritico()
+        if y in targets:                
+            WIN.blit(sa.raggio_spiritico_animation[int(sa.current_animation)],(0,HEIGHT/2))
+        if p in targets:
+            WIN.blit(pygame.transform.flip(sa.raggio_spiritico_animation[int(sa.current_animation)], False, True),(0,0))
+        if r in targets:
+            WIN.blit(pygame.transform.flip(sa.raggio_spiritico_animation[int(sa.current_animation)], True, False),(WIDTH/2,HEIGHT/2))
+        if f in targets:
+            WIN.blit(pygame.transform.flip(sa.raggio_spiritico_animation[int(sa.current_animation)], True, True),(WIDTH/2,0))
+        sa.current_animation+=0.50
+    if sa.current_animation >= len(sa.raggio_spiritico_animation):
+        sa.raggio_spiritico_animation.clear()
+        sa.is_doing_animation = False
 
 
 

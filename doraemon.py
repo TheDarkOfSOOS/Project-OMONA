@@ -31,7 +31,7 @@ class Doraemon():
         self.vel = 138 # Variabile per i punti velocità
         self.eva = 3 # Variabile per i punti evasione
 
-        self.current_hp = 1
+        self.current_hp = self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -77,7 +77,7 @@ class Doraemon():
 
         self.macchina_del_tempo_animation = []
 
-        self.chopter_animation = []
+        self.copter_animation = []
 
         self.sfuriate_meccaniche_animation = []
 
@@ -98,15 +98,15 @@ class Doraemon():
 
         self.is_showing_text_outputs = False
 
-        self.list_attacks = ["Dono inaspettato","Missile","Macchina del tempo","Chopter","Sfuriate meccaniche"]
+        self.list_attacks = ["Dono inaspettato","Missile","Macchina del tempo","Copter","Sfuriate meccaniche"]
 
         self.list_available_attacks = []
 
         self.attacks_target = {
-            self.list_attacks[0]:4,
+            self.list_attacks[0]:0,
             self.list_attacks[1]:4,
-            self.list_attacks[2]:4,
-            self.list_attacks[3]:4,
+            self.list_attacks[2]:0,
+            self.list_attacks[3]:0,
             self.list_attacks[4]:1,
         }
 
@@ -186,10 +186,10 @@ class Doraemon():
         self.macchina_del_tempo_animation.append(pygame.image.load("img/doraemon/animations/macchina_del_tempo/macchina_del_tempo_animation19.png"))
         self.macchina_del_tempo_animation.append(pygame.image.load("img/doraemon/animations/macchina_del_tempo/macchina_del_tempo_animation20.png"))
 
-    def load_chopter(self):
+    def load_copter(self):
         for x in range(10):
-            self.chopter_animation.append(pygame.image.load("img/doraemon/animations/chopter/chopter_animation0.png"))
-            self.chopter_animation.append(pygame.image.load("img/doraemon/animations/chopter/chopter_animation1.png"))
+            self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+            self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
 
     def load_sfuriate_meccaniche(self):
         for x in range(4):
@@ -355,13 +355,13 @@ class Doraemon():
                     self.is_showing_text_outputs = True
                     self.is_removing_bar = True
 
-            # Chopter
+            # Copter
             if self.choosen_attack == self.list_attacks[3]:
                 if self.is_doing_animation:
-                    dw.chopter_animation()
+                    dw.copter_animation()
                     
                 if not self.is_doing_animation:
-                    self.text_action = "Doraemon ha iniziato a volare con il Chopter, sarà impossibile colpirlo!"
+                    self.text_action = "Doraemon ha iniziato a volare con il Copter, sarà impossibile colpirlo!"
                     self.current_eva = 100
                     self.current_animation = 0
                     self.is_showing_text_outputs = True
@@ -390,8 +390,8 @@ class Doraemon():
             if input == "return" and self.ultimate_status == "will_activate":
                 self.ultimate_status = "used"
             elif self.ultimate_status == "will_activate":
-                dw.text_action("Doraemon: Scusate ragazzi, ma non posso farvi procedere oltre. Mi dispiace davvero. Addio...", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
-                dw.text_given_last_coordinates('"Enter" per confermare, le freccette direz. per selezionare. "Backspace" per tornare a scelta precedente', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING+(SPACING*2)-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
+                dw.text_action("Doraemon: Scusate ragazzi, ma non posso farvi procedere oltre. Mi dispiace davvero. Addio.", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING+(SPACING*2)-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
             DMG_DEAL = 20
             self.aoe_1 = action.damage_deal(boss.current_atk,DMG_DEAL,y.y.current_defn,self.current_emotion,y.y.current_emotion)
             self.aoe_2 = action.damage_deal(boss.current_atk,DMG_DEAL,p.p.current_defn,self.current_emotion,p.p.current_emotion)
@@ -429,30 +429,31 @@ class Doraemon():
             self.aoe_4 = int(self.aoe_4)
 
     def update_target(self, new_target):
-        self.focussed_allies.append(new_target)
-        found_slot = False
-        # Controlla che non sia gia' nei target
-        if not new_target in self.target:
-            for index in range(len(self.target)):
-                if (not self.target[index] in self.focussed_allies) and (not found_slot):
-                    self.target[index] = new_target
-                    print("TARGET CAMBIATO", self.target)
-                    found_slot = True
+        if len(self.target) != 0:
+            self.focussed_allies.append(new_target)
+            found_slot = False
+            # Controlla che non sia gia' nei target
+            if not new_target in self.target:
+                for index in range(len(self.target)):
+                    if (not self.target[index] in self.focussed_allies) and (not found_slot):
+                        self.target[index] = new_target
+                        print("TARGET CAMBIATO", self.target)
+                        found_slot = True
 
-        # Caso in cui tutti hanno gia' preso le attenzioni
-        count = 0
-        if not found_slot:
-            for index in range(len(self.target)):
-                if self.target[index] in self.focussed_allies:
-                    count +=1
-            if count == len(self.target):
-                for index in range(len(self.focussed_allies)):
-                    if self.target[0] == self.focussed_allies[index] and (not found_slot):
-                        if not new_target in self.target:
-                            self.target[0] = new_target
-                            print("TARGET CAMBIATO, tutti attenzioni prese", self.target)
-                            self.focussed_allies[index] = new_target
-                            found_slot = True
+            # Caso in cui tutti hanno gia' preso le attenzioni
+            count = 0
+            if not found_slot:
+                for index in range(len(self.target)):
+                    if self.target[index] in self.focussed_allies:
+                        count +=1
+                if count == len(self.target):
+                    for index in range(len(self.focussed_allies)):
+                        if self.target[0] == self.focussed_allies[index] and (not found_slot):
+                            if not new_target in self.target:
+                                self.target[0] = new_target
+                                print("TARGET CAMBIATO, tutti attenzioni prese", self.target)
+                                self.focussed_allies[index] = new_target
+                                found_slot = True
 
     def remove_bar(self, boss):
         if self.is_removing_bar:

@@ -49,9 +49,6 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
     # Fai queste cose all'inizio del round
     if new_turn_has_started:
-        # Resettiamo lo stato di provocazione
-        boss.focus_on_youssef = 0
-
         # Controlliamo se boss puo' attivare ultimate
         if boss.ultimate_status == "used":
             boss.ultimate_status = "off"
@@ -97,7 +94,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
         chara.change_img()
 
     boss.change_img()
-    #print(boss.current_defn)
+    #print(boss.focus_on_youssef)
     #print(youssef.y.sforbiciata_len)
     #print(pier.p.current_emotion)
     #print(raul.r.current_emotion)
@@ -132,6 +129,9 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             pier.p.sel["is_choosing"]=True
             youssef.y.sel["is_choosing"]=False
         else:
+            # Non rimanda a lui se si fa backspace nella sua scelta
+            if input == "backspace" and not youssef.y.sel["has_done_first_selection"]:
+                input = "null"
             # Fa partire il turno di youssef
             youssef.y.sel, returning = turn.of_character(youssef.y, input, boss, returning)
             #print("youssef: ", youssef.y.sel)

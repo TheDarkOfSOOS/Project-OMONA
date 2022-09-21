@@ -114,7 +114,7 @@ class Fabiano():
             # Friends
             "Cappe":"Indica un alleato che subirà l’attacco del nemico. Attacca per primo.",
             "Diego": 'Rende gioiosi(??) tutti gli alleati al massimo, ma diminuisce la loro difesa.',
-            "Trentin": "Osserva il nemico e dirà la sua prossima mossa per 2 turni.",
+            "Trentin": "Osserva il nemico e dirà la sua prossima mossa per 5 turni.",
             "Pastorello (spirito)": "Incita gli alleati a fare del loro meglio. Aumenta la difesa di tutti."
         }
         self.description = {}
@@ -465,7 +465,7 @@ class Fabiano():
 
         if self.sel["has_cursor_on"]=="Trentin":
             # Il valore numerico indica per quanti turni si vedranno gli attacchi del nemico
-            self.foresees_enemy_attacks = 2
+            self.foresees_enemy_attacks = 5
             if self.is_doing_animation:
                 dw.pestata_animation()
 
