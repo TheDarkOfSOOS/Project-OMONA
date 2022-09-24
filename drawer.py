@@ -1219,44 +1219,44 @@ def zzaaap_animation(targets):
         me.zzaaap_animation_top_right.clear()
         me.is_doing_animation = False
 
-def ovetto_animation(target):
-    if target.name == "Youssef":
-        if hd.is_doing_animation:
-            if hd.current_animation == 0:
-                hd.load_ovetto()
-            WIN.blit(pygame.transform.flip(hd.ovetto_animation[int(hd.current_animation)],True, False),(0,0))
-            hd.current_animation+=0.45
+def ovetto_y_animation():
+    if hd.is_doing_animation:
+        if hd.current_animation == 0:
+            hd.load_ovetto()
+        WIN.blit(pygame.transform.flip(hd.ovetto_animation[int(hd.current_animation)],True, False),(0,0))
+        hd.current_animation+=0.45
     if hd.current_animation >= len(hd.ovetto_animation):
         hd.ovetto_animation.clear()
         hd.is_doing_animation = False
 
-    if target.name == "Raul":
-        if hd.is_doing_animation:
-            if hd.current_animation == 0:
-                hd.load_ovetto()
-            WIN.blit(hd.ovetto_animation[int(hd.current_animation)],(0,0))
-            hd.current_animation+=0.45
+def ovetto_r_animation():
+    print("entrato da raul")
+    if hd.is_doing_animation:
+        if hd.current_animation == 0:
+            hd.load_ovetto()
+        WIN.blit(hd.ovetto_animation[int(hd.current_animation)],(0,0))
+        hd.current_animation+=0.45
     if hd.current_animation >= len(hd.ovetto_animation):
         hd.ovetto_animation.clear()
         hd.is_doing_animation = False
 
-def ovetto_1_animation(target):
-    if target.name == "Pier":
-        if hd.is_doing_animation:
-            if hd.current_animation == 0:
-                hd.load_ovetto_1()
-            WIN.blit(pygame.transform.flip(hd.ovetto_1_animation[int(hd.current_animation)],True, False),(0,0))
-            hd.current_animation+=0.50
+def ovetto_p_animation():
+    if hd.is_doing_animation:
+        if hd.current_animation == 0:
+            hd.load_ovetto_1()
+        WIN.blit(pygame.transform.flip(hd.ovetto_1_animation[int(hd.current_animation)],True, False),(0,0))
+        hd.current_animation+=0.50
     if hd.current_animation >= len(hd.ovetto_1_animation):
         hd.ovetto_1_animation.clear()
         hd.is_doing_animation = False
 
-    if target.name == "Fabiano":
-        if hd.is_doing_animation:
-            if hd.current_animation == 0:
-                hd.load_ovetto_1()
-            WIN.blit(hd.ovetto_1_animation[int(hd.current_animation)],(0,0))
-            hd.current_animation+=0.50
+def ovetto_f_animation():
+    print("entrato da fabiano")
+    if hd.is_doing_animation:
+        if hd.current_animation == 0:
+            hd.load_ovetto_1()
+        WIN.blit(hd.ovetto_1_animation[int(hd.current_animation)],(0,0))
+        hd.current_animation+=0.50
     if hd.current_animation >= len(hd.ovetto_1_animation):
         hd.ovetto_1_animation.clear()
         hd.is_doing_animation = False

@@ -61,7 +61,7 @@ class Humpty_Dumpty():
         
 
         # EMOZIONI
-        self.current_emotion = "neutrale" # Emozione attuale
+        self.current_emotion = "arrabbiato" # Emozione attuale
         self.emotional_levels = {"Felicità":1,"Rabbia":1,"Tristezza":1} # Dizionario per il livello massimo delle emozioni
 
         # Too many animations.
@@ -122,7 +122,7 @@ class Humpty_Dumpty():
             self.list_attacks[0]:0,
             self.list_attacks[1]:0,
             self.list_attacks[2]:0,
-            self.list_attacks[3]:0,
+            self.list_attacks[3]:2,
             self.list_attacks[4]:0,
         }
 
@@ -376,10 +376,14 @@ class Humpty_Dumpty():
                 DMG_DEAL = 9
                 self.damage_dealed = action.damage_deal(boss.current_atk,DMG_DEAL,self.target[0].current_defn,self.current_emotion,self.target[0].current_emotion)
                 if self.is_doing_animation:
-                    if self.target[0] == (y.y or r.r):
-                        dw.ovetto_animation(self.target[0])
-                    if self.target[0] == (p.p or f.f):
-                        dw.ovetto_1_animation(self.target[0])
+                    if self.target[0] == y.y:
+                        dw.ovetto_y_animation()
+                    if self.target[0] == r.r:
+                        dw.ovetto_r_animation()
+                    if self.target[0] == p.p:
+                        dw.ovetto_p_animation()
+                    if self.target[0] == f.f:
+                        dw.ovetto_f_animation()
 
                 if not self.is_doing_animation:
                     if action.is_missed(self.target[0].current_eva):
