@@ -1565,10 +1565,10 @@ def nei_mari_piu_profondi():
         if a.current_animation == 0:
             a.load_ulti()
         WIN.blit(a.nei_mari_piu_profondi[int(a.current_animation)],(0,0))
-        if int(a.current_animation) <= 64:
+        if int(a.current_animation) <= 63:
             a.current_animation+=0.50
         else:
-            a.current_animation+=0.15
+            a.current_animation+=0.10
     if a.current_animation >= len(a.nei_mari_piu_profondi):
         a.nei_mari_piu_profondi.clear()
         a.is_doing_animation = False
