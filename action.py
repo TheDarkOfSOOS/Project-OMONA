@@ -13,10 +13,7 @@ dmg_reduction = Get_Damage_Reduction_Active()
 damage_per_frame = 5
 
 def damage_deal(user_atk, atk_dmg, target_def, user_emotion, target_emotion):
-    if target_def == 0:
-        result = int(((user_atk*atk_dmg)/7)) - rng.randrange(0,6)
-    else:
-        result = int(((user_atk)*(atk_dmg*20)) / (target_def+rng.randrange(0,6)))
+    result = int(((user_atk)*(atk_dmg*20)) / (target_def+rng.randrange(1,6)))
     if result < 0:
         result = 0
     if dmg_reduction.is_active:
@@ -230,6 +227,7 @@ def remove_mna(self):
     
 
 def add_health(healing_quantity, target, count):
+    pygame.mixer.Sound.play(sound.GAIN_HEALTH)
     #print(count, "<", healing_quantity, "and", abs(count < healing_quantity), ">", damage_per_frame)
     if count < healing_quantity and abs(count - healing_quantity) >= damage_per_frame:
         count += damage_per_frame

@@ -69,13 +69,15 @@ class Youssef():
         self.emotional_levels = {"Felicità":2,"Rabbia":2,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
 
         self.sforbiciata_animation = []
-        self.sforbiciata_len = 19
+        #self.sforbiciata_len = 19
 
         self.provocazione_animation = []
-        self.provocazione_len = 8
+        #self.provocazione_len = 8
 
         self.pallonata_animation = []
-        self.pallonata_len = 26
+        #self.pallonata_len = 26
+
+        self.assedio_animation = []
 
         self.pol_animation = []
         #self.pol_len = 29
@@ -241,6 +243,17 @@ class Youssef():
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation24.png"))
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation25.png"))
 
+    def load_assedio(self):
+        self.assedio_animation.append(pygame.image.load("img/animations/assedio/assedio_animation0.png"))
+        self.assedio_animation.append(pygame.image.load("img/animations/assedio/assedio_animation1.png"))
+        self.assedio_animation.append(pygame.image.load("img/animations/assedio/assedio_animation2.png"))
+        self.assedio_animation.append(pygame.image.load("img/animations/assedio/assedio_animation3.png"))
+        self.assedio_animation.append(pygame.image.load("img/animations/assedio/assedio_animation4.png"))
+        for x in range(5):
+            self.assedio_animation.append(pygame.image.load("img/animations/assedio/assedio_animation5.png"))
+            self.assedio_animation.append(pygame.image.load("img/animations/assedio/assedio_animation6.png"))
+            self.assedio_animation.append(pygame.image.load("img/animations/assedio/assedio_animation7.png"))
+
     def load_pol(self):
         self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation00.png"))
         self.pol_animation.append(pygame.image.load("img/animations/pol/pol_animation01.png"))
@@ -400,7 +413,7 @@ class Youssef():
             DMG_DEAL = 8
             self.damage_dealed = 0
             if self.is_doing_animation:
-                dw.sforbiciata_animation()
+                dw.assedio_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
 
             if not self.is_doing_animation:

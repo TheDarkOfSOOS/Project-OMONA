@@ -31,7 +31,7 @@ class Doraemon():
         self.vel = 138 # Variabile per i punti velocità
         self.eva = 3 # Variabile per i punti evasione
 
-        self.current_hp = self.hp
+        self.current_hp = 1#self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -391,7 +391,7 @@ class Doraemon():
                 self.ultimate_status = "used"
             elif self.ultimate_status == "will_activate":
                 dw.text_action("Doraemon: Scusate ragazzi, ma non posso farvi procedere oltre. Mi dispiace davvero. Addio.", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
-                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING+(SPACING*2)-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
+                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
             DMG_DEAL = 20
             self.aoe_1 = action.damage_deal(boss.current_atk,DMG_DEAL,y.y.current_defn,self.current_emotion,y.y.current_emotion)
             self.aoe_2 = action.damage_deal(boss.current_atk,DMG_DEAL,p.p.current_defn,self.current_emotion,p.p.current_emotion)
@@ -406,7 +406,7 @@ class Doraemon():
                 self.text_action="Doraemon ha lanciato una bomba ad idrogeno!"
                 for chara in [y.y,p.p,r.r,f.f]:
                     emotion.change_emotion(chara,"neutrale")
-                self.current_defn =- action.buff_stats(self.current_defn,self,"debuff")*2
+                self.current_defn -= action.buff_stats(self.defn,self,"debuff")*2
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True

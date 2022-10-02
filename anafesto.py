@@ -29,7 +29,7 @@ class Anafesto():
         self.vel = 345 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = self.hp
+        self.current_hp = 100#self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -516,7 +516,7 @@ class Anafesto():
                 self.ultimate_status = "used"
             elif self.ultimate_status == "will_activate":
                 dw.text_action("Anafesto: No, non mi fermerete mai, saro' vittorioso. Andate tutti voi... 'Nei mari piu' profondi'!", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
-                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING+(SPACING*2)-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
+                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
             self.damage_dealed = self.current_hp - 1
             DMG_DEAL = 9999
             if self.last_standing == r.r:

@@ -268,7 +268,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 list_speed_ordered.pop(list_speed_ordered.index(fabiano.f))
                 list_speed_ordered.insert(0, fabiano.f)
 
-            if boss.choosen_attack == "Chopter":
+            if boss.choosen_attack == "Copter":
                 list_speed_ordered.pop(list_speed_ordered.index(boss))
                 list_speed_ordered.insert(0, boss)
 

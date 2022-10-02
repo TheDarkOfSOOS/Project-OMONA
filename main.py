@@ -52,7 +52,7 @@ wins = ["fighting", "ready", "ready", "ready", "ready"]
 def reset_res():
     return [False, False, False, True, False, [], []]
 
-mixer.music.load(soundtrack_2)
+mixer.music.load(OST_Fallen)
 mixer.music.play(-1)
 
 class Transition_Animator():
@@ -78,9 +78,6 @@ class Transition_Animator():
         self.new_transition_animation.append(pygame.image.load("img/animations/new_transition/new_transition_animation11.png"))
         self.new_transition_animation.append(pygame.image.load("img/animations/new_transition/new_transition_animation12.png"))
         self.new_transition_animation.append(pygame.image.load("img/animations/new_transition/new_transition_animation13.png"))
-        self.new_transition_animation.append(pygame.image.load("img/animations/new_transition/new_transition_animation14.png"))
-        self.new_transition_animation.append(pygame.image.load("img/animations/new_transition/new_transition_animation15.png"))
-        self.new_transition_animation.append(pygame.image.load("img/animations/new_transition/new_transition_animation16.png"))
 
     def make_transitions(self):
         if int(self.current_frame) == 0:
@@ -88,7 +85,7 @@ class Transition_Animator():
         self.is_transitioning = True
         if self.is_transitioning:
             WIN.blit(self.new_transition_animation[int(self.current_frame)],(0,0))
-            self.current_frame += 0.25
+            self.current_frame += 0.50
         if self.current_frame == 11:
             self.scene_loader[self.current_loader] = True
         if self.current_frame >= len(self.new_transition_animation):
@@ -153,10 +150,10 @@ while run:
     # Mago Elettrico
     if out_of_dialog and transitioner.scene_loader[0]:
         if setters[0] == "fighting":
-            mixer.music.load(pewpew)
+            mixer.music.load(OST_Spark_Royale)
             mixer.music.play(-1)
             #round.reset_charas()
-            round.set_charas(1)
+            round.set_charas(5)
             setters[0] = "waiting"
         if wins[0] == "fighting" and m_e.me.current_hp > 0 and not round.team_lost():
             round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], input, m_e.me)
@@ -176,6 +173,8 @@ while run:
                 setters[1] = "fighting"
                 dialogue_index += 1
                 out_of_dialog = False
+                mixer.music.load(OST_Assemblence)
+                mixer.music.play(-1)
         elif wins[0] == "fighting" and round.team_lost():
             if not transitioner.scene_loader[1]:
                 round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", m_e.me)
@@ -193,7 +192,7 @@ while run:
     # Humpty Dumpty
     if out_of_dialog and transitioner.scene_loader[2]:
         if setters[1] == "fighting":
-            mixer.music.load(pewpew)
+            mixer.music.load(OST_Both_Ruthless_and_Vicious)
             mixer.music.play(-1)
             round.set_charas(2)
             setters[1] = "waiting"
@@ -215,6 +214,8 @@ while run:
                 setters[2] = "fighting"
                 dialogue_index += 1
                 out_of_dialog = False
+                mixer.music.load(OST_Assemblence)
+                mixer.music.play(-1)
         elif wins[1] == "fighting" and round.team_lost():
             if not transitioner.scene_loader[3]:
                 round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", hd.hd)
@@ -232,7 +233,7 @@ while run:
     # Doraemon
     if out_of_dialog and transitioner.scene_loader[4]:
         if setters[2] == "fighting":
-            mixer.music.load(pewpew)
+            mixer.music.load(OST_Futuristic_Festival)
             mixer.music.play(-1)
             round.set_charas(3)
             setters[2] = "waiting"
@@ -254,6 +255,8 @@ while run:
                 setters[3] = "fighting"
                 dialogue_index += 1
                 out_of_dialog = False
+                mixer.music.load(OST_Assemblence)
+                mixer.music.play(-1)
         elif wins[2] == "fighting" and round.team_lost():
             if not transitioner.scene_loader[5]:
                 round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", d.d)
@@ -270,7 +273,7 @@ while run:
     # Spirito Amalgamato
     if out_of_dialog and transitioner.scene_loader[6]:
         if setters[3] == "fighting":
-            mixer.music.load(pewpew)
+            mixer.music.load(OST_The_Spirit_Revenge)
             mixer.music.play(-1)
             round.set_charas(4)
             setters[3] = "waiting"
@@ -291,6 +294,8 @@ while run:
                 setters[4] = "fighting"
                 dialogue_index += 1
                 out_of_dialog = False
+                mixer.music.load(OST_Assemblence)
+                mixer.music.play(-1)
         elif wins[3] == "fighting" and round.team_lost():
             if not transitioner.scene_loader[7]:
                 round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", s_a.sa)
@@ -307,7 +312,7 @@ while run:
     # Paolo Lucio Anafesto
     if out_of_dialog and transitioner.scene_loader[8]:
         if setters[4] == "fighting":
-            mixer.music.load(pewpew)
+            mixer.music.load(OST_Colossal_Wave)
             mixer.music.play(-1)
             round.set_charas(5)
             setters[4] = "waiting"
@@ -325,6 +330,8 @@ while run:
                 setters[3] = "done"
                 dialogue_index += 1
                 out_of_dialog = False
+                mixer.music.load(OST_Assemblence)
+                mixer.music.play(-1)
         elif wins[4] == "fighting" and round.team_lost():
             if not transitioner.scene_loader[9]:
                 round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", a.a)
@@ -338,7 +345,7 @@ while run:
                     round.reset_charas()
                     round.reset_boss(a.a)
     
-    if out_of_dialog and dialogue_index == 5:
+    if out_of_dialog and dialogue_index == 6:
         # Fine gioco btw
         run = False
         WIN.fill(ABSOLUTE_BLACK)

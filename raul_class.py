@@ -106,22 +106,22 @@ class Raul():
             "Bel tempo":"Crea un arcobaleno con la pioggia delle tempeste e la luce delle scintille. Fa diventare gioioso un alleato o nemico.",
             "Tensione esplosiva":"Scarica dal suo corpo una forte elettricità. Diventa arrabbiato e causa danni a tutti: alleati, sé stesso e gravi danni al nemico.",
             # Friends
+            "Cristian":"Diminuisce l’evasione del nemico.",
             "Damonte": "Aumenta la velocità di tutti gli alleati di tanto.",
             "Noce": "Esegue un headshot al nemico. Non tiene conto della difesa del nemico.",
-            "Cristian":"Diminuisce l’evasione del nemico.",
             "Mohammed (spirito)": "Usa l’unica arma in grado di ucciderlo. Rende tutti gli alleati tristi e ne aumenta ulteriormente la difesa."
         }
         self.description = {}
 
         self.friends_title_template = {
+            "Cristian":"[Inquadrato]",
             "Damonte":"[Rhythm Mayhem]",
             "Noce":"[Sangue freddo]",
-            "Cristian":"[Inquadrato]",
             "Mohammed (spirito)":"[Immortalità?]"
         }
         self.friends_title = {}
 
-        self.friends_template = [["Damonte","Cristian","-"],["Noce","Mohammed (spirito)","-"]]
+        self.friends_template = [["Cristian","Damonte","-"],["Noce","Mohammed (spirito)","-"]]
         self.friends = []
 
         self.sel={"is_choosing":False,"is_selecting":"Skills","has_done_first_selection":False,"has_cursor_on":"Skills","is_choosing_target":False}

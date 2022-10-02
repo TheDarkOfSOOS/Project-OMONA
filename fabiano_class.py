@@ -66,28 +66,30 @@ class Fabiano():
         self.emotional_levels = {"Felicità":3,"Rabbia":1,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
 
         self.biscotto_animation = []
-        self.biscotto_len = 12
+        #self.biscotto_len = 12
 
         self.pestata_animation = []
-        self.pestata_len = 11
+        #self.pestata_len = 11
 
         self.benevento_animation = []
-        self.benevento_len = 17        
+        #self.benevento_len = 17
+
+        self.empatia_animation = []       
 
         self.cappello_y_animation = []
-        self.cappello_y_len = 20
+        #self.cappello_y_len = 20
 
         self.cappello_p_animation = []
-        self.cappello_p_len = 20        
+        #self.cappello_p_len = 20        
 
         self.cappello_r_animation = []
-        self.cappello_r_len = 20
+        #self.cappello_r_len = 20
 
         self.cappello_f_animation = []
-        self.cappello_f_len = 20
+        #self.cappello_f_len = 20
 
         self.nikradogna_animation = []
-        self.nikradogna_len = 12
+        #self.nikradogna_len = 12
 
         self.current_animation = 0
 
@@ -109,7 +111,7 @@ class Fabiano():
             "Pestata":"Fa danni in base alla sua velocità.",
             "Benevento":"Aumenta la velocità di tutti.",
             "Malevento":"Diminuisce la difesa del nemico.",
-            "Empatia":"Si riposa e osserva il nemico provando capire i suoi problemi. Ne discute con lui rendendolo gioioso, gli aumenta l'attacco e recupera 30% di mana per aver fatto una buona azione (e anche per aver fatto un emerito nulla). Agisce per ultimo.",
+            "Empatia":"Si riposa e osserva il nemico provando capire i suoi problemi. Ne discute con lui rendendolo gioioso, gli diminuisce la difesa e recupera tutto il mana per aver fatto una buona azione (e anche per aver fatto un emerito nulla). Agisce per ultimo.",
             "Soffio della morte":"Riporta in vita un alleato con metà dei suoi HP.",
             # Friends
             "Cappe":"Indica un alleato che subirà l’attacco del nemico. Attacca per primo.",
@@ -221,6 +223,15 @@ class Fabiano():
         self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation14.png"))
         self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation15.png"))
         self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation16.png"))
+
+    def load_empatia(self):
+        self.empatia_animation.append(pygame.transform.scale(pygame.image.load("img/animations/empatia/empatia_animation0.png"),(280,160)))
+        self.empatia_animation.append(pygame.transform.scale(pygame.image.load("img/animations/empatia/empatia_animation1.png"),(280,160)))
+        self.empatia_animation.append(pygame.transform.scale(pygame.image.load("img/animations/empatia/empatia_animation2.png"),(280,160)))
+        self.empatia_animation.append(pygame.transform.scale(pygame.image.load("img/animations/empatia/empatia_animation3.png"),(280,160)))
+        self.empatia_animation.append(pygame.transform.scale(pygame.image.load("img/animations/empatia/empatia_animation4.png"),(280,160)))
+        self.empatia_animation.append(pygame.transform.scale(pygame.image.load("img/animations/empatia/empatia_animation5.png"),(280,160)))
+        self.empatia_animation.append(pygame.transform.scale(pygame.image.load("img/animations/empatia/empatia_animation6.png"),(280,160)))
 
     def load_cappello_y(self):
         self.cappello_y_animation.append(pygame.image.load("img/animations/cappello/cappello_animation00.png"))
@@ -388,15 +399,17 @@ class Fabiano():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Empatia":
+            if self.MNA_CONSUMPTION == 0:
+                self.MNA_CONSUMPTION = -self.mna
             if self.is_doing_animation:
-                dw.pestata_animation()
+                dw.empatia_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
                 emotion.change_emotion(boss, "gioioso")
-                boss.current_atk += action.buff_stats(boss.current_atk,boss,"buff")
-                print("Fabiano ha cercato di capire il nemico, rendendolo felice e aumentandogli l'attacco. Nonostante questo ottiene parte di mana per aver fatto una buona azione.")
-                self.text_action="Fabiano ha cercato di capire il nemico, rendendolo felice e aumentandogli l'attacco. Nonostante questo ottiene parte di mana per aver fatto una buona azione."
+                boss.current_defn -= action.buff_stats(boss.defn,boss,"debuff")
+                print("Fabiano ha cercato di capire il nemico, rendendolo felice e rendendolo più aperto, riducendogli la difesa. Riottiene tutto il mana per aver fatto una buona azione.")
+                self.text_action="Fabiano ha cercato di capire il nemico, rendendolo felice e rendendolo più aperto, riducendogli la difesa. Riottiene tutto il mana per aver fatto una buona azione."
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 

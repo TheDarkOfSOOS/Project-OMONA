@@ -471,7 +471,7 @@ class Spirito_Amalgamato():
 
             elif self.ultimate_status == "will_activate":
                 dw.text_action("Spirito Amalgamato: Mi state scocciando voi tre, vi faccio vedere io ora. ", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
-                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING+(SPACING*2)-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
+                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
             
             if self.is_doing_animation and self.ultimate_status == "used":
                 dw.raggio_spiritico_animation(self.hitted_charas)

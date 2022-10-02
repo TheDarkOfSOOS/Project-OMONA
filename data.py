@@ -104,9 +104,14 @@ FURIOSO_BUFF_DEFN = -60
 STATS_EXPLANATION = pygame.image.load("img/background/stats_explanation.png")
 EMOTION_EXPLANATION = pygame.image.load("img/background/emotion_explanation.png")
 
-# Examples
-pewpew = "./sounds/ost/pewpew.wav"
-soundtrack_2 = "./sounds/ost/field.wav"
+# Soundtracks
+OST_Fallen = "./sounds/ost/Fallen.mp3"
+OST_Assemblence = "./sounds/ost/Assemblence.mp3"
+OST_Spark_Royale = "./sounds/ost/Spark Royale.mp3"
+OST_Both_Ruthless_and_Vicious = "./sounds/ost/Both Ruthless and Vicious.mp3"
+OST_Futuristic_Festival = "./sounds/ost/Futuristic Festival.mp3"
+OST_The_Spirit_Revenge = "./sounds/ost/The Spirit Revenge.mp3"
+OST_Colossal_Wave = "./sounds/ost/Colossal Wave.mp3"
 
 
 

@@ -506,8 +506,8 @@ class Humpty_Dumpty():
                 self.ultimate_status = "used"
             elif self.ultimate_status == "will_activate":
                 dw.text_action("Humpty Dumpty: Ora basta! Ti invoco o grande... GRANDISSIMA madre. Soccorrimi, Gallina dalle uova d'oro!", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
-                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING+(SPACING*2)-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)
-            DMG_DEAL = 20
+                dw.text_given_last_coordinates('"Enter" per continuare...', int(FONT_SIZE/1.5), ( BOX_WIDTH+BOX_HORIZONTAL_SPACING-BOX_BORDER , BOX_HEIGHT-(SPACING)), WHITE)            
+                DMG_DEAL = 20
             self.aoe_1 = action.damage_deal(boss.current_atk,DMG_DEAL,y.y.current_defn,self.current_emotion,y.y.current_emotion)
             self.aoe_2 = action.damage_deal(boss.current_atk,DMG_DEAL,p.p.current_defn,self.current_emotion,p.p.current_emotion)
             self.aoe_3 = action.damage_deal(boss.current_atk,DMG_DEAL,r.r.current_defn,self.current_emotion,r.r.current_emotion)

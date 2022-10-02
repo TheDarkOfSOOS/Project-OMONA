@@ -108,7 +108,7 @@ def get_bg_color(chara):
 
 
 def bg():
-    WIN.fill((140,218,255))
+    WIN.fill((0,0,100))
 def boss(boss):
     if boss == a:
         WIN.blit(pygame.transform.scale(boss.img,(592,880)),(620,HEIGHT-850)) 
@@ -820,6 +820,22 @@ def pallonata_animation():
     if int(y.current_animation) == 18:
         pygame.mixer.Sound.play(sound.FALLING)
 
+def assedio_animation():
+    if y.is_doing_animation:
+        if y.current_animation == 0:
+            y.load_assedio()  
+        WIN.blit(y.assedio_animation[int(y.current_animation)],(0,HEIGHT/2))
+        if not p.is_dead or y.current_animation>=4:
+            WIN.blit(pygame.transform.flip(y.assedio_animation[int(y.current_animation)], False, True),(0,0))
+        if not r.is_dead or y.current_animation>=4:
+            WIN.blit(pygame.transform.flip(y.assedio_animation[int(y.current_animation)], True, False),(WIDTH/2,HEIGHT/2))
+        if not f.is_dead or y.current_animation>=4:
+            WIN.blit(pygame.transform.flip(y.assedio_animation[int(y.current_animation)], True, True),(WIDTH/2,0))
+        y.current_animation+=0.40
+    if y.current_animation >= len(y.assedio_animation):
+        y.assedio_animation.clear()
+        y.is_doing_animation = False
+
 def pol_animation():
     if y.current_animation == 0:
         y.load_pol()
@@ -1129,6 +1145,16 @@ def benevento_animation():
     if int(f.current_animation) == 3:
         pygame.mixer.Sound.play(sound.BENEVENTO)
 
+def empatia_animation():
+    if f.current_animation == 0:
+        f.load_empatia()
+    if f.is_doing_animation:
+        WIN.blit(f.empatia_animation[int(f.current_animation)],(WIDTH - ((CHARA_WIDTH+280) + SPACING - BOX_BORDER) , SPACING+BOX_BORDER+BANNER_HEIGHT))
+        f.current_animation+=0.10
+    if f.current_animation >= len(f.empatia_animation):
+        f.empatia_animation.clear()
+        f.is_doing_animation = False
+
 def cappello_y_animation():
     if f.current_animation == 0:
         f.load_cappello_y()
@@ -1223,53 +1249,70 @@ def ovetto_y_animation():
     if hd.is_doing_animation:
         if hd.current_animation == 0:
             hd.load_ovetto()
+            pygame.mixer.Sound.play(sound.FALLING)
         WIN.blit(pygame.transform.flip(hd.ovetto_animation[int(hd.current_animation)],True, False),(0,0))
         hd.current_animation+=0.45
     if hd.current_animation >= len(hd.ovetto_animation):
         hd.ovetto_animation.clear()
         hd.is_doing_animation = False
+    if int(hd.current_animation) == 10:
+        pygame.mixer.Sound.play(sound.EXPLOSIVE_COLLISION)
 
 def ovetto_r_animation():
-    print("entrato da raul")
+    #print("entrato da raul")
     if hd.is_doing_animation:
         if hd.current_animation == 0:
             hd.load_ovetto()
+            pygame.mixer.Sound.play(sound.FALLING)
         WIN.blit(hd.ovetto_animation[int(hd.current_animation)],(0,0))
         hd.current_animation+=0.45
     if hd.current_animation >= len(hd.ovetto_animation):
         hd.ovetto_animation.clear()
         hd.is_doing_animation = False
+    if int(hd.current_animation) == 10:
+        pygame.mixer.Sound.play(sound.EXPLOSIVE_COLLISION)
 
 def ovetto_p_animation():
     if hd.is_doing_animation:
         if hd.current_animation == 0:
             hd.load_ovetto_1()
+            pygame.mixer.Sound.play(sound.FALLING)
         WIN.blit(pygame.transform.flip(hd.ovetto_1_animation[int(hd.current_animation)],True, False),(0,0))
         hd.current_animation+=0.50
     if hd.current_animation >= len(hd.ovetto_1_animation):
         hd.ovetto_1_animation.clear()
         hd.is_doing_animation = False
+    if int(hd.current_animation) == 10:
+        pygame.mixer.Sound.play(sound.EXPLOSIVE_COLLISION)
 
 def ovetto_f_animation():
-    print("entrato da fabiano")
+    #print("entrato da fabiano")
     if hd.is_doing_animation:
         if hd.current_animation == 0:
             hd.load_ovetto_1()
+            pygame.mixer.Sound.play(sound.FALLING)
         WIN.blit(hd.ovetto_1_animation[int(hd.current_animation)],(0,0))
         hd.current_animation+=0.50
     if hd.current_animation >= len(hd.ovetto_1_animation):
         hd.ovetto_1_animation.clear()
         hd.is_doing_animation = False
+    if int(hd.current_animation) == 10:
+        pygame.mixer.Sound.play(sound.EXPLOSIVE_COLLISION)
 
 def avidita_animation():
     if hd.is_doing_animation:
         if hd.current_animation == 0:
             hd.load_avidita()
+            pygame.mixer.Sound.play(sound.SELECTING_BOSS)
         WIN.blit(hd.avidita_animaiton[int(hd.current_animation)],(0,0))
         hd.current_animation+=0.40
     if hd.current_animation >= len(hd.avidita_animaiton):
         hd.avidita_animaiton.clear()
         hd.is_doing_animation = False
+    if int(hd.current_animation) == 11:
+        pygame.mixer.Sound.play(sound.HELP_REQUEST)
+    if int(hd.current_animation) >= 15:
+        pygame.mixer.Sound.play(sound.PROVOCAZIONE)
 
 def germogli_animation(target):
     if hd.is_doing_animation:
@@ -1287,26 +1330,47 @@ def germogli_animation(target):
     if hd.current_animation >= len(hd.germogli_animation):
         hd.germogli_animation.clear()
         hd.is_doing_animation = False
+    if int(hd.current_animation) >= 2:
+        pygame.mixer.Sound.play(sound.LITTLE_BREEZE)
+        pygame.mixer.Sound.play(sound.HIT_SKILL)
 
 def chiamata_animation():
     if hd.is_doing_animation:
         if hd.current_animation == 0:
             hd.load_chiamata()
+            pygame.mixer.Sound.play(sound.CHARGING)
         WIN.blit(hd.chiamata_animation[int(hd.current_animation)],(0,0))
         hd.current_animation+=0.60
     if hd.current_animation >= len(hd.chiamata_animation):
         hd.chiamata_animation.clear()
         hd.is_doing_animation = False
+    if int(hd.current_animation) == 9:
+        pygame.mixer.Sound.play(sound.CHARGING)
+    if int(hd.current_animation) == 18:
+        pygame.mixer.Sound.play(sound.CHARGING)
+    if int(hd.current_animation) == 24:
+        pygame.mixer.Sound.play(sound.CHARGING)
+    if int(hd.current_animation) == 31:
+        pygame.mixer.Sound.play(sound.FAST_HIT)
+    if int(hd.current_animation) == 34:
+        pygame.mixer.Sound.play(sound.FAST_HIT)
+    if int(hd.current_animation) == 37:
+        pygame.mixer.Sound.play(sound.FAST_HIT)
+
+
 
 def travestimento_animation():
     if hd.is_doing_animation:
         if hd.current_animation == 0:
             hd.load_travestimento()
+            pygame.mixer.Sound.play(sound.CHEERS)
         WIN.blit(hd.travestimento_animation[int(hd.current_animation)],(5,0))
         hd.current_animation+=0.45
     if hd.current_animation >= len(hd.travestimento_animation):
         hd.travestimento_animation.clear()
         hd.is_doing_animation = False
+    if int(hd.current_animation) == 15:
+        pygame.mixer.Sound.play(sound.BLESSED)
 
 def gallina_animation():
     if hd.is_doing_animation:
@@ -1317,6 +1381,21 @@ def gallina_animation():
     if hd.current_animation >= len(hd.gallina_animation):
         hd.gallina_animation.clear()
         hd.is_doing_animation = False
+    if int(hd.current_animation) == 4:
+        pygame.mixer.Sound.play(sound.FAST_HIT)
+        pygame.mixer.Sound.play(sound.LOW_VOICE)
+    if int(hd.current_animation) == 10:
+        pygame.mixer.Sound.play(sound.FAST_HIT)
+        pygame.mixer.Sound.play(sound.LOW_VOICE)
+    if int(hd.current_animation) == 15:
+        pygame.mixer.Sound.play(sound.FAST_HIT)
+        pygame.mixer.Sound.play(sound.LOW_VOICE)
+    if int(hd.current_animation) == 20:
+        pygame.mixer.Sound.play(sound.FAST_HIT)
+        pygame.mixer.Sound.play(sound.LOW_VOICE)
+    if int(hd.current_animation) == 26:
+        pygame.mixer.Sound.play(sound.FAST_HIT)
+        pygame.mixer.Sound.play(sound.LOW_VOICE)
 
 
 def dono_inaspettato_animation():
@@ -1329,6 +1408,9 @@ def dono_inaspettato_animation():
     if d.current_animation >= len(d.dono_inaspettato_animation):
         d.dono_inaspettato_animation.clear()
         d.is_doing_animation = False
+    if int(d.current_animation)%7==0:
+        pygame.mixer.Sound.play(sound.CHEERS)
+    
 
 def missile_animation():
     if d.is_doing_animation:
@@ -1339,6 +1421,10 @@ def missile_animation():
     if d.current_animation >= len(d.missile_animation):
         d.missile_animation.clear()
         d.is_doing_animation = False
+    if int(d.current_animation)==0:
+        pygame.mixer.Sound.play(sound.FALLING)
+    if int(d.current_animation)==6:
+        pygame.mixer.Sound.play(sound.EXPLOSION)
 
 def macchina_del_tempo_animation():
     if d.is_doing_animation:
@@ -1349,6 +1435,8 @@ def macchina_del_tempo_animation():
     if d.current_animation >= len(d.macchina_del_tempo_animation):
         d.macchina_del_tempo_animation.clear()
         d.is_doing_animation = False
+    if int(d.current_animation)==10:
+        pygame.mixer.Sound.play(sound.EXPLOSION)
 
 def copter_animation():
     if d.is_doing_animation:
@@ -1359,6 +1447,8 @@ def copter_animation():
     if d.current_animation >= len(d.copter_animation):
         d.copter_animation.clear()
         d.is_doing_animation = False
+    if int(d.current_animation)%4==0:
+        pygame.mixer.Sound.play(sound.FRUSH_FRUSH)
 
 def sfuriate_meccaniche_animation(target):
     if d.is_doing_animation:
@@ -1376,6 +1466,12 @@ def sfuriate_meccaniche_animation(target):
     if d.current_animation >= len(d.sfuriate_meccaniche_animation):
         d.sfuriate_meccaniche_animation.clear()
         d.is_doing_animation = False
+    if int(d.current_animation)%4==0:
+        pygame.mixer.Sound.play(sound.TORNADO)
+    if int(d.current_animation)==8:
+        pygame.mixer.Sound.play(sound.CUT)
+    if int(d.current_animation)==10:
+        pygame.mixer.Sound.play(sound.CUT)
 
 def bomba_ad_idrogeno_animation():
     if d.is_doing_animation:
@@ -1386,6 +1482,10 @@ def bomba_ad_idrogeno_animation():
     if d.current_animation >= len(d.bomba_ad_idrogeno_animation):
         d.bomba_ad_idrogeno_animation.clear()
         d.is_doing_animation = False
+    if int(d.current_animation)==0:
+        pygame.mixer.Sound.play(sound.FALLING)
+    if int(d.current_animation)==7:
+        pygame.mixer.Sound.play(sound.EXPLOSION)
 
 # Spirito amalgamato
 
@@ -1399,6 +1499,10 @@ def cambiaforma_animation():
     if sa.current_animation >= len(sa.cambiaforma_animation):
         sa.cambiaforma_animation.clear()
         sa.is_doing_animation = False
+    if int(sa.current_animation)%2==0:
+        pygame.mixer.Sound.play(sound.LOW_VOICE)
+    if int(sa.current_animation)%2==9:
+        pygame.mixer.Sound.play(sound.LOUD_VOICE1)
 
 def lamento_animation():
     if sa.is_doing_animation:
@@ -1410,6 +1514,11 @@ def lamento_animation():
     if sa.current_animation >= len(sa.lamento_animation):
         sa.lamento_animation.clear()
         sa.is_doing_animation = False
+    if int(sa.current_animation)==1:
+        pygame.mixer.Sound.play(sound.LOUD_VOICE2)
+        pygame.mixer.Sound.play(sound.LOUD_VOICE3)
+    if int(sa.current_animation)==11:
+        pygame.mixer.Sound.play(sound.CRACKED_SKULL)
 
 def rilascio_spiritico_animation():
     if sa.is_doing_animation:
@@ -1421,6 +1530,11 @@ def rilascio_spiritico_animation():
     if sa.current_animation >= len(sa.rilascio_spiritico_animation):
         sa.rilascio_spiritico_animation.clear()
         sa.is_doing_animation = False
+    if int(sa.current_animation)==1:
+        pygame.mixer.Sound.play(sound.LOUD_VOICE1)
+    if int(sa.current_animation)==8:
+        pygame.mixer.Sound.play(sound.CRACKED_SKULL)
+
 
 def onda_di_disperazione_animation():
     if sa.is_doing_animation:
@@ -1432,6 +1546,10 @@ def onda_di_disperazione_animation():
     if sa.current_animation >= len(sa.onda_di_disperazione_animation):
         sa.onda_di_disperazione_animation.clear()
         sa.is_doing_animation = False
+    if int(sa.current_animation)>0:
+        pygame.mixer.Sound.play(sound.HITTED)
+    if int(sa.current_animation)==13:
+        pygame.mixer.Sound.play(sound.DEEP_HIT)
 
 def affoga_animation(target):
     if sa.is_doing_animation:
@@ -1449,6 +1567,8 @@ def affoga_animation(target):
     if sa.current_animation >= len(sa.affoga_animation):
         sa.affoga_animation.clear()
         sa.is_doing_animation = False
+    if int(sa.current_animation) == 3:
+        pygame.mixer.Sound.play(sound.DEEP_HIT)
 
 def raggio_spiritico_animation(targets):
     if sa.is_doing_animation:
@@ -1462,10 +1582,15 @@ def raggio_spiritico_animation(targets):
             WIN.blit(pygame.transform.flip(sa.raggio_spiritico_animation[int(sa.current_animation)], True, False),(WIDTH/2,HEIGHT/2))
         if f in targets:
             WIN.blit(pygame.transform.flip(sa.raggio_spiritico_animation[int(sa.current_animation)], True, True),(WIDTH/2,0))
-        sa.current_animation+=0.50
+        sa.current_animation+=0.25
     if sa.current_animation >= len(sa.raggio_spiritico_animation):
         sa.raggio_spiritico_animation.clear()
         sa.is_doing_animation = False
+    if int(sa.current_animation)==1:
+        pygame.mixer.Sound.play(sound.LOUD_VOICE1)
+        pygame.mixer.Sound.play(sound.LITTLE_BREEZE)
+    if int(sa.current_animation)==6:
+        pygame.mixer.Sound.play(sound.DEEP_HIT)
 
 
 
@@ -1480,6 +1605,10 @@ def spirito_animation():
     if a.current_animation >= len(a.spirito_animation):
         a.spirito_animation.clear()
         a.is_doing_animation = False
+    if int(a.current_animation)==6:
+        pygame.mixer.Sound.play(sound.LOW_VOICE)
+    if int(a.current_animation)==13:
+        pygame.mixer.Sound.play(sound.STATS_BOOST)
 
 def mulinello_animation(target):
     if a.is_doing_animation:
@@ -1497,6 +1626,8 @@ def mulinello_animation(target):
     if a.current_animation >= len(a.mulinello_animation):
         a.mulinello_animation.clear()
         a.is_doing_animation = False
+    if int(a.current_animation)%2==0:
+        pygame.mixer.Sound.play(sound.FAST_HIT)
 
 def tsunami_animation():
     if a.is_doing_animation:
@@ -1507,11 +1638,15 @@ def tsunami_animation():
     if a.current_animation >= len(a.tsunami_animation):
         a.tsunami_animation.clear()
         a.is_doing_animation = False
+    if int(a.current_animation)>=3 and int(a.current_animation)<len(a.tsunami_animation)-4 and int(a.current_animation)%3==0:
+        pygame.mixer.Sound.play(sound.CHANGE_PAGE)
+        pygame.mixer.Sound.play(sound.CUT)
 
 def isolamento_animation(target):
     if a.is_doing_animation:
         if a.current_animation == 0:
             a.load_isolamento()
+            pygame.mixer.Sound.play(sound.RECOVER)
         if target == y:
             WIN.blit(a.isolamento_animation[int(a.current_animation)],(0,0))
         if target == p:
@@ -1524,6 +1659,9 @@ def isolamento_animation(target):
     if a.current_animation >= len(a.isolamento_animation):
         a.isolamento_animation.clear()
         a.is_doing_animation = False
+    if int(a.current_animation)==14:
+        pygame.mixer.Sound.stop(sound.RECOVER)
+        pygame.mixer.Sound.play(sound.CRACKED_SKULL)
 
 # ANIMAZIONE DA FARE PARTIRE SE IL PERSONAGGIO USA UN FRIEND O UN ITEM SOTTO EFFETTO DI ISOLAMENTO
 def isolamento_pg_animation(user):
@@ -1547,6 +1685,7 @@ def tridente_animation(target):
     if a.is_doing_animation:
         if a.current_animation == 0:
             a.load_tridente()
+            pygame.mixer.Sound.play(sound.LITTLE_BREEZE)
         if target == y:
             WIN.blit(a.tridente_animation[int(a.current_animation)],(0,0))
         if target == p:
@@ -1559,6 +1698,9 @@ def tridente_animation(target):
     if a.current_animation >= len(a.tridente_animation):
         a.tridente_animation.clear()
         a.is_doing_animation = False
+    if int(a.current_animation)>=11 and int(a.current_animation)%2==0:
+        pygame.mixer.Sound.stop(sound.HIT_SKILL)
+        pygame.mixer.Sound.stop(sound.PULSE)
 
 def nei_mari_piu_profondi():
     if a.is_doing_animation:
@@ -1568,10 +1710,20 @@ def nei_mari_piu_profondi():
         if int(a.current_animation) <= 63:
             a.current_animation+=0.50
         else:
-            a.current_animation+=0.10
+            a.current_animation+=0.20
     if a.current_animation >= len(a.nei_mari_piu_profondi):
+        pygame.mixer.music.play(-1)
         a.nei_mari_piu_profondi.clear()
         a.is_doing_animation = False
+    if (int(a.current_animation)%2==0 and (int(a.current_animation)<=14 or int(a.current_animation)>=20) and int(a.current_animation)<=60):
+        pygame.mixer.Sound.play(sound.HIT_SKILL)
+        pygame.mixer.Sound.play(sound.PULSE)
+    if (int(a.current_animation)%1.5==0 and int(a.current_animation)>=50 and int(a.current_animation)<=60):
+        pygame.mixer.Sound.play(sound.OOF)
+    if int(a.current_animation)==64:
+        pygame.mixer.music.stop()
+    if int(a.current_animation)==106:
+        pygame.mixer.Sound.play(sound.ZZAAP_END)
 
 
 def item_acqua_animation(user):
