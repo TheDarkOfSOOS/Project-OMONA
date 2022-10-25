@@ -74,6 +74,10 @@ class Youssef():
         self.provocazione_animation = []
         #self.provocazione_len = 8
 
+        self.battutaccia_animation = []
+
+        self.parata_animation = []
+
         self.pallonata_animation = []
         #self.pallonata_len = 26
 
@@ -84,6 +88,10 @@ class Youssef():
 
         self.anastasia_animation = []
         #self.anastasia_len = 27
+
+        self.borin_animation = []
+
+        self.ciudin_animation = []
 
         self.current_animation = 0
 
@@ -238,10 +246,27 @@ class Youssef():
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation19.png"))
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation20.png"))
         self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation21.png"))
-        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation22.png"))
-        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation23.png"))
-        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation24.png"))
-        self.pallonata_animation.append(pygame.image.load("img/animations/pallonata/pallonata_animation25.png"))
+
+    def load_battutaccia(self):
+        for x in range(4):
+            self.battutaccia_animation.append(pygame.image.load("img/animations/battutaccia/battutaccia_animation0.png"))
+            self.battutaccia_animation.append(pygame.image.load("img/animations/battutaccia/battutaccia_animation1.png"))
+            self.battutaccia_animation.append(pygame.image.load("img/animations/battutaccia/battutaccia_animation2.png"))
+            self.battutaccia_animation.append(pygame.image.load("img/animations/battutaccia/battutaccia_animation3.png"))
+
+    def load_parata(self):
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation00.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation01.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation02.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation03.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation04.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation05.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation06.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation07.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation08.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation09.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation10.png"))
+        self.parata_animation.append(pygame.image.load("img/animations/parata/parata_animation11.png"))
 
     def load_assedio(self):
         self.assedio_animation.append(pygame.image.load("img/animations/assedio/assedio_animation0.png"))
@@ -314,6 +339,45 @@ class Youssef():
         self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation25.png"))
         self.anastasia_animation.append(pygame.image.load("img/animations/anastasia/anastasia_animation26.png"))
 
+    def load_borin(self):
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation00.png"))
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation01.png"))
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation02.png"))
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation03.png"))
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation04.png"))
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation05.png"))
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation06.png"))
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation07.png"))
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation08.png"))
+        self.borin_animation.append(pygame.image.load("img/animations/borin/borin_animation09.png"))
+
+    def load_ciudin(self):
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation00.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation01.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation02.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation03.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation04.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation05.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation06.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation07.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation08.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation09.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation10.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation11.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation12.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation13.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation14.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation15.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation16.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation17.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation18.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation19.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation20.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation21.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation22.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation23.png"))
+        self.ciudin_animation.append(pygame.image.load("img/animations/ciudin/ciudin_animation24.png"))
+
     def do_something(self, boss, input):
         if self.MNA_CONSUMPTION == True:
             self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
@@ -375,7 +439,7 @@ class Youssef():
 
         if self.sel["has_cursor_on"]=="Delusione":
             if self.is_doing_animation:     
-                dw.sforbiciata_animation()
+                dw.parata_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
 
             if not self.is_doing_animation:
@@ -390,7 +454,7 @@ class Youssef():
 
         if self.sel["has_cursor_on"]=="Battutaccia":
             if self.is_doing_animation:
-                dw.sforbiciata_animation()
+                dw.battutaccia_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
 
             if not self.is_doing_animation:
@@ -461,7 +525,7 @@ class Youssef():
 
         if self.sel["has_cursor_on"]=="Borin":
             if self.is_doing_animation:
-                dw.sforbiciata_animation()
+                dw.borin_animation()
 
             if not self.is_doing_animation:
                 self.friends[0][1] = "-"
@@ -475,7 +539,7 @@ class Youssef():
 
         if self.sel["has_cursor_on"]=="Ciudin (spirito)":
             if self.is_doing_animation:
-                dw.sforbiciata_animation()
+                dw.ciudin_animation()
 
             if not self.is_doing_animation:
                 self.friends[1][1] = "-"

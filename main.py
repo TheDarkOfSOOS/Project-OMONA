@@ -177,6 +177,7 @@ while run:
                 mixer.music.play(-1)
         elif wins[0] == "fighting" and round.team_lost():
             if not transitioner.scene_loader[1]:
+                dw.game_over_loader.game_over_status = True
                 round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", m_e.me)
             transitioner.current_loader = 1
             if transitioner.scene_loader[1]:
@@ -188,6 +189,7 @@ while run:
                     round_essentials_status = reset_res()
                     round.reset_charas()
                     round.reset_boss(m_e.me)
+                    
 
     # Humpty Dumpty
     if out_of_dialog and transitioner.scene_loader[2]:

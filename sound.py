@@ -1,4 +1,3 @@
-from re import S
 import pygame
 from pygame.locals import *
 from pygame import mixer
@@ -65,3 +64,8 @@ LOUD_VOICE2 = pygame.mixer.Sound("sounds/loud_voice2.wav")
 LOUD_VOICE3 = pygame.mixer.Sound("sounds/loud_voice3.wav")
 FAST_HIT = pygame.mixer.Sound("sounds/fast_hit.wav")
 BLESSED = pygame.mixer.Sound("sounds/blessed.wav")
+GOOFY_LAUGH = pygame.mixer.Sound("sounds/goofy_laugh.wav")
+SCISSORS = pygame.mixer.Sound("sounds/scissors.wav")
+ARGUE = pygame.mixer.Sound("sounds/argue.wav")
+FIRE_LASER = pygame.mixer.Sound("sounds/fire_laser.wav")
+SNORING = pygame.mixer.Sound("sounds/snoring.wav")

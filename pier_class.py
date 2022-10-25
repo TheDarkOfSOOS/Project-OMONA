@@ -69,34 +69,32 @@ class Pier():
         self.emotional_levels = {"Felicità":1,"Rabbia":2,"Tristezza":3} # Dizionario per il livello massimo delle emozioni
 
         self.f_protettrice_animation = []
-        self.f_protettrice_len = 16
         
         self.sbracciata_animation = []
-        self.sbracciata_len = 37
 
         self.richiesta_aiuto_animation = []
-        self.richiesta_aiuto_len = 22
+
+        self.spessanza_animation = []
+
+        self.bastione_animation = []
 
         self.sacrificio_y_animation = []
-        self.sacrificio_y_len = 42-(5)
 
         self.sacrificio_p_animation = []
-        self.sacrificio_p_animation = 39-(5)
 
         self.ilaria_y_animation = []
-        self.ilaria_y_len = 44        
 
         self.ilaria_p_animation = []
-        self.ilaria_p_len = 43
 
         self.ilaria_r_animation = []
-        self.ilaria_r_len = 37
 
         self.ilaria_f_animation = []
-        self.ilaria_f_len = 17
 
         self.stefan_animation = []
-        self.stefan_len = 14
+
+        self.prade_animation = []
+
+        self.gonzato_animation = []
 
         self.current_animation = 0
 
@@ -265,6 +263,54 @@ class Pier():
         self.richiesta_aiuto_animation.append(pygame.image.load("img/animations/richiesta_aiuto/richiesta_aiuto_animation15.png"))
         self.richiesta_aiuto_animation.append(pygame.image.load("img/animations/richiesta_aiuto/richiesta_aiuto_animation15.png"))
         self.richiesta_aiuto_animation.append(pygame.image.load("img/animations/richiesta_aiuto/richiesta_aiuto_animation15.png"))
+
+    def load_spessanza(self):
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation00.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation01.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation02.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation03.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation04.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation05.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation06.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation07.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation08.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation09.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation10.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation11.png"))
+        self.spessanza_animation.append(pygame.image.load("img/animations/spessanza/spessanza_animation12.png"))
+
+
+    def load_bastione(self):
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation00.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation01.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation02.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation03.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation04.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation05.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation06.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation07.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation08.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation09.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation10.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation11.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation12.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation13.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation14.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation15.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation16.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation17.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation18.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation19.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation20.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation21.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation22.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation23.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation24.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation25.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation26.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation27.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation28.png"))
+        self.bastione_animation.append(pygame.image.load("img/animations/bastione_fiammante/bastione_f_animation29.png"))
 
     def load_sacrificio_y(self):
         self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation05.png"))
@@ -506,7 +552,35 @@ class Pier():
         self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
         self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation1.png"))
         self.stefan_animation.append(pygame.image.load("img/animations/stefan/stefan_animation0.png"))
-       
+
+    def load_prade(self):
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation00.png"))
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation01.png"))
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation02.png"))
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation03.png"))
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation04.png"))
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation05.png"))
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation06.png"))
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation07.png"))
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation08.png"))
+        self.prade_animation.append(pygame.image.load("img/animations/prade/prade_animation09.png"))
+
+    def load_gonzato(self):
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation00.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation01.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation02.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation03.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation04.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation05.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation06.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation07.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation08.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation09.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation10.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation11.png"))
+        self.gonzato_animation.append(pygame.image.load("img/animations/gonzato/gonzato_animation12.png"))
+
+
     def do_something(self, boss, input):
         if self.MNA_CONSUMPTION == True:
             self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
@@ -553,7 +627,7 @@ class Pier():
         
         if self.sel["has_cursor_on"]=='"Spessanza"':
             if self.is_doing_animation:        
-                dw.sbracciata_animation()
+                dw.spessanza_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
@@ -571,7 +645,7 @@ class Pier():
             self.aoe_3 = action.healing_percentage(heal_percentage, r.r.current_hp, r.r.hp)
             self.aoe_4 = action.healing_percentage(heal_percentage, f.f.current_hp, f.f.hp)
             if self.is_doing_animation:
-                dw.sbracciata_animation()
+                dw.bastione_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.sbracciata_animation)/0.25, round(MNA_CONSUMPTION/(len(self.sbracciata_animation)/0.25),2))
 
             if not self.is_doing_animation:
@@ -660,7 +734,7 @@ class Pier():
 
         if self.sel["has_cursor_on"]=="Prade":
             if self.is_doing_animation:
-                dw.sbracciata_animation()
+                dw.prade_animation()
 
             if not self.is_doing_animation:
                 self.friends[0][1] = "-"
@@ -679,7 +753,7 @@ class Pier():
             self.aoe_3 = action.healing_percentage(heal_percentage, r.r.current_hp, r.r.hp)
             self.aoe_4 = action.healing_percentage(heal_percentage, f.f.current_hp, f.f.hp)
             if self.is_doing_animation:
-                dw.sbracciata_animation()
+                dw.gonzato_animation()
 
             if not self.is_doing_animation:
                 self.friends[1][1] = "-"

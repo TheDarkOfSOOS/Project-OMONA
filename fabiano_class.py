@@ -66,30 +66,30 @@ class Fabiano():
         self.emotional_levels = {"Felicità":3,"Rabbia":1,"Tristezza":2} # Dizionario per il livello massimo delle emozioni
 
         self.biscotto_animation = []
-        #self.biscotto_len = 12
 
         self.pestata_animation = []
-        #self.pestata_len = 11
 
         self.benevento_animation = []
-        #self.benevento_len = 17
+        
+        self.malevento_animation = []
 
-        self.empatia_animation = []       
+        self.empatia_animation = []   
+
+        self.soffio_animation = []
 
         self.cappello_y_animation = []
-        #self.cappello_y_len = 20
 
         self.cappello_p_animation = []
-        #self.cappello_p_len = 20        
 
         self.cappello_r_animation = []
-        #self.cappello_r_len = 20
 
         self.cappello_f_animation = []
-        #self.cappello_f_len = 20
 
         self.nikradogna_animation = []
-        #self.nikradogna_len = 12
+
+        self.trentin_animation = []
+
+        self.pastorello_animation = []
 
         self.current_animation = 0
 
@@ -224,6 +224,56 @@ class Fabiano():
         self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation15.png"))
         self.benevento_animation.append(pygame.image.load("img/animations/benevento/benevento_animation16.png"))
 
+    def load_malevento(self):
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation00.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation01.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation02.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation03.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation04.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation05.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation06.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation07.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation08.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation09.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation10.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation11.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation12.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation13.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation14.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation15.png"))
+        self.malevento_animation.append(pygame.image.load("img/animations/malevento/malevento_animation16.png"))
+
+    def load_soffio(self):
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation00.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation01.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation02.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation03.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation04.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation05.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation06.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation07.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation08.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation09.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation10.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation11.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation12.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation13.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation14.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation15.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation16.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation17.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation18.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation19.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation20.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation21.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation22.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation23.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation24.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation25.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation26.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation27.png"))
+        self.soffio_animation.append(pygame.image.load("img/animations/soffio_della_morte/soffio_animation28.png"))
+
     def load_empatia(self):
         self.empatia_animation.append(pygame.transform.scale(pygame.image.load("img/animations/empatia/empatia_animation0.png"),(280,160)))
         self.empatia_animation.append(pygame.transform.scale(pygame.image.load("img/animations/empatia/empatia_animation1.png"),(280,160)))
@@ -335,6 +385,47 @@ class Fabiano():
         self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation09.png"))
         self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation10.png"))
         self.nikradogna_animation.append(pygame.image.load("img/animations/marchiotto/nikradogna_animation11.png"))
+
+    def load_trentin(self):
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation00.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation01.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation02.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation03.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation04.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation05.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation06.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation07.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation08.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation09.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation10.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation11.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation12.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation13.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation14.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation15.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation16.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation17.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation18.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation19.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation20.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation21.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation22.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation23.png"))
+        self.trentin_animation.append(pygame.image.load("img/animations/trentin/trentin_animation24.png"))
+
+
+    def load_pastorello(self):
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation00.png"))
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation01.png"))
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation02.png"))
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation03.png"))
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation04.png"))
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation05.png"))
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation06.png"))
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation07.png"))
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation08.png"))
+        self.pastorello_animation.append(pygame.image.load("img/animations/pastorello/pastorello_animation09.png"))
+
             
     def do_something(self, boss, input):
         if self.MNA_CONSUMPTION == True:
@@ -388,7 +479,7 @@ class Fabiano():
 
         if self.sel["has_cursor_on"]=="Malevento":
             if self.is_doing_animation:
-                dw.pestata_animation()
+                dw.malevento_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
             if not self.is_doing_animation:
@@ -418,7 +509,7 @@ class Fabiano():
             target = self.sel["is_choosing_target"]
             if target.is_dead:
                 if self.is_doing_animation:
-                    dw.pestata_animation()
+                    dw.soffio_animation(target)
                     #self.remove_mna(MNA_CONSUMPTION, len(self.pestata_animation)/0.30, round(MNA_CONSUMPTION/(len(self.pestata_animation)/0.30),2))
 
                 if not self.is_doing_animation:
@@ -480,7 +571,7 @@ class Fabiano():
             # Il valore numerico indica per quanti turni si vedranno gli attacchi del nemico
             self.foresees_enemy_attacks = 5
             if self.is_doing_animation:
-                dw.pestata_animation()
+                dw.trentin_animation()
 
             if not self.is_doing_animation:
                 self.friends[0][1] = "-"
@@ -492,7 +583,7 @@ class Fabiano():
         if self.sel["has_cursor_on"]=="Pastorello (spirito)":
             self.friends[1][1] = "-"
             if self.is_doing_animation:
-                dw.pestata_animation()
+                dw.pastorello_animation()
 
             if not self.is_doing_animation:
                 for allies in [y.y,p.p,r.r,self]:

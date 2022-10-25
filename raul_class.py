@@ -69,19 +69,22 @@ class Raul():
         self.emotional_levels = {"Felicità":2,"Rabbia":3,"Tristezza":1} # Dizionario per il livello massimo delle emozioni
     
         self.saetta_animation = []
-        self.saetta_len = 37
 
         self.tempesta_animation = []
-        self.tempesta_len = 24
         
         self.bastonata_animation = []
-        self.bastonata_len = 16
+
+        self.pettoinfuori_animation = []
+
+        self.tensione_animation = []
         
         self.noce_animation = []
-        self.noce_len = 38
 
         self.damox_animation = []
-        self.damox_len = 19
+
+        self.cardile_animation = []
+
+        self.mohammed_animation = []
 
         self.current_animation = 0
 
@@ -252,7 +255,75 @@ class Raul():
         self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation13.png"))
         self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation14.png"))
         self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation15.png"))
-    
+
+    def load_pettoinfuori(self):
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation00.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation01.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation02.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation03.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation04.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation05.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation06.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation07.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation08.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation09.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation10.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation11.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation12.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation13.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation14.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation15.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation16.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation17.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation18.png"))
+        self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation19.png"))
+
+    def load_tensione(self):
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation00.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation01.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation02.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation03.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation04.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation05.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation06.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation07.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation08.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation09.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation10.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation11.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation12.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation13.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation14.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation15.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation16.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation17.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation18.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation19.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation20.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation21.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation22.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation23.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation24.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation25.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation26.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation27.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation28.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation29.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation30.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation31.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation32.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation33.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation34.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation35.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation36.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation37.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation38.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation39.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation40.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation41.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation42.png"))
+        self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation43.png"))
+
     def load_noce(self):
         self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation00.png"))
         self.noce_animation.append(pygame.image.load("img/animations/nocentini/noce_animation01.png"))
@@ -314,6 +385,48 @@ class Raul():
         self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation17.png"))
         self.damox_animation.append(pygame.image.load("img/animations/damonte/damox_animation18.png"))
     
+    def load_cardile(self):
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation00.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation01.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation02.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation03.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation04.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation05.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation06.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation07.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation08.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation09.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation10.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation11.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation12.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation13.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation14.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation15.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation16.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation17.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation18.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation19.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation20.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation21.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation22.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation23.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation24.png"))
+        self.cardile_animation.append(pygame.image.load("img/animations/cardile/cardile_animation25.png"))
+
+    def load_mohammed(self):
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation00.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation01.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation02.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation03.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation04.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation05.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation06.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation07.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation08.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation09.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation10.png"))
+        self.mohammed_animation.append(pygame.image.load("img/animations/mohammed/memed_animation11.png"))
+        
 
     def do_something(self, boss, input):
         if self.MNA_CONSUMPTION == True:
@@ -393,7 +506,7 @@ class Raul():
 
         if self.sel["has_cursor_on"]=="Pettoinfuori":
             if self.is_doing_animation:
-                dw.saetta_animation()
+                dw.pettoinfuori_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
@@ -422,7 +535,7 @@ class Raul():
             self.aoe_2 = action.damage_deal(r.current_atk,DMG_DEAL,p.p.current_defn,self.current_emotion,p.p.current_emotion)
             self.aoe_4 = action.damage_deal(r.current_atk,DMG_DEAL,f.f.current_defn,self.current_emotion,f.f.current_emotion)
             if self.is_doing_animation:
-                dw.saetta_animation()
+                dw.tensione_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
 
             if not self.is_doing_animation:
@@ -448,7 +561,7 @@ class Raul():
         
         if self.sel["has_cursor_on"]=="Cristian":
             if self.is_doing_animation:
-                dw.saetta_animation()
+                dw.cardile_animation()
 
             if not self.is_doing_animation:
                 self.friends[0][1] = "-"
@@ -475,7 +588,7 @@ class Raul():
 
         if self.sel["has_cursor_on"]=="Mohammed (spirito)":
             if self.is_doing_animation:
-                dw.saetta_animation()
+                dw.mohammed_animation()
 
             if not self.is_doing_animation:
                 self.friends[1][1] = "-"
