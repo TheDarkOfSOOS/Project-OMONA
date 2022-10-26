@@ -13,6 +13,8 @@ dmg_reduction = Get_Damage_Reduction_Active()
 damage_per_frame = 5
 
 def damage_deal(user_atk, atk_dmg, target_def, user_emotion, target_emotion):
+    if target_def <= 80:
+        target_def = 80
     result = int(((user_atk)*(atk_dmg*20)) / (target_def+rng.randrange(1,6)))
     if result < 0:
         result = 0

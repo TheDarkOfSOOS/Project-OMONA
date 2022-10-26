@@ -31,7 +31,7 @@ class Mago_Elettrico():
         self.vel = 134 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = self.hp
+        self.current_hp = 1#self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel

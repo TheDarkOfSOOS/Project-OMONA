@@ -29,7 +29,7 @@ class Anafesto():
         self.vel = 345 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = 100#self.hp
+        self.current_hp = 10#self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -60,6 +60,8 @@ class Anafesto():
         self.count_4 = 0
         
         self.last_standing = rng.choice([r.r,f.f,p.p])
+        self.not_hero = ""
+        self.another_not_hero = ""
 
         # EMOZIONI
         self.current_emotion = "neutrale" # Emozione attuale
@@ -397,6 +399,11 @@ class Anafesto():
             
         print(self.target)
 
+    def find_not_heroes(self):
+        not_heroes_list = [p.p,r.r,f.f]
+        not_heroes_list.remove(self.last_standing)
+        self.not_hero = not_heroes_list[0]
+        self.another_not_hero = not_heroes_list[1]
 
         #if self.attacks_target[self.choosen_attack] > 0:
 

@@ -115,21 +115,21 @@ class Fabiano():
             "Soffio della morte":"Riporta in vita un alleato con metà dei suoi HP.",
             # Friends
             "Cappe":"Indica un alleato che subirà l’attacco del nemico. Attacca per primo.",
-            "Diego": 'Rende gioiosi(??) tutti gli alleati al massimo, ma diminuisce la loro difesa.',
             "Trentin": "Osserva il nemico e dirà la sua prossima mossa per 5 turni.",
+            "Diego": 'Rende gioiosi(??) tutti gli alleati al massimo, ma diminuisce la loro difesa.',
             "Pastorello (spirito)": "Incita gli alleati a fare del loro meglio. Aumenta la difesa di tutti."
         }
         self.description = {}
 
         self.friends_title_template = {
             "Cappe":"[Sostituto]",
-            "Diego":'[“Camomilla”]',
             "Trentin":"[Consigliere]",
+            "Diego":'[“Camomilla”]',
             "Pastorello (spirito)":"[Consiglio del maggiore]"
         }
         self.friends_title = {}
 
-        self.friends_template=[["Cappe","Trentin","-"],["Diego","Pastorello (spirito)","-"]]
+        self.friends_template=[["Cappe","Diego","-"],["Trentin","Pastorello (spirito)","-"]]
         self.friends = []
 
         self.sel = {"is_choosing":False,"is_selecting":"Skills","has_done_first_selection":False,"has_cursor_on":"Skills","is_choosing_target":False}

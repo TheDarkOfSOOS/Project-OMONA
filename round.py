@@ -49,6 +49,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
 
     # Fai queste cose all'inizio del round
     if new_turn_has_started:
+        youssef.y.immortality = False
         # Controlliamo se boss puo' attivare ultimate
         if boss.ultimate_status == "used":
             boss.ultimate_status = "off"
@@ -244,6 +245,10 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
                 list_speed_ordered.pop(list_speed_ordered.index(youssef.y))
                 list_speed_ordered.insert(0, youssef.y)
 
+            if youssef.y.sel["has_cursor_on"]=="Parata":
+                list_speed_ordered.pop(list_speed_ordered.index(youssef.y))
+                list_speed_ordered.insert(0, youssef.y)
+
             if youssef.y.sel["has_cursor_on"]=="Sforbiciata":
                 list_speed_ordered.pop(list_speed_ordered.index(youssef.y))
                 list_speed_ordered.insert(len(list_speed_ordered), youssef.y)
@@ -259,6 +264,10 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
             if pier.p.sel["has_cursor_on"]=='"Spessanza"':
                 list_speed_ordered.pop(list_speed_ordered.index(pier.p))
                 list_speed_ordered.insert(0, pier.p)
+
+            if raul.r.sel["has_cursor_on"]=="Testata":
+                list_speed_ordered.pop(list_speed_ordered.index(raul.r))
+                list_speed_ordered.insert(len(list_speed_ordered), raul.r)
 
             if fabiano.f.sel["has_cursor_on"]=="Empatia":
                 list_speed_ordered.pop(list_speed_ordered.index(fabiano.f))
@@ -473,6 +482,11 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
     # Rendiamo il boss immortale se deve ancora usare la sua ultimate
     if (boss.ultimate_status == "will_activate" or boss.ultimate_status == "to_activate") and boss.current_hp <= 0:
         boss.current_hp = 1
+
+    # Rendiamo Youssef immortale se ha attivato parata:
+    if (youssef.y.immortality) and youssef.y.current_hp <=0:
+        youssef.y.is_dead = False
+        youssef.y.current_hp = 1
 
     return [everyone_has_chosen, everyone_has_finished_animation, continue_animation, new_turn_has_started, returning, list_speed_ordered, dead_list]
 

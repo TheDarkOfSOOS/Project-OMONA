@@ -79,6 +79,70 @@ class Chara_bg_effect():
 
 chara_bg_effect = Chara_bg_effect()
 
+class Main_Menu():
+    def __init__(self):
+        self.show_screen = True
+        self.animation_closure = False
+        self.text_opacity = 255
+        self.CHANGE_PER_FRAME_OPACITY = 17
+        self.text_opacity_status = "down"
+
+    def update(self, input):
+        if input == "return" and self.animation_closure == 0:
+            #print("1")
+            self.animation_closure = 1
+            pygame.mixer.music.stop()
+            pygame.mixer.Channel(0).play(sound.INIT_TRANSITION, 0,0, 100)
+
+        if self.animation_closure == False:
+            #print("2")
+            WIN.blit(pygame.image.load("img/background/main_menu/main_menu.png"),(0,0))
+            WIN.blit(pygame.image.load("img/background/main_menu/main_menu_addon.png"),(0,0))
+            WIN.blit(pygame.image.load("img/background/main_menu/title.png"),(WIDTH/2-(984/2),HEIGHT//12))
+            self.text_animation('Premi "Enter" per continuare.', 47, (WIDTH//1.49,HEIGHT//1.1), (178,60,64))
+        else:
+            #print("3")
+            WIN.blit(pygame.image.load("img/background/main_menu/main_menu.png"),(0,0))
+            self.animation_closure += 1
+            if not pygame.mixer.Channel(0).get_busy():
+                self.show_screen = False
+                pygame.mixer.music.load(OST_Assemblence)
+                pygame.mixer.music.play(-1)
+
+        
+        
+    def text_animation(self, text, font_size, start_position, color):
+        text_space_x = 0
+        text_space_y = font_size/2.2
+        my_font = pygame.font.Font(MY_FONT,font_size)
+        for i in range(len(text)+1):
+            text_space_x += font_size/2.2
+
+        #print(word)
+        # Renderizza parola da mettere in output
+        text_render = my_font.render(text,False,color)
+        # Output parola, CON opacita'
+        text_render.set_alpha(self.text_opacity)
+        WIN.blit(text_render, (start_position[X]-text_space_x, start_position[Y]-text_space_y))
+        #print(len(word))
+
+        self.update_opacity()
+
+    def update_opacity(self):
+        if self.text_opacity_status == "down":
+            self.text_opacity -= self.CHANGE_PER_FRAME_OPACITY
+            if self.text_opacity == 0:
+                self.text_opacity_status = "up"
+        else:
+            self.text_opacity += self.CHANGE_PER_FRAME_OPACITY
+            if self.text_opacity == 255:
+                self.text_opacity_status = "down"
+        #print(self.text_opacity)
+
+
+main_menu_screen = Main_Menu()
+
+
 def get_bg_color(chara):
     result = (0,0,0)
     if not chara.is_dead:
@@ -333,7 +397,7 @@ def choices(current_player, is_selecting, boss):
             ci sara' del testo diverso '''
         if not current_player.sel["has_done_first_selection"]:
             if boss.ultimate_status == "will_activate":
-                text_action(boss.name + " sembra voler attivare qualcosa...", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
+                text_action(boss.name + " sembra voler preparare qualcosa...", FONT_SIZE*2, (BOX_HORIZONTAL_SPACING+SPACING, SPACING), BOX_HORIZONTAL_SPACING + SPACING + BOX_WIDTH)
             elif f.foresees_enemy_attacks >= 0:
                 text_focus = ""
                 for targets in boss.target:
@@ -567,7 +631,7 @@ def friend_icon(selected_friend):
     elif selected_friend == "Anastasia":
         friend_to_draw = ANASTASIA
     elif selected_friend == "Ciudin (spirito)":
-        friend_to_draw = BORIN
+        friend_to_draw = CIUDIN
     elif selected_friend == "Damonte":
         friend_to_draw = DAMONTE
     elif selected_friend == "Cristian":
@@ -575,7 +639,7 @@ def friend_icon(selected_friend):
     elif selected_friend == "Noce":
         friend_to_draw = NOCE
     elif selected_friend == "Mohammed (spirito)":
-        friend_to_draw = BORIN
+        friend_to_draw = MOHAMMED
     elif selected_friend == "Ilaria":
         friend_to_draw = ILARIA
     elif selected_friend == "Stefan":
@@ -583,7 +647,7 @@ def friend_icon(selected_friend):
     elif selected_friend == "Prade":
         friend_to_draw = PRADE
     elif selected_friend == "Gonzato (spirito)":
-        friend_to_draw = BORIN
+        friend_to_draw = GONZATO
     elif selected_friend == "Cappe":
         friend_to_draw = CAPPE
     elif selected_friend == "Diego":
@@ -591,7 +655,7 @@ def friend_icon(selected_friend):
     elif selected_friend == "Trentin":
         friend_to_draw = TRENTIN
     elif selected_friend == "Pastorello (spirito)":
-        friend_to_draw = BORIN
+        friend_to_draw = KEVIN
     
     #print(friend_to_draw)
     if not friend_to_draw == "null":
@@ -607,6 +671,12 @@ def item_icon(selected_item):
         item_to_draw = LAUREA_IN_MATEMATICA
     elif selected_item == "Tiramisù (senza...)":
         item_to_draw = TIRAMISU_SENZA_MASCARPONE
+    elif selected_item == "Orologio donato":
+        item_to_draw = OROLOGIO_DONATO
+    elif selected_item == "Parmigianino":
+        item_to_draw = PARMIGIANINO
+    elif selected_item == "Ghiaccio dei Bidelli":
+        item_to_draw = GHIACCIO_DEI_BIDELLI
 
     #print(friend_to_draw)
     if not item_to_draw == "null":
@@ -624,14 +694,24 @@ def dialogue_gui(img):
     #pygame.draw.rect(WIN, (WHITE), pygame.Rect( SPACING*2, HEIGHT-action_box.height-SPACING, WIDTH-SPACING*4, action_box.height ), BOX_BORDER)
     if dialogue_box.current_width == dialogue_box.desired_width:
         # Drawer profile
-        pygame.draw.rect(WIN, (WHITE), pygame.Rect( SPACING*2, HEIGHT-dialogue_box.height-SPACING*2-CHARA_IMAGE_HEIGHT, CHARA_IMAGE_WIDTH, CHARA_IMAGE_HEIGHT ))
-        WIN.blit(pygame.transform.scale(img, (CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)), ( SPACING*2, HEIGHT-dialogue_box.height-SPACING*2-CHARA_IMAGE_HEIGHT, CHARA_IMAGE_WIDTH, CHARA_IMAGE_HEIGHT ))
-        pygame.draw.rect(WIN, (BLACK), pygame.Rect( SPACING*2, HEIGHT-dialogue_box.height-SPACING*2-CHARA_IMAGE_HEIGHT, CHARA_IMAGE_WIDTH, CHARA_IMAGE_HEIGHT ), BOX_BORDER)
+        if not img == NOTHING:
+            pygame.draw.rect(WIN, (WHITE), pygame.Rect( SPACING*2, HEIGHT-dialogue_box.height-SPACING*2-CHARA_IMAGE_HEIGHT, CHARA_IMAGE_WIDTH, CHARA_IMAGE_HEIGHT ))
+            WIN.blit(pygame.transform.scale(img, (CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)), ( SPACING*2, HEIGHT-dialogue_box.height-SPACING*2-CHARA_IMAGE_HEIGHT, CHARA_IMAGE_WIDTH, CHARA_IMAGE_HEIGHT ))
+            pygame.draw.rect(WIN, (WHITE), pygame.Rect( SPACING*2, HEIGHT-dialogue_box.height-SPACING*2-CHARA_IMAGE_HEIGHT, CHARA_IMAGE_WIDTH, CHARA_IMAGE_HEIGHT ), BOX_BORDER)
+
+def boss_dialogue_anafesto(img):
+    WIN.fill((0,0,100))
+    WIN.blit(pygame.transform.scale(img,(592,880)),(620,HEIGHT-1000)) 
+
+def anafesto_arrives(img, current_height):
+    current_height += 10
+    WIN.fill((0,0,100))
+    WIN.blit(pygame.transform.scale(img,(592,880)),(620,current_height-1000))
+    return current_height
 
 def dialogue_bg(img):
-    if img == "None":
-        WIN.fill((0,0,100))
-    else:
+    WIN.fill((0,0,100))
+    if img != "None":
         WIN.blit(pygame.transform.scale(img,(WIDTH,HEIGHT)),(0,0))
 
 class GameOverMenu():
@@ -812,13 +892,13 @@ def pallonata_animation():
         y.is_doing_animation = False
         y.pallonata_animation.clear()
     if int(y.current_animation) == 5:
-        pygame.mixer.Sound.play(sound.FALLING)
+        pygame.mixer.Sound.play(sound.FIRE_LASER)
     if int(y.current_animation) == 12:
         pygame.mixer.Sound.play(sound.HIT_SKILL)
     if int(y.current_animation) == 17:
         pygame.mixer.Sound.play(sound.HIT_SKILL_1)
     if int(y.current_animation) == 18:
-        pygame.mixer.Sound.play(sound.FALLING)
+        pygame.mixer.Sound.play(sound.FIRE_LASER)
 
 def battutaccia_animation():
     if y.current_animation == 0:
@@ -858,6 +938,8 @@ def assedio_animation():
     if y.current_animation >= len(y.assedio_animation):
         y.assedio_animation.clear()
         y.is_doing_animation = False
+    if int(y.current_animation) > 5 and int(y.current_animation)%3==0:
+        pygame.mixer.Sound.play(sound.EXPLOSIVE_COLLISION)
 
 def pol_animation():
     if y.current_animation == 0:
@@ -1186,6 +1268,22 @@ def pettoinfuori_animation():
     if int(r.current_animation) == 11:
         pygame.mixer.Sound.play(sound.SNIPER)
 
+def testata_animation():
+    if r.current_animation == 0:
+        pygame.mixer.Sound.play(sound.THUNDER_STRIKE)
+        r.load_testata()
+    if r.is_doing_animation:
+        WIN.blit(r.testata_animation[int(r.current_animation)],(WIDTH/2.5,HEIGHT/2))
+        r.current_animation+=0.20
+    if r.current_animation >= len(r.testata_animation):
+        r.testata_animation.clear()
+        r.is_doing_animation = False
+    if int(r.current_animation) == 5:
+        pygame.mixer.Sound.play(sound.FIRE_LASER)
+    if int(r.current_animation) == 9:
+        pygame.mixer.Sound.play(sound.EXPLOSIVE_COLLISION)
+
+
 def tensione_animation():
     if r.current_animation == 0:
         r.load_tensione()
@@ -1343,6 +1441,8 @@ def empatia_animation():
     if f.current_animation >= len(f.empatia_animation):
         f.empatia_animation.clear()
         f.is_doing_animation = False
+    if int(f.current_animation) == 4:
+        pygame.mixer.Sound.play(sound.CHEERS)
 
 def soffio_animation(target):
     if f.is_doing_animation:
@@ -1971,6 +2071,8 @@ def item_acqua_animation(user):
     if user.current_animation >= len(items.acqua_animation):
         user.is_doing_animation = False
         items.acqua_animation.clear()
+    if int(user.current_animation) == 7:
+        pygame.mixer.Sound.play(sound.CHEERS)
     
 def item_tiramisu_animation(user):
     if user.current_animation == 0:
@@ -1981,6 +2083,8 @@ def item_tiramisu_animation(user):
     if user.current_animation >= len(items.tiramisu_no_mascarpone):
         user.is_doing_animation = False
         items.tiramisu_no_mascarpone.clear()
+    if int(user.current_animation) == 7:
+        pygame.mixer.Sound.play(sound.CHEERS)
 
 def item_laurea_animation(user):
     if user.current_animation == 0:
@@ -1991,6 +2095,8 @@ def item_laurea_animation(user):
     if user.current_animation >= len(items.laurea_animation):
         user.is_doing_animation = False
         items.laurea_animation.clear()
+    if int(user.current_animation) == 7:
+        pygame.mixer.Sound.play(sound.CHEERS)
     
 def item_orologio_animation(user):
     if user.current_animation == 0:
@@ -2001,6 +2107,8 @@ def item_orologio_animation(user):
     if user.current_animation >= len(items.orologio_animation):
         user.is_doing_animation = False
         items.orologio_animation.clear()
+    if int(user.current_animation) == 7:
+        pygame.mixer.Sound.play(sound.CHEERS)
 
 def item_parmigianino_animation(user):
     if user.current_animation == 0:
@@ -2011,6 +2119,8 @@ def item_parmigianino_animation(user):
     if user.current_animation >= len(items.parmigianino_animation):
         user.is_doing_animation = False
         items.parmigianino_animation.clear()
+    if int(user.current_animation) == 7:
+        pygame.mixer.Sound.play(sound.CHEERS)
 
 def item_ghiaccio_animation(user):
     if user.current_animation == 0:
@@ -2021,3 +2131,5 @@ def item_ghiaccio_animation(user):
     if user.current_animation >= len(items.ghiaccio_animation):
         user.is_doing_animation = False
         items.ghiaccio_animation.clear()
+    if int(user.current_animation) == 7:
+        pygame.mixer.Sound.play(sound.CHEERS)

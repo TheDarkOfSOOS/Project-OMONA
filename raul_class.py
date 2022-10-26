@@ -76,6 +76,8 @@ class Raul():
 
         self.pettoinfuori_animation = []
 
+        self.testata_animation = []
+
         self.tensione_animation = []
         
         self.noce_animation = []
@@ -97,7 +99,7 @@ class Raul():
 
         self.is_showing_text_outputs = False
 
-        self.skills_template = [["Saetta trascendente","Bastonata","Bel tempo"],["Tempesta","Pettoinfuori","Tensione esplosiva"]]
+        self.skills_template = [["Saetta trascendente","Bastonata","Testata"],["Tempesta","Pettoinfuori","Tensione esplosiva"]]
         self.skills = []
 
         self.description_template = {
@@ -106,20 +108,20 @@ class Raul():
             "Tempesta":"Scatena una tempesta che rende tristi tutti gli alleati e causa lievi danni al nemico.",
             "Bastonata":"Colpisce con la sua staffa elettrica. Ottiene un quarto del mana suo totale.",
             "Pettoinfuori":"Si pompa, aumentando l’attacco.",
-            "Bel tempo":"Crea un arcobaleno con la pioggia delle tempeste e la luce delle scintille. Fa diventare gioioso un alleato o nemico.",
+            "Testata":"Raul carica una fortissima testata. Se l’avversario non lo ha colpito, si fonda contro di esso infliggendo immensi danni. Colpisce per ultimo.",
             "Tensione esplosiva":"Scarica dal suo corpo una forte elettricità. Diventa arrabbiato e causa danni a tutti: alleati, sé stesso e gravi danni al nemico.",
             # Friends
             "Cristian":"Diminuisce l’evasione del nemico.",
-            "Damonte": "Aumenta la velocità di tutti gli alleati di tanto.",
             "Noce": "Esegue un headshot al nemico. Non tiene conto della difesa del nemico.",
+            "Damonte": "Aumenta la velocità di tutti gli alleati di tanto.",
             "Mohammed (spirito)": "Usa l’unica arma in grado di ucciderlo. Rende tutti gli alleati tristi e ne aumenta ulteriormente la difesa."
         }
         self.description = {}
 
         self.friends_title_template = {
             "Cristian":"[Inquadrato]",
-            "Damonte":"[Rhythm Mayhem]",
             "Noce":"[Sangue freddo]",
+            "Damonte":"[Rhythm Mayhem]",
             "Mohammed (spirito)":"[Immortalità?]"
         }
         self.friends_title = {}
@@ -134,12 +136,12 @@ class Raul():
             "Tempesta":66,
             "Bastonata":0,
             "Pettoinfuori":36,
-            "Bel tempo":10,
+            "Testata":20,
             "Tensione esplosiva":300,
         }
 
         self.allies_selections=["Acqua di Destiny", "Parmigianino", "Ghiaccio dei Bidelli"]
-        self.allies_enemy_selections=["Bel tempo"]
+        self.allies_enemy_selections=[""]
 
     def change_img(self):
         if self.is_dead:
@@ -277,6 +279,21 @@ class Raul():
         self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation17.png"))
         self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation18.png"))
         self.pettoinfuori_animation.append(pygame.image.load("img/animations/pettoinfuori/pettoinfuori_animation19.png"))
+
+    def load_testata(self):
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation00.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation01.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation02.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation03.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation04.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation05.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation06.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation07.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation08.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation09.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation10.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation11.png"))
+        self.testata_animation.append(pygame.image.load("img/animations/testata/testata_animation12.png"))
 
     def load_tensione(self):
         self.tensione_animation.append(pygame.image.load("img/animations/tensione_esplosiva/tensione_animation00.png"))
@@ -516,17 +533,33 @@ class Raul():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if self.sel["has_cursor_on"]=="Bel tempo":
-            if self.is_doing_animation:
-                dw.saetta_animation()
-                #self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
+        if self.sel["has_cursor_on"]=="Testata":
+            if not self in boss.target:
+                DMG_DEAL = 16
+                self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
+                if self.is_doing_animation:
+                    dw.testata_animation()
+                    #self.remove_mna(MNA_CONSUMPTION, self.saetta_len/0.50, round(MNA_CONSUMPTION/(self.saetta_len/0.50),2))
 
-            if not self.is_doing_animation:
-                emotion.change_emotion(self.sel["is_choosing_target"], "gioioso")
-                print("Raul ha reso felice", self.sel["is_choosing_target"].name)
-                self.text_action="Raul ha reso felice "+ str(self.sel["is_choosing_target"].name)
+                if not self.is_doing_animation:
+                    if action.is_missed(boss.current_eva):
+                        self.text_action="Il nemico ha schivato il colpo!"
+                        self.current_animation = 0
+                        self.is_showing_text_outputs = True
+                    else:
+                        print("Raul ha fatto", self.damage_dealed, "danni al nemico!")
+                        self.text_action="Raul ha fatto "+ str(self.damage_dealed) + " danni al nemico!"
+
+                        self.current_animation = 0
+                        self.is_showing_text_outputs = True
+                        self.is_removing_bar = True
+            else:
+                print("Raul ha perso la concentrazione.")
+                self.text_action="Raul ha perso la concentrazione."
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
+                self.is_removing_bar = True
+                self.is_doing_animation = False
 
         if self.sel["has_cursor_on"]=="Tensione esplosiva":
             DMG_DEAL = 6

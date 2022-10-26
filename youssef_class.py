@@ -93,6 +93,8 @@ class Youssef():
 
         self.ciudin_animation = []
 
+        self.immortality = False
+
         self.current_animation = 0
 
         self.is_buffed = -1
@@ -105,7 +107,7 @@ class Youssef():
         self.is_showing_text_outputs = False
 
         # Contiene il nome di tutte le abilita'
-        self.skills_template = [["Sforbiciata","Pallonata","Battutaccia"],["Provocazione","Delusione","Assedio"]]
+        self.skills_template = [["Sforbiciata","Pallonata","Battutaccia"],["Provocazione","Parata","Assedio"]]
         self.skills = []
 
         self.description_template = {
@@ -113,7 +115,7 @@ class Youssef():
             "Sforbiciata":"Esegue un attacco che fa buoni danni. Attacca sempre per ultimo.",
             "Provocazione":"Provoca il nemico rendendolo arrabbiato e lo costringe a concentrarsi su Youssef per 3 turni.",
             "Pallonata":"Tira un pallone al nemico che ignora la sua difesa quando Youssef è arrabbiato.",
-            "Delusione":"Il nemico lo prende di mira. Se Youssef è triste diminuisce l’attacco del nemico. Attacca per primo.",
+            "Parata":"Youssef guarda il nemico per parare il suo attacco. Sopravvive ad attacchi K.O. Attacca per primo e diventa il bersaglio del nemico.",
             "Battutaccia":"Rende tutto il party gioioso in modo randomico.",
             "Assedio":"Sprona tutto il party ad attaccare il nemico. Ognuno farà pochi danni.",
             # Friends
@@ -149,7 +151,7 @@ class Youssef():
             "Sforbiciata":30,
             "Provocazione":60,
             "Pallonata":20,
-            "Delusione":60,
+            "Parata":100,
             "Battutaccia":100,
             "Assedio":150,
         }
@@ -437,18 +439,16 @@ class Youssef():
                     self.is_showing_text_outputs = True
                     self.is_removing_bar = True
 
-        if self.sel["has_cursor_on"]=="Delusione":
+        if self.sel["has_cursor_on"]=="Parata":
             if self.is_doing_animation:     
                 dw.parata_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.sforbiciata_animation)/0.70, round(MNA_CONSUMPTION/(len(self.sforbiciata_animation)/0.70),2))
 
             if not self.is_doing_animation:
-                self.text_action="Youssef ha attirato le attenzioni del nemico. "
+                self.immortality = True
+                self.text_action="Youssef sembra voglia parare(?) l'attacco del boss."
                 boss.update_target(self)
-                if self.current_emotion=="triste" or self.current_emotion=="depresso":
-                    emotion.change_emotion(boss, "triste")
-                    self.text_action+="La sua tristezza affligge pure il nemico. Ora questo si sente in colpa."
-                print("Youssef ha provocato il nemico! Ora questo lo vuole fare fritto.")
+                print("Youssef sembra voglia parare(?) l'attacco del boss.")
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 

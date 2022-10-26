@@ -103,6 +103,13 @@ FURIOSO_BUFF_DEFN = -60
 
 STATS_EXPLANATION = pygame.image.load("img/background/stats_explanation.png")
 EMOTION_EXPLANATION = pygame.image.load("img/background/emotion_explanation.png")
+TURN_EXPLANATION = pygame.image.load("img/background/turn_explanation.png")
+SKILLS_EXPLANATION = pygame.image.load("img/background/skills_explanation.png")
+STATUS_EXPLANATION = pygame.image.load("img/background/status_explanation.png")
+FRIENDS_EXPLANATION = pygame.image.load("img/background/friends_explanation.png")
+CARD_EXPLANATION = pygame.image.load("img/background/card_explanation.png")
+ITEMS_EXPLANATION = pygame.image.load("img/background/items_explanation.png")
+
 
 # Soundtracks
 OST_Fallen = "./sounds/ost/Fallen.mp3"
@@ -121,6 +128,7 @@ OST_Colossal_Wave = "./sounds/ost/Colossal Wave.mp3"
 # NON SI IMPORTA PIU' DA DATA PER IL COMBATTIMENTO, SOLTANTO PER BOX DIALOGHI (i friends vengono presi da qui)
 
 NOTHING = pygame.image.load("img/nothing.png")
+LEONE_ALATO = pygame.transform.scale(pygame.image.load("img/friends/leone_alato.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
 YOUSSEF = pygame.transform.scale(pygame.image.load("img/friends/youssef.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 PIER = pygame.transform.scale(pygame.image.load("img/friends/pier.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
@@ -129,24 +137,27 @@ FABIANO = pygame.transform.scale(pygame.image.load("img/friends/fabiano.png"),(C
 POL = pygame.transform.scale(pygame.image.load("img/friends/pol.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 BORIN = pygame.transform.scale(pygame.image.load("img/friends/borin.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 ANASTASIA = pygame.transform.scale(pygame.image.load("img/friends/anastasia.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-#CIUDIN = pygame.transform.scale(dir,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+CIUDIN = pygame.transform.scale(pygame.image.load("img/friends/ciudin.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 DAMONTE = pygame.transform.scale(pygame.image.load("img/friends/damonte.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 CRISTIAN = pygame.transform.scale(pygame.image.load("img/friends/cristian.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 NOCE = pygame.transform.scale(pygame.image.load("img/friends/noce.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-#MOHAMMED = pygame.transform.scale(dir,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+MOHAMMED = pygame.transform.scale(pygame.image.load("img/friends/mohammed.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 ILARIA = pygame.transform.scale(pygame.image.load("img/friends/ilaria.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 STEFAN = pygame.transform.scale(pygame.image.load("img/friends/stefan.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 PRADE = pygame.transform.scale(pygame.image.load("img/friends/prade.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-#GONZATO = pygame.transform.scale(dir,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+GONZATO = pygame.transform.scale(pygame.image.load("img/friends/gonzato.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 CAPPE = pygame.transform.scale(pygame.image.load("img/friends/cappe.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 DIEGO = pygame.transform.scale(pygame.image.load("img/friends/diego.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 TRENTIN = pygame.transform.scale(pygame.image.load("img/friends/trentin.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-#PASTORELLO = pygame.transform.scale(dir,(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+KEVIN = pygame.transform.scale(pygame.image.load("img/friends/kevin.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+
 
 ACQUA_DI_DESTINY = pygame.transform.scale(pygame.image.load("img/items/acqua_di_destiny.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 LAUREA_IN_MATEMATICA = pygame.transform.scale(pygame.image.load("img/items/laurea_di_matematica.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 TIRAMISU_SENZA_MASCARPONE = pygame.transform.scale(pygame.image.load("img/items/tiramisu_no_mascarpone.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
-
+GHIACCIO_DEI_BIDELLI = pygame.transform.scale(pygame.image.load("img/items/ghiaccio_dei_bidelli.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+OROLOGIO_DONATO = pygame.transform.scale(pygame.image.load("img/items/orologio_donato.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
+PARMIGIANINO = pygame.transform.scale(pygame.image.load("img/items/parmigianino.png"),(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT))
 
 NEUTRAL_IMG = pygame.image.load("img/neutral_img.png")
 DEAD_IMG = pygame.image.load("img/dead_img.png")
