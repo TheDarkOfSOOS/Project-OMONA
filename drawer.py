@@ -1074,6 +1074,11 @@ def sacrificio_y_animation():
     if p.current_animation >= len(p.sacrificio_y_animation):
         p.sacrificio_y_animation.clear()
         p.is_doing_animation = False
+        pygame.mixer.Sound.stop(sound.FIRE)
+    if int(p.current_animation) == 0:
+        pygame.mixer.Sound.play(sound.FIRE)
+    if int(p.current_animation) == 23:
+        pygame.mixer.Sound.play(sound.GREAT_EXPLOSION)
 
 def sacrificio_p_animation():
     if p.current_animation == 0:
@@ -1084,6 +1089,11 @@ def sacrificio_p_animation():
     if p.current_animation >= len(p.sacrificio_p_animation):
         p.sacrificio_p_animation.clear()
         p.is_doing_animation = False
+        pygame.mixer.Sound.stop(sound.FIRE)
+    if int(p.current_animation) == 0:
+        pygame.mixer.Sound.play(sound.FIRE)
+    if int(p.current_animation) == 23:
+        pygame.mixer.Sound.play(sound.GREAT_EXPLOSION)
 
 def sacrificio_r_animation():
     if p.current_animation == 0:
@@ -1095,6 +1105,11 @@ def sacrificio_r_animation():
     if p.current_animation >= len(p.sacrificio_y_animation):
         p.sacrificio_y_animation.clear()
         p.is_doing_animation = False
+        pygame.mixer.Sound.stop(sound.FIRE)
+    if int(p.current_animation) == 0:
+        pygame.mixer.Sound.play(sound.FIRE)
+    if int(p.current_animation) == 23:
+        pygame.mixer.Sound.play(sound.GREAT_EXPLOSION)
 
 def sacrificio_f_animation():
     if p.current_animation == 0:
@@ -1106,6 +1121,11 @@ def sacrificio_f_animation():
     if p.current_animation >= len(p.sacrificio_p_animation):
         p.sacrificio_p_animation.clear()
         p.is_doing_animation = False
+        pygame.mixer.Sound.stop(sound.FIRE)
+    if int(p.current_animation) == 0:
+        pygame.mixer.Sound.play(sound.FIRE)
+    if int(p.current_animation) == 23:
+        pygame.mixer.Sound.play(sound.GREAT_EXPLOSION)
 
 def ilaria_y_animation():
     if p.current_animation == 0:
@@ -1237,11 +1257,11 @@ def tempesta_animation():
         r.load_tempesta()
     if r.is_doing_animation:
         WIN.blit(r.tempesta_animation[int(r.current_animation)],(0,0))
-        r.current_animation+=0.50
+        r.current_animation+=0.30
     if r.current_animation >= len(r.tempesta_animation):
         r.tempesta_animation.clear()
         r.is_doing_animation = False
-    if int(r.current_animation)%6 == 0:
+    if int(r.current_animation)%4 == 0:
         pygame.mixer.Sound.play(sound.TORNADO)
 
 def bastonata_animation():
@@ -1378,16 +1398,16 @@ def biscotto_animation(target):
         f.load_biscotto()
     if f.is_doing_animation:
         if target == f:
-            WIN.blit(f.biscotto_animation[int(f.current_animation)],(WIDTH-CHARA_WIDTH,SPACING+(SPACING*3)))
+            WIN.blit(f.biscotto_animation[int(f.current_animation)],(WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , SPACING+BOX_BORDER+BANNER_HEIGHT))
             f.current_animation+=0.25
         elif target == y:
-            WIN.blit(f.biscotto_animation[int(f.current_animation)],(SPACING+SPACING,HEIGHT-CHARA_HEIGHT-SPACING+(SPACING*3)))
+            WIN.blit(f.biscotto_animation[int(f.current_animation)],(SPACING+BOX_BORDER, HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
             f.current_animation+=0.25
         elif target == p:
-            WIN.blit(f.biscotto_animation[int(f.current_animation)],(SPACING+SPACING,SPACING+(SPACING*3)))
+            WIN.blit(f.biscotto_animation[int(f.current_animation)],(SPACING+BOX_BORDER, SPACING+BOX_BORDER+BANNER_HEIGHT))
             f.current_animation+=0.25
         elif target == r:
-            WIN.blit(f.biscotto_animation[int(f.current_animation)],(WIDTH-CHARA_WIDTH,HEIGHT-CHARA_HEIGHT+SPACING))
+            WIN.blit(f.biscotto_animation[int(f.current_animation)],(WIDTH - (CHARA_WIDTH + SPACING - BOX_BORDER) , HEIGHT-(CHARA_HEIGHT+SPACING-BOX_BORDER-BANNER_HEIGHT)))
             f.current_animation+=0.25
         if f.current_animation >= len(f.biscotto_animation):
             f.biscotto_animation.clear()
@@ -1813,6 +1833,7 @@ def bomba_ad_idrogeno_animation():
     if d.is_doing_animation:
         if d.current_animation == 0:
             d.load_bomba_ad_idrogeno()
+        print(d.bomba_ad_idrogeno_animation,d.current_animation)
         WIN.blit(d.bomba_ad_idrogeno_animation[int(d.current_animation)],(0,0))
         d.current_animation+=0.25
     if d.current_animation >= len(d.bomba_ad_idrogeno_animation):
@@ -2046,7 +2067,7 @@ def nei_mari_piu_profondi():
         if int(a.current_animation) <= 63:
             a.current_animation+=0.50
         else:
-            a.current_animation+=0.20
+            a.current_animation+=0.10
     if a.current_animation >= len(a.nei_mari_piu_profondi):
         pygame.mixer.music.play(-1)
         a.nei_mari_piu_profondi.clear()
@@ -2058,7 +2079,15 @@ def nei_mari_piu_profondi():
         pygame.mixer.Sound.play(sound.OOF)
     if int(a.current_animation)==64:
         pygame.mixer.music.stop()
-    if int(a.current_animation)==106:
+    if int(a.current_animation)==88:
+        pygame.mixer.Sound.play(sound.SNIPER)
+    if int(a.current_animation)==92:
+        pygame.mixer.Sound.play(sound.SNIPER)
+    if int(a.current_animation)==96:
+        pygame.mixer.Sound.play(sound.SNIPER)
+    if int(a.current_animation)==100:
+        pygame.mixer.Sound.play(sound.SNIPER)
+    if int(a.current_animation)==104:
         pygame.mixer.Sound.play(sound.ZZAAP_END)
 
 

@@ -367,10 +367,17 @@ class Dialogues():
                 ["Leone Alato","L'avventura finisce qui. Addio eroi, Subnezia non dimenticherà la vostra impresa."],
                 ["","Il gruppo quindi scompare, lasciando solo " +a.a.last_standing.name+ " a Subnezia."],
                 ["",""],
-                ["","In memoria di "+a.a.last_standing.name+", considerato annegato quel fatidico giorno."]
+                ["","In memoria di "+a.a.last_standing.name+", considerato annegato quel fatidico giorno."],
+                ["",""],
+                ["",""],
+                ["",""],
+                ["",""],
+                ["",""],
+                ["",""],
+                ["",""]
             ]
             self.text_of_dialogue = text_of_dialogue_5
-            self.background = ["None"] 
+            self.background = ["None",CREDITS_1,CREDITS_2,CREDITS_3,CREDITS_4,CREDITS_5,CREDITS_6,CREDITS_7] 
         # print("")
 
 
@@ -521,6 +528,24 @@ class Dialogues():
                 else:
                     self.background_visualized = 1
 
+        if self.number_of_dialogue == 5:
+            if self.text_visualized > 34:
+                pygame.mixer.music.stop()
+                self.show_gui = False
+            if self.text_visualized == 35:
+                self.background_visualized = 1
+            if self.text_visualized == 36:
+                self.background_visualized = 2
+            if self.text_visualized == 37:
+                self.background_visualized = 3
+            if self.text_visualized == 38:
+                self.background_visualized = 4
+            if self.text_visualized == 39:
+                self.background_visualized = 5
+            if self.text_visualized == 40:
+                self.background_visualized = 6
+            if self.text_visualized == 41:
+                self.background_visualized = 7
 
 
         if input == "return":

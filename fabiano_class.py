@@ -30,11 +30,11 @@ class Fabiano():
         self.position_in_fight="right-up"
 
         # STATISTICHE
-        self.hp = 312 # Variabile per i punti vita
+        self.hp = 354 # Variabile per i punti vita
         self.mna = 401 # Variabile per i punti mana
         self.atk = 77 # Variabile per i punti attacco
         self.defn = 131 # Variabile per i punti difesa
-        self.vel = 179 # Variabile per i punti velocità
+        self.vel = 210 # Variabile per i punti velocità
         self.eva = 25 # Variabile per i punti evasione
 
         self.current_hp = self.hp
@@ -191,6 +191,7 @@ class Fabiano():
         self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation09.png"))
         self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation10.png"))
         self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation11.png"))
+        self.biscotto_animation.append(pygame.image.load("img/animations/biscotto/biscotto_animation12.png"))
 
     def load_pestata(self):
         self.pestata_animation.append(pygame.image.load("img/animations/pestata/pestata_animation00.png"))
@@ -446,7 +447,7 @@ class Fabiano():
                 self.is_removing_bar = True
         
         if self.sel["has_cursor_on"]=="Pestata":
-            DMG_DEAL = 7
+            DMG_DEAL = 6
             self.damage_dealed = action.damage_deal(f.current_vel,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.pestata_animation()
@@ -587,7 +588,7 @@ class Fabiano():
 
             if not self.is_doing_animation:
                 for allies in [y.y,p.p,r.r,self]:
-                    allies.current_defn+=action.buff_stats(allies.defn,allies, "buff")
+                    allies.current_defn+=(action.buff_stats(allies.defn,allies, "buff"))*2
                 print("Pastorello con il megafono ha incitato tutti aumentando la loro determinazione!")
                 self.text_action="Pastorello con il megafono ha incitato tutti aumentando la loro determinazione!"
                 self.current_animation = 0

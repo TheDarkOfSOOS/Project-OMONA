@@ -24,7 +24,7 @@ pygame.mixer.init()
 
 clock = pygame.time.Clock()
 
-pygame.display.set_caption("Omona")
+pygame.display.set_caption("Subnezia")
 out_of_dialog = False
 first_time = True
 dialogue_index = 0
@@ -181,6 +181,7 @@ while run:
                     mixer.music.load(OST_Assemblence)
                     mixer.music.play(-1)
             elif wins[0] == "fighting" and round.team_lost():
+                print(transitioner.scene_loader[1])
                 if not transitioner.scene_loader[1]:
                     dw.game_over_loader.game_over_status = True
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", m_e.me)
@@ -194,6 +195,7 @@ while run:
                         round_essentials_status = reset_res()
                         round.reset_charas()
                         round.reset_boss(m_e.me)
+                        transitioner.done_transition[1] = False
                         
 
         # Humpty Dumpty
@@ -225,6 +227,7 @@ while run:
                     mixer.music.play(-1)
             elif wins[1] == "fighting" and round.team_lost():
                 if not transitioner.scene_loader[3]:
+                    dw.game_over_loader.game_over_status = True
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", hd.hd)
                 transitioner.current_loader = 3
                 if transitioner.scene_loader[3]:
@@ -266,12 +269,14 @@ while run:
                     mixer.music.play(-1)
             elif wins[2] == "fighting" and round.team_lost():
                 if not transitioner.scene_loader[5]:
+                    dw.game_over_loader.game_over_status = True
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", d.d)
                 transitioner.current_loader = 5
                 if transitioner.scene_loader[5]:
                     mixer.music.stop()
                     dw.game_over_loader.game_over(input)
                     if dw.game_over_loader.game_over_status == False:
+                        dw.game_over_loader.game_over_status = True
                         setters[2] = "fighting"
                         round_essentials_status = reset_res()
                         round.reset_charas()
@@ -305,12 +310,14 @@ while run:
                     mixer.music.play(-1)
             elif wins[3] == "fighting" and round.team_lost():
                 if not transitioner.scene_loader[7]:
+                    dw.game_over_loader.game_over_status = True
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", s_a.sa)
                 transitioner.current_loader = 7
                 if transitioner.scene_loader[7]:
                     mixer.music.stop()
                     dw.game_over_loader.game_over(input)
                     if dw.game_over_loader.game_over_status == False:
+                        dw.game_over_loader.game_over_status = True
                         setters[3] = "fighting"
                         round_essentials_status = reset_res()
                         round.reset_charas()
@@ -341,12 +348,14 @@ while run:
                     mixer.music.play(-1)
             elif wins[4] == "fighting" and round.team_lost():
                 if not transitioner.scene_loader[9]:
+                    dw.game_over_loader.game_over_status = True
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", a.a)
                 transitioner.current_loader = 9
                 if transitioner.scene_loader[9]:
                     mixer.music.stop()
                     dw.game_over_loader.game_over(input)
                     if dw.game_over_loader.game_over_status == False:
+                        dw.game_over_loader.game_over_status = True
                         setters[4] = "fighting"
                         round_essentials_status = reset_res()
                         round.reset_charas()

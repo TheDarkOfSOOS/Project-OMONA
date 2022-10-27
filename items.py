@@ -17,7 +17,7 @@ class Items():
         self.items_usage = []
 
         self.items_description_template = {
-            "Acqua di Destiny":"Acqua santa, portatrice di benessere e serenità, la quintessenza della pace. Resetta l’emozione di un alleato, lo cura completamente e ripristina il suo mana.",
+            "Acqua di Destiny":"Acqua santa, portatrice di benessere e serenità, la quintessenza della pace. Cura completamente un alleato e ripristina il suo mana.",
             "Tiramisù (senza...)":"Il dolce più amato con un errore colossale: l’assenza del mascarpone... Rende arrabbiato il nemico e diminuisce la sua difesa.",
             "Laurea in Matematica":"Laurea “ad honorem” ritrovata per terra vicino al portone del mago elettrico, la sua sapienza è inaspettata... Aumenta di molto l’attacco dell’usatore.",
             "Parmigianino":"Panino dalle proprietà mistiche, incomprensibili dagli adepti del Muratore ai quali cura metà HP. Se usato su Fabiano aumenta di molto la sua velocità, se usato su Raul aumenta di molto il suo attacco.",
@@ -135,9 +135,8 @@ class Items():
                 user.damage_dealed = action.healing_percentage(100, target.current_hp, target.hp)
                 print("after", user.damage_dealed)
                 user.aoe_1 = action.healing_percentage(100, target.current_mna, target.mna)
-                emotion.change_emotion(target, "neutrale")
-                print(user.name+" ha usato l'Acqua di Destiny su "+target.name+" ripristinando l'emozione, il mana e la vita!")
-                user.text_action=str(user.name+" ha usato l'Acqua di Destiny su "+target.name+" ripristinando l'emozione, il mana e la vita!")
+                print(user.name+" ha usato l'Acqua di Destiny su "+target.name+" ripristinando il mana e la vita!")
+                user.text_action=str(user.name+" ha usato l'Acqua di Destiny su "+target.name+" ripristinando il mana e la vita!")
                 user.current_animation = 0
                 user.is_showing_text_outputs = True
                 user.is_removing_bar = True

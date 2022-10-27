@@ -37,7 +37,7 @@ class Youssef():
         self.vel = 131 # Variabile per i punti velocità
         self.eva = 15 # Variabile per i punti evasione
 
-        self.current_hp = self.hp
+        self.current_hp = 1#self.hp
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
@@ -418,7 +418,7 @@ class Youssef():
                 self.is_showing_text_outputs = True
 
         if self.sel["has_cursor_on"]=="Pallonata":
-            DMG_DEAL = 8
+            DMG_DEAL = 9
             if y.current_emotion=="arrabbiato" or y.current_emotion=="iracondo":
                 self.damage_dealed = action.damage_deal(y.current_atk,DMG_DEAL,0,self.current_emotion,boss.current_emotion)
             else:

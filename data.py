@@ -109,7 +109,13 @@ STATUS_EXPLANATION = pygame.image.load("img/background/status_explanation.png")
 FRIENDS_EXPLANATION = pygame.image.load("img/background/friends_explanation.png")
 CARD_EXPLANATION = pygame.image.load("img/background/card_explanation.png")
 ITEMS_EXPLANATION = pygame.image.load("img/background/items_explanation.png")
-
+CREDITS_1 = pygame.image.load("img/background/credits/credist_1.png")
+CREDITS_2 = pygame.image.load("img/background/credits/credist_2.png")
+CREDITS_3 = pygame.image.load("img/background/credits/credist_3.png")
+CREDITS_4 = pygame.image.load("img/background/credits/credist_4.png")
+CREDITS_5 = pygame.image.load("img/background/credits/credist_5.png")
+CREDITS_6 = pygame.image.load("img/background/credits/credist_6.png")
+CREDITS_7 = pygame.image.load("img/background/credits/credist_7.png")
 
 # Soundtracks
 OST_Fallen = "./sounds/ost/Fallen.mp3"

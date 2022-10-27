@@ -34,7 +34,7 @@ class Pier():
         self.hp = 525 # Variabile per i punti vita
         self.mna = 342 # Variabile per i punti mana
         self.atk = 128 # Variabile per i punti attacco
-        self.defn = 154 # Variabile per i punti difesa
+        self.defn = 136 # Variabile per i punti difesa
         self.vel = 119 # Variabile per i punti velocità
         self.eva = 5 # Variabile per i punti evasione
 
@@ -341,15 +341,6 @@ class Pier():
         self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation30.png"))
         self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation31.png"))
         self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation32.png"))
-        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation33.png"))
-        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation34.png"))
-        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation35.png"))
-        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation36.png"))
-        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation37.png"))
-        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation38.png"))
-        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation39.png"))
-        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation40.png"))
-        self.sacrificio_y_animation.append(pygame.image.load("img/animations/sacrificio_y/sacrificio_y_animation41.png"))
 
     def load_sacrificio_p(self):
         self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation05.png"))
@@ -380,12 +371,6 @@ class Pier():
         self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation30.png"))
         self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation31.png"))
         self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation32.png"))
-        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation33.png"))
-        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation34.png"))
-        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation35.png"))
-        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation36.png"))
-        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation37.png"))
-        self.sacrificio_p_animation.append(pygame.image.load("img/animations/sacrificio_p/sacrificio_p_animation38.png"))
 
     def load_ilaria_y(self):
         self.ilaria_y_animation.append(pygame.image.load("img/animations/ilaria/ilaria_y_animation00.png"))
@@ -596,7 +581,7 @@ class Pier():
                 self.is_showing_text_outputs = True
     
         if self.sel["has_cursor_on"]=="Sbracciata":
-            DMG_DEAL = 6
+            DMG_DEAL = 8
             self.damage_dealed = action.damage_deal(p.current_atk,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.sbracciata_animation()
@@ -656,32 +641,40 @@ class Pier():
                 self.is_removing_bar = True
         
         if self.sel["has_cursor_on"]=="Sacrificio umano":
-            DMG_DEAL = 25
+            DMG_DEAL = 35
             self.damage_dealed = action.damage_deal(p.current_atk,DMG_DEAL,boss.current_defn,self.current_emotion,boss.current_emotion)
-            if self.is_doing_animation and self.sel["is_choosing_target"].name == "Youssef":
-                dw.sacrificio_y_animation()
-                #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_y_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_y_len/0.60),2))
+            if not self.sel["is_choosing_target"].is_dead:
+                if self.is_doing_animation and self.sel["is_choosing_target"].name == "Youssef":
+                    dw.sacrificio_y_animation()
+                    #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_y_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_y_len/0.60),2))
 
-            if self.is_doing_animation and self.sel["is_choosing_target"].name == "Piergiorgio":
-                dw.sacrificio_p_animation()
-                #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_p_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_p_len/0.60),2))
+                if self.is_doing_animation and self.sel["is_choosing_target"].name == "Pier":
+                    dw.sacrificio_p_animation()
+                    #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_p_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_p_len/0.60),2))
 
-            if self.is_doing_animation and self.sel["is_choosing_target"].name == "Raul":
-                dw.sacrificio_r_animation()
-                #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_r_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_r_len/0.60),2))
+                if self.is_doing_animation and self.sel["is_choosing_target"].name == "Raul":
+                    dw.sacrificio_r_animation()
+                    #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_r_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_r_len/0.60),2))
 
-            if self.is_doing_animation and self.sel["is_choosing_target"].name == "Fabiano":
-                dw.sacrificio_f_animation()
-                #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_f_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_f_len/0.60),2))
+                if self.is_doing_animation and self.sel["is_choosing_target"].name == "Fabiano":
+                    dw.sacrificio_f_animation()
+                    #self.remove_mna(MNA_CONSUMPTION, self.sacrificio_f_len/0.60, round(MNA_CONSUMPTION/(self.sacrificio_f_len/0.60),2))
 
-            if not self.is_doing_animation:
-                # ANIMA LA BARRA
-                self.sel["is_choosing_target"].current_hp = 0
-                print("Pier ha fatto", self.damage_dealed, "danni al nemico! Sacrificando " + self.sel["is_choosing_target"].name)
-                self.text_action="Pier ha fatto " + str(self.damage_dealed) + " danni al nemico, Sacrificando " + self.sel["is_choosing_target"].name
+                if not self.is_doing_animation:
+                    # ANIMA LA BARRA
+                    self.sel["is_choosing_target"].current_hp = 0
+                    print("Pier ha fatto", self.damage_dealed, "danni al nemico! Sacrificando " + self.sel["is_choosing_target"].name)
+                    self.text_action="Pier ha fatto " + str(self.damage_dealed) + " danni al nemico, Sacrificando " + self.sel["is_choosing_target"].name
+                    self.current_animation = 0
+                    self.is_showing_text_outputs = True
+                    self.is_removing_bar = True
+            else:
+                print("Pier non può sacrificare " + self.sel["is_choosing_target"].name+ " perché è già KO.")
+                self.text_action=str("Pier non può sacrificare " + self.sel["is_choosing_target"].name+ " perché è già KO.")
                 self.current_animation = 0
+                self.is_doing_animation = False
                 self.is_showing_text_outputs = True
-                self.is_removing_bar = True
+                self.is_removing_bar = False
 
         if self.sel["has_cursor_on"]=="Ilaria":
             if self.is_doing_animation:

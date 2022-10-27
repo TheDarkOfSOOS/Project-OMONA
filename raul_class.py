@@ -33,12 +33,12 @@ class Raul():
         # STATISTICHE
         self.hp = 498 # Variabile per i punti vita
         self.mna = 325 # Variabile per i punti mana
-        self.atk = 172 # Variabile per i punti attacco
-        self.defn = 103 # Variabile per i punti difesa
+        self.atk = 161 # Variabile per i punti attacco
+        self.defn = 186 # Variabile per i punti difesa
         self.vel = 93 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = self.hp
+        self.current_hp = 1#self.hp
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
@@ -111,7 +111,7 @@ class Raul():
             "Testata":"Raul carica una fortissima testata. Se l’avversario non lo ha colpito, si fonda contro di esso infliggendo immensi danni. Colpisce per ultimo.",
             "Tensione esplosiva":"Scarica dal suo corpo una forte elettricità. Diventa arrabbiato e causa danni a tutti: alleati, sé stesso e gravi danni al nemico.",
             # Friends
-            "Cristian":"Diminuisce l’evasione del nemico.",
+            "Cristian":"Diminuisce l’evasione e l'attacco del nemico.",
             "Noce": "Esegue un headshot al nemico. Non tiene conto della difesa del nemico.",
             "Damonte": "Aumenta la velocità di tutti gli alleati di tanto.",
             "Mohammed (spirito)": "Usa l’unica arma in grado di ucciderlo. Rende tutti gli alleati tristi e ne aumenta ulteriormente la difesa."
@@ -228,17 +228,6 @@ class Raul():
         self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation10.png"))
         self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation11.png"))
         self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation12.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation13.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation14.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation15.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation16.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation17.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation18.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation19.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation20.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation21.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation22.png"))
-        self.tempesta_animation.append(pygame.image.load("img/animations/tempesta/tempesta_animation23.png"))
 
     def load_bastonata(self):
         self.bastonata_animation.append(pygame.image.load("img/animations/bastonata/bastonata_animation00.png"))
@@ -449,7 +438,7 @@ class Raul():
         if self.MNA_CONSUMPTION == True:
             self.MNA_CONSUMPTION = self.MNA_CONSUMPTION_SKILLS.get(self.sel["has_cursor_on"])
         if self.sel["has_cursor_on"]=="Saetta trascendente":
-            DMG_DEAL = 8
+            DMG_DEAL = 9
             self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.saetta_animation()
@@ -482,7 +471,7 @@ class Raul():
                     self.is_removing_bar = True
 
         if self.sel["has_cursor_on"]=="Tempesta":
-            DMG_DEAL = 4
+            DMG_DEAL = 7
             self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
             if self.is_doing_animation:
                 dw.tempesta_animation()
@@ -494,6 +483,7 @@ class Raul():
                 emotion.change_emotion(p.p, "triste")
                 emotion.change_emotion(r, "triste")
                 emotion.change_emotion(f.f, "triste")
+                emotion.change_emotion(boss, "triste")
                 self.text_action="Raul ha reso tutti tristi e ha fatto " + str(self.damage_dealed) + " danni al nemico"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
@@ -535,7 +525,7 @@ class Raul():
 
         if self.sel["has_cursor_on"]=="Testata":
             if not self in boss.target:
-                DMG_DEAL = 16
+                DMG_DEAL = 20
                 self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
                 if self.is_doing_animation:
                     dw.testata_animation()
@@ -562,11 +552,11 @@ class Raul():
                 self.is_doing_animation = False
 
         if self.sel["has_cursor_on"]=="Tensione esplosiva":
-            DMG_DEAL = 6
-            self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL+4,boss.defn,self.current_emotion,boss.current_emotion)
-            self.aoe_1 = action.damage_deal(r.current_atk,DMG_DEAL,y.y.current_defn,self.current_emotion,y.y.current_emotion)
-            self.aoe_2 = action.damage_deal(r.current_atk,DMG_DEAL,p.p.current_defn,self.current_emotion,p.p.current_emotion)
-            self.aoe_4 = action.damage_deal(r.current_atk,DMG_DEAL,f.f.current_defn,self.current_emotion,f.f.current_emotion)
+            DMG_DEAL = 30
+            self.damage_dealed = action.damage_deal(r.current_atk,DMG_DEAL,boss.defn,self.current_emotion,boss.current_emotion)
+            self.aoe_1 = action.damage_deal(r.current_atk,DMG_DEAL-26,y.y.current_defn,self.current_emotion,y.y.current_emotion)
+            self.aoe_2 = action.damage_deal(r.current_atk,DMG_DEAL-26,p.p.current_defn,self.current_emotion,p.p.current_emotion)
+            self.aoe_4 = action.damage_deal(r.current_atk,DMG_DEAL-26,f.f.current_defn,self.current_emotion,f.f.current_emotion)
             if self.is_doing_animation:
                 dw.tensione_animation()
                 #self.remove_mna(MNA_CONSUMPTION, len(self.saetta_animation)/0.50, round(MNA_CONSUMPTION/(len(self.saetta_animation)/0.50),2))
@@ -599,6 +589,7 @@ class Raul():
             if not self.is_doing_animation:
                 self.friends[0][1] = "-"
                 boss.current_eva-=action.buff_stats(boss.eva, boss, "debuff")
+                boss.current_atk-=action.buff_stats(boss.atk, boss, "debuff")*2
                 print("Il flash di Cristian ha accecato il nemico!")
                 self.text_action="Il flash di Cristian ha accecato il nemico!"
                 self.current_animation = 0

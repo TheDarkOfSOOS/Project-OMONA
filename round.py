@@ -484,7 +484,7 @@ def round(everyone_has_chosen, everyone_has_finished_animation, continue_animati
         boss.current_hp = 1
 
     # Rendiamo Youssef immortale se ha attivato parata:
-    if (youssef.y.immortality) and youssef.y.current_hp <=0:
+    if (youssef.y.immortality) and youssef.y.current_hp <=0 and (boss.name == "Paolo Lucio Anafesto" and boss.ultimate_status == "will_activate" or boss.ultimate_status == "to_activate"):
         youssef.y.is_dead = False
         youssef.y.current_hp = 1
 
