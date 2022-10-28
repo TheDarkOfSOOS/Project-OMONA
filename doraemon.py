@@ -25,13 +25,13 @@ class Doraemon():
         self.img = pygame.transform.scale(D_NEUTRALE,BOSS_WIDTHxHEIGHT)
 
         # STATISTICHE
-        self.hp = 3000 # Variabile per i punti vita
+        self.hp = 4500 # Variabile per i punti vita
         self.atk = 123 # Variabile per i punti attacco
-        self.defn = 201 # Variabile per i punti difesa
-        self.vel = 138 # Variabile per i punti velocità
+        self.defn = 180 # Variabile per i punti difesa
+        self.vel = 101 # Variabile per i punti velocità
         self.eva = 3 # Variabile per i punti evasione
 
-        self.current_hp = 1#self.hp
+        self.current_hp = self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel
@@ -369,12 +369,13 @@ class Doraemon():
 
             # Sfuriate meccaniche
             if self.choosen_attack == self.list_attacks[4]:
-                DMG_DEAL = 10
-                self.damage_dealed = action.damage_deal(boss.current_atk,DMG_DEAL,self.target[0].current_defn,self.current_emotion,self.target[0].current_emotion)
                 if self.is_doing_animation:
+                    DMG_DEAL = 10
+                    self.damage_dealed = action.damage_deal(boss.current_atk,DMG_DEAL,self.target[0].current_defn,self.current_emotion,self.target[0].current_emotion)
                     dw.sfuriate_meccaniche_animation(self.target[0])
 
                 if not self.is_doing_animation:
+                    self.check_damage_reduction()
                     print("Doraemon ha riempito di graffi "+ str(self.target[0].name)+"!")
                     self.text_action="Doraemon ha riempito di graffi "+ str(self.target[0].name)+" causando "+str(self.damage_dealed)+". Gli altri si sono divertiti a vedere come Doraemon graffiava il loro alleato."
                     for chara in [y.y,p.p,r.r,f.f]:

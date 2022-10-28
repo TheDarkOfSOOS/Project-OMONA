@@ -62,6 +62,7 @@ class Transition_Animator():
         self.scene_loader = [False, False, False, False, False, False, False, False, False, False]
         self.done_transition = [False, False, False, False, False, False, False, False, False, False]
         self.current_loader = -1
+        self.can_do_transition = True
 
         self.new_transition_animation = []
         self.new_transition_animation.append(pygame.image.load("img/animations/new_transition/new_transition_animation00.png"))
@@ -158,7 +159,7 @@ while run:
                 mixer.music.load(OST_Spark_Royale)
                 mixer.music.play(-1)
                 #round.reset_charas()
-                round.set_charas(5)
+                round.set_charas(1)
                 setters[0] = "waiting"
             if wins[0] == "fighting" and m_e.me.current_hp > 0 and not round.team_lost():
                 round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], input, m_e.me)
@@ -167,6 +168,7 @@ while run:
                 if not transitioner.scene_loader[1]:
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", m_e.me)
                 transitioner.current_loader = 1
+                transitioner.can_do_transition = True
                 if transitioner.scene_loader[1]:
                     round_essentials_status = reset_res()
                     round.reset_charas()
@@ -186,6 +188,7 @@ while run:
                     dw.game_over_loader.game_over_status = True
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", m_e.me)
                 transitioner.current_loader = 1
+                transitioner.can_do_transition = True
                 if transitioner.scene_loader[1]:
                     mixer.music.stop()
                     dw.game_over_loader.game_over(input)
@@ -196,6 +199,8 @@ while run:
                         round.reset_charas()
                         round.reset_boss(m_e.me)
                         transitioner.done_transition[1] = False
+                        transitioner.scene_loader[1] = False
+                        transitioner.can_do_transition = False
                         
 
         # Humpty Dumpty
@@ -212,6 +217,7 @@ while run:
                 if not transitioner.scene_loader[3]:
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", hd.hd)
                 transitioner.current_loader = 3
+                transitioner.can_do_transition = True
                 if transitioner.scene_loader[3]:
                     round_essentials_status = reset_res()
                     round.reset_charas()
@@ -230,6 +236,7 @@ while run:
                     dw.game_over_loader.game_over_status = True
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", hd.hd)
                 transitioner.current_loader = 3
+                transitioner.can_do_transition = True
                 if transitioner.scene_loader[3]:
                     mixer.music.stop()
                     dw.game_over_loader.game_over(input)
@@ -239,6 +246,9 @@ while run:
                         round_essentials_status = reset_res()
                         round.reset_charas()
                         round.reset_boss(hd.hd)
+                        transitioner.done_transition[3] = False
+                        transitioner.scene_loader[3] = False
+                        transitioner.can_do_transition = False
 
         # Doraemon
         if out_of_dialog and transitioner.scene_loader[4]:
@@ -254,6 +264,7 @@ while run:
                 if not transitioner.scene_loader[5]:
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", d.d)
                 transitioner.current_loader = 5
+                transitioner.can_do_transition = True
                 if transitioner.scene_loader[5]:
                     round_essentials_status = reset_res()
                     round.reset_charas()
@@ -272,6 +283,7 @@ while run:
                     dw.game_over_loader.game_over_status = True
                     round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], "null", d.d)
                 transitioner.current_loader = 5
+                transitioner.can_do_transition = True
                 if transitioner.scene_loader[5]:
                     mixer.music.stop()
                     dw.game_over_loader.game_over(input)
@@ -281,6 +293,9 @@ while run:
                         round_essentials_status = reset_res()
                         round.reset_charas()
                         round.reset_boss(d.d)
+                        transitioner.done_transition[5] = False
+                        transitioner.scene_loader[5] = False
+                        transitioner.can_do_transition = False
 
         # Spirito Amalgamato
         if out_of_dialog and transitioner.scene_loader[6]:
@@ -322,6 +337,9 @@ while run:
                         round_essentials_status = reset_res()
                         round.reset_charas()
                         round.reset_boss(s_a.sa)
+                        transitioner.done_transition[7] = False
+                        transitioner.scene_loader[7] = False
+                        transitioner.can_do_transition = False
             
         # Paolo Lucio Anafesto
         if out_of_dialog and transitioner.scene_loader[8]:
@@ -360,6 +378,9 @@ while run:
                         round_essentials_status = reset_res()
                         round.reset_charas()
                         round.reset_boss(a.a)
+                        transitioner.done_transition[9] = False
+                        transitioner.scene_loader[9] = False
+                        transitioner.can_do_transition = False
         
         if out_of_dialog and dialogue_index == 6:
             # Fine gioco btw
@@ -372,7 +393,7 @@ while run:
             run = False'''
 
         # Evitiamo l'errore out of index
-        if not transitioner.current_loader == -1:
+        if (not transitioner.current_loader == -1) and transitioner.can_do_transition:
             # Se c'e' bisogno di fare l'animazione che si vuole fare al momento
             if not transitioner.done_transition[transitioner.current_loader]:
                 transitioner.make_transitions()

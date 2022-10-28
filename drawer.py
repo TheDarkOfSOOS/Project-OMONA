@@ -1758,7 +1758,7 @@ def dono_inaspettato_animation():
     if d.is_doing_animation:
         if d.current_animation == 0:
             d.load_dono_inaspettato()
-            print(d.dono_inaspettato_animation)
+        print(d.dono_inaspettato_animation,d.current_animation)
         WIN.blit(d.dono_inaspettato_animation[int(d.current_animation)],(0,0))
         d.current_animation+=0.25
     if d.current_animation >= len(d.dono_inaspettato_animation):
@@ -1772,6 +1772,7 @@ def missile_animation():
     if d.is_doing_animation:
         if d.current_animation == 0:
             d.load_missile()
+        print(d.missile_animation,d.current_animation)
         WIN.blit(d.missile_animation[int(d.current_animation)],(0,0))
         d.current_animation+=0.25
     if d.current_animation >= len(d.missile_animation):
@@ -1786,6 +1787,7 @@ def macchina_del_tempo_animation():
     if d.is_doing_animation:
         if d.current_animation == 0:
             d.load_macchina_del_tempo()
+        print(d.macchina_del_tempo_animation,d.current_animation)
         WIN.blit(d.macchina_del_tempo_animation[int(d.current_animation)],(0,0))
         d.current_animation+=0.25
     if d.current_animation >= len(d.macchina_del_tempo_animation):
@@ -1798,6 +1800,7 @@ def copter_animation():
     if d.is_doing_animation:
         if d.current_animation == 0:
             d.load_copter()
+            print(d.copter_animation,d.current_animation)
         WIN.blit(d.copter_animation[int(d.current_animation)],(WIDTH//2.1,HEIGHT//2.1))
         d.current_animation+=0.25
     if d.current_animation >= len(d.copter_animation):
@@ -1810,6 +1813,7 @@ def sfuriate_meccaniche_animation(target):
     if d.is_doing_animation:
         if d.current_animation == 0:
             d.load_sfuriate_meccaniche()
+        print(d.sfuriate_meccaniche_animation,d.current_animation)
         if target == y:
             WIN.blit(pygame.transform.scale(d.sfuriate_meccaniche_animation[int(d.current_animation)],(CHARA_IMAGE_WIDTH,CHARA_IMAGE_HEIGHT)),(SPACING+SPACING,HEIGHT-CHARA_HEIGHT-SPACING+(SPACING*3)))
         elif target == p:

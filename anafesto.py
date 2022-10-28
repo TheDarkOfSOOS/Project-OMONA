@@ -29,7 +29,7 @@ class Anafesto():
         self.vel = 345 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = 10#self.hp
+        self.current_hp = self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel

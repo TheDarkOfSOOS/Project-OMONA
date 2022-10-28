@@ -23,13 +23,13 @@ class Humpty_Dumpty():
         self.img = pygame.transform.scale(HD_NEUTRALE,BOSS_WIDTHxHEIGHT)
 
         # STATISTICHE
-        self.hp = 2500 # Variabile per i punti vita
-        self.atk = 113 # Variabile per i punti attacco
-        self.defn = 203 # Variabile per i punti difesa
-        self.vel = 121 # Variabile per i punti velocità
+        self.hp = 3250 # Variabile per i punti vita
+        self.atk = 131 # Variabile per i punti attacco
+        self.defn = 198 # Variabile per i punti difesa
+        self.vel = 142 # Variabile per i punti velocità
         self.eva = 0 # Variabile per i punti evasione
 
-        self.current_hp = 1#self.hp
+        self.current_hp = self.hp
         self.current_atk = self.atk
         self.current_defn = self.defn
         self.current_vel = self.vel

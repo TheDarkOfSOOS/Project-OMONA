@@ -33,12 +33,12 @@ class Raul():
         # STATISTICHE
         self.hp = 498 # Variabile per i punti vita
         self.mna = 325 # Variabile per i punti mana
-        self.atk = 161 # Variabile per i punti attacco
-        self.defn = 186 # Variabile per i punti difesa
+        self.atk = 187 # Variabile per i punti attacco
+        self.defn = 121 # Variabile per i punti difesa
         self.vel = 93 # Variabile per i punti velocità
         self.eva = 10 # Variabile per i punti evasione
 
-        self.current_hp = 1#self.hp
+        self.current_hp = self.hp
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn
@@ -569,29 +569,29 @@ class Raul():
                 self.is_showing_text_outputs = True
                 self.is_removing_bar = True
 
-        if self.sel["has_cursor_on"]=="Damonte":
-            if self.is_doing_animation:
-                dw.damox_animation()
-
-            if not self.is_doing_animation:
-                self.friends[0][0] = "-"
-                for allies in [y.y,p.p,self,f.f]:
-                    allies.current_vel+=(action.buff_stats(allies.vel,allies, "buff")*2)
-                print("Damonte ha dato il ritmo a tutti gli alleati!")
-                self.text_action="Damonte ha dato il ritmo a tutti gli alleati!"
-                self.current_animation = 0
-                self.is_showing_text_outputs = True
-        
         if self.sel["has_cursor_on"]=="Cristian":
             if self.is_doing_animation:
                 dw.cardile_animation()
 
             if not self.is_doing_animation:
-                self.friends[0][1] = "-"
+                self.friends[0][0] = "-"
                 boss.current_eva-=action.buff_stats(boss.eva, boss, "debuff")
                 boss.current_atk-=action.buff_stats(boss.atk, boss, "debuff")*2
                 print("Il flash di Cristian ha accecato il nemico!")
                 self.text_action="Il flash di Cristian ha accecato il nemico!"
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if self.sel["has_cursor_on"]=="Damonte":
+            if self.is_doing_animation:
+                dw.damox_animation()
+
+            if not self.is_doing_animation:
+                self.friends[0][1] = "-"
+                for allies in [y.y,p.p,self,f.f]:
+                    allies.current_vel+=(action.buff_stats(allies.vel,allies, "buff")*2)
+                print("Damonte ha dato il ritmo a tutti gli alleati!")
+                self.text_action="Damonte ha dato il ritmo a tutti gli alleati!"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 

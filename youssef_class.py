@@ -37,7 +37,7 @@ class Youssef():
         self.vel = 131 # Variabile per i punti velocità
         self.eva = 15 # Variabile per i punti evasione
 
-        self.current_hp = 1#self.hp
+        self.current_hp = self.hp
         self.current_mna = self.mna
         self.current_atk = self.atk
         self.current_defn = self.defn

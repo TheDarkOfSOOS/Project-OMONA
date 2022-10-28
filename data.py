@@ -101,6 +101,8 @@ FURIOSO_BUFF_DEFN = -60
 
 # Backgrounds
 
+LEONE_ALATO_FULL_IMAGE = pygame.image.load("img/background/leone_alato.png")
+
 STATS_EXPLANATION = pygame.image.load("img/background/stats_explanation.png")
 EMOTION_EXPLANATION = pygame.image.load("img/background/emotion_explanation.png")
 TURN_EXPLANATION = pygame.image.load("img/background/turn_explanation.png")

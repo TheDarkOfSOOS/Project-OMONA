@@ -43,36 +43,36 @@ class Dialogues():
                 [ "Raul", "D-dove sono? "],
                 [ "Raul", "Oh, Youssef, sveglia! "],
                 [ "Youssef", "... Uh, Cosa? "],
-                [ "Raul", "Svegliati! Uhh... ma dove siamo...? "],
-                [ "Youssef", "Mhhh... Che è 'sto posto? "],
-                [ "Raul", "Non ne ho idea. Eravamo sulla barca a Venezia, cosa è successo? "],
+                [ "Raul", "Ou dai, Svegliati! Che poi, dove siamo finiti? "],
+                [ "Youssef", "Mhhh...?! Non ne ho idea? "],
+                [ "Raul", "Prima eravamo sulla barca a Venezia, cosa è successo? "],
                 [ "Youssef", "Mi ricordo solo che ci siamo scontrati con un’onda strana che ci ha ribaltato le barche. Poi siamo... affogati? "],
-                [ "Raul", "Allora siamo mo- "],
-                [ "???", "Altri due eroi sono stati rinvenuti, in tutto sono... quattro? Penso di aver fatto male i conti. "],
+                [ "Raul", "Allora siamo morti! "],
+                [ "???", "Altri due eroi sono stati rinvenuti, in tutto sono... quattro? Potrei aver fatto male i conti. "],
                 [ "Youssef", "Chi ha parlato? "],
                 [ "Leone Alato", "Sono il Leone Alato, protettore di Venezia. Seguite la scia luminosa, avete dei compagni. "],
-                [ "Youssef", "Compagni? Quindi non siamo finiti solo noi due qui. "],
+                [ "Youssef", "Compagni? Quindi non siamo finiti solo noi due finiti qui. "],
                 [ "...", "..."],
                 [ "Fabiano", "Eccovi! "],
-                [ "Raul", "Fabiano? Uh, Pier? Anche voi qui? "],
-                [ "Pier", "Sì, sto’ posto sembra un rip-off di Atlantide. "],
+                [ "Raul", "Fabiano? Ah, anche Pier? Pure voi qui? "],
+                [ "Pier", "Sì, 'sto posto sembra un rip-off di Atlantide. "],
                 [ "Leone Alato", "Roar... non è un rip-off (ma proprio questi dovevo trovare?). Siete a Subnezia, il paese subacqueo sotto la città di Venezia. "],
                 [ "Fabiano", "Ookay... ma noi saremmo in gita e dovremmo tornare lassù. "],
                 [ "Leone Alato", "Oh, questo è impossibile, avete passato la \"prova del gondoliere\", siete gli unici mortali presenti qui. "],
                 [ "Raul", "Aspetta un secondo, in che senso \"gli unici mortali\"? "],
-                [ "Leone Alato", "Che a Subnezia si trovano soltanto anime di persone morte o lasciate indietro, spesso nell'area circostante alla provincia. "],
-                [ "Pier", "E poi cosa intendi con sta’ \"prova del gondoliere\"? Noi non abbiamo fatto nulla. "],
+                [ "Leone Alato", "Che a Subnezia si trovano soltanto anime di persone morte o dimenticate. "],
+                [ "Pier", "E poi cosa intendi con questa \"prova del gondoliere\"? Noi non abbiamo fatto nulla. "],
                 [ "Leone Alato", "Non posso svelare i requisiti per passarla, altrimenti pure i nostri spettatori tenteranno, non posso permettere che entrino degli sciocchi. "],
                 [ "Fabiano", " \"spettatori\"? Stai rompendo una quarta parete o cosa? "],
-                [ "Leone Alato", "Ma no, parlo degli studiosi del posto. L'esistenza di questo luogo è nota da decenni e sono riusciti a mettersi in contatto con il Re, cercando di farlo ragionare invano. "],
-                [ "Leone Alato", "Il Re è Paolo Lucio Anafesto, il primo Doge, l’innalzamento dell’acqua è opera sua, come anche la creazione di Subnezia stessa. "],
+                [ "Leone Alato", "Non intendevo questo, parlo degli studiosi del posto. L'esistenza di questo luogo è nota da decenni e sono riusciti a mettersi in contatto con il Re, cercando di farlo ragionare invano. "],
+                [ "Leone Alato", "Il Re è Paolo Lucio Anafesto, il primo Doge, l’innalzamento dell’acqua è opera sua, come anche la creazione di Subnezia stessa. Dobbiamo fermarlo prima che la situazione possa peggiorare. "],
                 [ "Raul", "Dobbiamo fargliela pagare allora. "],
-                [ "Leone Alato", "Bravo, voi eroi avete il compito di annientare il re, se lo farete, potrete ritornare alle vostre vite quotidiane. O meglio alla vostra gita. "],
-                [ "Youssef", "Si menaa. "],
-                [ "Leone Alato", "Per questo vi ho convocati. Ma prima di andare da lui, abbiamo bisogno di alleati. Prima non ho detto propriamente la verità, non siete gli unici mortali. "],
+                [ "Leone Alato", "Bravi, voi eroi avete il compito di annientare il re, se lo farete, potrete ritornare alle vostre vite quotidiane... o meglio alla vostra gita. "],
+                [ "Youssef", "Finalmente qualcosa di interessante, si mena! "],
+                [ "Leone Alato", "Vi ho convocati proprio per questo. Ma prima di andare da lui, abbiamo bisogno di alleati. Prima non ho detto propriamente la verità, non siete gli unici mortali. "],
                 [ "Fabiano", "Mh? Cosa intendi? "],
                 [ "Leone Alato", "Ci sono altri individui che vengono dal vostro mondo che sono stati catturati dai governanti dei 4 regni di Subnezia, per salvarli dovrete sconfiggere anche questi."],
-                [ "Pier", "Poteri? Cosa inten- Cosa sono quelle?! "],
+                [ "Pier", "Poteri? Cosa inten- Eeeeh, cosa sono quelle?! "],
                 [ "Leone Alato", "Sono armi magiche. Pensavi vi avrei fatto combattere a mani nude? "],
                 [ "Fabiano", "Ah ok, stavo già per andarmene. "],
                 [ "Leone Alato", "Al ragazzo basso regalerò la Staffa di Merlino, capace di scagliare magie quasi in autonomia."],
@@ -89,7 +89,7 @@ class Dialogues():
                 [ "Leone Alato", "Infine, a te consegnerò la Palla Meteora, un pallone in grado di poter creare grandi catastrofi, ma soltanto se ne sei degno. "],
                 [ "Youssef", "Non mi sembra avere chissà che poteri. C’è già Raul che stava rischiando di esplodere o Pier che sta già lanciando fiamme... "],
                 [ "Youssef", "Sei sicuro sia questa? Anche lanciandola mi sembra una normal- "],
-                [ "Leone Alato", "Ahhh! Santo mare! Me ne spetava solo tre, sa voto che te diga? Tiraghe ‘na sbalona’ e te vedi che te lo fe’ volar via! "],
+                [ "Leone Alato", "Ahhh! Santo mare! Me ne spetava solo tre, sa voto che te diga? Tiraghe 'na sbalona' e te vedi che te lo fe' volar via! "],
                 [ "Youssef", "Se ci pensi. "],
                 [ "Leone Alato", "Vi servirà un addestramento prima di affrontare i guardiani. "],
                 [ "Leone Alato",  "Vi spiegherò come si combatte, tutorial offerto da Leonzulla! "],
@@ -106,27 +106,27 @@ class Dialogues():
                 ["",""],
 
                 ["Leone Alato", "Questo è quello che dovete sapere per ora, vi porto dal primo governante."],
-                [ "Leone Alato", "Prima area: \"Gameplay Courtyard\", qui ci sono le anime che hanno preso forma dei personaggi dei videogiochi. "],
-                [ "Raul", "\"Prendono forma\"? Le anime sono anime. "],
-                [ "Leone Alato", "A Subnezia si tramutano in base ai propri ricordi in vita. "],
+                [ "Leone Alato", "Eccoci alla prima area: \"Gameplay Courtyard\", qui ci sono le anime che hanno preso forma dei personaggi dei videogiochi. "],
+                [ "Raul", "\"Prendono forma\"? Le anime non dovrebbero prendere una forma. "],
+                [ "Leone Alato", "Le anime a Subnezia si tramutano in base ai propri ricordi in vita. "],
                 [ "Leone Alato", "In questo luogo giacciono i videogiocatori, tramutati nel proprio personaggio preferito. "],
-                [ "Youssef", "Quindi chi sarà il governatore? Forse Doomslayer? Kratos? "],
-                [ "Leone Alato", "Assolutamente no! Nessuno di questi è degno, sono troppo deboli. "],
+                [ "Youssef", "Quindi chi sarà il governatore? Fammi pensare... Doomslayer? Magari Kratos? "],
+                [ "Leone Alato", "Stai pensando un po' troppo in grande, non sarebbe altrimenti il primo governante in cui v'avrei portati. "],
                 [ "Youssef", "E chi è allora? L’Hog Rider di Clash Royale? "],
 
                 # *Appare lo sprite del mago elettrico *
                 ["",""],
 
-                [ "Leone Alato", "Lui è il governante. "],
+                [ "Leone Alato", "Eccolo lì, è lui il governante. "],
                 [ "Pier", "Beh ci sei andato vicino. (Ma che ca-) "],
                 [ "Raul", "(Il mio idolo!) "],
-                [ "Leone Alato", "Questa è la prima prova, sembra debole ma non fatevi ingannare, vi assisterò con degli utili strumenti. Fatevi valere, eroi! "],
+                [ "Leone Alato", "Questa è la prima prova, sembra debole ma ricordate che siete solo agli inizi, vi assisterò con degli utili strumenti. Fatevi valere, eroi! "],
                 [ "Fabiano", "(Cosa abbiamo fatto per meritarci questo?) "],
 
                 ]
 
             self.text_of_dialogue = text_of_dialogue_0
-            self.background = ["None",me.img,TURN_EXPLANATION,STATS_EXPLANATION,EMOTION_EXPLANATION,SKILLS_EXPLANATION,STATUS_EXPLANATION,FRIENDS_EXPLANATION,ITEMS_EXPLANATION,CARD_EXPLANATION] 
+            self.background = ["None",me.img,TURN_EXPLANATION,STATS_EXPLANATION,EMOTION_EXPLANATION,SKILLS_EXPLANATION,STATUS_EXPLANATION,FRIENDS_EXPLANATION,ITEMS_EXPLANATION,CARD_EXPLANATION, LEONE_ALATO_FULL_IMAGE] 
             
         if number_of_dialogue == 1:
             text_of_dialogue_1 = [
@@ -141,7 +141,7 @@ class Dialogues():
                 [ "Youssef", "Guarda meglio, ci sono anche altri! "],
                 [ "Pier", "Cappe, Ilaria... e Cristian anche. Che ci fanno loro qui? "],
                 [ "Cappe", "È successo un casino qui, ci siamo ritrovati davanti al coso di Clash Royale che ci ha sbattuti qui in prigione. "],
-                [ "Leone Alato", "I governanti come avete visto sono aggressivi e vogliono proteggere Paolo Lucio Anafesto. "],
+                [ "Leone Alato", "Come vedete ogni zona ha ricevuto degli eroi, ma purtroppo sono riuscito a far indirizzare vicino a me soltanto voi quattro."],
                 [ "Raul", "Non importa, almeno non siamo solo noi quattro qui sotto! "],
                 [ "Pol", "Effettivamente non ci ritroviamo in una bella situazione, ma almeno dovremmo esserci tutti qui. Dobbiamo sbrigarci a trovare anche gli altri. "],
                 [ "Cristian", "Intanto fateci uscire che c’è troppa puzza qua. "],
@@ -149,14 +149,13 @@ class Dialogues():
                 [ "Leone Alato", "Adesso che vi abbiamo liberati, proseguiamo alla seconda zona. "],
 
                 # *Entrano nella seconda area*
-                ["","..."],
+                [ "Leone Alato", "Eccoci alla seconda zona: L'Impero delle Fiabe, il nome è autoesplicativo. "],
                 [ "Ilaria", "Quindi qui troveremo altre persone rinchiuse? "],
-                [ "Leone Alato", "Certo, ma possiamo liberarle soltanto dopo aver sconfitto il governante. Non vi rovino la sorpresa. "],
-                [ "Pier", "Pare un paesaggio fiabesco. "],
+                [ "Leone Alato", "Certo, ma possiamo liberarle soltanto dopo aver sconfitto il governante. Sarà una spiacevole sorpresa. "],
                 [ "Youssef", "Il paesaggio è parecchio bizzarro, ma aspetta, cos'è quell'uovo? "],
                 [ "Raul", "Humpty Dumpty? "], #22
-                [ "Leone Alato", "Il governante della seconda zona. "],
-                [ "Cristian", "Ma scusa quell’uovo lì? "],
+                [ "Leone Alato", "È lui il governante della seconda zona. "],
+                [ "Cristian", "Quell’uovo lì? Ma fammi il piacere... "],
                 [ "Humpty Dumpty", "Che ammasso di falliti, voi vorreste affrontare Lucio? Siete solo bambini hahahaha. E sembrate deboli, mooolto deboli! "],
                 [ "Pier", "...Quanto mi fa inc- "],
                 [ "Fabiano", "Ehi! "],
@@ -186,10 +185,10 @@ class Dialogues():
                 ["Stefan","No vabbè cioè scusa un attimo. No perché qua Humpty Dumpty quell'uovo maledetto mi avrà preso in giro per tutto il tempo per come sono vestito."],
                 ["Youssef","Beh, sei adorabile, su quello non ci piove."],
                 ["Stefan","Sì, ma che cacchio-"],
-                ["Anastasia","Guarda che sei molto alla moda, e per fortuna che non hai iniziato ad attaccarlo che sennò facevamo una brutta fine."],
-                ["Leone Alato","... Bene, ora siete liberi."],
+                ["Anastasia","Guarda che stai molto bene. Soltanto per fortuna che non hai iniziato ad attaccarlo che sennò facevamo una brutta fine."],
+                ["Leone Alato","e... ok. Bene, ora siete liberi."],
                 ["Trentin","Ma avete visto cos'ha Noce?"],
-                ["Cappe","Lo volevo io! Guarda a me che schifo che ho ricevuto! Magari avessi un cecchino."],
+                ["Cappe","Cosa? No dai! Lo volevo io! Guarda a me che schifo che ho ricevuto! Magari avessi un cecchino."],
                 ["Noce","Sì, ma ha un solo colpo e mi ritorna dopo chissà quanto tempo."],
                 ["Trentin","Comunque mancano ancora tanti, dove sono gli altri?"],
                 ["Leone Alato","Dobbiamo dirigerci in un'altra zona. Probabilmente lì troveremo tutti i vostri alleati, muoviamoci."],
@@ -197,20 +196,20 @@ class Dialogues():
                 # *Terza zona*
                 ["","..."],
 
-                ["Leone Alato","Questa è il piccolo regno del Giappone. State attenti, ci sono rovine qua e là a causa di una feroce guerra."],
+                ["Leone Alato","Questo è il piccolo regno del Giappone. State attenti, ci sono rovine qua e là a causa di una feroce guerra."],
                 ["Raul","Hiroshima?"],
                 ["Leone Alato","Non è esattamente così ma si avvicina. Il nuovo governante ha gettato una bomba ad idrogeno per sconfiggere il vecchio governante."],
                 ["Cappe","E chi è? Doraemon?"],
                 ["Noce","C'è qui Doraemon. Lo vedo in quella casa laggiù."],
-                ["Leone Alato","La casa del Governante: Doraemon. Colui che sconfisse il precedente governante: l'EVA01."],
+                ["Leone Alato","È la casa del governante Doraemon. Fu lui a sconfiggere il precedente Governante, l'EVA01."],
                 ["Fabiano","Ma che-"],
                 ["Ilaria","Sarà dura combattere contro Doraemon, come faremo ad attaccarlo?"],
                 ["Stefan","Con le cinghiate, ovviamente!"],
-                ["Pol","Un banco nei denti fa più effetto. Dai sbrighiamocela."],
+                ["Pol","Un banco nei denti fa più effetto. Dai sbrighiamoci."],
                 ["Doraemon","So perché siete giunti qui e non posso nemmeno dirvi di fermarvi. Però posso convincervi..."],
                 ["Anastasia","E con cosa...?"],
                 ["Doraemon","Volete viaggiare nel tempo? Oppure volare in giro?"],
-                ["Anastasia","Dai non voglio più affrontarlo. Non me ne faccio niente di questo potere! Fatemi volare!"],
+                ["Anastasia","Dai non voglio più affrontarlo. Non mi interessa più questo potere! Fatemi volare!"],
                 ["Youssef","Fatemi picchiare sto gatto vi prego."]
 
             ]
@@ -218,7 +217,7 @@ class Dialogues():
             self.background = ["None", do.D_NEUTRALE] 
         if number_of_dialogue == 3:
             text_of_dialogue_3 = [
-                ["Pier","Una. bomba. ad. idrogeno. SERIAMENTE?!"],
+                ["Pier","Una- bomba- ad- idrogeno... SERIAMENTE?!"],
                 ["Noce","Ci aveva avvertito..."],
                 ["Raul","State bene voi? Io no."],
                 ["Cappe","Non so neanche come faccio ancora ad essere vivo."],
@@ -236,8 +235,8 @@ class Dialogues():
                 # *animazione di forza roma*
                 ["Raul","Oh ma quanta carica! SPACCO TUTTO."],
                 ["Borin","Io non ho ancora ben capito questa cosa dei poteri. Ci hanno dato cose strane che hanno effetti ancora più strani. Guardate che ha Diego."],
-                ["Diego","Eh? Ah, no io non ho nulla di interessante. Solo un po' di camomilla."],
-                ["Prade","Sisì camomilla. Guarda che si vede che non è camomilla."],
+                ["Diego","Eh? Ah, no no io non ho nulla di interessante. Solo un po' di camomilla."],
+                ["Prade","Sisì vecio. Proprio camomilla, si vede che non lo è."],
                 ["Pol","È il caso, no?"],
                 ["Diego","Beh, KIARO."],
                 ["Damonte","Finalmente fuori che non ce la facevo più."],
@@ -246,14 +245,14 @@ class Dialogues():
                 ["Diego, Prade, Borin","ASSOLUTAMENTE NO!"],
                 ["Fabiano","Dio mio, che ce ne facciamo..."],
                 ["Leone Alato","Ti ricordo che ho dato io questi poteri. Ti assicuro che non è camomilla, ma giuro che servirà in battaglia e che la dovrai assumere."],
-                ["Raul","Dai! Ti obbligo a prenderla se dovremo!"],
+                ["Raul","Potrebbe essere una bella esperienza."],
 
                 # *cambio di zona*
                 ["",""],
 
                 ["Leone Alato","Ora che siamo al completo, dobbiamo annientare l'ultimo governante, poi Paolo Lucio Anafesto e infine arriveremo all'epilogo. Come vi sentite?"],
                 ["Damonte","Stanco!"],
-                ["Ilaria","Ma se ti sei appena aggiunto a noi..."],
+                ["Ilaria","Ma ti sei appena aggiunto a noi..."],
                 ["Noce","Dopo un po' ti abitui. Ormai sono inseparabile dal mio cecchino."],
                 ["Pol","E Stefan dal suo abito-"],
                 ["Stefan","Oh! Guarda che le prendi eh."],
@@ -265,13 +264,13 @@ class Dialogues():
                 ["Youssef","Mi sto per cacare nei pantaloni, non fate brutti scherzi."],
                 ["???","Ombrello..."],
                 ["???","Innocenza..."],
-                ["???","Ripetere..."],
+                ["???","Esperienza..."],
                 ["???","Assenze..."],
                 ["Borin","Ma chi sono questi? Ombrello? Ma che-"],
                 ["Pol","Non vorrei dirlo, ma siamo circondati."],
-                ["Cristian","E chi sono questi? Ma andatevene via!"],
+                ["Cristian","Cos'è 'sta roba? Ma vattene via!"],
                 ["Varie voci con tono basso","Ohh, non ce ne andremo via. Sarete voi a venire con noi."],
-                ["Leone Alato","Questa zona contiene tutte le persone che sono state dimenticate. Avete una buona esperienza di combattimento, se riuscirete a cavarvela davanti a ciò che avete lasciato indietro, potrete affrontare la sfida più grossa."],
+                ["Leone Alato","Questa zona contiene tutte le persone che sono state dimenticate. Avete una buona esperienza di combattimento, se riuscirete a cavarvela davanti a ciò che avete lasciato indietro, potrete giungere alle porte del Re di Subnezia."],
                 ["Pier","Perché ci deve sempre essere la parte inquietante in ogni gioco..."],
                 ["Fabiano","Finché mancano i jumpscare, lo accetto."],
                 ["Raul","Me li sognerò per un anno penso."],
@@ -283,35 +282,35 @@ class Dialogues():
             text_of_dialogue_4 = [
                 ["Damonte","È finita?"],
                 ["Ilaria","Non lo vedo più. Però davvero che botta di emozioni."],
-                ["Youssef","Se ne è andato, però c'è qualche spirito ancora attorno a noi."],
+                ["Youssef","Se ne è andato, ma c'è ancora qualche spirito vicino a noi."],
                 ["Prade","Aspetta... Mohammed?"],
                 ["Mohammed","Uh, eh- non attaccarci! Volevamo aiutarvi per la vostra impresa."],
                 ["Stefan","Attaccandoci? O volevate allenarci?"],
-                ["Kevin","Non hai capito. Lo spirito era mosso dall'insieme di tutti. Non volevamo attaccarvi dall'inizio."],
+                ["Kevin","Non hai capito. Lo spirito era mosso dall'insieme di tutti. Noi in realtà non volevamo attaccarvi fin dall'inizio."],
                 ["Fabiano","Kevin?!"],
-                ["Gonzato","Ora vogliamo unirvi a voi. Vogliamo aiutarvi ad affrontare Anafesto."],
+                ["Gonzato","Ora vogliamo unirvi a voi. Abbiamo intenzione di aiutarvi ad affrontare Anafesto."],
                 ["Pier","Gonzato?!"],
                 ["Ciudin","Non ho capito perché mi avete voluto includere."],
-                ["Kevin","Gli altri non volevano ascoltare, ci siamo divisi appena ci siamo indeboliti abbastanza."],
+                ["Kevin","Gli altri non volevano ascoltare, ci siamo divisi appena potevamo."],
                 ["Pol","Sempre bello vedervi."],
-                ["Stefan","Quindi l'ombrello, alla fine l'hai cercato."],
-                ["Ciudin","Ho soltanto memoria di quando ero con voi. Infatti vi ricordo molto più diversi e numerosi. Però effettivamente l'ombrello ora che ci penso che fine ha fatto?"],
+                ["Stefan","Quindi l'ombrello... alla fine l'hai cercato."],
+                ["Ciudin","Ho soltanto memoria di quando ero con voi. Infatti vi ricordo più diversi. Però l'ombrello ora che ci penso che fine ha fatto?"],
                 ["Youssef","Uh, no niente. Non preoccuparti te l'avevamo ridato."],
                 ["Leone Alato","Visto che parli di ombrello e sembrate essere veramente disposti ad aiutarli. Ecco qua dei strumenti per voi."],
-                ["Ciudin","È il mio ombrello questo! Che me ne dovrei fare?"],
+                ["Ciudin","È il mio ombrello questo. Che me ne dovrei fare?"],
                 ["Youssef","Ho un'idea, passamelo quando serve. Ne farò buon uso."],
-                ["Kevin","Un megafono? Cosa me ne faccio scusa? Vabbè vi dirò qualcosa dai."],
+                ["Kevin","Un megafono? Uhmm... Vabbè vi dirò qualcosa dai."],
                 ["Cappe","Dai raga! Siete pronti che ora c'è il bossss..."],
-                ["Noce","Non c'è mai una pausa. Però devo dire che non è male questa avventura."],
+                ["Noce","Non c'è mai una pausa, dai andiamo, il mio cecchino è pronto."],
                 ["Leone Alato","Dai, dobbiamo dirigerci in fretta. Seguitemi!"],
 
                 # *ultima zona*
                 ["",""],
 
                 ["Pier","Cosa succede se non ce la facciamo a sconfiggerlo?"],
-                ["Leone Alato","Divertente come non vi siete posti questa domanda prima mentre eravate soli, ma invece adesso dove siete in un gruppo davvero numeroso."],
+                ["Leone Alato","Perché non l'hai chiesto prima mentre eravate soli invece che adesso. Guarda che gruppo numeroso, ce la farete se sarete determinati."],
                 ["Borin","Massì dai, tanto sarà una cavolata."],
-                ["Anastasia","Dai entriamo e finiamola. Anche se mi dispiacerà non vedere più Stefan così."],
+                ["Anastasia","Dai entriamo e finiamola. Chissà che tipo sarà questo Paolo."],
                 ["Raul","Eddai, apriamo le porte per la sala del trono e battiamolo!"],
 
                 # *Scena Anafesto*
@@ -445,7 +444,10 @@ class Dialogues():
             #WIDTH-SPACING*4, int(BOX_HEIGHT*1.2),  SPACING*2, SPACING,
 
         if self.number_of_dialogue == 0:
-            if self.text_visualized == 71:
+            if self.text_visualized == 11 or self.text_visualized == 12:
+                self.background_visualized = 10
+                self.show_gui = True
+            elif self.text_visualized == 71:
                 self.background_visualized = 1
                 self.show_gui = False
             elif self.text_visualized > 71:

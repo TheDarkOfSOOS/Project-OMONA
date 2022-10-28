@@ -273,7 +273,7 @@ def buff_stats(target_stat_to_upgrade, chara, type):
         chara.is_buffed = 0
     else:
         chara.is_debuffed = 0
-    return int(target_stat_to_upgrade/20)
+    return int(target_stat_to_upgrade/35)
 
 def is_missed(target_eva):
     if rng.randrange(1,101) < target_eva:

@@ -554,20 +554,6 @@ class Fabiano():
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
-        if self.sel["has_cursor_on"]=="Diego":
-            if self.is_doing_animation:
-                dw.nikradogna_animation()
-
-            if not self.is_doing_animation:
-                self.friends[1][0] = "-"
-                for allies in [y.y,p.p,r.r,self]:
-                    allies.current_defn-=action.buff_stats(allies.defn, allies, "debuff")
-                    emotion.change_emotion(allies, "euforico")
-                print("Diego ha dato quella che sembra camomilla. Come fanno ad essere scatenati ora?")
-                self.text_action="Diego ha dato quella che sembra camomilla. Come fanno ad essere scatenati ora?"
-                self.current_animation = 0
-                self.is_showing_text_outputs = True
-
         if self.sel["has_cursor_on"]=="Trentin":
             # Il valore numerico indica per quanti turni si vedranno gli attacchi del nemico
             self.foresees_enemy_attacks = 5
@@ -575,9 +561,23 @@ class Fabiano():
                 dw.trentin_animation()
 
             if not self.is_doing_animation:
-                self.friends[0][1] = "-"
+                self.friends[1][0] = "-"
                 print("Trentin inizia ad osservare le prossime mosse del nemico.")
                 self.text_action="Trentin inizia ad osservare le prossime mosse del nemico."
+                self.current_animation = 0
+                self.is_showing_text_outputs = True
+
+        if self.sel["has_cursor_on"]=="Diego":
+            if self.is_doing_animation:
+                dw.nikradogna_animation()
+
+            if not self.is_doing_animation:
+                self.friends[0][1] = "-"
+                for allies in [y.y,p.p,r.r,self]:
+                    allies.current_defn-=action.buff_stats(allies.defn, allies, "debuff")
+                    emotion.change_emotion(allies, "euforico")
+                print("Diego ha dato quella che sembra camomilla. Come fanno ad essere scatenati ora?")
+                self.text_action="Diego ha dato quella che sembra camomilla. Come fanno ad essere scatenati ora?"
                 self.current_animation = 0
                 self.is_showing_text_outputs = True
 
