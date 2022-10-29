@@ -24,144 +24,142 @@ def damage_deal(user_atk, atk_dmg, target_def, user_emotion, target_emotion):
     return damage
 
 def emotion_effectiveness(damage, target_emotion, user_emotion):
-    LOW_BOOST = abs(damage*0.25)
     MED_BOOST = abs(damage*0.50)
-    MAX_BOOST = abs(damage*0.75)
     
     if user_emotion == "neutrale" and target_emotion == "neutrale":
         damage = damage
 
     # TRISTEZZA VS FELICITA'
     elif user_emotion == "triste" and target_emotion == "gioioso":
-        damage += LOW_BOOST
+        damage += MED_BOOST
     elif user_emotion == "depresso" and target_emotion == "gioioso":
         damage += MED_BOOST
     elif user_emotion == "disperato" and target_emotion == "gioioso":
-        damage += MAX_BOOST
+        damage += MED_BOOST
 
     elif user_emotion == "triste" and target_emotion == "felice":
-        damage += 0
+        damage += MED_BOOST
     elif user_emotion == "depresso" and target_emotion == "felice":
-        damage += LOW_BOOST
+        damage += MED_BOOST
     elif user_emotion == "disperato" and target_emotion == "felice":
         damage += MED_BOOST
     
     elif user_emotion == "triste" and target_emotion == "euforico":
-        damage += 0
+        damage += MED_BOOST
     elif user_emotion == "depresso" and target_emotion == "euforico":
-        damage += 0
+        damage += MED_BOOST
     elif user_emotion == "disperato" and target_emotion == "euforico":
-        damage += LOW_BOOST
+        damage += MED_BOOST
 
     # FELICITA' VS TRISTEZZA
     elif user_emotion == "gioioso" and target_emotion == "triste":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "felice" and target_emotion == "triste":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "euforico" and target_emotion == "triste":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     
     elif user_emotion == "gioioso" and target_emotion == "depresso":
         damage -= MED_BOOST
     elif user_emotion == "felice" and target_emotion == "depresso":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "euforico" and target_emotion == "depresso":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
 
     elif user_emotion == "gioioso" and target_emotion == "disperato":
-        damage -= MAX_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "felice" and target_emotion == "disperato":
         damage -= MED_BOOST
     elif user_emotion == "euforico" and target_emotion == "disperato":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
 
     # FELICITA' VS RABBIA
     elif user_emotion == "gioioso" and target_emotion == "arrabbiato":
-        damage += LOW_BOOST
+        damage += MED_BOOST
     elif user_emotion == "felice" and target_emotion == "arrabbiato":
         damage += MED_BOOST
     elif user_emotion == "euforico" and target_emotion == "arrabbiato":
-        damage += MAX_BOOST
+        damage += MED_BOOST
     
     elif user_emotion == "gioioso" and target_emotion == "iracondo":
-        damage += 0
+        damage += MED_BOOST
     elif user_emotion == "felice" and target_emotion == "iracondo":
-        damage += LOW_BOOST
+        damage += MED_BOOST
     elif user_emotion == "euforico" and target_emotion == "iracondo":
         damage += MED_BOOST
 
     elif user_emotion == "gioioso" and target_emotion == "furioso":
-        damage += 0
+        damage += MED_BOOST
     elif user_emotion == "felice" and target_emotion == "furioso":
-        damage += 0
+        damage += MED_BOOST
     elif user_emotion == "euforico" and target_emotion == "furioso":
-        damage += LOW_BOOST
+        damage += MED_BOOST
 
     # RABBIA VS FELICITA'
     elif user_emotion == "arrabbiato" and target_emotion == "gioioso":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "iracondo" and target_emotion == "gioioso":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "furioso" and target_emotion == "gioioso":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     
     elif user_emotion == "arrabbiato" and target_emotion == "felice":
         damage -= MED_BOOST
     elif user_emotion == "iracondo" and target_emotion == "felice":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "furioso" and target_emotion == "felice":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
 
     elif user_emotion == "arrabbiato" and target_emotion == "euforico":
-        damage -= MAX_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "iracondo" and target_emotion == "euforico":
         damage -= MED_BOOST
     elif user_emotion == "furioso" and target_emotion == "euforico":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
 
     # RABBIA VS TRISTEZZA
     elif user_emotion == "arrabbiato" and target_emotion == "triste":
-        damage += LOW_BOOST
+        damage += MED_BOOST
     elif user_emotion == "iracondo" and target_emotion == "triste":
         damage += MED_BOOST
     elif user_emotion == "furioso" and target_emotion == "triste":
-        damage += MAX_BOOST
+        damage += MED_BOOST
     
     elif user_emotion == "arrabbiato" and target_emotion == "depresso":
-        damage += 0
+        damage += MED_BOOST
     elif user_emotion == "iracondo" and target_emotion == "depresso":
-        damage += LOW_BOOST
+        damage += MED_BOOST
     elif user_emotion == "furioso" and target_emotion == "depresso":
         damage += MED_BOOST
 
     elif user_emotion == "arrabbiato" and target_emotion == "disperato":
-        damage += 0
+        damage += MED_BOOST
     elif user_emotion == "iracondo" and target_emotion == "disperato":
-        damage += 0
+        damage += MED_BOOST
     elif user_emotion == "furioso" and target_emotion == "disperato":
-        damage += LOW_BOOST
+        damage += MED_BOOST
 
     # TRISTEZZA VS RABBIA
     elif user_emotion == "triste" and target_emotion == "arrabbiato":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "depresso" and target_emotion == "arrabbiato":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "disperato" and target_emotion == "arrabbiato":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
 
     elif user_emotion == "triste" and target_emotion == "iracondo":
         damage += MED_BOOST
     elif user_emotion == "depresso" and target_emotion == "iracondo":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "disperato" and target_emotion == "iracondo":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
     
     elif user_emotion == "triste" and target_emotion == "furioso":
-        damage -= MAX_BOOST
+        damage -= MED_BOOST
     elif user_emotion == "depresso" and target_emotion == "furioso":
         damage -= MED_BOOST
     elif user_emotion == "disperato" and target_emotion == "furioso":
-        damage -= LOW_BOOST
+        damage -= MED_BOOST
 
     return int(damage)
 
