@@ -160,7 +160,7 @@ while run:
                 mixer.music.load(OST_Spark_Royale)
                 mixer.music.play(-1)
                 #round.reset_charas()
-                round.set_charas(5)
+                round.set_charas(1)
                 setters[0] = "waiting"
             if wins[0] == "fighting" and m_e.me.current_hp > 0 and not round.team_lost():
                 round_essentials_status = round.round(round_essentials_status[0], round_essentials_status[1], round_essentials_status[2], round_essentials_status[3], round_essentials_status[4], round_essentials_status[5], round_essentials_status[6], input, m_e.me)
