@@ -25,6 +25,7 @@ pygame.mixer.init()
 clock = pygame.time.Clock()
 
 pygame.display.set_caption("Subnezia")
+pygame.display.set_icon(pygame.image.load("subnezia_app_icon.png"))
 out_of_dialog = False
 first_time = True
 dialogue_index = 0
