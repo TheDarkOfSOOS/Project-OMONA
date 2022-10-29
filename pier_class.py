@@ -115,7 +115,7 @@ class Pier():
             "Fiamma protettrice":"Protegge lievemente tutto il party dall’attacco del nemico. Attacca per primo.",
             "Sbracciata":"Fa una T pose e continua a girare velocemente, colpendo il nemico. IMPOSSIBILE mancare.",
             "Richiesta d'aiuto":"Infastidisce un alleato o nemico nel momento peggiore... portandogli rabbia. Durante la selezione, premi SHIFT per selezionare il nemico.",
-            '"Spessanza"':"Mostra tutta la sua fierezza, facendo concentrare il nemico su Piergiorgio, diminuendo l’attacco del nemico e degli alleati per un turno. Attacca per primo.",
+            '"Spessanza"':"Mostra tutta la sua fierezza, facendo concentrare il nemico su Piergiorgio. Attacca per primo.",
             "Bastione fiammante":"Cura tutti gli alleati del 40%.",
             "Sacrificio umano":"Manda al rogo un compagno a scelta e causa grandissimi danni al nemico.",
             # Friends
@@ -141,8 +141,8 @@ class Pier():
 
         self.MNA_CONSUMPTION_SKILLS = {
             "Fiamma protettrice":104,
-            "Sbracciata":30,
-            "Richiesta d'aiuto":0,
+            "Sbracciata":0,
+            "Richiesta d'aiuto":30,
             '"Spessanza"':140,
             "Bastione fiammante":200,
             "Sacrificio umano":300,

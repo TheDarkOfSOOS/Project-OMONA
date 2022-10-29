@@ -158,10 +158,16 @@ class Doraemon():
         self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation3.png"))
         self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation4.png"))
         self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation5.png"))
-
-        for x in range(5):
-            self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation6.png"))
-            self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation7.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation6.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation7.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation6.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation7.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation6.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation7.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation6.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation7.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation6.png"))
+        self.missile_animation.append(pygame.image.load("img/doraemon/animations/missile/missile_animation7.png"))
 
     def load_macchina_del_tempo(self):
         self.macchina_del_tempo_animation.append(pygame.image.load("img/doraemon/animations/macchina_del_tempo/macchina_del_tempo_animation00.png"))
@@ -187,15 +193,36 @@ class Doraemon():
         self.macchina_del_tempo_animation.append(pygame.image.load("img/doraemon/animations/macchina_del_tempo/macchina_del_tempo_animation20.png"))
 
     def load_copter(self):
-        for x in range(10):
-            self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
-            self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation0.png"))
+        self.copter_animation.append(pygame.image.load("img/doraemon/animations/copter/copter_animation1.png"))
 
     def load_sfuriate_meccaniche(self):
-        for x in range(4):
-            self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation0.png"))
-            self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation1.png"))
-
+        self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation0.png"))
+        self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation1.png"))
+        self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation0.png"))
+        self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation1.png"))
+        self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation0.png"))
+        self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation1.png"))
+        self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation0.png"))
+        self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation1.png"))
         self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation2.png"))
         self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation3.png"))
         self.sfuriate_meccaniche_animation.append(pygame.image.load("img/doraemon/animations/sfuriate_meccaniche/sfuriate_meccaniche_animation4.png"))
@@ -210,10 +237,16 @@ class Doraemon():
         self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation4.png"))
         self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation5.png"))
         self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation6.png"))
-
-        for x in range(5):
-            self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation7.png"))
-            self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation8.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation7.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation8.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation7.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation8.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation7.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation8.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation7.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation8.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation7.png"))
+        self.bomba_ad_idrogeno_animation.append(pygame.image.load("img/doraemon/animations/bomba_ad_idrogeno/bomba_ad_idrogeno_animation8.png"))
 
     # Algoritmo di scelta attacco
     def obtain_attack(self):

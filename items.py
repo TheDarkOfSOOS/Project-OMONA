@@ -13,7 +13,7 @@ class Items():
         self.items_template = [["Acqua di Destiny","Laurea in Matematica","Ghiaccio dei Bidelli"],["Tiramisù (senza...)","Parmigianino","Orologio donato"]]
         self.items = []
 
-        self.items_usage_template = [[1,1,2],[2,2,1]]
+        self.items_usage_template = [[2,1,3],[2,2,1]]
         self.items_usage = []
 
         self.items_description_template = {
