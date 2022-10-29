@@ -1,5 +1,11 @@
 # Subnezia (Project OMONA)
 
+![Menu principale](/readme_utils/full_background.png)
+
+## Cast dei personaggi
+
+![Cast](/readme_utils/all_together.png)
+
 ## Trama
 Subnezia è un gioco RPG a turni "fedelmente ispirato" ad Omori. Due ragazzi in gita a Venezia si ritrovano nel mondo subacqueo di, banalmente, Subnezia. Questi ricevono un compito dopo aver trovato altri due loro amici: Spodestare il Re di Subnezia. Che tipo di mondo è Subnezia? Che scoperte e incontri faranno? Ma soprattutto, come andrà a finire?
 
@@ -16,6 +22,8 @@ Scaricare la versione di Windows e utilizzare Wine per avviarlo.
 Scegliere la versione di Linux e aprire Subnezia_LINUX
 
 ## Screenshots
+![Esempio di dialogo](/readme_utils/dialogue_example.png)
+![Esempio di combattimento](/readme_utils/fight_example.png)
 
 ## Ringraziamenti da parte degli autori
 * Pixabay per i numerosi Sound Effects
